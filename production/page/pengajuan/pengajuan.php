@@ -77,7 +77,7 @@
                 <td class=" "><?= $data['waranty'];?></td>
                 <td class=" "><?= $data['renewal'];?></td>
                 <td class=" "><?= $data['condition'];?></td>
-                <td class=" last"><a href="?form=ubahPengajuan">Ubah </a> | <a href="">Hapus </a>
+                <td class=" last"><a href="?form=ubahPengajuan&aksi=ubah&inv_id=<?= $data['inv_id']?>">Ubah </a> | <a href="?form=hapusPengajuan&inv_id<?= $data['inv_id']?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus </a>
                 </td>
               </tr>
               

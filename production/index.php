@@ -337,8 +337,8 @@
                                 include "page/pengajuan/tambah.php";
                                 break;
 
-                            case 'hapusAnggaran':
-                                include "page/anggaran/hapus.php";
+                            case 'hapusPengajuan':
+                                include "page/pengajuan/hapus.php";
                                 break;
                 
               case 'cariAnggaran':

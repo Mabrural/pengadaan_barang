@@ -46,6 +46,49 @@ function tambahPengajuan($data) {
 	return mysqli_affected_rows($koneksi);
 }
 
+function ubahPengajuan($data) {
+	global $koneksi;
+	$inv_id = htmlspecialchars($data["inv_id"]);
+	$nama_barang = htmlspecialchars($data["nama_barang"]);
+	$spec = htmlspecialchars($data["spec"]);
+	$desc = htmlspecialchars($data["desc"]);
+	$qty = htmlspecialchars($data["qty"]);
+	$date_in = htmlspecialchars($data["date_in"]);
+	$unit_price = htmlspecialchars($data["unit_price"]);
+	$vendor = htmlspecialchars($data["vendor"]);
+	$waranty = htmlspecialchars($data["waranty"]);
+	$renewal = htmlspecialchars($data["renewal"]);
+	$condition = htmlspecialchars($data["condition"]);
+	// $id_mhs = mysqli_real_escape_string($koneksi, $_SESSION["id_mhs"]);
+
+
+	$query = "UPDATE pengadaan_barang SET
+				inv_id= '$inv_id',
+				nama_barang = '$nama_barang',
+				spec = '$spec',
+				desc = '$desc',
+				qty = '$qty',
+				date_in = '$date_in',
+				unit_price = '$unit_price',
+				vendor = '$vendor',
+				waranty = '$waranty',
+				renewal = '$renewal',
+				condition = '$condition'
+			  WHERE inv_id='$inv_id'
+			";
+			
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function hapusPengajuan($inv_id) {
+	global $koneksi;
+	mysqli_query($koneksi, "DELETE FROM pengadaan_barang WHERE inv_id='$inv_id'");
+
+	return mysqli_affected_rows($koneksi);
+
+}
 function tambahAnggaran($data) {
 	global $koneksi;
 	$nama_anggaran = htmlspecialchars($data["nama_anggaran"]);
