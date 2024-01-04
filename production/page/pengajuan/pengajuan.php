@@ -70,6 +70,7 @@
                 <td class=" "><?= $data['nama_barang'];?> </td>
                 <td class=" "><?= $data['spec'];?></td>
                 <td class=" "><?= $data['desc'];?></td>
+                <td class=" "><?= $data['qty'];?></td>
                 <td class=" "><?= $data['date_in'];?></td>
                 <td class=" "><?= $data['unit_price'];?></td>
                 <td class=" "><?= $data['vendor'];?></td>
