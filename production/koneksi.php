@@ -11,6 +11,7 @@ if (!$koneksi) {
 }
 
 
+
 function query($query){
 	global $koneksi;
 	$result = mysqli_query($koneksi, $query);
