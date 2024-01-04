@@ -23,6 +23,29 @@ function query($query){
 	return $rows;
 }
 
+function tambahPengajuan($data) {
+	global $koneksi;
+	$inv_id = htmlspecialchars($data["inv_id"]);
+	$nama_barang = htmlspecialchars($data["nama_barang"]);
+	$spec = htmlspecialchars($data["spec"]);
+	$desc = htmlspecialchars($data["desc"]);
+	$qty = htmlspecialchars($data["qty"]);
+	$date_in = htmlspecialchars($data["date_in"]);
+	$unit_price = htmlspecialchars($data["unit_price"]);
+	$vendor = htmlspecialchars($data["vendor"]);
+	$waranty = htmlspecialchars($data["waranty"]);
+	$renewal = htmlspecialchars($data["renewal"]);
+	$condition = htmlspecialchars($data["condition"]);
+	// $id_mhs = mysqli_real_escape_string($koneksi, $_SESSION["id_mhs"]);
+
+
+	$query = "INSERT INTO pengadaan_barang VALUES
+			('$inv_id', '$nama_barang', '$spec', '$desc', '$qty', '$date_in', '$unit_price', '$vendor', '$waranty', '$renewal', '$condition')";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
 function tambahAnggaran($data) {
 	global $koneksi;
 	$nama_anggaran = htmlspecialchars($data["nama_anggaran"]);

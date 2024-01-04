@@ -329,12 +329,12 @@
                         switch ($form) {
                             
 
-                            case 'ubahAnggaran':
-                                include "page/anggaran/ubah.php";
+                            case 'ubahPengajuan':
+                                include "page/pengajuan/ubah.php";
                                 break;
 
-                            case 'tambahAnggaran':
-                                include "page/anggaran/tambah.php";
+                            case 'tambahPengajuan':
+                                include "page/pengajuan/tambah.php";
                                 break;
 
                             case 'hapusAnggaran':

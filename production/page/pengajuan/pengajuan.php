@@ -6,7 +6,7 @@
     <div class="x_panel">
       <div class="x_title">
         <h2>Table Pengajuan Barang <small></small></h2>
-        <a href="" class="btn btn-primary">Form Pengajuan</a>
+        <a href="?form=tambahPengajuan" class="btn btn-primary">Form Pengajuan</a>
         <!-- <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>
@@ -77,7 +77,7 @@
                 <td class=" "><?= $data['waranty'];?></td>
                 <td class=" "><?= $data['renewal'];?></td>
                 <td class=" "><?= $data['condition'];?></td>
-                <td class=" last"><a href="#">Ubah | Hapus</a>
+                <td class=" last"><a href="?form=ubahPengajuan">Ubah </a> | <a href="">Hapus </a>
                 </td>
               </tr>
               
