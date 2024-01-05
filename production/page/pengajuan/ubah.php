@@ -185,6 +185,7 @@ if (isset($_POST["submit"])) {
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Condition</label>
 											<div class="col-md-6 col-sm-6 ">
 												<input id="middle-name" name="kondisi" class="form-control" type="text" value="<?= $barang["kondisi"];?>">
+												<input id="middle-name" name="status" class="form-control" type="hidden" value="<?= $barang["status"];?>">
 											</div>
 										</div>
 									

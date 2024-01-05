@@ -61,7 +61,7 @@ function ubahPengajuan($data) {
 	$waranty = htmlspecialchars($data["waranty"]);
 	$renewal = htmlspecialchars($data["renewal"]);
 	$kondisi = htmlspecialchars($data["kondisi"]);
-	// $id_mhs = mysqli_real_escape_string($koneksi, $_SESSION["id_mhs"]);
+	$status = htmlspecialchars($data["status"]);
 
 
 	$query = "UPDATE barang SET
@@ -75,7 +75,8 @@ function ubahPengajuan($data) {
 				vendor = '$vendor',
 				waranty = '$waranty',
 				renewal = '$renewal',
-				kondisi = '$kondisi'
+				kondisi = '$kondisi',
+				status = '$status'
 			  WHERE id_barang = $id_barang
 			";
 	mysqli_query($koneksi, $query);
