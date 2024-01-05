@@ -126,13 +126,13 @@ if (isset($_POST["submit"])) {
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Spec</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="spec" class="form-control" type="text">
+												<input id="middle-name" name="spek" class="form-control" type="text">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Desc</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="desc" class="form-control" type="text">
+												<input id="middle-name" name="deskripsi" class="form-control" type="text">
 											</div>
 										</div>
 										<div class="item form-group">
@@ -144,13 +144,13 @@ if (isset($_POST["submit"])) {
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Date In</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="date_in" class="form-control" placeholder="dd-mm-yyyy" type="date">
+												<input id="middle-name" name="tgl_masuk" class="form-control" placeholder="dd-mm-yyyy" type="date">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Unit Price</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="unit_price" class="form-control" type="text">
+												<input id="middle-name" name="harga" class="form-control" type="text">
 											</div>
 										</div>
 										<div class="item form-group">
@@ -174,7 +174,7 @@ if (isset($_POST["submit"])) {
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Condition</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="condition" class="form-control" type="text">
+												<input id="middle-name" name="kondisi" class="form-control" type="text">
 											</div>
 										</div>
 										<!-- <div class="item form-group">

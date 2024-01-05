@@ -2,6 +2,8 @@
 
 // $id_mhs = $_SESSION["id_mhs"];
 
+$pengajuan = query("SELECT * FROM pengadaan_barang");
+
 ?>
     <div class="x_panel">
       <div class="x_title">
@@ -58,7 +60,7 @@
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-              		$query = "SELECT * FROM pengadaan_barang";
+              		$query = "SELECT * FROM barang";
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
               		
@@ -68,16 +70,16 @@
                 <td class=" "><?= $no++;?></td>
                 <td class=" "><?= $data['inv_id'];?></td>
                 <td class=" "><?= $data['nama_barang'];?> </td>
-                <td class=" "><?= $data['spec'];?></td>
-                <td class=" "><?= $data['desc'];?></td>
+                <td class=" "><?= $data['spek'];?></td>
+                <td class=" "><?= $data['deskripsi'];?></td>
                 <td class=" "><?= $data['qty'];?></td>
-                <td class=" "><?= $data['date_in'];?></td>
-                <td class=" "><?= $data['unit_price'];?></td>
+                <td class=" "><?= $data['tgl_masuk'];?></td>
+                <td class=" "><?= $data['harga'];?></td>
                 <td class=" "><?= $data['vendor'];?></td>
                 <td class=" "><?= $data['waranty'];?></td>
                 <td class=" "><?= $data['renewal'];?></td>
-                <td class=" "><?= $data['condition'];?></td>
-                <td class=" last"><a href="?form=ubahPengajuan&aksi=ubah&inv_id=<?= $data['inv_id']?>">Ubah </a> | <a href="?form=hapusPengajuan&inv_id<?= $data['inv_id']?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus </a>
+                <td class=" "><?= $data['kondisi'];?></td>
+                <td class=" last"><a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>">Ubah </a> | <a href="?form=hapusPengajuan&id_barang=<?= $data["id_barang"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus </a>
                 </td>
               </tr>
               

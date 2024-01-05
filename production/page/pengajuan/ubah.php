@@ -2,16 +2,20 @@
 
 // $id_mhs = $_SESSION["id_mhs"];
 
-$inv_id = $_GET['inv_id'];
+// ambil data di URL
+$id_barang = $_GET["id_barang"];
+// query data mahasiswa berdasarkan id
+$barang = query("SELECT * FROM barang WHERE id_barang = $id_barang")[0];
 
-$pengajuan = query("SELECT * FROM pengadaan_barang WHERE inv_id='$inv_id'");
+
 
 // cek apakah tombol submit sudah ditekan atau belum
 if (isset($_POST["submit"])) {
 	
 
+	
 
-	// cek apakah data berhasil ditambahkan atau tidak
+	// cek apakah data berhasil diubah atau tidak
 	if(ubahPengajuan($_POST) > 0 ) {
 		echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
 		echo '<script src="./sweetalert2.min.js"></script>';
@@ -20,7 +24,7 @@ if (isset($_POST["submit"])) {
 			swal.fire({
 				
 				title               : 'Berhasil',
-				text                :  'Data berhasil ditambahkan',
+				text                :  'Data berhasil diubah',
 				//footer              :  '',
 				icon                : 'success',
 				timer               : 2000,
@@ -29,11 +33,11 @@ if (isset($_POST["submit"])) {
 		},10);   setTimeout(function () {
 			window.location.href = '?page=pengajuan'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
-		</script>"; 
+		</script>";
 		// echo "
 		// 	<script>
-		// 		alert('Data berhasil ditambahkan');
-		// 		document.location.href = '?page=anggaran';
+		// 		alert('Data berhasil diubah!');
+		// 		document.location.href = '?page=pengajuan';
 		// 	</script>
 		// ";
 	} else{
@@ -44,7 +48,7 @@ if (isset($_POST["submit"])) {
 			swal.fire({
 				
 				title               : 'Gagal',
-				text                :  'Data gagal ditambahkan',
+				text                :  'Data gagal diubah',
 				//footer              :  '',
 				icon                : 'error',
 				timer               : 2000,
@@ -56,8 +60,8 @@ if (isset($_POST["submit"])) {
 		</script>";
 		// echo "
 		// 	<script>
-		// 		alert('Data gagal ditambahkan');
-		// 		document.location.href = '?page=anggaran';
+		// 		alert('Data gagal diubah!');
+		// 		document.location.href = '?page=pengajuan';
 		// 	</script>
 		// ";
 	}
@@ -111,104 +115,79 @@ if (isset($_POST["submit"])) {
 								</div>
 								<div class="x_content">
 									<br />
-									<form action="" method="get" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-
+									<form action="" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+										<input type="hidden" name="id_barang" value="<?= $barang["id_barang"];?>">
 										<div class="item form-group">
-											<input type="hidden" name="aksi" value="ubah">
+											<!-- <input type="hidden" name="aksi" value="ubah"> -->
+
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">INV ID <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="inv_id" id="first-name" required="required" class="form-control" value="<?= $data["inv_id"];?>">
+												<input type="text" name="inv_id" id="first-name" required="required" class="form-control" value="<?= $barang["inv_id"];?>">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Nama Barang <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="nama_barang" id="last-name" required="required" class="form-control">
+												<input type="text" name="nama_barang" id="last-name" required="required" class="form-control" value="<?= $barang["nama_barang"];?>">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Spec</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="spec" class="form-control" type="text">
+												<input id="middle-name" name="spek" class="form-control" type="text" value="<?= $barang["spek"];?>">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Desc</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="desc" class="form-control" type="text">
+												<input id="middle-name" name="deskripsi" class="form-control" type="text" value="<?= $barang["deskripsi"];?>">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Qty</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="qty" class="form-control" type="text">
+												<input id="middle-name" name="qty" class="form-control" type="text" value="<?= $barang["qty"];?>">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Date In</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="date_in" class="form-control" placeholder="dd-mm-yyyy" type="date">
+												<input id="middle-name" name="tgl_masuk" class="form-control" type="date" value="<?= $barang["tgl_masuk"];?>">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Unit Price</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="unit_price" class="form-control" type="text">
+												<input id="middle-name" name="harga" class="form-control" type="text" value="<?= $barang["harga"];?>">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Vendor</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="vendor" class="form-control" type="text">
+												<input id="middle-name" name="vendor" class="form-control" type="text" value="<?= $barang["vendor"];?>">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Waranty</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="waranty" class="form-control" type="text">
+												<input id="middle-name" name="waranty" class="form-control" type="text" value="<?= $barang["waranty"];?>">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Renewal</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="renewal" class="form-control" type="text">
+												<input id="middle-name" name="renewal" class="form-control" type="text" value="<?= $barang["renewal"];?>">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Condition</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="condition" class="form-control" type="text">
+												<input id="middle-name" name="kondisi" class="form-control" type="text" value="<?= $barang["kondisi"];?>">
 											</div>
 										</div>
-										<!-- <div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align">Gender</label>
-											<div class="col-md-6 col-sm-6 ">
-												<div id="gender" class="btn-group" data-toggle="buttons">
-													<label class="btn btn-secondary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-														<input type="radio" name="gender" value="male" class="join-btn"> &nbsp; Male &nbsp;
-													</label>
-													<label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-														<input type="radio" name="gender" value="female" class="join-btn"> Female
-													</label>
-												</div>
-											</div>
-										</div> -->
-										<!-- <div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align">Date Of Birth <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="birthday" class="date-picker form-control" placeholder="dd-mm-yyyy" type="text" required="required" type="text" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
-												<script>
-													function timeFunctionLong(input) {
-														setTimeout(function() {
-															input.type = 'text';
-														}, 60000);
-													}
-												</script>
-											</div>
-										</div> -->
+									
 										<div class="ln_solid"></div>
 										<div class="item form-group">
 											<div class="col-md-6 col-sm-6 offset-md-3">
