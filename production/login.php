@@ -1,12 +1,12 @@
 <?php 
 
-// session_start();
+session_start();
 
-// if (isset($_SESSION["login"])) {
+if (isset($_SESSION["login"])) {
     
-//   header("Location: index.php");
-//   exit;
-// }
+  header("Location: index.php");
+  exit;
+}
 
 
 require 'koneksi.php';
@@ -61,7 +61,7 @@ if (isset($_POST['login'])) {
   $error = true;
 }
 
- ?>
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -87,7 +87,7 @@ if (isset($_POST['login'])) {
     <link href="../build/css/custom.min.css" rel="stylesheet">
   </head>
 
-  <body class="login">
+  <body class="login" bgcolor="red">
     <div>
       <a class="hiddenanchor" id="signup"></a>
       <a class="hiddenanchor" id="signin"></a>
@@ -96,7 +96,8 @@ if (isset($_POST['login'])) {
         <div class="animate form login_form">
           <section class="login_content">
             <?php if(isset($error)) :?>
-                <?php
+              <!-- <p style="color: red; font-style: italic;">Username / password salah</p> -->
+              <?php
                     echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
                     echo '<script src="./sweetalert2.min.js"></script>';
                     echo "<script>
@@ -115,18 +116,17 @@ if (isset($_POST['login'])) {
                     }, 2000); //will call the function after 2 secs
                     </script>";    
                 ?>
-               <!-- <center> <p style="color: red; font-style: italic;">Username / password salah</p> </center> -->
 
               <?php endif; ?>
 
             <form action="" method="post">
               <h1>Login Form</h1>
-              <input type="hidden" name="id_user">
+
               <div>
-                <input name="username" type="text" class="form-control" placeholder="Username" required="" autofocus />
+                <input type="text" name="username" class="form-control" placeholder="Username" required="" autofocus />
               </div>
               <div>
-                <input name="password" type="password" class="form-control" placeholder="Password" required="" />
+                <input type="password" name="password" class="form-control" placeholder="Password" required="" />
               </div>
               <div>
                 <button type="submit" name="login" class="btn btn-primary">Log in</button>
@@ -174,7 +174,7 @@ if (isset($_POST['login'])) {
                           showConfirmButton   : true
                       });  
                   },10);   setTimeout(function () {
-                      window.location.href = 'index.php'; //will redirect to your blog page (an ex: blog.html)
+                      window.location.href = 'login.php'; //will redirect to your blog page (an ex: blog.html)
                   }, 2000); //will call the function after 2 secs
                   </script>";
                       
@@ -211,8 +211,9 @@ if (isset($_POST['login'])) {
                 <input name="email" type="email" class="form-control" placeholder="Email" required="" />
               </div>
               <div>
-                <button type="submit" class="btn btn-primary" name="register">Create</button>
-                <!-- <a class="btn btn-default submit" href="index.html">Submit</a> -->
+              <!-- <a class="btn btn-primary" href="index.html">Submit</a> -->
+                <button type="submit" name="register" class="btn btn-primary">Create</button>
+
               </div>
 
               <div class="clearfix"></div>

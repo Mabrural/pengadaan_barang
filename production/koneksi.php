@@ -36,11 +36,11 @@ function tambahPengajuan($data) {
 	$waranty = htmlspecialchars($data["waranty"]);
 	$renewal = htmlspecialchars($data["renewal"]);
 	$kondisi = htmlspecialchars($data["kondisi"]);
-	// $id_mhs = mysqli_real_escape_string($koneksi, $_SESSION["id_mhs"]);
+	$id_user = mysqli_real_escape_string($koneksi, $_SESSION["id_user"]);
 
 
 	$query = "INSERT INTO barang VALUES
-			('', '$inv_id', '$nama_barang', '$spek', '$deskripsi', '$qty', '$tgl_masuk', '$harga', '$vendor', '$waranty', '$renewal', '$kondisi')";
+			('', '$inv_id', '$nama_barang', '$spek', '$deskripsi', '$qty', '$tgl_masuk', '$harga', '$vendor', '$waranty', '$renewal', '$kondisi', '$id_user')";
 	mysqli_query($koneksi, $query);
 
 	return mysqli_affected_rows($koneksi);
@@ -285,12 +285,9 @@ function ubahJadwal($data) {
 function registrasi($data){
 	global $koneksi;
 
-    // $nama = stripcslashes($data["username"]);
 	$username = strtolower(stripcslashes($data["username"]));
 	$password = mysqli_real_escape_string($koneksi, $data["password"]);
     $password2 = mysqli_real_escape_string($koneksi, $data["password2"]);
-    // $no_hp = stripcslashes($data["no_hp"]);
-    // $alamat = stripcslashes($data["alamat"]);
     $email = stripcslashes($data["email"]);
 	
 
@@ -324,11 +321,28 @@ function registrasi($data){
 
 	// cek konfirmasi password
 	if ($password !== $password2) {
-		echo "
-			<script>
-				alert('konfirmasi password tidak sesuai!');
-			</script>
-		";
+		echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
+		echo '<script src="./sweetalert2.min.js"></script>';
+		echo "<script>
+		setTimeout(function () { 
+			swal.fire({
+				
+				title               : 'Daftar Akun Gagal',
+				text                :  'Konfirmasi Password Tidak Sesuai!',
+				//footer              :  '',
+				icon                : 'error',
+				timer               : 2000,
+				showConfirmButton   : true
+			});  
+		},10);   setTimeout(function () {
+			window.location.href = 'login.php'; //will redirect to your blog page (an ex: blog.html)
+		}, 2000); //will call the function after 2 secs
+		</script>";
+		// echo "
+		// 	<script>
+		// 		alert('konfirmasi password tidak sesuai!');
+		// 	</script>
+		// ";
 		return false;
 	}
 

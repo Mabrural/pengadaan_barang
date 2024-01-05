@@ -1,8 +1,8 @@
 <?php
 
-// $id_mhs = $_SESSION["id_mhs"];
+$id_user = $_SESSION["id_user"];
 
-$pengajuan = query("SELECT * FROM pengadaan_barang");
+// $pengajuan = query("SELECT * FROM barang WHERE barang.id_barang=$id_user");
 
 ?>
     <div class="x_panel">
@@ -60,7 +60,7 @@ $pengajuan = query("SELECT * FROM pengadaan_barang");
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-              		$query = "SELECT * FROM barang";
+              		$query = "SELECT * FROM barang WHERE barang.id_user=$id_user";
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
               		
@@ -79,7 +79,7 @@ $pengajuan = query("SELECT * FROM pengadaan_barang");
                 <td class=" "><?= $data['waranty'];?></td>
                 <td class=" "><?= $data['renewal'];?></td>
                 <td class=" "><?= $data['kondisi'];?></td>
-                <td class=" last"><a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>">Ubah </a> | <a href="?form=hapusPengajuan&id_barang=<?= $data["id_barang"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus </a>
+                <td class=" last"><a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusPengajuan&id_barang=<?= $data["id_barang"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
                 </td>
               </tr>
               
