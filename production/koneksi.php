@@ -36,11 +36,12 @@ function tambahPengajuan($data) {
 	$waranty = htmlspecialchars($data["waranty"]);
 	$renewal = htmlspecialchars($data["renewal"]);
 	$kondisi = htmlspecialchars($data["kondisi"]);
+	$status = htmlspecialchars($data["status"]);
 	$id_user = mysqli_real_escape_string($koneksi, $_SESSION["id_user"]);
 
 
 	$query = "INSERT INTO barang VALUES
-			('', '$inv_id', '$nama_barang', '$spek', '$deskripsi', '$qty', '$tgl_masuk', '$harga', '$vendor', '$waranty', '$renewal', '$kondisi', '$id_user')";
+			('', '$inv_id', '$nama_barang', '$spek', '$deskripsi', '$qty', '$tgl_masuk', '$harga', '$vendor', '$waranty', '$renewal', '$kondisi', '$status','$id_user')";
 	mysqli_query($koneksi, $query);
 
 	return mysqli_affected_rows($koneksi);

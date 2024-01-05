@@ -303,8 +303,8 @@ if (!isset($_SESSION["login"])) {
                                 include "page/pengajuan/pengajuan.php";
                                 break;
                          
-                            case 'catatan':
-                                include "page/catatan/catatan.php";
+                            case 'dashboard':
+                                include "page/dashboard/dashboard.php";
                                 break;
 
                             case 'laporan':
@@ -315,9 +315,9 @@ if (!isset($_SESSION["login"])) {
                                 include "page/tagihan/tagihan.php";
                                 break;
               
-              case 'profil':
-                include "page/profil/profil.php";
-                break;
+                            case 'profil':
+                                include "page/profil/profil.php";
+                                break;
 
                             default:
                                 echo "<center><h3>Maaf. Halaman tidak di temukan!</h3></center>";
