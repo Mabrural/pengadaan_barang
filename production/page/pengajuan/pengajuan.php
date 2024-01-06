@@ -94,11 +94,15 @@ $id_user = $_SESSION["id_user"];
                     <strong><?= $data['status'];?></strong>
                 </td>
 
-                <!-- <td class=" " style="color: #b58709;">
-                  <strong><?= $data['status'];?></strong>
+              <td class=" last">
+              <?php if ($data['status'] == 'Sudah disetujui') { ?>
+                <span class="text-success fa fa-check"><strong> Selesai</strong></span>
+              <?php } else { ?>
+                <a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusPengajuan&id_barang=<?= $data["id_barang"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
+              <?php } ?>
+            </td>
+               <!--  <td class=" last"><a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusPengajuan&id_barang=<?= $data["id_barang"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
                 </td> -->
-                <td class=" last"><a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusPengajuan&id_barang=<?= $data["id_barang"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
-                </td>
               </tr>
               
            
