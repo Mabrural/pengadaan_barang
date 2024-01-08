@@ -61,7 +61,7 @@ $id_user = $_SESSION["id_user"];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-              		$query = "SELECT * FROM barang WHERE barang.id_user=$id_user";
+              		$query = "SELECT * FROM barang WHERE barang.id_user=$id_user AND status='Menunggu Persetujuan' OR status='Sedang diproses'";
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
               		
@@ -84,7 +84,7 @@ $id_user = $_SESSION["id_user"];
                     if ($data['status'] == 'Menunggu Persetujuan') {
                         echo '#b58709';
                     } elseif ($data['status'] == 'Sedang diproses') {
-                        echo '#2657a6';
+                        echo '#b58709';
                     } elseif ($data['status'] == 'Sudah disetujui') {
                         echo '#14a664';
                     } else {
@@ -97,6 +97,8 @@ $id_user = $_SESSION["id_user"];
               <td class=" last">
               <?php if ($data['status'] == 'Sudah disetujui') { ?>
                 <span class="text-success fa fa-check"><strong> Selesai</strong></span>
+              <?php } elseif ($data['status'] == 'Sedang diproses') { ?>
+                <span class="text-info fa fa-spinner fa-spin"></span><strong> Waiting</strong>
               <?php } else { ?>
                 <a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusPengajuan&id_barang=<?= $data["id_barang"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
               <?php } ?>

@@ -63,7 +63,7 @@ $id_user = $_SESSION["id_user"];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='Menunggu Persetujuan' OR status='Sedang diproses'";
+              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='Sedang diproses'";
               		// $query = "SELECT * FROM barang WHERE barang.id_user=$id_user";
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
@@ -95,14 +95,14 @@ $id_user = $_SESSION["id_user"];
                         echo '#a62f26';
                     }
                 ?>;">
-                    <strong><?= $data['status'];?></strong>
+                    <span class="text-info fa fa-spinner fa-spin"></span> <strong><?= $data['status'];?></strong>
 
-                 <?php if ($data['status'] == 'Sudah disetujui' OR $data['status'] == 'Sedang diproses') { ?>
+                 <?php if ($data['status'] == 'Sudah disetujui') { ?>
 		          <td class=" last">
 		            <span class="text-success fa fa-check"><strong> Selesai</strong></span>
 		          </td>
 		        <?php } else { ?>
-		          <td class=" last"><a href="?form=ubahApprove&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Approve </a> 
+		          <td class=" last"><a href="?form=ubahApprove2&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Approve </a> 
                 <input type="hidden" name="nama_pemohon" value="<?= $_SESSION['username']; ?>">
 		        </td>
 		        <?php } ?>
