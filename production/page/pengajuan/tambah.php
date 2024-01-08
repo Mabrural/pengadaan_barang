@@ -144,7 +144,7 @@ if (isset($_POST["submit"])) {
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Date In</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="tgl_masuk" class="form-control" placeholder="dd-mm-yyyy" type="date">
+												<input id="middle-name" name="tgl_masuk" class="form-control" placeholder="dd-mm-yyyy" type="date" value="<?php echo date('Y-m-d'); ?>" readonly>
 											</div>
 										</div>
 										<div class="item form-group">

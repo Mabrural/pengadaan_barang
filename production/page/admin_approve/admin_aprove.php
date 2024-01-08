@@ -63,7 +63,7 @@ $id_user = $_SESSION["id_user"];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user";
+              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user ORDER BY status='Sudah disetujui' ASC";
               		// $query = "SELECT * FROM barang WHERE barang.id_user=$id_user";
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
