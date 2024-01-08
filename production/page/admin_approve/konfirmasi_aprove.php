@@ -16,7 +16,7 @@ if (isset($_POST["submit"])) {
 	
 
 	// cek apakah data berhasil diubah atau tidak
-	if(ubahPengajuan($_POST) > 0 ) {
+	if(ubahApprove($_POST) > 0 ) {
 		echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
 		echo '<script src="./sweetalert2.min.js"></script>';
 		echo "<script>

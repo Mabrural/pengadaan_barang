@@ -154,7 +154,7 @@ if (isset($_POST["submit"])) {
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Date In</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="tgl_masuk" class="form-control" type="date" value="<?= $barang["tgl_masuk"];?>">
+												<input id="middle-name" name="tgl_masuk" class="form-control" type="date" value="<?= $barang["tgl_masuk"];?>" readonly>
 											</div>
 										</div>
 										<div class="item form-group">
@@ -185,7 +185,7 @@ if (isset($_POST["submit"])) {
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Condition</label>
 											<div class="col-md-6 col-sm-6 ">
 												<input id="middle-name" name="kondisi" class="form-control" type="text" value="<?= $barang["kondisi"];?>">
-												<input id="middle-name" name="status" class="form-control" type="hidden" value="<?= $barang["status"];?>">
+												<input id="middle-name" name="status" class="form-control" type="hidden" value="Menunggu Persetujuan">
 											</div>
 										</div>
 									

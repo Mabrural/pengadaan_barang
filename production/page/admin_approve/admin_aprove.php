@@ -103,6 +103,7 @@ $id_user = $_SESSION["id_user"];
 		          </td>
 		        <?php } else { ?>
 		          <td class=" last"><a href="?form=ubahApprove&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Approve </a> 
+                <input type="hidden" name="nama_pemohon" value="<?= $_SESSION['username']; ?>">
 		        </td>
 		        <?php } ?>
 

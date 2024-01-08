@@ -84,6 +84,43 @@ function ubahPengajuan($data) {
 	return mysqli_affected_rows($koneksi);
 }
 
+function ubahApprove($data) {
+	global $koneksi;
+	$id_barang = $data["id_barang"];
+	$inv_id = htmlspecialchars($data["inv_id"]);
+	$nama_barang = htmlspecialchars($data["nama_barang"]);
+	$spek = htmlspecialchars($data["spek"]);
+	$deskripsi = htmlspecialchars($data["deskripsi"]);
+	$qty = htmlspecialchars($data["qty"]);
+	$tgl_masuk = htmlspecialchars($data["tgl_masuk"]);
+	$harga = htmlspecialchars($data["harga"]);
+	$vendor = htmlspecialchars($data["vendor"]);
+	$waranty = htmlspecialchars($data["waranty"]);
+	$renewal = htmlspecialchars($data["renewal"]);
+	$kondisi = htmlspecialchars($data["kondisi"]);
+	$status = htmlspecialchars($data["status"]);
+
+
+	$query = "UPDATE barang SET
+				inv_id = '$inv_id',
+				nama_barang = '$nama_barang',
+				spek = '$spek',
+				deskripsi = '$deskripsi',
+				qty = '$qty',
+				tgl_masuk = '$tgl_masuk',
+				harga = '$harga',
+				vendor = '$vendor',
+				waranty = '$waranty',
+				renewal = '$renewal',
+				kondisi = '$kondisi',
+				status = '$status'
+			  WHERE id_barang = $id_barang
+			";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
 function hapusPengajuan($id_barang) {
 	global $koneksi;
 	mysqli_query($koneksi, "DELETE FROM barang WHERE id_barang=$id_barang");
