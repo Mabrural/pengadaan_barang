@@ -3,7 +3,9 @@
 session_start();
 
 if (isset($_SESSION["login"])) {
-    
+  if ($_SESSION["level"] === "admin") {
+    header("Location: admin.php");
+  }
   header("Location: index.php");
   exit;
 }
@@ -29,23 +31,48 @@ if (isset($_POST['login'])) {
       $_SESSION["login"] = true;
       $_SESSION["username"] = $_POST["username"];
       $_SESSION["id_user"] = $row["id_user"];
-      echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
-      echo '<script src="./sweetalert2.min.js"></script>';
-      echo "<script>
-      setTimeout(function () { 
-          swal.fire({
-              
-              title               : 'Berhasil',
-              text                :  'Login berhasil',
-              //footer              :  '',
-              icon                : 'success',
-              timer               : 2000,
-              showConfirmButton   : true
-          });  
-      },10);   setTimeout(function () {
-          window.location.href = 'index.php'; //will redirect to your blog page (an ex: blog.html)
-      }, 2000); //will call the function after 2 secs
-      </script>";
+      // Menyimpan level pengguna dalam sesi
+      $_SESSION["level"] = $row["level"];
+
+      // Mengarahkan berdasarkan level pengguna
+      if ($row["level"] === "admin") {
+        echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
+        echo '<script src="./sweetalert2.min.js"></script>';
+        echo "<script>
+        setTimeout(function () { 
+            swal.fire({
+                
+                title               : 'Berhasil',
+                text                :  'Login berhasil',
+                //footer              :  '',
+                icon                : 'success',
+                timer               : 2000,
+                showConfirmButton   : true
+            });  
+        },10);   setTimeout(function () {
+            window.location.href = 'admin.php'; //will redirect to your blog page (an ex: blog.html)
+        }, 2000); //will call the function after 2 secs
+        </script>";
+      } else{
+        echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
+        echo '<script src="./sweetalert2.min.js"></script>';
+        echo "<script>
+        setTimeout(function () { 
+            swal.fire({
+                
+                title               : 'Berhasil',
+                text                :  'Login berhasil',
+                //footer              :  '',
+                icon                : 'success',
+                timer               : 2000,
+                showConfirmButton   : true
+            });  
+        },10);   setTimeout(function () {
+            window.location.href = 'index.php'; //will redirect to your blog page (an ex: blog.html)
+        }, 2000); //will call the function after 2 secs
+        </script>";
+      }
+      
       // echo 
       // "<script>
       //     alert('Login berhasil!');

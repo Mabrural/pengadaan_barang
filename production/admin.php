@@ -5,7 +5,12 @@ if (!isset($_SESSION["login"])) {
   header("Location: login.php");
   exit;
 }
-  
+
+if ($_SESSION["level"] == "user") {
+    header("Location: index.php");
+    exit;
+}
+
   include "koneksi.php";
   $id_user = $_SESSION["id_user"];
 

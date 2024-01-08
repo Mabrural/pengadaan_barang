@@ -5,13 +5,18 @@ if (!isset($_SESSION["login"])) {
   header("Location: login.php");
   exit;
 }
+
+if ($_SESSION["level"] == "admin") {
+    header("Location: admin.php");
+    exit;
+}
   
   include "koneksi.php";
   $id_user = $_SESSION["id_user"];
 
   $nama = $_SESSION["username"];
   
-//  ?>
+  ?>
 
 <!DOCTYPE html>
 <html lang="en">
