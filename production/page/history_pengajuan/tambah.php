@@ -2,21 +2,13 @@
 
 // $id_mhs = $_SESSION["id_mhs"];
 
-// ambil data di URL
-$id_barang = $_GET["id_barang"];
-// query data mahasiswa berdasarkan id
-$barang = query("SELECT * FROM barang WHERE id_barang = $id_barang")[0];
-
-
-
 // cek apakah tombol submit sudah ditekan atau belum
 if (isset($_POST["submit"])) {
 	
 
-	
 
-	// cek apakah data berhasil diubah atau tidak
-	if(ubahApprove2($_POST) > 0 ) {
+	// cek apakah data berhasil ditambahkan atau tidak
+	if(tambahPengajuan($_POST) > 0 ) {
 		echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
 		echo '<script src="./sweetalert2.min.js"></script>';
 		echo "<script>
@@ -24,20 +16,20 @@ if (isset($_POST["submit"])) {
 			swal.fire({
 				
 				title               : 'Berhasil',
-				text                :  'Data berhasil diapprove',
+				text                :  'Data berhasil ditambahkan',
 				//footer              :  '',
 				icon                : 'success',
 				timer               : 2000,
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=approve2'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=pengajuan'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
-		</script>";
+		</script>"; 
 		// echo "
 		// 	<script>
-		// 		alert('Data berhasil diubah!');
-		// 		document.location.href = '?page=pengajuan';
+		// 		alert('Data berhasil ditambahkan');
+		// 		document.location.href = '?page=anggaran';
 		// 	</script>
 		// ";
 	} else{
@@ -48,20 +40,20 @@ if (isset($_POST["submit"])) {
 			swal.fire({
 				
 				title               : 'Gagal',
-				text                :  'Data gagal diubah',
+				text                :  'Data gagal ditambahkan',
 				//footer              :  '',
 				icon                : 'error',
 				timer               : 2000,
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=approve2'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=pengajuan'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>";
 		// echo "
 		// 	<script>
-		// 		alert('Data gagal diubah!');
-		// 		document.location.href = '?page=pengajuan';
+		// 		alert('Data gagal ditambahkan');
+		// 		document.location.href = '?page=anggaran';
 		// 	</script>
 		// ";
 	}
@@ -76,7 +68,7 @@ if (isset($_POST["submit"])) {
       <div class="">
 					<div class="page-title">
 						<div class="title_left">
-							<h3>Konfirmasi Approval</h3>
+							<h3>Form Pengadaan Barang</h3>
 						</div>
 
 						<div class="title_right">
@@ -95,7 +87,7 @@ if (isset($_POST["submit"])) {
 						<div class="col-md-12 col-sm-12 ">
 							<div class="x_panel">
 								<div class="x_title">
-									<h2>Konfirmasi Data <small></small></h2>
+									<h2>Form input <small></small></h2>
 									<!-- <ul class="nav navbar-right panel_toolbox">
 										<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
 										</li>
@@ -116,85 +108,121 @@ if (isset($_POST["submit"])) {
 								<div class="x_content">
 									<br />
 									<form action="" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-										<input type="hidden" name="id_barang" value="<?= $barang["id_barang"];?>">
-										<div class="item form-group">
-											<!-- <input type="hidden" name="aksi" value="ubah"> -->
 
+										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">INV ID <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="inv_id" id="first-name" required="required" class="form-control" value="<?= $barang["inv_id"];?>" readonly>
+												<input type="text" name="inv_id" id="first-name" required="required" class="form-control ">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Nama Barang <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="nama_barang" id="last-name" required="required" class="form-control" value="<?= $barang["nama_barang"];?>" readonly>
+												<input type="text" name="nama_barang" id="last-name" required="required" class="form-control">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Spec</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="spek" class="form-control" type="text" value="<?= $barang["spek"];?>" readonly>
+												<input id="middle-name" name="spek" class="form-control" type="text">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Desc</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="deskripsi" class="form-control" type="text" value="<?= $barang["deskripsi"];?>" readonly>
+												<input id="middle-name" name="deskripsi" class="form-control" type="text">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Qty</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="qty" class="form-control" type="text" value="<?= $barang["qty"];?>" readonly>
+												<input id="middle-name" name="qty" class="form-control" type="text">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Date In</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="tgl_masuk" class="form-control" type="date" value="<?= $barang["tgl_masuk"];?>" readonly>
+												<input id="middle-name" name="tgl_masuk" class="form-control" placeholder="dd-mm-yyyy" type="date" value="<?php echo date('Y-m-d'); ?>" readonly>
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Unit Price</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="harga" class="form-control" type="text" value="<?= $barang["harga"];?>" readonly>
+												<input id="middle-name" name="harga" class="form-control" type="text">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Vendor</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="vendor" class="form-control" type="text" value="<?= $barang["vendor"];?>" readonly>
+												<input id="middle-name" name="vendor" class="form-control" type="text">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Waranty</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="waranty" class="form-control" type="text" value="<?= $barang["waranty"];?>" readonly>
+												<input id="middle-name" name="waranty" class="form-control" type="text">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Renewal</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="renewal" class="form-control" type="text" value="<?= $barang["renewal"];?>" readonly>
+												<input id="middle-name" name="renewal" class="form-control" type="text">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Condition</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="kondisi" class="form-control" type="text" value="<?= $barang["kondisi"];?>" readonly>
-												<input id="middle-name" name="status" class="form-control" type="hidden" value="Sudah disetujui">
+												<input id="middle-name" name="kondisi" class="form-control" type="text">
+												<input id="middle-name" name="status" class="form-control" type="hidden" value="Menunggu Persetujuan">
+												<input id="middle-name" name="status2" class="form-control" type="hidden" value="Menunggu Persetujuan">
 											</div>
 										</div>
-									
+										<!-- <div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Status</label>
+											<div class="col-md-6 col-sm-6">
+												<select class="form-control" name="status">
+													<option value="Menunggu Persetujuan" type="hidden">Menunggu Persetujuan</option>
+													<option value="Sedang diproses">Sedang diproses</option>
+													<option value="Sudah disetujui">Sudah disetujui</option>
+													<option value="Ditolak">Ditolak</option>
+												</select>
+											</div>
+										</div> -->
+										<!-- <div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align">Gender</label>
+											<div class="col-md-6 col-sm-6 ">
+												<div id="gender" class="btn-group" data-toggle="buttons">
+													<label class="btn btn-secondary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+														<input type="radio" name="gender" value="male" class="join-btn"> &nbsp; Male &nbsp;
+													</label>
+													<label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+														<input type="radio" name="gender" value="female" class="join-btn"> Female
+													</label>
+												</div>
+											</div>
+										</div> -->
+										<!-- <div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align">Date Of Birth <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input id="birthday" class="date-picker form-control" placeholder="dd-mm-yyyy" type="text" required="required" type="text" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
+												<script>
+													function timeFunctionLong(input) {
+														setTimeout(function() {
+															input.type = 'text';
+														}, 60000);
+													}
+												</script>
+											</div>
+										</div> -->
 										<div class="ln_solid"></div>
 										<div class="item form-group">
 											<div class="col-md-6 col-sm-6 offset-md-3">
 												<!-- <button class="btn btn-primary" type="button">Cancel</button> -->
-												<!-- <button class="btn btn-primary" type="reset">Reset</button> -->
-												<button type="submit" class="btn btn-success" name="submit">Approve</button>
+												<button class="btn btn-primary" type="reset">Reset</button>
+												<button type="submit" class="btn btn-success" name="submit">Submit</button>
 											</div>
 										</div>
 

@@ -16,7 +16,7 @@ if (isset($_POST["submit"])) {
 	
 
 	// cek apakah data berhasil diubah atau tidak
-	if(ubahApprove2($_POST) > 0 ) {
+	if(ubahPengajuan($_POST) > 0 ) {
 		echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
 		echo '<script src="./sweetalert2.min.js"></script>';
 		echo "<script>
@@ -24,14 +24,14 @@ if (isset($_POST["submit"])) {
 			swal.fire({
 				
 				title               : 'Berhasil',
-				text                :  'Data berhasil diapprove',
+				text                :  'Data berhasil diubah',
 				//footer              :  '',
 				icon                : 'success',
 				timer               : 2000,
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=approve2'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=pengajuan'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>";
 		// echo "
@@ -55,7 +55,7 @@ if (isset($_POST["submit"])) {
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=approve2'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=pengajuan'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>";
 		// echo "
@@ -76,7 +76,7 @@ if (isset($_POST["submit"])) {
       <div class="">
 					<div class="page-title">
 						<div class="title_left">
-							<h3>Konfirmasi Approval</h3>
+							<h3>Form Pengadaan Barang</h3>
 						</div>
 
 						<div class="title_right">
@@ -95,7 +95,7 @@ if (isset($_POST["submit"])) {
 						<div class="col-md-12 col-sm-12 ">
 							<div class="x_panel">
 								<div class="x_title">
-									<h2>Konfirmasi Data <small></small></h2>
+									<h2>Form Ubah Data <small></small></h2>
 									<!-- <ul class="nav navbar-right panel_toolbox">
 										<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
 										</li>
@@ -123,32 +123,32 @@ if (isset($_POST["submit"])) {
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">INV ID <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="inv_id" id="first-name" required="required" class="form-control" value="<?= $barang["inv_id"];?>" readonly>
+												<input type="text" name="inv_id" id="first-name" required="required" class="form-control" value="<?= $barang["inv_id"];?>">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Nama Barang <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="nama_barang" id="last-name" required="required" class="form-control" value="<?= $barang["nama_barang"];?>" readonly>
+												<input type="text" name="nama_barang" id="last-name" required="required" class="form-control" value="<?= $barang["nama_barang"];?>">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Spec</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="spek" class="form-control" type="text" value="<?= $barang["spek"];?>" readonly>
+												<input id="middle-name" name="spek" class="form-control" type="text" value="<?= $barang["spek"];?>">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Desc</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="deskripsi" class="form-control" type="text" value="<?= $barang["deskripsi"];?>" readonly>
+												<input id="middle-name" name="deskripsi" class="form-control" type="text" value="<?= $barang["deskripsi"];?>">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Qty</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="qty" class="form-control" type="text" value="<?= $barang["qty"];?>" readonly>
+												<input id="middle-name" name="qty" class="form-control" type="text" value="<?= $barang["qty"];?>">
 											</div>
 										</div>
 										<div class="item form-group">
@@ -160,32 +160,32 @@ if (isset($_POST["submit"])) {
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Unit Price</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="harga" class="form-control" type="text" value="<?= $barang["harga"];?>" readonly>
+												<input id="middle-name" name="harga" class="form-control" type="text" value="<?= $barang["harga"];?>">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Vendor</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="vendor" class="form-control" type="text" value="<?= $barang["vendor"];?>" readonly>
+												<input id="middle-name" name="vendor" class="form-control" type="text" value="<?= $barang["vendor"];?>">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Waranty</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="waranty" class="form-control" type="text" value="<?= $barang["waranty"];?>" readonly>
+												<input id="middle-name" name="waranty" class="form-control" type="text" value="<?= $barang["waranty"];?>">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Renewal</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="renewal" class="form-control" type="text" value="<?= $barang["renewal"];?>" readonly>
+												<input id="middle-name" name="renewal" class="form-control" type="text" value="<?= $barang["renewal"];?>">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Condition</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="kondisi" class="form-control" type="text" value="<?= $barang["kondisi"];?>" readonly>
-												<input id="middle-name" name="status" class="form-control" type="hidden" value="Sudah disetujui">
+												<input id="middle-name" name="kondisi" class="form-control" type="text" value="<?= $barang["kondisi"];?>">
+												<input id="middle-name" name="status" class="form-control" type="hidden" value="Menunggu Persetujuan">
 											</div>
 										</div>
 									
@@ -193,8 +193,8 @@ if (isset($_POST["submit"])) {
 										<div class="item form-group">
 											<div class="col-md-6 col-sm-6 offset-md-3">
 												<!-- <button class="btn btn-primary" type="button">Cancel</button> -->
-												<!-- <button class="btn btn-primary" type="reset">Reset</button> -->
-												<button type="submit" class="btn btn-success" name="submit">Approve</button>
+												<button class="btn btn-primary" type="reset">Reset</button>
+												<button type="submit" class="btn btn-success" name="submit">Submit</button>
 											</div>
 										</div>
 

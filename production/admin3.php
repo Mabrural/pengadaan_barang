@@ -6,26 +6,26 @@ if (!isset($_SESSION["login"])) {
   exit;
 }
 
+if ($_SESSION["level"] == "user") {
+    header("Location: index.php");
+    exit;
+}
+
 if ($_SESSION["level"] == "admin") {
     header("Location: admin.php");
     exit;
-} 
-
+}
 if ($_SESSION["level"] == "admin2") {
     header("Location: admin2.php");
     exit;
-} 
-
-if ($_SESSION["level"] == "admin3") {
-    header("Location: admin.php");
-    exit;
 }
+
   include "koneksi.php";
   $id_user = $_SESSION["id_user"];
 
   $nama = $_SESSION["username"];
   
-  ?>
+//  ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -126,10 +126,10 @@ if ($_SESSION["level"] == "admin3") {
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-list"></i> Pengajuan Barang<span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-check"></i> Approval <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="index.php?page=pengajuan">Tabel Pengajuan</a></li>
-                      <li><a href="index.php?page=historyPengajuan">History Pengajuan</a></li>
+                      <li><a href="admin3.php?page=approve3">Approval</a></li>
+                      <li><a href="admin3.php?page=historyApprove3">History Approval</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
                   </li>
@@ -314,14 +314,14 @@ if ($_SESSION["level"] == "admin3") {
                     if(isset($_GET['page'])){
                         $page = $_GET['page'];
                         switch ($page) {
-                            case 'pengajuan':
-                                include "page/pengajuan/pengajuan.php";
+                            case 'approve3':
+                                include "page/admin_approve3/admin_aprove3.php";
                                 break;
 
-                            case 'historyPengajuan':
-                                include "page/history_pengajuan/history_pengajuan.php";
+                            case 'historyApprove2':
+                                include "page/history_approve2/history_approve2.php";
                                 break;
-
+                         
                             case 'dashboard':
                                 include "page/dashboard/dashboard.php";
                                 break;
@@ -348,8 +348,8 @@ if ($_SESSION["level"] == "admin3") {
                         switch ($form) {
                             
 
-                            case 'ubahPengajuan':
-                                include "page/pengajuan/ubah.php";
+                            case 'ubahApprove2':
+                                include "page/admin_approve2/konfirmasi_aprove2.php";
                                 break;
 
                             case 'tambahPengajuan':
@@ -1102,3 +1102,4 @@ if ($_SESSION["level"] == "admin3") {
 	
   </body>
 </html>
+

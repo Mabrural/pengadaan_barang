@@ -1,4 +1,3 @@
-
 <?php
 
 $id_user = $_SESSION["id_user"];
@@ -8,7 +7,7 @@ $id_user = $_SESSION["id_user"];
 ?>
     <div class="x_panel">
       <div class="x_title">
-        <h2>Table Approval <small></small></h2>
+        <h2>History Pengajuan Barang <small></small></h2>
         <!-- <a href="?form=tambahPengajuan" class="btn btn-primary">Form Pengajuan</a> -->
         <!-- <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -49,7 +48,6 @@ $id_user = $_SESSION["id_user"];
                 <th class="column-title">Waranty </th>
                 <th class="column-title">Renewal </th>
                 <th class="column-title">Condition </th>
-                <th class="column-title">Nama Pemohon </th>
                 <th class="column-title">Status </th>
                 <th class="column-title no-link last"><span class="nobr">Action</span>
                 </th>
@@ -63,8 +61,7 @@ $id_user = $_SESSION["id_user"];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='Menunggu Persetujuan' OR status='Sedang diproses'";
-              		// $query = "SELECT * FROM barang WHERE barang.id_user=$id_user";
+              		$query = "SELECT * FROM barang WHERE barang.id_user=$id_user AND status='Sudah disetujui'";
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
               		
@@ -83,7 +80,6 @@ $id_user = $_SESSION["id_user"];
                 <td class=" "><?= $data['waranty'];?></td>
                 <td class=" "><?= $data['renewal'];?></td>
                 <td class=" "><?= $data['kondisi'];?></td>
-                <td class=" "><strong><?= $data['username'];?></strong></td>
                 <td class=" " style="color: <?php
                     if ($data['status'] == 'Menunggu Persetujuan') {
                         echo '#b58709';
@@ -96,18 +92,18 @@ $id_user = $_SESSION["id_user"];
                     }
                 ?>;">
                     <strong><?= $data['status'];?></strong>
+                </td>
 
-                 <?php if ($data['status'] == 'Sudah disetujui' OR $data['status'] == 'Sedang diproses') { ?>
-		          <td class=" last">
-		            <span class="text-success fa fa-check"><strong> Selesai</strong></span>
-		          </td>
-		        <?php } else { ?>
-		          <td class=" last"><a href="?form=ubahApprove&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Approve </a> 
-                <input type="hidden" name="nama_pemohon" value="<?= $_SESSION['username']; ?>">
-		        </td>
-		        <?php } ?>
-
-             <!--    <td class=" last"><a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Approve </a> 
+              <td class=" last">
+              <?php if ($data['status'] == 'Sudah disetujui') { ?>
+                <span class="text-success fa fa-check"><strong> Selesai</strong></span>
+              <?php } elseif ($data['status'] == 'Sedang diproses') { ?>
+                <span class="text-info fa fa-spinner fa-spin"></span><strong> Waiting</strong>
+              <?php } else { ?>
+                <a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusPengajuan&id_barang=<?= $data["id_barang"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
+              <?php } ?>
+            </td>
+               <!--  <td class=" last"><a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusPengajuan&id_barang=<?= $data["id_barang"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
                 </td> -->
               </tr>
               

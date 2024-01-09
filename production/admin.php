@@ -11,12 +11,22 @@ if ($_SESSION["level"] == "user") {
     exit;
 }
 
+if ($_SESSION["level"] == "admin2") {
+    header("Location: admin2.php");
+    exit;
+}
+
+if ($_SESSION["level"] == "admin3") {
+    header("Location: admin3.php");
+    exit;
+}
+
   include "koneksi.php";
   $id_user = $_SESSION["id_user"];
 
   $nama = $_SESSION["username"];
   
-//  ?>
+  ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -117,9 +127,10 @@ if ($_SESSION["level"] == "user") {
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-table"></i> Pengajuan <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-check"></i> Approval <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="admin.php?page=approve">Tabel Pengajuan</a></li>
+                      <li><a href="admin.php?page=approve">Approval</a></li>
+                      <li><a href="admin.php?page=historyApprove">History Approve</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
                   </li>
@@ -306,6 +317,10 @@ if ($_SESSION["level"] == "user") {
                         switch ($page) {
                             case 'approve':
                                 include "page/admin_approve/admin_aprove.php";
+                                break;
+
+                            case 'historyApprove':
+                                include "page/history_approve/history_approve.php";
                                 break;
                          
                             case 'dashboard':
