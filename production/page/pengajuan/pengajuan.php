@@ -37,17 +37,12 @@ $id_user = $_SESSION["id_user"];
                   <input type="checkbox" id="check-all" class="flat">
                 </th> -->
                 <th class="column-title">No. </th>
-                <th class="column-title">INV ID </th>
+                <th class="column-title">Kode Pengajuan </th>
                 <th class="column-title">Nama Barang </th>
                 <th class="column-title">Spec </th>
                 <th class="column-title">Desc </th>
                 <th class="column-title">Qty </th>
-                <th class="column-title">Date in </th>
-                <th class="column-title">Unit Price </th>
-                <th class="column-title">Vendor </th>
-                <th class="column-title">Waranty </th>
-                <th class="column-title">Renewal </th>
-                <th class="column-title">Condition </th>
+                <th class="column-title">Tanggal Pengajuan </th>
                 <th class="column-title">Status </th>
                 <th class="column-title no-link last"><span class="nobr">Action</span>
                 </th>
@@ -64,22 +59,26 @@ $id_user = $_SESSION["id_user"];
               		$query = "SELECT * FROM barang WHERE barang.id_user=$id_user AND status='Menunggu Persetujuan' OR status='Sedang diproses'";
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
-              		
-              		
+              		// $hari_indonesia = array(
+                  //     'Sunday' => 'Minggu',
+                  //     'Monday' => 'Senin',
+                  //     'Tuesday' => 'Selasa',
+                  //     'Wednesday' => 'Rabu',
+                  //     'Thursday' => 'Kamis',
+                  //     'Friday' => 'Jumat',
+                  //     'Saturday' => 'Sabtu',
+                  // );
+                  //     $hari = strftime('%A', strtotime($data['tgl_pengajuan']));          		
 
               	 ?>
                 <td class=" "><?= $no++;?></td>
-                <td class=" "><?= $data['inv_id'];?></td>
+                <td class=" "><?= $data['kode_pengajuan'];?></td>
                 <td class=" "><?= $data['nama_barang'];?> </td>
                 <td class=" "><?= $data['spek'];?></td>
                 <td class=" "><?= $data['deskripsi'];?></td>
                 <td class=" "><?= $data['qty'];?></td>
-                <td class=" "><?= $data['tgl_masuk'];?></td>
-                <td class=" "><?= $data['harga'];?></td>
-                <td class=" "><?= $data['vendor'];?></td>
-                <td class=" "><?= $data['waranty'];?></td>
-                <td class=" "><?= $data['renewal'];?></td>
-                <td class=" "><?= $data['kondisi'];?></td>
+                <!-- <td class=" "><?= $hari_indonesia[$hari].date(', d-M-Y', strtotime($data['tgl_pengajuan']));?></td> -->
+                <td class=" "><?= date('d-M-Y', strtotime($data['tgl_pengajuan']));?></td>
                 <td class=" " style="color: <?php
                     if ($data['status'] == 'Menunggu Persetujuan') {
                         echo '#b58709';

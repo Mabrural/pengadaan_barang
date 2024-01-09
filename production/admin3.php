@@ -126,9 +126,9 @@ if ($_SESSION["level"] == "admin2") {
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-check"></i> Approval <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-list-alt"></i> Laporan Pengajuan <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="admin3.php?page=approve3">Approval</a></li>
+                      <li><a href="admin3.php?page=approve3">Rekap Data Approval</a></li>
                       <li><a href="admin3.php?page=historyApprove3">History Approval</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>

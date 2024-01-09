@@ -120,10 +120,10 @@ if (isset($_POST["submit"])) {
 										<div class="item form-group">
 											<!-- <input type="hidden" name="aksi" value="ubah"> -->
 
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">INV ID <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Kode Pengajuan <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="inv_id" id="first-name" required="required" class="form-control" value="<?= $barang["inv_id"];?>" readonly>
+												<input type="text" name="kode_pengajuan" id="first-name" required="required" class="form-control" value="<?= $barang["kode_pengajuan"];?>" readonly>
 											</div>
 										</div>
 										<div class="item form-group">
@@ -152,42 +152,14 @@ if (isset($_POST["submit"])) {
 											</div>
 										</div>
 										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Date In</label>
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Pengajuan</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="tgl_masuk" class="form-control" type="date" value="<?= $barang["tgl_masuk"];?>" readonly>
-											</div>
-										</div>
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Unit Price</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="harga" class="form-control" type="text" value="<?= $barang["harga"];?>" readonly>
-											</div>
-										</div>
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Vendor</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="vendor" class="form-control" type="text" value="<?= $barang["vendor"];?>" readonly>
-											</div>
-										</div>
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Waranty</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="waranty" class="form-control" type="text" value="<?= $barang["waranty"];?>" readonly>
-											</div>
-										</div>
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Renewal</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="renewal" class="form-control" type="text" value="<?= $barang["renewal"];?>" readonly>
-											</div>
-										</div>
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Condition</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="kondisi" class="form-control" type="text" value="<?= $barang["kondisi"];?>" readonly>
+												<input id="middle-name" name="tgl_pengajuan" class="form-control" type="date" value="<?= $barang["tgl_pengajuan"];?>" readonly>
 												<input id="middle-name" name="status" class="form-control" type="hidden" value="Sudah disetujui">
+												<input id="middle-name" name="acc2" class="form-control" type="hidden" value="<?= $nama;?>">
 											</div>
 										</div>
+										
 									
 										<div class="ln_solid"></div>
 										<div class="item form-group">

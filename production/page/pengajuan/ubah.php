@@ -117,19 +117,12 @@ if (isset($_POST["submit"])) {
 									<br />
 									<form action="" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 										<input type="hidden" name="id_barang" value="<?= $barang["id_barang"];?>">
-										<div class="item form-group">
-											<!-- <input type="hidden" name="aksi" value="ubah"> -->
-
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">INV ID <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="inv_id" id="first-name" required="required" class="form-control" value="<?= $barang["inv_id"];?>">
-											</div>
-										</div>
+										
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Nama Barang <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
+												<input type="hidden" name="kode_pengajuan" id="last-name" required="required" class="form-control" value="<?= $barang["kode_pengajuan"];?>">
 												<input type="text" name="nama_barang" id="last-name" required="required" class="form-control" value="<?= $barang["nama_barang"];?>">
 											</div>
 										</div>
@@ -152,42 +145,16 @@ if (isset($_POST["submit"])) {
 											</div>
 										</div>
 										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Date In</label>
+											<!-- <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Date In</label> -->
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="tgl_masuk" class="form-control" type="date" value="<?= $barang["tgl_masuk"];?>" readonly>
-											</div>
-										</div>
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Unit Price</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="harga" class="form-control" type="text" value="<?= $barang["harga"];?>">
-											</div>
-										</div>
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Vendor</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="vendor" class="form-control" type="text" value="<?= $barang["vendor"];?>">
-											</div>
-										</div>
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Waranty</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="waranty" class="form-control" type="text" value="<?= $barang["waranty"];?>">
-											</div>
-										</div>
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Renewal</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="renewal" class="form-control" type="text" value="<?= $barang["renewal"];?>">
-											</div>
-										</div>
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Condition</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="kondisi" class="form-control" type="text" value="<?= $barang["kondisi"];?>">
+												<input id="middle-name" name="tgl_pengajuan" class="form-control" type="hidden" value="<?= $barang["tgl_pengajuan"];?>" >
 												<input id="middle-name" name="status" class="form-control" type="hidden" value="Menunggu Persetujuan">
+												<input id="middle-name" name="acc1" class="form-control" type="hidden" value="">
+												<input id="middle-name" name="acc2" class="form-control" type="hidden" value="">
+
 											</div>
 										</div>
+										
 									
 										<div class="ln_solid"></div>
 										<div class="item form-group">

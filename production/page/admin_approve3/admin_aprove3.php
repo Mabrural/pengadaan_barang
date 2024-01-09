@@ -8,7 +8,7 @@ $id_user = $_SESSION["id_user"];
 ?>
     <div class="x_panel">
       <div class="x_title">
-        <h2>Table Approval <small></small></h2>
+        <h2>Rekap Data Approval <small></small></h2>
         <!-- <a href="?form=tambahPengajuan" class="btn btn-primary">Form Pengajuan</a> -->
         <!-- <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -38,18 +38,9 @@ $id_user = $_SESSION["id_user"];
                   <input type="checkbox" id="check-all" class="flat">
                 </th> -->
                 <th class="column-title">No. </th>
-                <th class="column-title">INV ID </th>
-                <th class="column-title">Nama Barang </th>
-                <th class="column-title">Spec </th>
-                <th class="column-title">Desc </th>
-                <th class="column-title">Qty </th>
-                <th class="column-title">Date in </th>
-                <th class="column-title">Unit Price </th>
-                <th class="column-title">Vendor </th>
-                <th class="column-title">Waranty </th>
-                <th class="column-title">Renewal </th>
-                <th class="column-title">Condition </th>
                 <th class="column-title">Nama Pemohon </th>
+                <th class="column-title">Tanggal Pengajuan </th>
+                <th class="column-title">Di Acc Oleh </th>
                 <th class="column-title">Status </th>
                 <th class="column-title no-link last"><span class="nobr">Action</span>
                 </th>
@@ -63,7 +54,7 @@ $id_user = $_SESSION["id_user"];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='Sedang diproses'";
+              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='Sudah disetujui' GROUP BY barang.id_user";
               		// $query = "SELECT * FROM barang WHERE barang.id_user=$id_user";
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
@@ -72,18 +63,9 @@ $id_user = $_SESSION["id_user"];
 
               	 ?>
                 <td class=" "><?= $no++;?></td>
-                <td class=" "><?= $data['inv_id'];?></td>
-                <td class=" "><?= $data['nama_barang'];?> </td>
-                <td class=" "><?= $data['spek'];?></td>
-                <td class=" "><?= $data['deskripsi'];?></td>
-                <td class=" "><?= $data['qty'];?></td>
-                <td class=" "><?= $data['tgl_masuk'];?></td>
-                <td class=" "><?= $data['harga'];?></td>
-                <td class=" "><?= $data['vendor'];?></td>
-                <td class=" "><?= $data['waranty'];?></td>
-                <td class=" "><?= $data['renewal'];?></td>
-                <td class=" "><?= $data['kondisi'];?></td>
                 <td class=" "><strong><?= $data['username'];?></strong></td>
+                <td class=" "><?= date('d-M-Y', strtotime($data['tgl_pengajuan']));?></td>
+                <td class=" "><?= $data['qty'];?></td>
                 <td class=" " style="color: <?php
                     if ($data['status'] == 'Menunggu Persetujuan') {
                         echo '#b58709';
@@ -95,17 +77,9 @@ $id_user = $_SESSION["id_user"];
                         echo '#a62f26';
                     }
                 ?>;">
-                    <span class="text-info fa fa-spinner fa-spin"></span> <strong><?= $data['status'];?></strong>
+                     <strong><?= $data['status'];?></strong>
 
-                 <?php if ($data['status'] == 'Sudah disetujui') { ?>
-		          <td class=" last">
-		            <span class="text-success fa fa-check"><strong> Selesai</strong></span>
-		          </td>
-		        <?php } else { ?>
-		          <td class=" last"><a href="?form=ubahApprove2&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Approve </a> 
-                <input type="hidden" name="nama_pemohon" value="<?= $_SESSION['username']; ?>">
-		        </td>
-		        <?php } ?>
+                <td><a href="" class="btn btn-info btn-sm">Rincian</a></td>
 
              <!--    <td class=" last"><a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Approve </a> 
                 </td> -->

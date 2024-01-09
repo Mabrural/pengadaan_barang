@@ -37,19 +37,16 @@ $id_user = $_SESSION["id_user"];
                   <input type="checkbox" id="check-all" class="flat">
                 </th> -->
                 <th class="column-title">No. </th>
-                <th class="column-title">INV ID </th>
+                <th class="column-title">Kode Pengajuan </th>
                 <th class="column-title">Nama Barang </th>
                 <th class="column-title">Spec </th>
                 <th class="column-title">Desc </th>
                 <th class="column-title">Qty </th>
-                <th class="column-title">Date in </th>
-                <th class="column-title">Unit Price </th>
-                <th class="column-title">Vendor </th>
-                <th class="column-title">Waranty </th>
-                <th class="column-title">Renewal </th>
-                <th class="column-title">Condition </th>
+                <th class="column-title">Tanggal Pengajuan </th>
+                <th class="column-title">Approval 1</th>
+                <th class="column-title">Approval 2 </th>
                 <th class="column-title">Status </th>
-                <th class="column-title no-link last"><span class="nobr">Action</span>
+                <!-- <th class="column-title no-link last"><span class="nobr">Action</span> -->
                 </th>
                 <th class="bulk-actions" colspan="7">
                   <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
@@ -69,17 +66,14 @@ $id_user = $_SESSION["id_user"];
 
               	 ?>
                 <td class=" "><?= $no++;?></td>
-                <td class=" "><?= $data['inv_id'];?></td>
+                <td class=" "><?= $data['kode_pengajuan'];?></td>
                 <td class=" "><?= $data['nama_barang'];?> </td>
                 <td class=" "><?= $data['spek'];?></td>
                 <td class=" "><?= $data['deskripsi'];?></td>
                 <td class=" "><?= $data['qty'];?></td>
-                <td class=" "><?= $data['tgl_masuk'];?></td>
-                <td class=" "><?= $data['harga'];?></td>
-                <td class=" "><?= $data['vendor'];?></td>
-                <td class=" "><?= $data['waranty'];?></td>
-                <td class=" "><?= $data['renewal'];?></td>
-                <td class=" "><?= $data['kondisi'];?></td>
+                <td class=" "><?= date('d-M-Y', strtotime($data['tgl_pengajuan']));?></td>
+                <td class=" "><?= $data['acc1'];?></td>
+                <td class=" "><?= $data['acc2'];?></td>
                 <td class=" " style="color: <?php
                     if ($data['status'] == 'Menunggu Persetujuan') {
                         echo '#b58709';
@@ -94,15 +88,13 @@ $id_user = $_SESSION["id_user"];
                     <strong><?= $data['status'];?></strong>
                 </td>
 
-              <td class=" last">
-              <?php if ($data['status'] == 'Sudah disetujui') { ?>
-                <span class="text-success fa fa-check"><strong> Selesai</strong></span>
-              <?php } elseif ($data['status'] == 'Sedang diproses') { ?>
-                <span class="text-info fa fa-spinner fa-spin"></span><strong> Waiting</strong>
-              <?php } else { ?>
-                <a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusPengajuan&id_barang=<?= $data["id_barang"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
-              <?php } ?>
-            </td>
+                
+
+              
+
+                
+
+
                <!--  <td class=" last"><a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusPengajuan&id_barang=<?= $data["id_barang"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
                 </td> -->
               </tr>

@@ -23,59 +23,73 @@ function query($query){
 	return $rows;
 }
 
+// function tambahPengajuan($data) {
+// 	global $koneksi;
+// 	// $kode_pengajuan = htmlspecialchars($data["kode_pengajuan"]);
+// 	$kode_pengajuan = 1;
+// 	$nama_barang = htmlspecialchars($data["nama_barang"]);
+// 	$spek = htmlspecialchars($data["spek"]);
+// 	$deskripsi = htmlspecialchars($data["deskripsi"]);
+// 	$qty = htmlspecialchars($data["qty"]);
+// 	$tgl_pengajuan = htmlspecialchars($data["tgl_pengajuan"]);
+// 	$status = htmlspecialchars($data["status"]);
+// 	$id_user = mysqli_real_escape_string($koneksi, $_SESSION["id_user"]);
+// 	$new_kode_pengajuan = $kode_pengajuan+1;
+
+// 	$query = "INSERT INTO barang VALUES
+// 			('', '$new_kode_pengajuan', '$nama_barang', '$spek', '$deskripsi', '$qty', '$tgl_pengajuan', '$status','$id_user')";
+// 	mysqli_query($koneksi, $query);
+
+// 	return mysqli_affected_rows($koneksi);
+// }
+
 function tambahPengajuan($data) {
+
 	global $koneksi;
-	$inv_id = htmlspecialchars($data["inv_id"]);
+	// $kode_pengajuan = htmlspecialchars($data["kode_pengajuan"]);
 	$nama_barang = htmlspecialchars($data["nama_barang"]);
 	$spek = htmlspecialchars($data["spek"]);
 	$deskripsi = htmlspecialchars($data["deskripsi"]);
 	$qty = htmlspecialchars($data["qty"]);
-	$tgl_masuk = htmlspecialchars($data["tgl_masuk"]);
-	$harga = htmlspecialchars($data["harga"]);
-	$vendor = htmlspecialchars($data["vendor"]);
-	$waranty = htmlspecialchars($data["waranty"]);
-	$renewal = htmlspecialchars($data["renewal"]);
-	$kondisi = htmlspecialchars($data["kondisi"]);
+	$tgl_pengajuan = htmlspecialchars($data["tgl_pengajuan"]);
 	$status = htmlspecialchars($data["status"]);
+	// $acc1 = htmlspecialchars($data["acc1"]);
+	// $acc2 = htmlspecialchars($data["acc2"]);
 	$id_user = mysqli_real_escape_string($koneksi, $_SESSION["id_user"]);
 
+	$query = "SELECT MAX(kode_pengajuan) AS kode_pengajuan FROM barang";
+	$result = mysqli_query($koneksi, $query);
+	$row = mysqli_fetch_assoc($result);
+	$new_kode_pengajuan = $row["kode_pengajuan"] + 1;
 
 	$query = "INSERT INTO barang VALUES
-			('', '$inv_id', '$nama_barang', '$spek', '$deskripsi', '$qty', '$tgl_masuk', '$harga', '$vendor', '$waranty', '$renewal', '$kondisi', '$status','$id_user')";
+			('', '$new_kode_pengajuan', '$nama_barang', '$spek', '$deskripsi', '$qty', '$tgl_pengajuan', '$status', '', '', '$id_user')";
 	mysqli_query($koneksi, $query);
 
 	return mysqli_affected_rows($koneksi);
+
+
 }
+
 
 function ubahPengajuan($data) {
 	global $koneksi;
 	$id_barang = $data["id_barang"];
-	$inv_id = htmlspecialchars($data["inv_id"]);
+	// $kode_pengajuan = htmlspecialchars($data["kode_pengajuan"]);
 	$nama_barang = htmlspecialchars($data["nama_barang"]);
 	$spek = htmlspecialchars($data["spek"]);
 	$deskripsi = htmlspecialchars($data["deskripsi"]);
 	$qty = htmlspecialchars($data["qty"]);
-	$tgl_masuk = htmlspecialchars($data["tgl_masuk"]);
-	$harga = htmlspecialchars($data["harga"]);
-	$vendor = htmlspecialchars($data["vendor"]);
-	$waranty = htmlspecialchars($data["waranty"]);
-	$renewal = htmlspecialchars($data["renewal"]);
-	$kondisi = htmlspecialchars($data["kondisi"]);
+	$tgl_pengajuan = htmlspecialchars($data["tgl_pengajuan"]);
 	$status = htmlspecialchars($data["status"]);
 
 
 	$query = "UPDATE barang SET
-				inv_id = '$inv_id',
 				nama_barang = '$nama_barang',
 				spek = '$spek',
 				deskripsi = '$deskripsi',
 				qty = '$qty',
-				tgl_masuk = '$tgl_masuk',
-				harga = '$harga',
-				vendor = '$vendor',
-				waranty = '$waranty',
-				renewal = '$renewal',
-				kondisi = '$kondisi',
+				tgl_pengajuan = '$tgl_pengajuan',
 				status = '$status'
 			  WHERE id_barang = $id_barang
 			";
@@ -87,33 +101,25 @@ function ubahPengajuan($data) {
 function ubahApprove($data) {
 	global $koneksi;
 	$id_barang = $data["id_barang"];
-	$inv_id = htmlspecialchars($data["inv_id"]);
+	$kode_pengajuan = htmlspecialchars($data["kode_pengajuan"]);
 	$nama_barang = htmlspecialchars($data["nama_barang"]);
 	$spek = htmlspecialchars($data["spek"]);
 	$deskripsi = htmlspecialchars($data["deskripsi"]);
 	$qty = htmlspecialchars($data["qty"]);
-	$tgl_masuk = htmlspecialchars($data["tgl_masuk"]);
-	$harga = htmlspecialchars($data["harga"]);
-	$vendor = htmlspecialchars($data["vendor"]);
-	$waranty = htmlspecialchars($data["waranty"]);
-	$renewal = htmlspecialchars($data["renewal"]);
-	$kondisi = htmlspecialchars($data["kondisi"]);
+	$tgl_pengajuan = htmlspecialchars($data["tgl_pengajuan"]);
 	$status = htmlspecialchars($data["status"]);
+	$acc1 = htmlspecialchars($data["acc1"]);
 
 
 	$query = "UPDATE barang SET
-				inv_id = '$inv_id',
+				kode_pengajuan = '$kode_pengajuan',
 				nama_barang = '$nama_barang',
 				spek = '$spek',
 				deskripsi = '$deskripsi',
 				qty = '$qty',
-				tgl_masuk = '$tgl_masuk',
-				harga = '$harga',
-				vendor = '$vendor',
-				waranty = '$waranty',
-				renewal = '$renewal',
-				kondisi = '$kondisi',
-				status = '$status'
+				tgl_pengajuan = '$tgl_pengajuan',
+				status = '$status',
+				acc1 = '$acc1'
 			  WHERE id_barang = $id_barang
 			";
 	mysqli_query($koneksi, $query);
@@ -124,33 +130,25 @@ function ubahApprove($data) {
 function ubahApprove2($data) {
 	global $koneksi;
 	$id_barang = $data["id_barang"];
-	$inv_id = htmlspecialchars($data["inv_id"]);
+	$kode_pengajuan = htmlspecialchars($data["kode_pengajuan"]);
 	$nama_barang = htmlspecialchars($data["nama_barang"]);
 	$spek = htmlspecialchars($data["spek"]);
 	$deskripsi = htmlspecialchars($data["deskripsi"]);
 	$qty = htmlspecialchars($data["qty"]);
-	$tgl_masuk = htmlspecialchars($data["tgl_masuk"]);
-	$harga = htmlspecialchars($data["harga"]);
-	$vendor = htmlspecialchars($data["vendor"]);
-	$waranty = htmlspecialchars($data["waranty"]);
-	$renewal = htmlspecialchars($data["renewal"]);
-	$kondisi = htmlspecialchars($data["kondisi"]);
+	$tgl_pengajuan = htmlspecialchars($data["tgl_pengajuan"]);
 	$status = htmlspecialchars($data["status"]);
+	$acc2 = htmlspecialchars($data["acc2"]);
 
 
 	$query = "UPDATE barang SET
-				inv_id = '$inv_id',
+				kode_pengajuan = '$kode_pengajuan',
 				nama_barang = '$nama_barang',
 				spek = '$spek',
 				deskripsi = '$deskripsi',
 				qty = '$qty',
-				tgl_masuk = '$tgl_masuk',
-				harga = '$harga',
-				vendor = '$vendor',
-				waranty = '$waranty',
-				renewal = '$renewal',
-				kondisi = '$kondisi',
-				status = '$status'
+				tgl_pengajuan = '$tgl_pengajuan',
+				status = '$status',
+				acc2 = '$acc2'
 			  WHERE id_barang = $id_barang
 			";
 	mysqli_query($koneksi, $query);

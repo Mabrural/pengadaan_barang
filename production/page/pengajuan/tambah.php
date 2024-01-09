@@ -110,11 +110,11 @@ if (isset($_POST["submit"])) {
 									<form action="" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">INV ID <span class="required">*</span>
+											<!-- <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">INV ID <span class="required">*</span> -->
 											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="inv_id" id="first-name" required="required" class="form-control ">
-											</div>
+											<!-- <div class="col-md-6 col-sm-6 ">
+												<input type="hidden" name="kode_pengajuan" id="first-name" required="required" class="form-control ">
+											</div> -->
 										</div>
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Nama Barang <span class="required">*</span>
@@ -138,47 +138,28 @@ if (isset($_POST["submit"])) {
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Qty</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="qty" class="form-control" type="text">
+												<input id="middle-name" name="qty" class="form-control" type="number">
 											</div>
 										</div>
 										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Date In</label>
+											<!-- <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Pengajuan</label> -->
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="tgl_masuk" class="form-control" placeholder="dd-mm-yyyy" type="date" value="<?php echo date('Y-m-d'); ?>" readonly>
+												<input id="middle-name" name="tgl_pengajuan" class="form-control" placeholder="dd-mm-yyyy" type="hidden" value="<?php echo date('Y-m-d'); ?>" readonly>
+												<input id="middle-name" name="status" class="form-control" type="hidden" value="Menunggu Persetujuan">
+												<input id="middle-name" name="acc1" class="form-control" type="hidden" value="">
+												<input id="middle-name" name="acc2" class="form-control" type="hidden" value="">
+												
 											</div>
 										</div>
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Unit Price</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="harga" class="form-control" type="text">
-											</div>
-										</div>
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Vendor</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="vendor" class="form-control" type="text">
-											</div>
-										</div>
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Waranty</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="waranty" class="form-control" type="text">
-											</div>
-										</div>
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Renewal</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="renewal" class="form-control" type="text">
-											</div>
-										</div>
-										<div class="item form-group">
+										
+										<!-- <div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Condition</label>
 											<div class="col-md-6 col-sm-6 ">
 												<input id="middle-name" name="kondisi" class="form-control" type="text">
 												<input id="middle-name" name="status" class="form-control" type="hidden" value="Menunggu Persetujuan">
 												<input id="middle-name" name="status2" class="form-control" type="hidden" value="Menunggu Persetujuan">
 											</div>
-										</div>
+										</div> -->
 										<!-- <div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Status</label>
 											<div class="col-md-6 col-sm-6">
