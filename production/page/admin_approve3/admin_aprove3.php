@@ -40,7 +40,8 @@ $id_user = $_SESSION["id_user"];
                 <th class="column-title">No. </th>
                 <th class="column-title">Nama Pemohon </th>
                 <th class="column-title">Tanggal Pengajuan </th>
-                <th class="column-title">Di Acc Oleh </th>
+                <th class="column-title">Approval 1 </th>
+                <th class="column-title">Approval 2 </th>
                 <th class="column-title">Status </th>
                 <th class="column-title no-link last"><span class="nobr">Action</span>
                 </th>
@@ -65,7 +66,8 @@ $id_user = $_SESSION["id_user"];
                 <td class=" "><?= $no++;?></td>
                 <td class=" "><strong><?= $data['username'];?></strong></td>
                 <td class=" "><?= date('d-M-Y', strtotime($data['tgl_pengajuan']));?></td>
-                <td class=" "><?= $data['qty'];?></td>
+                <td class=" "><?= $data['acc1'];?></td>
+                <td class=" "><?= $data['acc2'];?></td>
                 <td class=" " style="color: <?php
                     if ($data['status'] == 'Menunggu Persetujuan') {
                         echo '#b58709';
@@ -79,9 +81,9 @@ $id_user = $_SESSION["id_user"];
                 ?>;">
                      <strong><?= $data['status'];?></strong>
 
-                <td><a href="" class="btn btn-info btn-sm">Rincian</a></td>
+                <td><a href="?form=rincian&id_user=<?= $data["id_user"]; ?>" class="btn btn-info btn-sm">Rincian</a></td>
 
-             <!--    <td class=" last"><a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Approve </a> 
+                <!-- <td class=" last"><a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Approve </a> 
                 </td> -->
               </tr>
               

@@ -77,7 +77,7 @@ if ($_SESSION["level"] == "admin2") {
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <h2><?= $nama;?></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -350,6 +350,10 @@ if ($_SESSION["level"] == "admin2") {
 
                             case 'ubahApprove2':
                                 include "page/admin_approve2/konfirmasi_aprove2.php";
+                                break;
+
+                            case 'rincian':
+                                include "page/admin_approve3/rincian.php";
                                 break;
 
                             case 'tambahPengajuan':
