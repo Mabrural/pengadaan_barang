@@ -23,7 +23,7 @@ if ($_SESSION["level"] == "admin3") {
   include "koneksi.php";
   $id_user = $_SESSION["id_user"];
 
-  $nama = $_SESSION["username"];
+  $nama = $_SESSION["nama_emp"];
   
   ?>
 
@@ -35,9 +35,9 @@ if ($_SESSION["level"] == "admin3") {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" href="images/favicon.ico" type="image/ico" />
+	<link rel="icon" href="images/logo-gpp.png" type="image/ico" />
 
-    <title>Gentelella Alela!</title>
+    <title>PT GLOBAL PETRO PASIFIC</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">

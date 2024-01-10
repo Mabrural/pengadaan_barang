@@ -81,7 +81,7 @@ if (isset($_POST["submit"])) {
 							<div class="x_panel">
 								<div class="x_title">
 									<h2>Rincian Data <small></small></h2>
-        					<a href="" class="btn btn-info btn-sm"><i class="fa fa-print"></i> Cetak Data</a>
+        					<a href="?form=cetak" class="btn btn-info btn-sm"><i class="fa fa-print"></i> Cetak Data</a>
 
 									<!-- <ul class="nav navbar-right panel_toolbox">
 										<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>

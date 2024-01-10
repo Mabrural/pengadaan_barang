@@ -23,7 +23,7 @@ if ($_SESSION["level"] == "admin2") {
   include "koneksi.php";
   $id_user = $_SESSION["id_user"];
 
-  $nama = $_SESSION["username"];
+  $nama = $_SESSION["nama_emp"];
   
 //  ?>
 
@@ -35,9 +35,9 @@ if ($_SESSION["level"] == "admin2") {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" href="images/favicon.ico" type="image/ico" />
+	<link rel="icon" href="images/logo-gpp.png" type="image/ico" />
 
-    <title>Gentelella Alela!</title>
+    <title>PT GLOBAL PETRO PASIFIC</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -65,7 +65,7 @@ if ($_SESSION["level"] == "admin2") {
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+              <a href="index.html" class="site_title"> <span>PT GLOBAL PETRO</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -354,6 +354,10 @@ if ($_SESSION["level"] == "admin2") {
 
                             case 'rincian':
                                 include "page/admin_approve3/rincian.php";
+                                break;
+
+                            case 'cetak':
+                                include "page/admin_approve3/cetak.php";
                                 break;
 
                             case 'tambahPengajuan':

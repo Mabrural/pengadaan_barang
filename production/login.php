@@ -23,7 +23,8 @@ if (isset($_POST['login'])) {
   $username = mysqli_real_escape_string($koneksi, $_POST["username"]);
   $password = mysqli_real_escape_string($koneksi, $_POST["password"]);
 
-  $result = mysqli_query($koneksi, "SELECT * FROM user WHERE username = '$username'");
+  $result = mysqli_query($koneksi, "SELECT * FROM user JOIN karyawan ON karyawan.id_emp=user.id_emp WHERE username = '$username'");
+  // $result = mysqli_query($koneksi, "SELECT * FROM user WHERE username = '$username'");
 
   // cek username
   if (mysqli_num_rows($result) === 1 ) {
@@ -34,6 +35,7 @@ if (isset($_POST['login'])) {
       // set session
       $_SESSION["login"] = true;
       $_SESSION["username"] = $_POST["username"];
+      $_SESSION["nama_emp"] = $row["nama_emp"];
       $_SESSION["id_user"] = $row["id_user"];
       // Menyimpan level pengguna dalam sesi
       $_SESSION["level"] = $row["level"];
