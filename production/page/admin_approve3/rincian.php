@@ -7,7 +7,7 @@ $id_user = $_GET["id_user"];
 // query data mahasiswa berdasarkan id
 $barang = query("SELECT * FROM barang WHERE id_user = $id_user")[0];
 
-
+$tgl_pengajuan = $_GET['tgl_pengajuan'];
 
 // cek apakah tombol submit sudah ditekan atau belum
 if (isset($_POST["submit"])) {
@@ -132,7 +132,8 @@ if (isset($_POST["submit"])) {
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='Sudah disetujui' AND barang.id_user=$id_user";
+              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='Sudah disetujui' AND barang.id_user=$id_user AND barang.tgl_pengajuan='$tgl_pengajuan'";
+              		// $query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='Sudah disetujui' AND barang.id_user=$id_user";
               		// $query = "SELECT * FROM barang WHERE barang.id_user=$id_user";
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
@@ -170,6 +171,7 @@ if (isset($_POST["submit"])) {
                 </td> -->
               </tr>
               
+        					
            
             </tbody>
            <?php } ?>
