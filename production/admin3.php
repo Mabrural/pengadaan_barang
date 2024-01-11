@@ -25,7 +25,7 @@ if ($_SESSION["level"] == "admin2") {
 
   $nama = $_SESSION["nama_emp"];
   
-//  ?>
+  ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -327,7 +327,7 @@ if ($_SESSION["level"] == "admin2") {
                                 break;
 
                             case 'laporan':
-                                include "page/laporan/laporan.php";
+                                include "page/laporan/rekap_data.php";
                                 break;
 
                             case 'tagihan':
@@ -357,7 +357,7 @@ if ($_SESSION["level"] == "admin2") {
                                 break;
 
                             case 'cetak':
-                                include "page/admin_approve3/cetak.php";
+                                include "page/laporan/rekap_data.php";
                                 break;
 
                             case 'tambahPengajuan':

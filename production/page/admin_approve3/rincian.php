@@ -9,64 +9,6 @@ $barang = query("SELECT * FROM barang WHERE id_user = $id_user")[0];
 
 $tgl_pengajuan = $_GET['tgl_pengajuan'];
 
-// cek apakah tombol submit sudah ditekan atau belum
-if (isset($_POST["submit"])) {
-	
-
-	
-
-	// cek apakah data berhasil diubah atau tidak
-	if(ubahApprove2($_POST) > 0 ) {
-		echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
-		echo '<script src="./sweetalert2.min.js"></script>';
-		echo "<script>
-		setTimeout(function () { 
-			swal.fire({
-				
-				title               : 'Berhasil',
-				text                :  'Data berhasil diapprove',
-				//footer              :  '',
-				icon                : 'success',
-				timer               : 2000,
-				showConfirmButton   : true
-			});  
-		},10);   setTimeout(function () {
-			window.location.href = '?page=approve2'; //will redirect to your blog page (an ex: blog.html)
-		}, 2000); //will call the function after 2 secs
-		</script>";
-		// echo "
-		// 	<script>
-		// 		alert('Data berhasil diubah!');
-		// 		document.location.href = '?page=pengajuan';
-		// 	</script>
-		// ";
-	} else{
-		echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
-		echo '<script src="./sweetalert2.min.js"></script>';
-		echo "<script>
-		setTimeout(function () { 
-			swal.fire({
-				
-				title               : 'Gagal',
-				text                :  'Data gagal diubah',
-				//footer              :  '',
-				icon                : 'error',
-				timer               : 2000,
-				showConfirmButton   : true
-			});  
-		},10);   setTimeout(function () {
-			window.location.href = '?page=approve2'; //will redirect to your blog page (an ex: blog.html)
-		}, 2000); //will call the function after 2 secs
-		</script>";
-		// echo "
-		// 	<script>
-		// 		alert('Data gagal diubah!');
-		// 		document.location.href = '?page=pengajuan';
-		// 	</script>
-		// ";
-	}
-
-}
 
 
 ?>
@@ -81,7 +23,16 @@ if (isset($_POST["submit"])) {
 							<div class="x_panel">
 								<div class="x_title">
 									<h2>Rincian Data <small></small></h2>
-        					<a href="?form=cetak" class="btn btn-info btn-sm"><i class="fa fa-print"></i> Cetak Data</a>
+                  <!-- <form action="../../laporan/rekap_data.php" method="get">
+        					<a href="laporan/rekap_data.php" class="btn btn-info btn-sm"><i class="fa fa-print"></i> Cetak Data</a>
+                  </form> -->
+                  <form action="laporan/rekap_data.php" method="get">
+                  <!-- <a href="laporan/rekap_data.php&id_user=<?= $data['id_user'];?>" class="btn btn-info btn-sm"><i class="fa fa-print"></i> Cetak Data</a> -->
+                      <input type="hidden" name="aksi">
+                      <input type="hidden" name="id_user" value="<?= $barang['id_user'];?>">
+                      <input type="hidden" name="tgl_pengajuan" value="<?= $tgl_pengajuan;?>">
+                      <button type="submit" class="btn btn-info btn-sm" name="cetakData"><i class="fa fa-print"></i> Cetak Data</button>
+                  </form>
 
 									<!-- <ul class="nav navbar-right panel_toolbox">
 										<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -174,6 +125,8 @@ if (isset($_POST["submit"])) {
         					
            
             </tbody>
+                  
+
            <?php } ?>
           </table>
         </div>
