@@ -311,9 +311,9 @@ if (isset($_GET['cetakData'])) {
 				              	 ?>
 								<td height="20" valign="top" align="center" class="kotak" style="padding:4px">&nbsp;<?= $no++; ?></td>
 								<td valign="top" align="center" class="kananAtasBawah" style="padding:4px">&nbsp;<?= $data['kode_pengajuan'];?></td>
-								<td valign="top" align="center" class="kananAtasBawah" style="padding:4px"><?= $data['nama_barang'];?></td>
-								<td valign="top" align="center" class="kananAtasBawah" style="padding:4px"><?= $data['spek'];?></td>
-								<td valign="top" align="center" class="kananAtasBawah" style="padding:4px"><?= $data['deskripsi'];?></td>
+								<td valign="top" align="left" class="kananAtasBawah" style="padding:4px"><?= $data['nama_barang'];?></td>
+								<td valign="top" align="left" class="kananAtasBawah" style="padding:4px"><?= $data['spek'];?></td>
+								<td valign="top" align="left" class="kananAtasBawah" style="padding:4px"><?= $data['deskripsi'];?></td>
 								<td valign="top" align="center" class="kananAtasBawah" style="padding:4px"><?= $data['qty'];?></td>
 								<!-- <td valign="top" align="center" class="kananAtasBawah" style="padding:4px">&nbsp;</td>   -->
 								<!-- <td valign="top" align="center" class="kananAtasBawah" style="padding:4px"></td> -->
