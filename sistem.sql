@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 10, 2024 at 12:05 PM
+-- Generation Time: Jan 12, 2024 at 12:49 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -46,11 +46,11 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id_barang`, `kode_pengajuan`, `nama_barang`, `spek`, `deskripsi`, `qty`, `tgl_pengajuan`, `status`, `acc1`, `acc2`, `id_user`) VALUES
-(116, 112345232112123, 'Aktip Speaker + bluetooth', 'lampu 2 TL', 'Krissbow', 2, '2024-01-09', 'Sudah disetujui', 'admin', 'admin2', 10),
-(117, 112345232112124, 'PC ASUS ROG ', 'Intel Core i7-10350 RAM 32GB VGA NVIDIA RTX 4030TI', 'Untuk dijadikan server lokal', 1, '2024-01-09', 'Sudah disetujui', 'Henda Kurniawan', 'Aldi Taher', 9),
-(118, 112345232112125, 'Genset AE Portabel ', 'Genset AE Portabel ', 'Krissbow', 1, '2024-01-08', 'Sudah disetujui', 'Henda Kurniawan', 'Aldi Taher', 9),
-(119, 112345232112126, 'PC ALL IN ONE', 'Intel Core i5-9400 RAM 8GB DD5 ', 'untuk kebutuhan administrasi kantor', 1, '2024-01-10', 'Sudah disetujui', 'Henda Kurniawan', 'Aldi Taher', 10),
-(120, 112345232112127, 'Mouse Pad', '-', 'Merk Logitech', 1, '2024-01-10', 'Sudah disetujui', 'Henda Kurniawan', 'Aldi Taher', 10);
+(127, 112345232112131, 'Printer', 'EPSON L3210', 'Ecotank untuk replacement printer lama yang rusak', 1, '2024-01-12', 'On Progress in Purchasing', 'Henda Kurniawan', 'Aldi Taher', 9),
+(128, 112345232112132, 'Monitor', 'Acer 21 Inch', 'Buat Preview Grafik', 1, '2024-01-12', 'On Progress in Purchasing', 'Henda Kurniawan', 'Aldi Taher', 9),
+(130, 112345232112134, 'Mouse Wireless', 'Merk Logitech Silent Click', 'butuh cepat', 1, '2024-01-12', 'On Progress in Purchasing', 'Henda Kurniawan', 'Aldi Taher', 9),
+(131, 112345232112135, 'Aktip Speaker + bluetooth', 'Aktip Speaker + bluetooth', 'Aktip Speaker + bluetooth', 2, '2024-01-12', 'On Progress in Purchasing', 'Henda Kurniawan', 'Aldi Taher', 9),
+(132, 112345232112136, 'Liferaft', 'Liferaft', 'Liferaft', 1, '2024-01-12', 'On Progress in Purchasing', 'Henda Kurniawan', 'Aldi Taher', 9);
 
 -- --------------------------------------------------------
 
@@ -135,7 +135,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+  MODIFY `id_barang` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
 
 --
 -- AUTO_INCREMENT for table `karyawan`
