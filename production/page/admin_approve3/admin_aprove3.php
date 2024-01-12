@@ -56,7 +56,7 @@ $id_user = $_SESSION["id_user"];
               		$no = 1;
                   // $query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='Sudah disetujui' GROUP BY barang.id_user";
               		// $query = "SELECT karyawan.nama_emp, karyawan.jabatan, karyawan.divisi, barang.tgl_pengajuan FROM karyawan JOIN user ON user.id_emp=karyawan.id_emp JOIN barang ON user.id_user=barang.id_user";
-                  $query = "SELECT * FROM karyawan JOIN user ON user.id_emp=karyawan.id_emp JOIN barang ON user.id_user=barang.id_user WHERE barang.status='Sudah disetujui' GROUP BY karyawan.nama_emp, barang.tgl_pengajuan ORDER BY barang.tgl_pengajuan DESC";
+                  $query = "SELECT * FROM karyawan JOIN user ON user.id_emp=karyawan.id_emp JOIN barang ON user.id_user=barang.id_user WHERE barang.status='On Progress in Purchasing' GROUP BY karyawan.nama_emp, barang.tgl_pengajuan ORDER BY barang.tgl_pengajuan DESC";
               		// $query = "SELECT * FROM barang WHERE barang.id_user=$id_user";
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {

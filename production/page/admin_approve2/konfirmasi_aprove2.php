@@ -155,7 +155,7 @@ if (isset($_POST["submit"])) {
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Pengajuan</label>
 											<div class="col-md-6 col-sm-6 ">
 												<input id="middle-name" name="tgl_pengajuan" class="form-control" type="date" value="<?= $barang["tgl_pengajuan"];?>" readonly>
-												<input id="middle-name" name="status" class="form-control" type="hidden" value="Sudah disetujui">
+												<input id="middle-name" name="status" class="form-control" type="hidden" value="On Progress in Purchasing">
 												<input id="middle-name" name="acc2" class="form-control" type="hidden" value="<?= $nama;?>">
 											</div>
 										</div>

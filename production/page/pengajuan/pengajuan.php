@@ -56,7 +56,7 @@ $id_user = $_SESSION["id_user"];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-              		$query = "SELECT * FROM barang WHERE barang.id_user=$id_user AND status='Menunggu Persetujuan' OR status='Sedang diproses'";
+              		$query = "SELECT * FROM barang WHERE barang.id_user=$id_user AND status='Menunggu Persetujuan KC' OR status='Menunggu Persetujuan Dir.Ops'";
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
               		// $hari_indonesia = array(
@@ -80,9 +80,9 @@ $id_user = $_SESSION["id_user"];
                 <!-- <td class=" "><?= $hari_indonesia[$hari].date(', d-M-Y', strtotime($data['tgl_pengajuan']));?></td> -->
                 <td class=" "><?= date('d-M-Y', strtotime($data['tgl_pengajuan']));?></td>
                 <td class=" " style="color: <?php
-                    if ($data['status'] == 'Menunggu Persetujuan') {
+                    if ($data['status'] == 'Menunggu Persetujuan KC') {
                         echo '#b58709';
-                    } elseif ($data['status'] == 'Sedang diproses') {
+                    } elseif ($data['status'] == 'Menunggu Persetujuan Dir.Ops') {
                         echo '#b58709';
                     } elseif ($data['status'] == 'Sudah disetujui') {
                         echo '#14a664';
@@ -96,7 +96,7 @@ $id_user = $_SESSION["id_user"];
               <td class=" last">
               <?php if ($data['status'] == 'Sudah disetujui') { ?>
                 <span class="text-success fa fa-check"><strong> Selesai</strong></span>
-              <?php } elseif ($data['status'] == 'Sedang diproses') { ?>
+              <?php } elseif ($data['status'] == 'Menunggu Persetujuan Dir.Ops') { ?>
                 <span class="text-info fa fa-spinner fa-spin"></span><strong> Waiting</strong>
               <?php } else { ?>
                 <a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusPengajuan&id_barang=<?= $data["id_barang"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>

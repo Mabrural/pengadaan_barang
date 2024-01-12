@@ -39,8 +39,8 @@ $id_user = $_SESSION["id_user"];
                 <th class="column-title">No. </th>
                 <th class="column-title">Kode Pengajuan </th>
                 <th class="column-title">Nama Barang </th>
-                <th class="column-title">Spec </th>
-                <th class="column-title">Desc </th>
+                <th class="column-title">Spesifikasi </th>
+                <th class="column-title">Deskripsi </th>
                 <th class="column-title">Qty </th>
                 <th class="column-title">Tanggal Pengajuan </th>
                 <th class="column-title">Approval 1</th>
@@ -58,7 +58,7 @@ $id_user = $_SESSION["id_user"];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-              		$query = "SELECT * FROM barang WHERE barang.id_user=$id_user AND status='Sudah disetujui'";
+              		$query = "SELECT * FROM barang WHERE barang.id_user=$id_user AND status='On Progress in Purchasing' OR status='Menunggu Persetujuan KC' OR status = 'Menunggu Persetujuan Dir.Ops'";
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
               		

@@ -63,8 +63,8 @@ $tgl_pengajuan = $_GET['tgl_pengajuan'];
                 <th class="column-title">No. </th>
                 <th class="column-title">Kode Pengajuan </th>
                 <th class="column-title">Nama Barang </th>
-                <th class="column-title">Spec </th>
-                <th class="column-title">Desc </th>
+                <th class="column-title">Spesifikasi </th>
+                <th class="column-title">Deskripsi </th>
                 <th class="column-title">Qty </th>
                 <th class="column-title">Tanggal Pengajuan </th>
                 <th class="column-title">Nama Pemohon </th>
@@ -83,10 +83,13 @@ $tgl_pengajuan = $_GET['tgl_pengajuan'];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='Sudah disetujui' AND barang.id_user=$id_user AND barang.tgl_pengajuan='$tgl_pengajuan'";
+              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='On Progress in Purchasing' AND barang.id_user=$id_user AND barang.tgl_pengajuan='$tgl_pengajuan'";
+                  $query2 = "SELECT * FROM karyawan JOIN user ON user.id_emp=karyawan.id_emp JOIN barang ON user.id_user=barang.id_user WHERE barang.status='On Progress in Purchasing' GROUP BY karyawan.nama_emp, barang.tgl_pengajuan ORDER BY barang.tgl_pengajuan DESC";
               		// $query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='Sudah disetujui' AND barang.id_user=$id_user";
               		// $query = "SELECT * FROM barang WHERE barang.id_user=$id_user";
-              		$tampil = mysqli_query($koneksi, $query);
+                  $tampil = mysqli_query($koneksi, $query);
+                  $tampil2 = mysqli_query($koneksi, $query2);
+                  $data2 = mysqli_fetch_assoc($tampil2);
               		while ($data = mysqli_fetch_assoc($tampil)) {
               		
               		
@@ -100,7 +103,7 @@ $tgl_pengajuan = $_GET['tgl_pengajuan'];
                 <td class=" "><?= $data['qty'];?></td>
                 <td class=" "><?= date('d-M-Y', strtotime($data['tgl_pengajuan']));?></td>
 
-                <td class=" "><strong><?= $data['username'];?></strong></td>
+                <td class=" "><strong><?= $data2['nama_emp'];?></strong></td>
                 <td class=" "><?= $data['acc1'];?></td>
                 <td class=" "><?= $data['acc2'];?></td>
                 <td class=" " style="color: <?php

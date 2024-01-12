@@ -59,7 +59,7 @@ $id_user = $_SESSION["id_user"];
               	<?php 
               		$no = 1;
                   // $query = "SELECT * FROM karyawan JOIN user ON user.id_emp=karyawan.id_emp JOIN barang ON user.id_user=barang.id_user WHERE status='Menunggu Persetujuan' OR status='Sedang diproses'";
-              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='Menunggu Persetujuan' OR status='Sedang diproses'";
+              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='Menunggu Persetujuan KC' OR status='Sedang diproses'";
               		// $query = "SELECT * FROM barang WHERE barang.id_user=$id_user";
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {

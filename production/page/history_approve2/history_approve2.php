@@ -59,7 +59,7 @@ $id_user = $_SESSION["id_user"];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user AND status='Sudah disetujui'";
+              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user AND status='On Progress in Purchasing'";
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
               		
@@ -91,7 +91,7 @@ $id_user = $_SESSION["id_user"];
                 </td>
 
               <td class=" last">
-              <?php if ($data['status'] == 'Sudah disetujui') { ?>
+              <?php if ($data['status'] == 'On Progress in Purchasing') { ?>
                 <span class="text-success fa fa-check"><strong> Selesai</strong></span>
               <?php } elseif ($data['status'] == 'Sedang diproses') { ?>
                 <span class="text-info fa fa-spinner fa-spin"></span><strong> Waiting</strong>

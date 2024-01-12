@@ -312,7 +312,7 @@ if (isset($_GET['cetakData'])) {
 							<tr>
 								<?php 
 				              		$no = 1;
-				              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='Sudah disetujui' AND barang.id_user=$id_user AND barang.tgl_pengajuan='$tgl_pengajuan'";
+				              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='On Progress in Purchasing' AND barang.id_user=$id_user AND barang.tgl_pengajuan='$tgl_pengajuan'";
 				              		// $query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='Sudah disetujui' AND barang.id_user=$id_user";
 				              		// $query = "SELECT * FROM barang WHERE barang.id_user=$id_user";
 				              		$tampil = mysqli_query($koneksi, $query);
@@ -345,7 +345,7 @@ if (isset($_GET['cetakData'])) {
 							</tr>
 							<tr>
 								<td colspan="2">&nbsp;</td>
-								<td align="center">Kepala Shipping</td>
+								<td align="center">Direktur Operasional</td>
 							</tr>	
 							<tr>
 								<td width="37%"> <div align="left"></div> </td>
@@ -373,7 +373,7 @@ if (isset($_GET['cetakData'])) {
 							</tr>	
 							<tr>
 								<td colspan="2"> <div align="left">&nbsp;</div><br><br> </td>
-								<td> <div align="center">Kepala Shipping </div> </td>
+								<td> <div align="center">Direktur Operasional </div> </td>
 							</tr>
 						</tbody></table>
 					</td>

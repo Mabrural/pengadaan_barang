@@ -136,16 +136,16 @@ if (isset($_POST["submit"])) {
 											</div>
 										</div>
 										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Qty</label>
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Qty <span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="qty" class="form-control" type="number">
+												<input id="middle-name" name="qty" class="form-control" type="number" required>
 											</div>
 										</div>
 										<div class="item form-group">
 											<!-- <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Pengajuan</label> -->
 											<div class="col-md-6 col-sm-6 ">
 												<input id="middle-name" name="tgl_pengajuan" class="form-control" placeholder="dd-mm-yyyy" type="hidden" value="<?php echo date('Y-m-d'); ?>" readonly>
-												<input id="middle-name" name="status" class="form-control" type="hidden" value="Menunggu Persetujuan">
+												<input id="middle-name" name="status" class="form-control" type="hidden" value="Menunggu Persetujuan KC">
 												<input id="middle-name" name="acc1" class="form-control" type="hidden" value="">
 												<input id="middle-name" name="acc2" class="form-control" type="hidden" value="">
 												
