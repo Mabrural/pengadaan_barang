@@ -257,30 +257,46 @@ if (isset($_GET['cetakData'])) {
 								<td width="20%">&nbsp;</td>
 								<td>&nbsp;</td>
 							</tr>
+							
 							<tr>
 								<td>Nama Pemohon</td>
-								<td>: </td>
+								<?php 
+								$query = "SELECT * FROM user JOIN karyawan ON karyawan.id_emp=user.id_emp WHERE id_user='$id_user'";
+								$query2 = "SELECT * FROM barang WHERE id_user='$id_user'";
+								$tampil = mysqli_query($koneksi, $query);
+								$tampil2 = mysqli_query($koneksi, $query2);
+								$data = mysqli_fetch_assoc($tampil);
+								$data2 = mysqli_fetch_assoc($tampil2);
+								$nama_pemohon = $data['nama_emp'];
+							 	$jabatan = $data['jabatan'];
+							 	$divisi = $data['divisi'];
+							 	$acc1 = $data2['acc1'];
+							 	$acc2 = $data2['acc2'];
+							 	$tgl = date('d-M-Y', strtotime($data2['tgl_pengajuan']));
+								echo "<td>:  $nama_pemohon</td>";
+								?>
 							</tr>
 							<tr>
 								<td>Jabatan</td>
-								<td>: </td>
+								<?= "<td>: $jabatan</td>"  ?>
 							</tr>
 							<tr>
 								<td>Divisi</td>
-								<td>: </td>
+								<?= "<td>: $divisi</td>"  ?>
 							</tr>
 							<tr>
 								<td>Disetujui Oleh  </td>
-								<td>:  &  </td>
+								<?= "<td>: $acc1 & $acc2</td>"  ?>
 							</tr>
 							<tr>
 								<td>Tanggal Pengajuan</td>
-								<td>: </td>
+								<?= "<td>: $tgl</td>"  ?>
 							</tr>
 							<!-- <tr>
 								<td>Pembimbing Akademik</td>
 								<td>: </td>
 							</tr> -->
+
 						</tbody></table><br>
 
 						<table width="90%" border="0" cellpadding="0" cellspacing="0" align="center" style="font-family:&#39;Times New Roman&#39;, Times, serif; font-size:12px">

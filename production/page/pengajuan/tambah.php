@@ -124,13 +124,13 @@ if (isset($_POST["submit"])) {
 											</div>
 										</div>
 										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Spec</label>
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Spesifikasi</label>
 											<div class="col-md-6 col-sm-6 ">
 												<input id="middle-name" name="spek" class="form-control" type="text">
 											</div>
 										</div>
 										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Desc</label>
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Deskripsi</label>
 											<div class="col-md-6 col-sm-6 ">
 												<input id="middle-name" name="deskripsi" class="form-control" type="text">
 											</div>
