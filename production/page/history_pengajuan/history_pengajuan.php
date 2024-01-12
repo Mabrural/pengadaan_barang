@@ -58,7 +58,7 @@ $id_user = $_SESSION["id_user"];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-              		$query = "SELECT * FROM barang WHERE barang.id_user=$id_user AND status='On Progress in Purchasing' OR status='Menunggu Persetujuan KC' OR status = 'Menunggu Persetujuan Dir.Ops'";
+              		$query = "SELECT * FROM barang WHERE barang.id_user=$id_user AND status='On Progress in Purchasing' OR status='Menunggu Persetujuan KC' OR status = 'Menunggu Persetujuan Dir.Ops' ORDER BY kode_pengajuan DESC";
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
               		
@@ -75,11 +75,11 @@ $id_user = $_SESSION["id_user"];
                 <td class=" "><?= $data['acc1'];?></td>
                 <td class=" "><?= $data['acc2'];?></td>
                 <td class=" " style="color: <?php
-                    if ($data['status'] == 'Menunggu Persetujuan') {
+                    if ($data['status'] == 'Menunggu Persetujuan KC') {
                         echo '#b58709';
-                    } elseif ($data['status'] == 'Sedang diproses') {
+                    } elseif ($data['status'] == 'Menunggu Persetujuan Dir.Ops') {
                         echo '#b58709';
-                    } elseif ($data['status'] == 'Sudah disetujui') {
+                    } elseif ($data['status'] == 'On Progress in Purchasing') {
                         echo '#14a664';
                     } else {
                         echo '#a62f26';

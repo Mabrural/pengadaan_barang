@@ -65,7 +65,7 @@ if ($_SESSION["level"] == "admin2") {
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"> <span>PT GLOBAL PETRO</span></a>
+              <a href="index.php" class="site_title"><i class="fa fa-globe"></i> <span>PT Global Petro</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -73,7 +73,7 @@ if ($_SESSION["level"] == "admin2") {
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                <img src="images/gpp.png" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
@@ -91,12 +91,12 @@ if ($_SESSION["level"] == "admin2") {
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="index.html">Dashboard</a></li>
-                      <li><a href="index2.html">Dashboard2</a></li>
-                      <li><a href="index3.html">Dashboard3</a></li>
+                      <li><a href="admin3.php">Dashboard</a></li>
+                      <!-- <li><a href="index2.html">Dashboard2</a></li>
+                      <li><a href="index3.html">Dashboard3</a></li> -->
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+                  <!-- <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="form.html">General Form</a></li>
                       <li><a href="form_advanced.html">Advanced Components</a></li>
@@ -105,8 +105,8 @@ if ($_SESSION["level"] == "admin2") {
                       <li><a href="form_upload.html">Form Upload</a></li>
                       <li><a href="form_buttons.html">Form Buttons</a></li>
                     </ul>
-                  </li>
-                  <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
+                  </li> -->
+                  <!-- <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="general_elements.html">General Elements</a></li>
                       <li><a href="media_gallery.html">Media Gallery</a></li>
@@ -118,13 +118,13 @@ if ($_SESSION["level"] == "admin2") {
                       <li><a href="inbox.html">Inbox</a></li>
                       <li><a href="calendar.html">Calendar</a></li>
                     </ul>
-                  </li>
-                  <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
+                  </li> -->
+                  <!-- <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="tables.html">Tables</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
-                  </li>
+                  </li> -->
 
                   <li><a><i class="fa fa-list-alt"></i> Laporan Pengajuan <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -133,7 +133,7 @@ if ($_SESSION["level"] == "admin2") {
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
+                  <!-- <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="chartjs.html">Chart JS</a></li>
                       <li><a href="chartjs2.html">Chart JS2</a></li>
@@ -141,16 +141,16 @@ if ($_SESSION["level"] == "admin2") {
                       <li><a href="echarts.html">ECharts</a></li>
                       <li><a href="other_charts.html">Other Charts</a></li>
                     </ul>
-                  </li>
-                  <li><a><i class="fa fa-clone"></i>Layouts <span class="fa fa-chevron-down"></span></a>
+                  </li> -->
+                  <!-- <li><a><i class="fa fa-clone"></i>Layouts <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
                       <li><a href="fixed_footer.html">Fixed Footer</a></li>
                     </ul>
-                  </li>
+                  </li> -->
                 </ul>
               </div>
-              <div class="menu_section">
+              <!-- <div class="menu_section">
                 <h3>Live On</h3>
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
@@ -191,13 +191,13 @@ if ($_SESSION["level"] == "admin2") {
                   </li>                  
                   <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
                 </ul>
-              </div>
+              </div> -->
 
             </div>
             <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
+            <!-- <div class="sidebar-footer hidden-small">
               <a data-toggle="tooltip" data-placement="top" title="Settings">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
               </a>
@@ -210,7 +210,7 @@ if ($_SESSION["level"] == "admin2") {
               <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
-            </div>
+            </div> -->
             <!-- /menu footer buttons -->
           </div>
         </div>
@@ -225,20 +225,20 @@ if ($_SESSION["level"] == "admin2") {
               <ul class=" navbar-right">
                 <li class="nav-item dropdown open" style="padding-left: 15px;">
                   <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt=""><?= $nama;?>
+                    <?= $nama;?>
                   </a>
                   <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item"  href="javascript:;"> Profile</a>
-                      <a class="dropdown-item"  href="javascript:;">
+                      <!-- <a class="dropdown-item"  href="javascript:;">
                         <span class="badge bg-red pull-right">50%</span>
                         <span>Settings</span>
-                      </a>
-                  <a class="dropdown-item"  href="javascript:;">Help</a>
+                      </a> -->
+                    <!-- <a class="dropdown-item"  href="javascript:;">Help</a> -->
                     <a class="dropdown-item"  href="logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                   </div>
                 </li>
 
-                <li role="presentation" class="nav-item dropdown open">
+               <!--  <li role="presentation" class="nav-item dropdown open">
                   <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-envelope-o"></i>
                     <span class="badge bg-green">6</span>
@@ -301,7 +301,7 @@ if ($_SESSION["level"] == "admin2") {
                       </div>
                     </li>
                   </ul>
-                </li>
+                </li> -->
               </ul>
             </nav>
           </div>
@@ -360,6 +360,10 @@ if ($_SESSION["level"] == "admin2") {
                                 include "page/laporan/rekap_data.php";
                                 break;
 
+                            case 'historyPengajuan':
+                                include "page/history_pengajuan/history_pengajuan.php";
+                                break;
+
                             case 'tambahPengajuan':
                                 include "page/pengajuan/tambah.php";
                                 break;
@@ -407,7 +411,7 @@ if ($_SESSION["level"] == "admin2") {
                     }
 
                     else{
-                        include "dashboard.php";
+                        include "dashboard2.php";
                     }
                 ?>
         </div>
@@ -420,7 +424,7 @@ if ($_SESSION["level"] == "admin2") {
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            PT Global Petro Pasific - All Right Reserved <a href="https://globalpetro.co.id">2024</a>
           </div>
           <div class="clearfix"></div>
         </footer>

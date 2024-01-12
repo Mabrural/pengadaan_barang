@@ -7,7 +7,7 @@
 
 		  <li>
 		    <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
-		    <span class="glyphicon-class"><a href="index.php">Dashboard</span></a>
+		    <span class="glyphicon-class"><a href="admin3.php">Dashboard</span></a>
 		  </li>
 
 		  <!-- <li>
@@ -17,7 +17,7 @@
  -->
 		  <li>
 		    <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
-		    <span class="glyphicon-class"><a href="admin.php?page=historyApprove">Tracking Progress</span></a>
+		    <span class="glyphicon-class"><a href="admin2.php?page=historyApprove2">Tracking Progress</span></a>
 		  </li>
 
 		  

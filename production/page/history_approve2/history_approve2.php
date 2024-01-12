@@ -39,8 +39,8 @@ $id_user = $_SESSION["id_user"];
                 <th class="column-title">No. </th>
                 <th class="column-title">Kode Pengajuan </th>
                 <th class="column-title">Nama Barang </th>
-                <th class="column-title">Spec </th>
-                <th class="column-title">Desc </th>
+                <th class="column-title">Spesifikasi </th>
+                <th class="column-title">Deskripsi </th>
                 <th class="column-title">Qty </th>
                 <th class="column-title">Tanggal Pengajuan </th>
                 <th class="column-title">Nama Pemohon </th>
@@ -59,7 +59,10 @@ $id_user = $_SESSION["id_user"];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user AND status='On Progress in Purchasing'";
+              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user AND status='On Progress in Purchasing' OR status='Menunggu Persetujuan Dir.Ops' WHERE barang.id_user=user.id_user";
+                  $query2 = "SELECT * FROM user JOIN karyawan ON karyawan.id_emp=user.id_emp";
+                  $tampil2 = mysqli_query($koneksi, $query2);
+                  $data2 = mysqli_fetch_assoc($tampil2);
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
               		
@@ -73,15 +76,16 @@ $id_user = $_SESSION["id_user"];
                 <td class=" "><?= $data['deskripsi'];?></td>
                 <td class=" "><?= $data['qty'];?></td>
                 <td class=" "><?= date('d-M-Y', strtotime($data['tgl_pengajuan']));?></td>
-                <td class=" "><strong><?= $data['username'];?></strong></td>
+                <!-- <td class=" "><strong><?= $data['username'];?></strong></td> -->
+                <td class=" "><strong><?= $data2['nama_emp'];?></strong></td>
                 <td class=" "><?= $data['acc1'];?></td>
                 <td class=" "><?= $data['acc2'];?></td>
                 <td class=" " style="color: <?php
-                    if ($data['status'] == 'Menunggu Persetujuan') {
+                    if ($data['status'] == 'Menunggu Persetujuan KC') {
                         echo '#b58709';
-                    } elseif ($data['status'] == 'Sedang diproses') {
+                    } elseif ($data['status'] == 'Menunggu Persetujuan Dir.Ops') {
                         echo '#b58709';
-                    } elseif ($data['status'] == 'Sudah disetujui') {
+                    } elseif ($data['status'] == 'On Progress in Purchasing') {
                         echo '#14a664';
                     } else {
                         echo '#a62f26';
@@ -93,7 +97,7 @@ $id_user = $_SESSION["id_user"];
               <td class=" last">
               <?php if ($data['status'] == 'On Progress in Purchasing') { ?>
                 <span class="text-success fa fa-check"><strong> Selesai</strong></span>
-              <?php } elseif ($data['status'] == 'Sedang diproses') { ?>
+              <?php } elseif ($data['status'] == 'Menunggu Persetujuan Dir.Ops') { ?>
                 <span class="text-info fa fa-spinner fa-spin"></span><strong> Waiting</strong>
               <?php } else { ?>
                 <a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusPengajuan&id_barang=<?= $data["id_barang"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>

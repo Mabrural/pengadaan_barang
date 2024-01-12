@@ -14,6 +14,7 @@ if (isset($_GET['cetakData'])) {
 <!-- saved from url=(0058)https://sim.polibatam.ac.id/layanan-akademik/cetak_khs.php -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 			<title>Rekap Data Pengajuan Barang</title>
+			<link rel="icon" href="img/gpp.png" type="image/ico" />
 			<script language="JavaScript">
 				function Cetakan(){
 					document.getElementById("button_cetak").style.display = "none";

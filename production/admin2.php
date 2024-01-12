@@ -360,9 +360,9 @@ if ($_SESSION["level"] == "admin3") {
                                 include "page/pengajuan/hapus.php";
                                 break;
                 
-              case 'cariAnggaran':
-                include "page/anggaran/cari.php";
-                break;
+                            case 'cariAnggaran':
+                              include "page/anggaran/cari.php";
+                              break;
 
                             case 'ubahCatatan':
                                 include "page/catatan/ubah.php";
@@ -373,7 +373,7 @@ if ($_SESSION["level"] == "admin3") {
                             case 'hapusCatatan':
                                 include "page/catatan/hapus.php";
                                 break;
-              case 'cariCatatan':
+                            case 'cariCatatan':
                                 include "page/catatan/cari.php";
                                 break;
 
@@ -399,7 +399,7 @@ if ($_SESSION["level"] == "admin3") {
                     }
 
                     else{
-                        include "dashboard.php";
+                        include "dashboard3.php";
                     }
                 ?>
         </div>
