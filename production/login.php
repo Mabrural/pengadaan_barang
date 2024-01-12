@@ -141,7 +141,8 @@ if (isset($_POST['login'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Login | Register</title>
+    <title>Login </title>
+    <link rel="icon" href="images/logo-gpp.png" type="image/ico" />
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -187,7 +188,9 @@ if (isset($_POST['login'])) {
                 ?>
 
               <?php endif; ?>
-
+              <div>
+                <h1> <img src="images/gpp-transparan.png"></h1>
+              </div>
             <form action="" method="post">
               <h1>Login Form</h1>
 
@@ -206,16 +209,16 @@ if (isset($_POST['login'])) {
               <div class="clearfix"></div>
 
               <div class="separator">
-                <p class="change_link">New to site?
+                <!-- <p class="change_link">New to site?
                   <a href="#signup" class="to_register"> Create Account </a>
-                </p>
+                </p> -->
 
                 <div class="clearfix"></div>
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-globe"></i> PT GLOBAL PETRO PASIFIC</h1>
-                  <p>©2024 All Rights Reserved. PT Global Petro Pasific</p>
+                  <!-- <h1> <img src="images/gpp-transparan.png"></h1> -->
+                  <!-- <p>©2024 All Rights Reserved. PT Global Petro Pasific</p> -->
                 </div>
               </div>
             </form>
@@ -265,6 +268,9 @@ if (isset($_POST['login'])) {
 
         <div id="register" class="animate form registration_form">
           <section class="login_content">
+            <div>
+                <h1> <img src="images/gpp-transparan.png"></h1>
+              </div>
             <form action="" method="post">
               <h1>Create Account</h1>
               <div>
@@ -296,8 +302,8 @@ if (isset($_POST['login'])) {
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-globe"></i> PT GLOBAL PETRO PASIFIC</h1>
-                  <p>©2024 All Rights Reserved. PT Global Petro Pasific</p>
+                  <!-- <h1> <img src="images/gpp-transparan.png"></h1> -->
+                  <!-- <p>©2024 All Rights Reserved. PT Global Petro Pasific</p> -->
                 </div>
               </div>
             </form>

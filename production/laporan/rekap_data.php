@@ -257,10 +257,7 @@ if (isset($_GET['cetakData'])) {
 								<td width="20%">&nbsp;</td>
 								<td>&nbsp;</td>
 							</tr>
-							
-							<tr>
-								<td>Nama Pemohon</td>
-								<?php 
+							<?php 
 								$query = "SELECT * FROM user JOIN karyawan ON karyawan.id_emp=user.id_emp WHERE id_user='$id_user'";
 								$query2 = "SELECT * FROM barang WHERE id_user='$id_user'";
 								$tampil = mysqli_query($koneksi, $query);
@@ -273,8 +270,10 @@ if (isset($_GET['cetakData'])) {
 							 	$acc1 = $data2['acc1'];
 							 	$acc2 = $data2['acc2'];
 							 	$tgl = date('d-M-Y', strtotime($data2['tgl_pengajuan']));
-								echo "<td>:  $nama_pemohon</td>";
-								?>
+							 ?>
+							<tr>
+								<td>Nama Pemohon</td>
+								<?= "<td>: $nama_pemohon</td>"  ?>
 							</tr>
 							<tr>
 								<td>Jabatan</td>
@@ -292,10 +291,7 @@ if (isset($_GET['cetakData'])) {
 								<td>Tanggal Pengajuan</td>
 								<?= "<td>: $tgl</td>"  ?>
 							</tr>
-							<!-- <tr>
-								<td>Pembimbing Akademik</td>
-								<td>: </td>
-							</tr> -->
+
 
 						</tbody></table><br>
 
