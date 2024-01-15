@@ -163,6 +163,53 @@ function hapusPengajuan($id_barang) {
 	return mysqli_affected_rows($koneksi);
 
 }
+
+function tambahKaryawan($data) {
+	global $koneksi;
+	$nama_emp = htmlspecialchars($data["nama_emp"]);
+	$jabatan = htmlspecialchars($data["jabatan"]);
+	$divisi = htmlspecialchars($data["divisi"]);
+	$status = htmlspecialchars($data["status"]);
+	// $id_mhs = mysqli_real_escape_string($koneksi, $_SESSION["id_mhs"]);
+
+
+	$query = "INSERT INTO karyawan VALUES
+			('', '$nama_emp', '$jabatan', '$divisi', '$status')";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+
+function ubahKaryawan($data) {
+	global $koneksi;
+	$id_emp = $data["id_emp"];
+	$nama_emp = htmlspecialchars($data["nama_emp"]);
+	$jabatan = htmlspecialchars($data["jabatan"]);
+	$divisi = htmlspecialchars($data["divisi"]);
+	$status = htmlspecialchars($data["status"]);
+
+
+	$query = "UPDATE karyawan SET
+				nama_emp = '$nama_emp',
+				jabatan = '$jabatan',
+				divisi = '$divisi',
+				status = '$status'
+			  WHERE id_emp = $id_emp
+			";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function hapusKaryawan($id_emp) {
+	global $koneksi;
+	mysqli_query($koneksi, "DELETE FROM karyawan WHERE id_emp=$id_emp");
+
+	return mysqli_affected_rows($koneksi);
+
+}
+
 function tambahAnggaran($data) {
 	global $koneksi;
 	$nama_anggaran = htmlspecialchars($data["nama_anggaran"]);
@@ -178,7 +225,6 @@ function tambahAnggaran($data) {
 
 	return mysqli_affected_rows($koneksi);
 }
-
 function hapusAnggaran($id_anggaran) {
 	global $koneksi;
 

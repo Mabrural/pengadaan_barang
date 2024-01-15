@@ -113,6 +113,24 @@ if (isset($_POST['login'])) {
             window.location.href = 'admin4.php'; //will redirect to your blog page (an ex: blog.html)
         }, 2000); //will call the function after 2 secs
         </script>";
+      }elseif ($row["level"] === "hrd") {
+        echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
+        echo '<script src="./sweetalert2.min.js"></script>';
+        echo "<script>
+        setTimeout(function () { 
+            swal.fire({
+                
+                title               : 'Berhasil',
+                text                :  'Login berhasil',
+                //footer              :  '',
+                icon                : 'success',
+                timer               : 2000,
+                showConfirmButton   : true
+            });  
+        },10);   setTimeout(function () {
+            window.location.href = 'hrd.php'; //will redirect to your blog page (an ex: blog.html)
+        }, 2000); //will call the function after 2 secs
+        </script>";
       }else{
         echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
         echo '<script src="./sweetalert2.min.js"></script>';

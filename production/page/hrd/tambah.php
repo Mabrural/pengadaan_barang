@@ -8,7 +8,7 @@ if (isset($_POST["submit"])) {
 
 
 	// cek apakah data berhasil ditambahkan atau tidak
-	if(tambahPengajuan($_POST) > 0 ) {
+	if(tambahKaryawan($_POST) > 0 ) {
 		echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
 		echo '<script src="./sweetalert2.min.js"></script>';
 		echo "<script>
@@ -23,7 +23,7 @@ if (isset($_POST["submit"])) {
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=pengajuan'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=hrd'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>"; 
 		// echo "
@@ -47,7 +47,7 @@ if (isset($_POST["submit"])) {
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=pengajuan'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=hrd'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>";
 		// echo "
@@ -71,7 +71,7 @@ if (isset($_POST["submit"])) {
 							<h3>Form Tambah Karyawan</h3>
 						</div>
 
-						<div class="title_right">
+						<!-- <div class="title_right">
 							<div class="col-md-5 col-sm-5  form-group pull-right top_search">
 								<div class="input-group">
 									<input type="text" class="form-control" placeholder="Search for...">
@@ -80,7 +80,7 @@ if (isset($_POST["submit"])) {
 									</span>
 								</div>
 							</div>
-						</div>
+						</div> -->
 					</div>
 					<div class="clearfix"></div>
 					<div class="row">
@@ -117,39 +117,44 @@ if (isset($_POST["submit"])) {
 											</div> -->
 										</div>
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Nama Barang <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Nama Lengkap <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="nama_barang" id="last-name" required="required" class="form-control">
+												<input type="text" name="nama_emp" id="last-name" required="required" class="form-control">
 											</div>
 										</div>
 										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Spec</label>
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Jabatan</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="spek" class="form-control" type="text">
+												<input id="middle-name" name="jabatan" class="form-control" type="text">
 											</div>
 										</div>
 										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Desc</label>
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Divisi</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="deskripsi" class="form-control" type="text">
+												<input id="middle-name" name="divisi" class="form-control" type="text">
 											</div>
 										</div>
+										
 										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Qty</label>
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Status</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="qty" class="form-control" type="number">
+												<select class="form-control" name="status">
+													<option value="Aktif">Aktif</option>
+													<option value="Tidak Aktif">Tidak Aktif</option>
+													
+												</select>
 											</div>
 										</div>
 										<div class="item form-group">
 											<!-- <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Pengajuan</label> -->
-											<div class="col-md-6 col-sm-6 ">
+											<!-- <div class="col-md-6 col-sm-6 ">
 												<input id="middle-name" name="tgl_pengajuan" class="form-control" placeholder="dd-mm-yyyy" type="hidden" value="<?php echo date('Y-m-d'); ?>" readonly>
 												<input id="middle-name" name="status" class="form-control" type="hidden" value="Menunggu Persetujuan">
 												<input id="middle-name" name="acc1" class="form-control" type="hidden" value="">
 												<input id="middle-name" name="acc2" class="form-control" type="hidden" value="">
 												
-											</div>
+											</div> -->
 										</div>
 										
 										<!-- <div class="item form-group">

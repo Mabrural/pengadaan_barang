@@ -1,3 +1,4 @@
+
 <?php
 
 $id_user = $_SESSION["id_user"];
@@ -7,8 +8,8 @@ $id_user = $_SESSION["id_user"];
 ?>
     <div class="x_panel">
       <div class="x_title">
-        <h2>Data Karyawan <small></small></h2>
-        <a href="?form=tambahKaryawan" class="btn btn-primary btn-sm"><i class="fa fa-plus fa-sm"></i> Tambah Karyawan</a>
+        <h2>Rekap Data Pengajuan Barang <small></small></h2>
+        <!-- <a href="?form=tambahPengajuan" class="btn btn-primary">Form Pengajuan</a> -->
         <!-- <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>
@@ -37,10 +38,10 @@ $id_user = $_SESSION["id_user"];
                   <input type="checkbox" id="check-all" class="flat">
                 </th> -->
                 <th class="column-title">No. </th>
-                <th class="column-title">Nama </th>
+                <th class="column-title">Nama Pemohon </th>
                 <th class="column-title">Jabatan </th>
                 <th class="column-title">Divisi </th>
-                <th class="column-title">Status </th>
+                <th class="column-title">Tanggal Pengajuan </th>
                 <th class="column-title no-link last"><span class="nobr">Action</span>
                 </th>
                 <th class="bulk-actions" colspan="7">
@@ -53,25 +54,30 @@ $id_user = $_SESSION["id_user"];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-              		$query = "SELECT * FROM karyawan";
+                  // $query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='Sudah disetujui' GROUP BY barang.id_user";
+              		// $query = "SELECT karyawan.nama_emp, karyawan.jabatan, karyawan.divisi, barang.tgl_pengajuan FROM karyawan JOIN user ON user.id_emp=karyawan.id_emp JOIN barang ON user.id_user=barang.id_user";
+                  $query = "SELECT * FROM karyawan JOIN user ON user.id_emp=karyawan.id_emp JOIN barang ON user.id_user=barang.id_user WHERE barang.status='On Progress in Purchasing' GROUP BY karyawan.nama_emp, barang.tgl_pengajuan ORDER BY barang.tgl_pengajuan DESC";
+              		// $query = "SELECT * FROM barang WHERE barang.id_user=$id_user";
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
-              	      		
+              		
+              		
 
               	 ?>
                 <td class=" "><?= $no++;?></td>
-                <td class=" "><?= $data['nama_emp'];?></td>
-                <td class=" "><?= $data['jabatan'];?> </td>
+                <td class=" "><strong><?= $data['nama_emp'];?></strong></td>
+                <td class=" "><?= $data['jabatan'];?></td>
                 <td class=" "><?= $data['divisi'];?></td>
-                <td class=" "><?= $data['status'];?></td>
-                <!-- <td class=" "><?= $hari_indonesia[$hari].date(', d-M-Y', strtotime($data['tgl_pengajuan']));?></td> -->
-               
+                <td class=" "><?= date('d-M-Y', strtotime($data['tgl_pengajuan']));?></td>
+                
 
-                <td class=" last"><a href="?form=ubahKaryawan&id_emp=<?= $data["id_emp"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusKaryawan&id_emp=<?= $data["id_emp"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
-                </td>
+                <td><a href="?form=rincian&id_user=<?= $data["id_user"]; ?>&tgl_pengajuan=<?= $data['tgl_pengajuan']?>" class="btn btn-info btn-sm">Rincian</a></td>
+
+                <!-- <td class=" last"><a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Approve </a> 
+                </td> -->
               </tr>
-              <?php } ?>
-           
+              
+           <?php } ?>
             </tbody>
            
           </table>
@@ -96,6 +102,7 @@ $id_user = $_SESSION["id_user"];
           });
 
           </script>
+
         </div>
 				
 			

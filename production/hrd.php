@@ -6,20 +6,21 @@ if (!isset($_SESSION["login"])) {
   exit;
 }
 
-if ($_SESSION["level"] == "admin") {
-    header("Location: admin.php");
+if ($_SESSION["level"] == "user") {
+    header("Location: index.php");
     exit;
-} 
+}
 
 if ($_SESSION["level"] == "admin2") {
     header("Location: admin2.php");
     exit;
-} 
+}
 
 if ($_SESSION["level"] == "admin3") {
-    header("Location: admin.php");
+    header("Location: admin3.php");
     exit;
 }
+
   include "koneksi.php";
   $id_user = $_SESSION["id_user"];
 
@@ -71,7 +72,7 @@ if ($_SESSION["level"] == "admin3") {
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.php" class="site_title"><i class="fa fa-globe"></i> <span>PT Global Petro </span></a>
+              <a href="admin.php" class="site_title"><i class="fa fa-globe"></i> <span>PT Global Petro</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -80,10 +81,10 @@ if ($_SESSION["level"] == "admin3") {
             <div class="profile clearfix">
               <div class="profile_pic">
                 <img src="images/gpp.png" alt="..." class="img-circle profile_img">
-              </div>
+              </div> 
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2 class=""><?= $nama;?></h2>
+                <h2><?= $nama;?></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -97,7 +98,7 @@ if ($_SESSION["level"] == "admin3") {
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="index.php">Dashboard</a></li>
+                      <li><a href="admin.php">Dashboard</a></li>
                       <!-- <li><a href="index2.html">Dashboard2</a></li>
                       <li><a href="index3.html">Dashboard3</a></li> -->
                     </ul>
@@ -125,30 +126,30 @@ if ($_SESSION["level"] == "admin3") {
                       <li><a href="calendar.html">Calendar</a></li>
                     </ul>
                   </li> -->
-                 <!--  <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
+                  <!-- <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="tables.html">Tables</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
                   </li> -->
 
-                  <li><a><i class="fa fa-list"></i> Pengajuan Barang<span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-edit"></i> Approval <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="index.php?page=pengajuan">Tabel Pengajuan</a></li>
-                      <li><a href="index.php?page=historyPengajuan">History Pengajuan</a></li>
+                      <li><a href="admin.php?page=approve">Approval</a></li>
+                      <li><a href="admin.php?page=historyApprove">History Approve</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
                   </li>
 
-                 <!--  <li><a><i class="fa fa-users"></i> Human Resources<span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-users"></i> Human Resources<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="index.php?page=hrd">Data Karyawan</a></li>
-                      <li><a href="index.php?page=cuti">Form Cuti</a></li>
+                      <li><a href="hrd.php?page=hrd">Data Karyawan</a></li>
+                      <li><a href="hrd.php?page=cuti">Form Cuti</a></li>
+                      <li><a href="hrd.php?page=absen">Data Absen</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
-                  </li> -->
-
-                  <!-- li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
+                  </li>
+                  <!-- <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="chartjs.html">Chart JS</a></li>
                       <li><a href="chartjs2.html">Chart JS2</a></li>
@@ -165,48 +166,7 @@ if ($_SESSION["level"] == "admin3") {
                   </li> -->
                 </ul>
               </div>
-              <!-- <div class="menu_section">
-                <h3>Live On</h3>
-                <ul class="nav side-menu">
-                  <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="e_commerce.html">E-commerce</a></li>
-                      <li><a href="projects.html">Projects</a></li>
-                      <li><a href="project_detail.html">Project Detail</a></li>
-                      <li><a href="contacts.html">Contacts</a></li>
-                      <li><a href="profile.html">Profile</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="page_403.html">403 Error</a></li>
-                      <li><a href="page_404.html">404 Error</a></li>
-                      <li><a href="page_500.html">500 Error</a></li>
-                      <li><a href="plain_page.html">Plain Page</a></li>
-                      <li><a href="login.html">Login Page</a></li>
-                      <li><a href="pricing_tables.html">Pricing Tables</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                        <li><a href="#level1_1">Level One</a>
-                        <li><a>Level One<span class="fa fa-chevron-down"></span></a>
-                          <ul class="nav child_menu">
-                            <li class="sub_menu"><a href="level2.html">Level Two</a>
-                            </li>
-                            <li><a href="#level2_1">Level Two</a>
-                            </li>
-                            <li><a href="#level2_2">Level Two</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li><a href="#level1_2">Level One</a>
-                        </li>
-                    </ul>
-                  </li>                  
-                  <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
-                </ul>
-              </div> -->
+              
 
             </div>
             <!-- /sidebar menu -->
@@ -243,12 +203,12 @@ if ($_SESSION["level"] == "admin3") {
                     <?= $nama;?>
                   </a>
                   <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                    <!-- <a class="dropdown-item"  href="javascript:;"> Profile</a>
-                      <a class="dropdown-item"  href="javascript:;">
+                    <a class="dropdown-item"  href="javascript:;"> Profile</a>
+                      <!-- <a class="dropdown-item"  href="javascript:;">
                         <span class="badge bg-red pull-right">50%</span>
                         <span>Settings</span>
                       </a> -->
-                    <a class="dropdown-item"  href="javascript:;">Profile</a>
+                    <!-- <a class="dropdown-item"  href="javascript:;">Help</a> -->
                     <a class="dropdown-item"  href="logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                   </div>
                 </li>
@@ -329,22 +289,24 @@ if ($_SESSION["level"] == "admin3") {
                     if(isset($_GET['page'])){
                         $page = $_GET['page'];
                         switch ($page) {
-                            case 'pengajuan':
-                                include "page/pengajuan/pengajuan.php";
+                            case 'approve':
+                                include "page/admin_approve/admin_aprove.php";
                                 break;
 
-                            case 'historyPengajuan':
-                                include "page/history_pengajuan/history_pengajuan.php";
+                            case 'historyApprove':
+                                include "page/history_approve/history_approve.php";
                                 break;
-
-                            
-
-                            case 'cuti':
-                                include "page/cuti/form_cuti.php";
-                              break;
-
+                         
                             case 'dashboard':
                                 include "page/dashboard/dashboard.php";
+                                break;
+
+                            case 'hrd':
+                                include "page/hrd/data_karyawan.php";
+                                break;
+
+                            case 'absen':
+                                include "page/hrd/data_absen/data_absen.php";
                                 break;
 
                             case 'laporan':
@@ -369,8 +331,20 @@ if ($_SESSION["level"] == "admin3") {
                         switch ($form) {
                             
 
-                            case 'ubahPengajuan':
-                                include "page/pengajuan/ubah.php";
+                            case 'tambahKaryawan':
+                                include "page/hrd/tambah.php";
+                                break;
+
+                            case 'ubahKaryawan':
+                                include "page/hrd/ubah.php";
+                                break;
+
+                            case 'hapusKaryawan':
+                                include 'page/hrd/hapus.php';
+                                break;
+
+                            case 'ubahApprove':
+                                include "page/admin_approve/konfirmasi_aprove.php";
                                 break;
 
                             case 'tambahPengajuan':
@@ -380,14 +354,10 @@ if ($_SESSION["level"] == "admin3") {
                             case 'hapusPengajuan':
                                 include "page/pengajuan/hapus.php";
                                 break;
-
-                            case 'tambahKaryawan':
-                                include 'page/hrd/tambah.php';
-                              break;
                 
-                            case 'cariAnggaran':
-                              include "page/anggaran/cari.php";
-                              break;
+              case 'cariAnggaran':
+                include "page/anggaran/cari.php";
+                break;
 
                             case 'ubahCatatan':
                                 include "page/catatan/ubah.php";
@@ -398,7 +368,7 @@ if ($_SESSION["level"] == "admin3") {
                             case 'hapusCatatan':
                                 include "page/catatan/hapus.php";
                                 break;
-                            case 'cariCatatan':
+              case 'cariCatatan':
                                 include "page/catatan/cari.php";
                                 break;
 
@@ -424,20 +394,17 @@ if ($_SESSION["level"] == "admin3") {
                     }
 
                     else{
-                        include "dashboard.php";
+                        include "dashboard2.php";
                     }
                 ?>
         </div>
-    
-
-          
-         
+          <!-- /top tiles -->
 
 
         <!-- /page content -->
 
         <!-- footer content -->
-        <footer class="">
+        <footer>
           <div class="pull-right">
             PT Global Petro Pasific - All Right Reserved <a href="https://globalpetro.co.id">2024</a>
           </div>
@@ -490,3 +457,4 @@ if ($_SESSION["level"] == "admin3") {
 	
   </body>
 </html>
+

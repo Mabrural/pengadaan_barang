@@ -11,19 +11,19 @@
 		  </li>
 		  </a>
 
-		  <a href="">
+		  <a href="?page=approve4">
 		  <li>
 		    <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-		    <span class="glyphicon-class"><a href="?page=approve3">Laporan Pengajuan</span></a>
+		    <span class="glyphicon-class"><a href="?page=approve4">Laporan Pengajuan</span></a>
 		  </li>
 		  </a>
 		  
-		  <li>
+		  <!-- <li>
 		  	<a href="">
 		    <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
 		    <span class="glyphicon-class"><a href="admin3.php?page=historyApprove3">Tracking Progress</span></a>
 		  	</a>
-		  </li>
+		  </li> -->
 		  
 
 		  
