@@ -11,13 +11,13 @@
 		  </li>
 
 		  <li>
-		    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-		    <span class="glyphicon-class"><a href="?page=approve2">Approval</span></a>
+		    <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+		    <span class="glyphicon-class"><a href="?page=approve3">Laporan Pengajuan</span></a>
 		  </li>
 
 		  <li>
 		    <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
-		    <span class="glyphicon-class"><a href="admin2.php?page=historyApprove2">Tracking Progress</span></a>
+		    <span class="glyphicon-class"><a href="admin3.php?page=historyApprove3">Tracking Progress</span></a>
 		  </li>
 
 		  

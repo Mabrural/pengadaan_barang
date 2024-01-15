@@ -324,8 +324,8 @@ if ($_SESSION["level"] == "admin2") {
                                 include "page/admin_approve3/admin_aprove3.php";
                                 break;
 
-                            case 'historyApprove2':
-                                include "page/history_approve2/history_approve2.php";
+                            case 'historyApprove3':
+                                include "page/history_approve3/history_approve3.php";
                                 break;
                          
                             case 'dashboard':
@@ -417,7 +417,7 @@ if ($_SESSION["level"] == "admin2") {
                     }
 
                     else{
-                        include "dashboard2.php";
+                        include "dashboard4.php";
                     }
                 ?>
         </div>

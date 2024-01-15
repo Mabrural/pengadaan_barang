@@ -132,7 +132,7 @@ if ($_SESSION["level"] == "admin3") {
                     </ul>
                   </li> -->
 
-                  <li><a><i class="fa fa-check"></i> Approval <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-edit"></i> Approval <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="admin2.php?page=approve2">Approval</a></li>
                       <li><a href="admin2.php?page=historyApprove2">History Approval</a></li>
