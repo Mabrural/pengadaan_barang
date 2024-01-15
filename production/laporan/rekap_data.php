@@ -270,7 +270,7 @@ if (isset($_GET['cetakData'])) {
 							 	$divisi = $data['divisi'];
 							 	$acc1 = $data2['acc1'];
 							 	$acc2 = $data2['acc2'];
-							 	$tgl = date('d-M-Y', strtotime($data2['tgl_pengajuan']));
+							 	$tgl = date('d-M-Y', strtotime($tgl_pengajuan));
 							 ?>
 							<tr>
 								<td>Nama Pemohon</td>
@@ -374,7 +374,7 @@ if (isset($_GET['cetakData'])) {
 							</tr>	
 							<tr>
 								<td colspan="2"> <div align="left">&nbsp;</div><br><br> </td>
-								<td> <div align="center">Direktur Operasional </div> </td>
+								<td> <div align="center">( <?= $acc2;?> ) </div> </td>
 							</tr>
 						</tbody></table>
 					</td>

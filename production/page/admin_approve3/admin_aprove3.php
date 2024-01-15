@@ -31,8 +31,8 @@ $id_user = $_SESSION["id_user"];
         <!-- <p>Add class <code>bulk_action</code> to table for bulk actions options on row select</p> -->
 
         <div class="table-responsive">
-          <table class="table table-striped jambo_table bulk_action">
-            <thead>
+          <table id="example" class="display" style="width:100%">
+            <thead style="background-color: #2a3f54; color: #dfe5f1;">
               <tr class="headings">
                 <!-- <th>
                   <input type="checkbox" id="check-all" class="flat">
@@ -77,10 +77,32 @@ $id_user = $_SESSION["id_user"];
                 </td> -->
               </tr>
               
-           
-            </tbody>
            <?php } ?>
+            </tbody>
+           
           </table>
+
+          <script type="text/javascript">
+          $(document).ready(function() {
+              // Periksa apakah ada data dalam tabel
+              if ($('#example tbody td').length > 0) {
+                  new DataTable('#example', {
+                      responsive: true,
+                      columnDefs: [
+                          {
+                              targets: -1,
+                              responsivePriority: 'auto'
+                          }
+                      ]
+                  });
+              } else {
+                  // Jika tidak ada data, inisialisasi DataTable tanpa responsivitas
+                  $('#example').DataTable();
+              }
+          });
+
+          </script>
+
         </div>
 				
 			

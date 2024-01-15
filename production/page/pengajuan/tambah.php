@@ -71,7 +71,7 @@ if (isset($_POST["submit"])) {
 							<h3>Form Pengadaan Barang</h3>
 						</div>
 
-						<div class="title_right">
+						<!-- <div class="title_right">
 							<div class="col-md-5 col-sm-5  form-group pull-right top_search">
 								<div class="input-group">
 									<input type="text" class="form-control" placeholder="Search for...">
@@ -80,7 +80,7 @@ if (isset($_POST["submit"])) {
 									</span>
 								</div>
 							</div>
-						</div>
+						</div> -->
 					</div>
 					<div class="clearfix"></div>
 					<div class="row">

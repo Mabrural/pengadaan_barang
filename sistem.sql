@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 12, 2024 at 12:49 PM
+-- Generation Time: Jan 15, 2024 at 03:01 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -50,7 +50,10 @@ INSERT INTO `barang` (`id_barang`, `kode_pengajuan`, `nama_barang`, `spek`, `des
 (128, 112345232112132, 'Monitor', 'Acer 21 Inch', 'Buat Preview Grafik', 1, '2024-01-12', 'On Progress in Purchasing', 'Henda Kurniawan', 'Aldi Taher', 9),
 (130, 112345232112134, 'Mouse Wireless', 'Merk Logitech Silent Click', 'butuh cepat', 1, '2024-01-12', 'On Progress in Purchasing', 'Henda Kurniawan', 'Aldi Taher', 9),
 (131, 112345232112135, 'Aktip Speaker + bluetooth', 'Aktip Speaker + bluetooth', 'Aktip Speaker + bluetooth', 2, '2024-01-12', 'On Progress in Purchasing', 'Henda Kurniawan', 'Aldi Taher', 9),
-(132, 112345232112136, 'Liferaft', 'Liferaft', 'Liferaft', 1, '2024-01-12', 'On Progress in Purchasing', 'Henda Kurniawan', 'Aldi Taher', 9);
+(132, 112345232112136, 'Liferaft', 'Liferaft', 'Liferaft', 1, '2024-01-12', 'On Progress in Purchasing', 'Henda Kurniawan', 'Aldi Taher', 9),
+(133, 112345232112137, 'Fan Cooler', '3 Kipas', 'Butuh cepat', 1, '2024-01-12', 'On Progress in Purchasing', 'Henda Kurniawan', 'Aldi Taher', 9),
+(152, 112345232112138, 'Charger Laptop', 'Asus ROG Strix 504', 'Butuh Cepat Karena Charger Lama Rusak', 1, '2024-01-10', 'On Progress in Purchasing', 'Henda Kurniawan', 'Aldi Taher', 10),
+(153, 112345232112139, 'CCTV', 'HDR Hikvision', 'Buat parkiran', 1, '2024-01-13', 'On Progress in Purchasing', 'Henda Kurniawan', 'Aldi Taher', 9);
 
 -- --------------------------------------------------------
 
@@ -135,7 +138,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
+  MODIFY `id_barang` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
 
 --
 -- AUTO_INCREMENT for table `karyawan`

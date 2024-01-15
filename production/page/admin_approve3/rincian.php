@@ -53,9 +53,9 @@ $tgl_pengajuan = $_GET['tgl_pengajuan'];
 								</div>
 								<div class="x_content">
 									
-									<div class="table-responsive">
-          <table class="table table-striped jambo_table bulk_action">
-            <thead>
+				<div class="table-responsive">
+          <table id="example" class="display" style="width:100%">
+            <thead style="background-color: #2a3f54; color: #dfe5f1;">
               <tr class="headings">
                 <!-- <th>
                   <input type="checkbox" id="check-all" class="flat">
@@ -84,7 +84,7 @@ $tgl_pengajuan = $_GET['tgl_pengajuan'];
               	<?php 
               		$no = 1;
               		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='On Progress in Purchasing' AND barang.id_user=$id_user AND barang.tgl_pengajuan='$tgl_pengajuan'";
-                  $query2 = "SELECT * FROM karyawan JOIN user ON user.id_emp=karyawan.id_emp JOIN barang ON user.id_user=barang.id_user WHERE barang.status='On Progress in Purchasing' GROUP BY karyawan.nama_emp, barang.tgl_pengajuan ORDER BY barang.tgl_pengajuan DESC";
+                  $query2 = "SELECT * FROM karyawan JOIN user ON user.id_emp=karyawan.id_emp JOIN barang ON user.id_user=barang.id_user WHERE user.id_user=$id_user AND barang.status='On Progress in Purchasing' GROUP BY karyawan.nama_emp, barang.tgl_pengajuan ORDER BY barang.tgl_pengajuan DESC";
               		// $query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='Sudah disetujui' AND barang.id_user=$id_user";
               		// $query = "SELECT * FROM barang WHERE barang.id_user=$id_user";
                   $tampil = mysqli_query($koneksi, $query);
@@ -107,11 +107,11 @@ $tgl_pengajuan = $_GET['tgl_pengajuan'];
                 <td class=" "><?= $data['acc1'];?></td>
                 <td class=" "><?= $data['acc2'];?></td>
                 <td class=" " style="color: <?php
-                    if ($data['status'] == 'Menunggu Persetujuan') {
+                    if ($data['status'] == 'Menunggu Persetujuan KC') {
                         echo '#b58709';
-                    } elseif ($data['status'] == 'Sedang diproses') {
+                    } elseif ($data['status'] == 'Menunggu Persetujuan Dir.Ops') {
                         echo '#b58709';
-                    } elseif ($data['status'] == 'Sudah disetujui') {
+                    } elseif ($data['status'] == 'On Progress in Purchasing') {
                         echo '#14a664';
                     } else {
                         echo '#a62f26';
@@ -125,13 +125,34 @@ $tgl_pengajuan = $_GET['tgl_pengajuan'];
                 </td> -->
               </tr>
               
-        					
+        					<?php } ?>
            
             </tbody>
                   
 
-           <?php } ?>
+           
           </table>
+
+          <script type="text/javascript">
+          $(document).ready(function() {
+              // Periksa apakah ada data dalam tabel
+              if ($('#example tbody td').length > 0) {
+                  new DataTable('#example', {
+                      responsive: true,
+                      columnDefs: [
+                          {
+                              targets: -1,
+                              responsivePriority: 'auto'
+                          }
+                      ]
+                  });
+              } else {
+                  // Jika tidak ada data, inisialisasi DataTable tanpa responsivitas
+                  $('#example').DataTable();
+              }
+          });
+
+          </script>
         </div>
 								</div>
 							</div>

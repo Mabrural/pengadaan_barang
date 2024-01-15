@@ -3,6 +3,7 @@
 
 $id_user = $_SESSION["id_user"];
 
+
 // $pengajuan = query("SELECT * FROM barang WHERE barang.id_barang=$id_user");
 
 ?>
@@ -31,8 +32,8 @@ $id_user = $_SESSION["id_user"];
         <!-- <p>Add class <code>bulk_action</code> to table for bulk actions options on row select</p> -->
 
         <div class="table-responsive">
-          <table class="table table-striped jambo_table bulk_action">
-            <thead>
+          <table id="example" class="display" style="width:100%">
+            <thead style="background-color: #2a3f54; color: #dfe5f1;">
               <tr class="headings">
                 <!-- <th>
                   <input type="checkbox" id="check-all" class="flat">
@@ -59,8 +60,11 @@ $id_user = $_SESSION["id_user"];
               	<?php 
               		$no = 1;
                   // $query = "SELECT * FROM karyawan JOIN user ON user.id_emp=karyawan.id_emp JOIN barang ON user.id_user=barang.id_user WHERE status='Menunggu Persetujuan' OR status='Sedang diproses'";
-              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='Menunggu Persetujuan KC' OR status='Sedang diproses'";
+                  $query2 = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user JOIN karyawan ON karyawan.id_emp=user.id_emp WHERE barang.status='Menunggu Persetujuan KC' AND karyawan.id_emp=user.id_emp";
+              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='Menunggu Persetujuan KC'";
               		// $query = "SELECT * FROM barang WHERE barang.id_user=$id_user";
+                  $tampil2 = mysqli_query($koneksi, $query2);
+                  $data2 = mysqli_fetch_assoc($tampil2);
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
               		
@@ -74,6 +78,7 @@ $id_user = $_SESSION["id_user"];
                 <td class=" "><?= $data['qty'];?></td>
                 <td class=" "><?= date('d-M-Y', strtotime($data['tgl_pengajuan']));?></td>
                 <td class=" "><strong><?= $data['username'];?></strong></td>
+                <!-- <td class=" "><strong><?= $data2['nama_emp'];?></strong></td> -->
                 <td class=" " style="color: <?php
                     if ($data['status'] == 'Menunggu Persetujuan') {
                         echo '#b58709';
@@ -100,11 +105,45 @@ $id_user = $_SESSION["id_user"];
              <!--    <td class=" last"><a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Approve </a> 
                 </td> -->
               </tr>
-              
+              <?php } ?>
            
             </tbody>
-           <?php } ?>
+           
           </table>
+
+          <script type="text/javascript">
+          $(document).ready(function() {
+              // Periksa apakah ada data dalam tabel
+              if ($('#example tbody td').length > 0) {
+                  new DataTable('#example', {
+                      responsive: true,
+                      columnDefs: [
+                          {
+                              targets: -1,
+                              responsivePriority: 'auto'
+                          }
+                      ]
+                  });
+              } else {
+                  // Jika tidak ada data, inisialisasi DataTable tanpa responsivitas
+                  $('#example').DataTable();
+              }
+          });
+
+          </script>
+
+          <!-- <script type="text/javascript">
+            new DataTable('#example', {
+            responsive: true,
+            columnDefs: [
+              {
+                targets: -1,
+                responsivePriority: 'auto'
+              }
+            ]
+          });
+
+          </script> -->
         </div>
 				
 			

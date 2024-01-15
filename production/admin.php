@@ -36,9 +36,15 @@ if ($_SESSION["level"] == "admin3") {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" href="images/logo-gpp.png" type="image/ico" />
+	  <link rel="icon" href="images/logo-gpp.png" type="image/ico" />
 
     <title>PT GLOBAL PETRO PASIFIC</title>
+
+    <!-- datatables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <!-- datatables -->
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -75,7 +81,7 @@ if ($_SESSION["level"] == "admin3") {
             <div class="profile clearfix">
               <div class="profile_pic">
                 <img src="images/gpp.png" alt="..." class="img-circle profile_img">
-              </div>
+              </div> 
               <div class="profile_info">
                 <span>Welcome,</span>
                 <h2><?= $nama;?></h2>

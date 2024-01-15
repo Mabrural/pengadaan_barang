@@ -30,8 +30,8 @@ $id_user = $_SESSION["id_user"];
         <!-- <p>Add class <code>bulk_action</code> to table for bulk actions options on row select</p> -->
 
         <div class="table-responsive">
-          <table class="table table-striped jambo_table bulk_action">
-            <thead>
+          <table id="example" class="display" style="width:100%">
+            <thead style="background-color: #2a3f54; color: #dfe5f1;">
               <tr class="headings">
                 <!-- <th>
                   <input type="checkbox" id="check-all" class="flat">
@@ -98,11 +98,45 @@ $id_user = $_SESSION["id_user"];
                <!--  <td class=" last"><a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusPengajuan&id_barang=<?= $data["id_barang"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
                 </td> -->
               </tr>
-              
+              <?php } ?>
            
             </tbody>
-           <?php } ?>
+           
           </table>
+
+          <script type="text/javascript">
+          $(document).ready(function() {
+              // Periksa apakah ada data dalam tabel
+              if ($('#example tbody td').length > 0) {
+                  new DataTable('#example', {
+                      responsive: true,
+                      columnDefs: [
+                          {
+                              targets: -1,
+                              responsivePriority: 'auto'
+                          }
+                      ]
+                  });
+              } else {
+                  // Jika tidak ada data, inisialisasi DataTable tanpa responsivitas
+                  $('#example').DataTable();
+              }
+          });
+
+          </script>
+
+          <!-- <script type="text/javascript">
+            new DataTable('#example', {
+            responsive: true,
+            columnDefs: [
+              {
+                targets: -1,
+                responsivePriority: 'auto'
+              }
+            ]
+          });
+
+          </script> -->
         </div>
 				
 			
