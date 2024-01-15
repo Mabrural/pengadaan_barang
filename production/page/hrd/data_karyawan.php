@@ -62,7 +62,7 @@ $id_user = $_SESSION["id_user"];
               	 ?>
                 <td class=" "><?= $no++;?></td>
                 <td class=" "><a href="img/<?= $data['gambar'];?>"><img src="img/<?= $data['gambar'];?>" width="50"></a></td>
-                <td class=" "><?= $data['nama_emp'];?></td>
+                <td class=" "><a href="?form=rincianKaryawan&id_emp=<?=$data["id_emp"]?>"><?= $data['nama_emp'];?></a></td>
                 <td class=" "><?= $data['jabatan'];?> </td>
                 <td class=" "><?= $data['divisi'];?></td>
                 <td class=" "><?= $data['status'];?></td>
