@@ -305,6 +305,10 @@ if ($_SESSION["level"] == "admin3") {
                                 include "page/hrd/data_karyawan.php";
                                 break;
 
+                            case 'img':
+                                include "page/hrd/img/";
+                                break;
+
                             case 'absen':
                                 include "page/hrd/data_absen/data_absen.php";
                                 break;

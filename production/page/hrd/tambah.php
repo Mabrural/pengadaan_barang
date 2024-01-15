@@ -107,7 +107,7 @@ if (isset($_POST["submit"])) {
 								</div>
 								<div class="x_content">
 									<br />
-									<form action="" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+									<form action="" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
 
 										<div class="item form-group">
 											<!-- <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">INV ID <span class="required">*</span> -->
@@ -141,9 +141,15 @@ if (isset($_POST["submit"])) {
 											<div class="col-md-6 col-sm-6 ">
 												<select class="form-control" name="status">
 													<option value="Aktif">Aktif</option>
-													<option value="Tidak Aktif">Tidak Aktif</option>
-													
+													<option value="Tidak Aktif">Tidak Aktif</option>	
 												</select>
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Gambar</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="file" name="gambar">
 											</div>
 										</div>
 										<div class="item form-group">

@@ -37,6 +37,7 @@ $id_user = $_SESSION["id_user"];
                   <input type="checkbox" id="check-all" class="flat">
                 </th> -->
                 <th class="column-title">No. </th>
+                <th class="column-title">Gambar </th>
                 <th class="column-title">Nama </th>
                 <th class="column-title">Jabatan </th>
                 <th class="column-title">Divisi </th>
@@ -60,6 +61,7 @@ $id_user = $_SESSION["id_user"];
 
               	 ?>
                 <td class=" "><?= $no++;?></td>
+                <td class=" "><a href="img/<?= $data['gambar'];?>"><img src="img/<?= $data['gambar'];?>" width="50"></a></td>
                 <td class=" "><?= $data['nama_emp'];?></td>
                 <td class=" "><?= $data['jabatan'];?> </td>
                 <td class=" "><?= $data['divisi'];?></td>
