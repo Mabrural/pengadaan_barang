@@ -25,6 +25,8 @@ if ($_SESSION["level"] == "admin3") {
   $id_user = $_SESSION["id_user"];
 
   $nama = $_SESSION["nama_emp"];
+
+  $jabatan = $_SESSION['jabatan'];
   
   ?>
 
@@ -147,6 +149,7 @@ if ($_SESSION["level"] == "admin3") {
                       <li><a href="hrd.php?page=cuti">Form Cuti</a></li>
                       <li><a href="hrd.php?page=absen">Data Absen</a></li>
                       <li><a href="hrd.php?page=aksesPintu">Data Akses Pintu</a></li>
+                      <li><a href="hrd.php?page=userLogin">Data Login</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
                   </li>
@@ -191,6 +194,7 @@ if ($_SESSION["level"] == "admin3") {
           </div>
         </div>
 
+       
         <!-- top navigation -->
         <div class="top_nav">
           <div class="nav_menu">
@@ -201,7 +205,7 @@ if ($_SESSION["level"] == "admin3") {
               <ul class=" navbar-right">
                 <li class="nav-item dropdown open" style="padding-left: 15px;">
                   <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                    <?= $nama;?>
+                   <strong> <?= $nama;?></strong> ( <?= $jabatan?> )
                   </a>
                   <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item"  href="javascript:;"> Profile</a>
@@ -314,6 +318,10 @@ if ($_SESSION["level"] == "admin3") {
                                 include "page/hrd/data_absen/data_absen.php";
                                 break;
 
+                            case 'userLogin':
+                                include 'page/hrd/user_login/user_login.php';
+                              break;
+
                             case 'laporan':
                                 include "page/laporan/laporan.php";
                                 break;
@@ -376,6 +384,10 @@ if ($_SESSION["level"] == "admin3") {
                             case 'hapusAkses':
                                 include 'page/hrd/akses_pintu/hapus.php';
                                 break;
+
+                            case 'tambahLogin':
+                                include 'page/hrd/user_login/tambah.php';
+                              break;
 
                             case 'ubahApprove':
                                 include "page/admin_approve/konfirmasi_aprove.php";

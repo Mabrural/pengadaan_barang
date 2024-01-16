@@ -375,6 +375,80 @@ function hapusAkses($id_akses) {
 
 }
 
+function tambahLogin($data){
+	global $koneksi;
+
+	$username = strtolower(stripcslashes($data["username"]));
+	$password = mysqli_real_escape_string($koneksi, $data["password"]);
+    $password2 = mysqli_real_escape_string($koneksi, $data["password2"]);
+	$id_emp	= mysqli_real_escape_string($koneksi, $data["id_emp"]);	
+	$level	= mysqli_real_escape_string($koneksi, $data["level"]);	
+
+	// cek username sudah ada atau belum
+	$result = mysqli_query($koneksi, "SELECT username FROM user WHERE username= '$username'");
+	if (mysqli_fetch_assoc($result)) {
+		echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
+		echo '<script src="./sweetalert2.min.js"></script>';
+		echo "<script>
+		setTimeout(function () { 
+			swal.fire({
+				
+				title               : 'Daftar Akun Gagal',
+				text                :  'Username yang dipilih sudah terdaftar',
+				//footer              :  '',
+				icon                : 'error',
+				timer               : 2000,
+				showConfirmButton   : true
+			});  
+		},10);   setTimeout(function () {
+			window.location.href = '?page=userLogin'; //will redirect to your blog page (an ex: blog.html)
+		}, 2000); //will call the function after 2 secs
+		</script>";
+		// echo "
+		// 	<script>
+		// 		alert('Username yang dipilih sudah terdaftar!');
+		// 	</script>
+		// ";
+		return false;
+	}
+
+	// cek konfirmasi password
+	if ($password !== $password2) {
+		echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
+		echo '<script src="./sweetalert2.min.js"></script>';
+		echo "<script>
+		setTimeout(function () { 
+			swal.fire({
+				
+				title               : 'Daftar Akun Gagal',
+				text                :  'Konfirmasi Password Tidak Sesuai!',
+				//footer              :  '',
+				icon                : 'error',
+				timer               : 2000,
+				showConfirmButton   : true
+			});  
+		},10);   setTimeout(function () {
+			window.location.href = '?page=userLogin'; //will redirect to your blog page (an ex: blog.html)
+		}, 2000); //will call the function after 2 secs
+		</script>";
+		// echo "
+		// 	<script>
+		// 		alert('konfirmasi password tidak sesuai!');
+		// 	</script>
+		// ";
+		return false;
+	}
+
+	// enkripsi password
+	$password = password_hash($password, PASSWORD_DEFAULT);
+
+
+	// tambahkan user baru ke database
+	mysqli_query($koneksi, "INSERT INTO user VALUES('', '$username', '$password', '$level', '$id_emp')");
+
+	return mysqli_affected_rows($koneksi);
+}
+
 function tambahAnggaran($data) {
 	global $koneksi;
 	$nama_anggaran = htmlspecialchars($data["nama_anggaran"]);

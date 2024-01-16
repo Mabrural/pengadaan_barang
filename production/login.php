@@ -40,6 +40,9 @@ if (isset($_POST['login'])) {
       // Menyimpan level pengguna dalam sesi
       $_SESSION["level"] = $row["level"];
 
+      // Menyimpan jabatan pengguna dalam sesi
+      $_SESSION['jabatan'] = $row['jabatan'];
+
       // Mengarahkan berdasarkan level pengguna
       if ($row["level"] === "admin") {
         echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';

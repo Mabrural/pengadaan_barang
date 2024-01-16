@@ -11,7 +11,7 @@ if (isset($_POST["submit"])) {
 
 
 	// cek apakah data berhasil ditambahkan atau tidak
-	if(tambahAbsen($_POST) > 0 ) {
+	if(tambahLogin($_POST) > 0 ) {
 		echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
 		echo '<script src="./sweetalert2.min.js"></script>';
 		echo "<script>
@@ -26,7 +26,7 @@ if (isset($_POST["submit"])) {
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=absen'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=userLogin'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>"; 
 		// echo "
@@ -50,7 +50,7 @@ if (isset($_POST["submit"])) {
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=absen'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=userLogin'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>";
 		// echo "
@@ -90,7 +90,7 @@ if (isset($_POST["submit"])) {
 						<div class="col-md-12 col-sm-12 ">
 							<div class="x_panel">
 								<div class="x_title">
-									<h2>Form Input Absen<small></small></h2>
+									<h2>Form Input Data Login<small></small></h2>
 									<!-- <ul class="nav navbar-right panel_toolbox">
 										<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
 										</li>
@@ -125,22 +125,40 @@ if (isset($_POST["submit"])) {
 										</div>
 
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">No. Absen <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="username">Username <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="number" name="no_absen" id="last-name" required="required" class="form-control">
+												<input type="text" name="username" id="username" required="required" class="form-control">
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="password">Password <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="password" name="password" id="password" required="required" class="form-control">
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="password2">Konfirmasi Password <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="password" name="password2" id="password2" required="required" class="form-control">
 											</div>
 										</div>
 										
 
 										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Nama Lantai <span class="required">*</span></label>
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Level <span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<select class="form-control" name="id_lantai" required>
-													<option value="">--Pilih Lantai--</option>
-													<?php foreach($lantai as $row) : ?>
-														<option value="<?= $row['id_lantai']?>"><?= $row['nama_lantai']?></option>
-													<?php endforeach;?>	
+												<select class="form-control" name="level" required>
+													<option value="">--Pilih Level--</option>
+													<option value="hrd">HRD</option>
+													<option value="user">Staff</option>
+													<option value="admin">Kacap</option>
+													<option value="admin1">Dir.Operasional</option>
+													<option value="dirut">Dir. Utama</option>
 												</select>
 											</div>
 										</div>
