@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2024 at 01:43 PM
+-- Generation Time: Jan 16, 2024 at 12:02 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -39,8 +39,8 @@ CREATE TABLE `absen` (
 --
 
 INSERT INTO `absen` (`id_absen`, `no_absen`, `id_emp`, `id_lantai`) VALUES
-(1, 2, 19, 1),
-(2, 3, 5, 2);
+(8, 5, 17, 2),
+(9, 6, 14, 2);
 
 -- --------------------------------------------------------
 
@@ -54,6 +54,16 @@ CREATE TABLE `akses_pintu` (
   `id_emp` int(10) NOT NULL,
   `id_lantai` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `akses_pintu`
+--
+
+INSERT INTO `akses_pintu` (`id_akses`, `no_akses`, `id_emp`, `id_lantai`) VALUES
+(9, 2, 10, 2),
+(10, 1, 8, 1),
+(11, 2, 8, 2),
+(12, 3, 8, 2);
 
 -- --------------------------------------------------------
 
@@ -93,28 +103,30 @@ CREATE TABLE `karyawan` (
   `alamat` varchar(200) DEFAULT NULL,
   `no_hp` varchar(15) DEFAULT NULL,
   `email` varchar(40) DEFAULT NULL,
-  `status_pernikahan` varchar(30) DEFAULT NULL
+  `status_pernikahan` varchar(30) DEFAULT NULL,
+  `nik` varchar(30) DEFAULT NULL,
+  `npwp` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `karyawan`
 --
 
-INSERT INTO `karyawan` (`id_emp`, `nama_emp`, `jabatan`, `divisi`, `status`, `gambar`, `tgl_lahir`, `jenis_kelamin`, `alamat`, `no_hp`, `email`, `status_pernikahan`) VALUES
-(5, 'Andre Yogi', 'Staff Operasional', 'Office', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', ''),
-(8, 'Raden Sulaiman Sanjeev', 'Direktur Utama', 'BSD', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', ''),
-(9, 'Regina', 'Direktur Keuangan', 'BSD', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', ''),
-(10, 'James Taju', 'Direktur HRD', 'HRM', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', ''),
-(11, 'Bambang Wahyudi', 'Direktur Operasional', 'Manager', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', ''),
-(12, 'Michael Kawilarang', 'Kepala Cabang', 'Manager', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', ''),
-(13, 'Gahral', 'Kepala Shipping', 'Shipping', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', ''),
-(14, 'Elis', 'Finance', 'Finance', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', ''),
-(15, 'Rika', 'Staff Shipping', 'Shipping', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', ''),
-(16, 'Krisno', 'Staff Shipping', 'Shipping', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', ''),
-(17, 'Niken', 'Staff Finance', 'Finance', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', ''),
-(18, 'Robby T. Hamisi', 'Staff Operasional', 'Operasional', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', ''),
-(19, 'Alex', 'Staff Operasional', 'Operasional', 'Aktif', '65a4f99d7d9a8.png', NULL, NULL, NULL, '', '', ''),
-(25, 'Muhammad Mabrur Al Mutaqi', 'Staff IT', 'IT Assistant', 'Aktif', '65a50d602d652.png', '2002-05-21', 'Laki-laki', 'Batu Aji', '082178192938', 'mabruralmutaqi@gmail.com', 'Lajang');
+INSERT INTO `karyawan` (`id_emp`, `nama_emp`, `jabatan`, `divisi`, `status`, `gambar`, `tgl_lahir`, `jenis_kelamin`, `alamat`, `no_hp`, `email`, `status_pernikahan`, `nik`, `npwp`) VALUES
+(5, 'Andre Yogi', 'Staff Operasional', 'Office', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(8, 'Raden Sulaiman Sanjeev', 'Direktur Utama', 'BSD', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(9, 'Regina', 'Direktur Keuangan', 'BSD', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(10, 'James Taju', 'Direktur HRD', 'HRM', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(11, 'Bambang Wahyudi', 'Direktur Operasional', 'Manager', 'Aktif', '65a4f45ead15a.png', '0000-00-00', 'Laki-laki', '', '', '', 'Belum Menikah', NULL, ''),
+(12, 'Michael Kawilarang', 'Kepala Cabang', 'Manager', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(13, 'Gahral', 'Kepala Shipping', 'Shipping', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(14, 'Elis', 'Finance', 'Finance', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(15, 'Rika', 'Staff Shipping', 'Shipping', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(16, 'Krisno', 'Staff Shipping', 'Shipping', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(17, 'Niken', 'Staff Finance', 'Finance', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(18, 'Robby T. Hamisi', 'Staff Operasional', 'Operasional', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(19, 'Alex', 'Staff Operasional', 'Operasional', 'Aktif', '65a4f99d7d9a8.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(30, 'Muhammad Mabrur Al Mutaqi', 'Staff IT', 'IT', 'Aktif', '65a644a80e773.png', '2002-05-21', 'Laki-laki', 'Cipta Asri blok Herba no.120', '082178192938', 'mabruralmutaqi@gmail.com', 'Belum Menikah', '2171012105020001', '95.461.480.6-225.000');
 
 -- --------------------------------------------------------
 
@@ -146,7 +158,6 @@ CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `email` varchar(200) NOT NULL,
   `level` varchar(200) NOT NULL,
   `id_emp` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -155,13 +166,14 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `username`, `password`, `email`, `level`, `id_emp`) VALUES
-(9, 'mabrur', '$2y$10$IFfpvdyJyFuR6GCsvs8hje.Uy8gP41N0B9GijjPs5sgh8xGtnR56u', 'admin@gmail.com', 'user', 19),
-(11, 'admin', '$2y$10$jgzkM0mK8zHgZlhC7nuTjepzouD91p6z0PaZPp3aymL/BabwifU4e', 'admin@gmail.com', 'admin', 12),
-(12, 'admin2', '$2y$10$lhYFeDPMGWrR9.dVWm.NNe9THUiW.MOStkt/vpHnwrpjvBs9sE3yu', 'admin2@gmail.com', 'admin2', 11),
-(13, 'admin3', '$2y$10$0NepItZYt5bIyKOvPQhRpuGxb..ykUBm2BNLeeQ6iMNPb106CByli', 'admin3@gmail.com', 'admin3', 5),
-(14, 'admin4', '$2y$10$3SspMiCSr.VJIpZy9thj2O1tNUeKc/EGPCLLRLaj4SznMsEmQliN.', 'reno@gmail.com', 'admin4', 8),
-(15, 'hrd', '$2y$10$0vdFzekf.t/55JdvfOtw4ekZT39B3dML6yfSlQwTMm0XZzPNK09Kq', 'hrd@gmail.com', 'hrd', 10);
+INSERT INTO `user` (`id_user`, `username`, `password`, `level`, `id_emp`) VALUES
+(11, 'admin', '$2y$10$jgzkM0mK8zHgZlhC7nuTjepzouD91p6z0PaZPp3aymL/BabwifU4e', 'admin', 12),
+(12, 'admin2', '$2y$10$lhYFeDPMGWrR9.dVWm.NNe9THUiW.MOStkt/vpHnwrpjvBs9sE3yu', 'admin2', 11),
+(13, 'admin3', '$2y$10$0NepItZYt5bIyKOvPQhRpuGxb..ykUBm2BNLeeQ6iMNPb106CByli', 'admin3', 5),
+(14, 'admin4', '$2y$10$3SspMiCSr.VJIpZy9thj2O1tNUeKc/EGPCLLRLaj4SznMsEmQliN.', 'admin4', 9),
+(15, 'hrd', '$2y$10$0vdFzekf.t/55JdvfOtw4ekZT39B3dML6yfSlQwTMm0XZzPNK09Kq', 'hrd', 10),
+(18, 'mabrur', '$2y$10$JboZ8aA.oN73OflRoEC8iuPaHxGskhwoLGI2blVG2Zf.9IUcm926e', 'hrd', 30),
+(21, 'sanjeev', '$2y$10$1cjd3DxIxgvUsSOu.Y2ke.EeUeweAJkTCzitXZnjoWCHWAAbGU8wm', 'dirut', 8);
 
 --
 -- Indexes for dumped tables
@@ -217,13 +229,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `absen`
 --
 ALTER TABLE `absen`
-  MODIFY `id_absen` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_absen` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `akses_pintu`
 --
 ALTER TABLE `akses_pintu`
-  MODIFY `id_akses` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_akses` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `barang`
@@ -235,7 +247,7 @@ ALTER TABLE `barang`
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id_emp` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_emp` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `lantai`
@@ -247,7 +259,7 @@ ALTER TABLE `lantai`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables
