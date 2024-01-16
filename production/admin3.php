@@ -20,6 +20,11 @@ if ($_SESSION["level"] == "admin2") {
     exit;
 }
 
+if ($_SESSION["level"] == "hrd") {
+    header("Location: hrd.php");
+    exit;
+}
+
   include "koneksi.php";
   $id_user = $_SESSION["id_user"];
 

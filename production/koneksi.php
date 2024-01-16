@@ -170,6 +170,14 @@ function tambahKaryawan($data) {
 	$jabatan = htmlspecialchars($data["jabatan"]);
 	$divisi = htmlspecialchars($data["divisi"]);
 	$status = htmlspecialchars($data["status"]);
+	$tgl_lahir = htmlspecialchars($data["tgl_lahir"]);
+	$jenis_kelamin = htmlspecialchars($data["jenis_kelamin"]);
+	$alamat = htmlspecialchars($data["alamat"]);
+	$no_hp = htmlspecialchars($data["no_hp"]);
+	$email = htmlspecialchars($data["email"]);
+	$status_p = htmlspecialchars($data["status_pernikahan"]);
+	$nik = htmlspecialchars($data["nik"]);
+	$npwp = htmlspecialchars($data["npwp"]);
 
 	// upload gambar
 	$gambar =  upload();
@@ -178,7 +186,7 @@ function tambahKaryawan($data) {
 	}
 
 	$query = "INSERT INTO karyawan VALUES
-			('', '$nama_emp', '$jabatan', '$divisi', '$status', '$gambar')";
+			('', '$nama_emp', '$jabatan', '$divisi', '$status', '$gambar', '$tgl_lahir', '$jenis_kelamin', '$alamat', '$no_hp', '$email', '$status_p', '$nik', '$npwp')";
 	mysqli_query($koneksi, $query);
 
 	return mysqli_affected_rows($koneksi);
@@ -242,6 +250,12 @@ function ubahKaryawan($data) {
 	$divisi = htmlspecialchars($data["divisi"]);
 	$status = htmlspecialchars($data["status"]);
 	$gambarLama = htmlspecialchars($data["gambarLama"]);
+	$tgl_lahir = htmlspecialchars($data["tgl_lahir"]);
+	$jenis_kelamin = htmlspecialchars($data["jenis_kelamin"]);
+	$alamat = htmlspecialchars($data["alamat"]);
+	$no_hp = htmlspecialchars($data["no_hp"]);
+	$email = htmlspecialchars($data["email"]);
+	$status_p = htmlspecialchars($data["status_pernikahan"]);
 
 	// cek apakah user pilih gambar baru atau tidak
 	if ($_FILES['gambar']['error'] === 4 ) {
@@ -257,7 +271,13 @@ function ubahKaryawan($data) {
 				jabatan = '$jabatan',
 				divisi = '$divisi',
 				status = '$status',
-				gambar = '$gambar'
+				gambar = '$gambar',
+				tgl_lahir = '$tgl_lahir',
+				jenis_kelamin = '$jenis_kelamin',
+				alamat = '$alamat',
+				no_hp = '$no_hp',
+				email = '$email',
+				status_pernikahan = '$status_p'
 			  WHERE id_emp = $id_emp
 			";
 	mysqli_query($koneksi, $query);
@@ -268,6 +288,88 @@ function ubahKaryawan($data) {
 function hapusKaryawan($id_emp) {
 	global $koneksi;
 	mysqli_query($koneksi, "DELETE FROM karyawan WHERE id_emp=$id_emp");
+
+	return mysqli_affected_rows($koneksi);
+
+}
+
+function tambahAbsen($data) {
+	global $koneksi;
+	$no_absen = htmlspecialchars($data["no_absen"]);
+	$id_emp = htmlspecialchars($data["id_emp"]);
+	$id_lantai = htmlspecialchars($data["id_lantai"]);
+
+
+	$query = "INSERT INTO absen VALUES
+			('', '$no_absen', '$id_emp', '$id_lantai')";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function ubahAbsen($data) {
+	global $koneksi;
+	$id_absen = $data["id_absen"];
+	$no_absen = htmlspecialchars($data["no_absen"]);
+	$id_emp = htmlspecialchars($data["id_emp"]);
+	$id_lantai = htmlspecialchars($data["id_lantai"]);
+
+
+	$query = "UPDATE absen SET
+				no_absen = '$no_absen',
+				id_emp = '$id_emp',
+				id_lantai = '$id_lantai'
+			  WHERE id_absen = $id_absen
+			";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function hapusAbsen($id_absen) {
+	global $koneksi;
+	mysqli_query($koneksi, "DELETE FROM absen WHERE id_absen=$id_absen");
+
+	return mysqli_affected_rows($koneksi);
+
+}
+
+function tambahAkses($data) {
+	global $koneksi;
+	$no_akses = htmlspecialchars($data["no_akses"]);
+	$id_emp = htmlspecialchars($data["id_emp"]);
+	$id_lantai = htmlspecialchars($data["id_lantai"]);
+
+
+	$query = "INSERT INTO akses_pintu VALUES
+			('', '$no_akses', '$id_emp', '$id_lantai')";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function ubahAkses($data) {
+	global $koneksi;
+	$id_akses = $data["id_akses"];
+	$no_akses = htmlspecialchars($data["no_akses"]);
+	$id_emp = htmlspecialchars($data["id_emp"]);
+	$id_lantai = htmlspecialchars($data["id_lantai"]);
+
+
+	$query = "UPDATE akses_pintu SET
+				no_akses = '$no_akses',
+				id_emp = '$id_emp',
+				id_lantai = '$id_lantai'
+			  WHERE id_akses = $id_akses
+			";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function hapusAkses($id_akses) {
+	global $koneksi;
+	mysqli_query($koneksi, "DELETE FROM akses_pintu WHERE id_akses=$id_akses");
 
 	return mysqli_affected_rows($koneksi);
 

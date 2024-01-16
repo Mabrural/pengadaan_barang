@@ -21,6 +21,11 @@ if ($_SESSION["level"] == "admin3") {
     exit;
 }
 
+if ($_SESSION["level"] == "hrd") {
+    header("Location: hrd.php");
+    exit;
+}
+
   include "koneksi.php";
   $id_user = $_SESSION["id_user"];
 
@@ -141,13 +146,13 @@ if ($_SESSION["level"] == "admin3") {
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-users"></i> Human Resources<span class="fa fa-chevron-down"></span></a>
+                  <!-- <li><a><i class="fa fa-users"></i> Human Resources<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="admin.php?page=hrd">Data Karyawan</a></li>
                       <li><a href="admin.php?page=cuti">Form Cuti</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
-                  </li>
+                  </li> -->
                   <!-- <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="chartjs.html">Chart JS</a></li>
@@ -300,9 +305,9 @@ if ($_SESSION["level"] == "admin3") {
                                 include "page/dashboard/dashboard.php";
                                 break;
 
-                            case 'hrd':
-                                include "page/hrd/data_karyawan.php";
-                                break;
+                            // case 'hrd':
+                            //     include "page/hrd/data_karyawan.php";
+                            //     break;
 
                             case 'laporan':
                                 include "page/laporan/laporan.php";

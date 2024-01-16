@@ -7,8 +7,8 @@ $id_user = $_SESSION["id_user"];
 ?>
     <div class="x_panel">
       <div class="x_title">
-        <h2>Data Absen <small></small></h2>
-        <a href="?form=tambahAbsen" class="btn btn-primary btn-sm"><i class="fa fa-plus fa-sm"></i> Tambah Data Absen</a>
+        <h2>Data Akses Pintu <small></small></h2>
+        <a href="?form=tambahAkses" class="btn btn-primary btn-sm"><i class="fa fa-plus fa-sm"></i> Tambah Data Akses</a>
         <!-- <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>
@@ -40,7 +40,7 @@ $id_user = $_SESSION["id_user"];
                 <th class="column-title">Nama Karyawan</th>
                 <th class="column-title">Jabatan</th>
                 <th class="column-title">Divisi</th>
-                <th class="column-title">No. Absen </th>
+                <th class="column-title">No. Akses Pintu</th>
                 <th class="column-title">Nama Lantai </th>
                 <th class="column-title no-link last"><span class="nobr">Action</span>
                 </th>
@@ -54,7 +54,7 @@ $id_user = $_SESSION["id_user"];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-              		$query = "SELECT * FROM absen JOIN karyawan ON karyawan.id_emp=absen.id_emp JOIN lantai ON lantai.id_lantai=absen.id_lantai ORDER BY absen.id_absen DESC";
+              		$query = "SELECT * FROM akses_pintu JOIN karyawan ON karyawan.id_emp=akses_pintu.id_emp JOIN lantai ON lantai.id_lantai=akses_pintu.id_lantai ORDER BY akses_pintu.id_akses DESC";
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
               	      		
@@ -64,11 +64,11 @@ $id_user = $_SESSION["id_user"];
                 <td class=" "><a href="?form=rincianKaryawan&id_emp=<?=$data["id_emp"]?>"><?= $data['nama_emp'];?></a></td>
                 <td class=" "><?= $data['jabatan'];?> </td>
                 <td class=" "><?= $data['divisi'];?> </td>
-                <td class=" "><?= $data['no_absen'];?> </td>
+                <td class=" "><?= $data['no_akses'];?> </td>
                 <td class=" "><?= $data['nama_lantai'];?></td>
                
 
-                <td class=" last"><a href="?form=ubahAbsen&id_absen=<?= $data["id_absen"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusAbsen&id_absen=<?= $data["id_absen"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
+                <td class=" last"><a href="?form=ubahAkses&id_akses=<?= $data["id_akses"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusAkses&id_akses=<?= $data["id_akses"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
                 </td>
               </tr>
               <?php } ?>

@@ -120,6 +120,20 @@ if (isset($_POST["submit"])) {
 										<input type="hidden" name="gambarLama" value="<?= $karyawan["gambar"];?>">
 										
 										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">NIK <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="number" name="nik" id="last-name" required="required" class="form-control" value="<?= $karyawan["nik"];?>">
+											</div>
+										</div>
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">NPWP <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" name="npwp" id="last-name" required="required" class="form-control" value="<?= $karyawan["npwp"];?>">
+											</div>
+										</div>
+										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Nama Lengkap <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
@@ -138,8 +152,61 @@ if (isset($_POST["submit"])) {
 												<input id="middle-name" name="divisi" class="form-control" type="text" value="<?= $karyawan["divisi"];?>">
 											</div>
 										</div>
+
 										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Status <span class="required">*</span></label>
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Lahir <span class="required">*</span></label>
+											<div class="col-md-6 col-sm-6 ">
+												<input id="middle-name" name="tgl_lahir" class="form-control" type="date" value="<?= $karyawan["tgl_lahir"];?>">
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Jenis Kelamin <span class="required">*</span></label>
+											<div class="col-md-6 col-sm-6 ">
+												<select class="form-control" name="jenis_kelamin">
+													<option value="Laki-laki" <?php if ($karyawan['jenis_kelamin'] == 'Laki-laki') { echo "selected"; } ?>>Laki-laki</option>
+													<option value="Perempuan" <?php if ($karyawan['jenis_kelamin'] == 'Perempuan') { echo "selected"; } ?>>Perempuan</option>
+													
+												</select>
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Alamat <span class="required">*</span></label>
+											<div class="col-md-6 col-sm-6 ">
+												<input id="middle-name" name="alamat" class="form-control" type="text" value="<?= $karyawan["alamat"];?>">
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">No. HP <span class="required">*</span></label>
+											<div class="col-md-6 col-sm-6 ">
+												<input id="middle-name" name="no_hp" class="form-control" type="number" value="<?= $karyawan["no_hp"];?>">
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Email <span class="required">*</span></label>
+											<div class="col-md-6 col-sm-6 ">
+												<input id="middle-name" name="email" class="form-control" type="email" value="<?= $karyawan["email"];?>">
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Status Pernikahan<span class="required">*</span></label>
+											<div class="col-md-6 col-sm-6 ">
+												<select class="form-control" name="status_pernikahan">
+													<option value="Belum Menikah" <?php if ($karyawan['status_pernikahan'] == 'Belum Menikah') { echo "selected"; } ?>>Belum Menikah</option>
+													<option value="Sudah Menikah" <?php if ($karyawan['status_pernikahan'] == 'Sudah Menikah') { echo "selected"; } ?>>Sudah Menikah</option>
+													<option value="Cerai Hidup" <?php if ($karyawan['status_pernikahan'] == 'Cerai Hidup') { echo "selected"; } ?>>Cerai Hidup</option>
+													<option value="Cerai Mati" <?php if ($karyawan['status_pernikahan'] == 'Cerai Mati') { echo "selected"; } ?>>Cerai Mati</option>
+													
+												</select>
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Status Karyawan<span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
 												<select class="form-control" name="status">
 													<option value="Aktif" <?php if ($karyawan['status'] == 'Aktif') { echo "selected"; } ?>>Aktif</option>
@@ -150,7 +217,7 @@ if (isset($_POST["submit"])) {
 										</div>
 
 										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Gambar</label>
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Gambar <span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
 												<img src="img/<?= $karyawan['gambar'] ;?>" width="50">
 												<input type="file" name="gambar">

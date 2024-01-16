@@ -1,8 +1,8 @@
 <?php 
 
-$id_emp = $_GET["id_emp"];
+$id_absen = $_GET["id_absen"];
 
-if( hapusKaryawan($id_emp) > 0 ){
+if( hapusAbsen($id_absen) > 0 ){
 	echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
 	echo '<script src="./sweetalert2.min.js"></script>';
 	echo "<script>
@@ -17,7 +17,7 @@ if( hapusKaryawan($id_emp) > 0 ){
 			showConfirmButton   : true
 		});  
 	},10);   setTimeout(function () {
-		window.location.href = '?page=hrd'; //will redirect to your blog page (an ex: blog.html)
+		window.location.href = '?page=absen'; //will redirect to your blog page (an ex: blog.html)
 	}, 2000); //will call the function after 2 secs
 	</script>";
 	// echo "
@@ -41,7 +41,7 @@ if( hapusKaryawan($id_emp) > 0 ){
 			showConfirmButton   : true
 		});  
 	},10);   setTimeout(function () {
-		window.location.href = '?page=hrd'; //will redirect to your blog page (an ex: blog.html)
+		window.location.href = '?page=absen'; //will redirect to your blog page (an ex: blog.html)
 	}, 2000); //will call the function after 2 secs
 	</script>";
 	// echo "

@@ -146,6 +146,7 @@ if ($_SESSION["level"] == "admin3") {
                       <li><a href="hrd.php?page=hrd">Data Karyawan</a></li>
                       <li><a href="hrd.php?page=cuti">Form Cuti</a></li>
                       <li><a href="hrd.php?page=absen">Data Absen</a></li>
+                      <li><a href="hrd.php?page=aksesPintu">Data Akses Pintu</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
                   </li>
@@ -305,7 +306,9 @@ if ($_SESSION["level"] == "admin3") {
                                 include "page/hrd/data_karyawan.php";
                                 break;
 
-                            
+                            case 'aksesPintu':
+                                include 'page/hrd/akses_pintu/akses_pintu.php';
+                              break;
 
                             case 'absen':
                                 include "page/hrd/data_absen/data_absen.php";
@@ -347,6 +350,31 @@ if ($_SESSION["level"] == "admin3") {
 
                             case 'rincianKaryawan':
                                 include 'page/hrd/rincian_karyawan.php';
+                                break;
+
+                            case 'tambahAbsen':
+                                include "page/hrd/data_absen/tambah.php";
+                                break;
+
+                            case 'ubahAbsen':
+                                include "page/hrd/data_absen/ubah.php";
+                                break;
+
+                            case 'hapusAbsen':
+                                include "page/hrd/data_absen/hapus.php";
+                              break;
+
+                            case 'tambahAkses':
+                                include 'page/hrd/akses_pintu/tambah.php';
+                                break;
+
+                            case 'ubahAkses':
+                                include 'page/hrd/akses_pintu/ubah.php';
+                                break;
+
+
+                            case 'hapusAkses':
+                                include 'page/hrd/akses_pintu/hapus.php';
                                 break;
 
                             case 'ubahApprove':

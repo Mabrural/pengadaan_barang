@@ -39,17 +39,27 @@ $karyawan = query("SELECT * FROM karyawan WHERE id_emp = $id_emp")[0];
 							
 					<div class="x_content">
 						<div class="row no-gutters">
-						  <div class="col-md-3 mt-5 ml-5 my-5">
+						  <div class="col-md-2 mt-5 ml-5 my-5 mr-5">
 						  	
-						    	<img src="img/<?= $karyawan['gambar'];?>" class="card-img rounded img-thumbnail" alt="monmaap, kosong." max-height="30" max-width="30">
+						    	<img src="img/<?= $karyawan['gambar'];?>" class="card-img rounded img-thumbnail" alt="monmaap, kosong.">
 						  
 						  </div>
-						  <div class="col-md-7 mt-5 ml-5">
+						  <div class="col-md-7 mt-5 ml-5 mr-5">
 						        <h5 class="card-title"><b><center>DATA DIRI KARYAWAN</center></b></h5><hr>
 						        <table>
-						        <tbody style="font-size: 20px;">
+						        <tbody style="font-size: 0.9rem;">
+						        	<tr>
+						          <td width="45%">NIK</td>
+						          <td>:&nbsp;&nbsp;</td>
+						          <td><?= $karyawan['nik']?></td>
+						        </tr>
 						        <tr>
-						          <td width="40%">Nama</td>
+						          <td width="45%">NPWP</td>
+						          <td>:&nbsp;&nbsp;</td>
+						          <td><?= $karyawan['npwp']?></td>
+						        </tr>
+						        <tr>
+						          <td width="45%">Nama Lengkap</td>
 						          <td>:&nbsp;&nbsp;</td>
 						          <td><?= $karyawan['nama_emp']?></td>
 						        </tr>
