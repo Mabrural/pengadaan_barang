@@ -49,7 +49,7 @@
 		<a href="?page=userLogin">
 		  <li>
 		    <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
-		    <span class="glyphicon-class"><a href="?page=userLogin">Daftar Login</span></a>
+		    <span class="glyphicon-class"><a href="?page=userLogin">Manage Login</span></a>
 		  </li>
 		</a>
 

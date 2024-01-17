@@ -6,7 +6,7 @@ if (!isset($_SESSION["login"])) {
   exit;
 }
 
-if ($_SESSION["level"] == "Staff" || $_SESSION['level'] == "Staff Operasional") {
+if ($_SESSION["level"] == "Staff Operasional") {
     header("Location: index.php");
     exit;
 }
@@ -15,6 +15,7 @@ if ($_SESSION["level"] == "Direktur Operasional") {
     header("Location: admin2.php");
     exit;
 }
+
 
 if ($_SESSION["level"] == "Purchasing") {
     header("Location: admin3.php");
