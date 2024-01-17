@@ -457,7 +457,7 @@ if ($_SESSION["level"] == "Purchasing") {
                     }
 
                     else{
-                        include "dashboard2.php";
+                        include "dashboardHr.php";
                     }
                 ?>
         </div>
