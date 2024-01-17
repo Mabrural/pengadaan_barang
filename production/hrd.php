@@ -387,7 +387,15 @@ if ($_SESSION["level"] == "admin3") {
 
                             case 'tambahLogin':
                                 include 'page/hrd/user_login/tambah.php';
-                              break;
+                                break;
+
+                            case 'ubahLogin':
+                                include 'page/hrd/user_login/ubah.php';
+                                break;
+
+                            case 'hapusLogin':
+                                include 'page/hrd/user_login/hapus.php';
+                                break;
 
                             case 'ubahApprove':
                                 include "page/admin_approve/konfirmasi_aprove.php";

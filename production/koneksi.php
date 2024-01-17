@@ -449,6 +449,13 @@ function tambahLogin($data){
 	return mysqli_affected_rows($koneksi);
 }
 
+function hapusLogin($id_user) {
+	global $koneksi;
+	mysqli_query($koneksi, "DELETE FROM user WHERE id_user=$id_user");
+
+	return mysqli_affected_rows($koneksi);
+
+}
 function tambahAnggaran($data) {
 	global $koneksi;
 	$nama_anggaran = htmlspecialchars($data["nama_anggaran"]);
