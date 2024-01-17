@@ -135,7 +135,7 @@ if (isset($_POST["submit"])) {
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="new_password">New Password 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="password" name="password" id="new_password" class="form-control" placeholder="Type New Password" required>
+												<input type="password" name="password" id="new_password" class="form-control" placeholder="Type New Password" required autofocus>
 											</div>
 										</div>
 										
