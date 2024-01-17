@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2024 at 03:01 AM
+-- Generation Time: Jan 17, 2024 at 11:58 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,52 @@ SET time_zone = "+00:00";
 --
 -- Database: `sistem`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `absen`
+--
+
+CREATE TABLE `absen` (
+  `id_absen` int(10) NOT NULL,
+  `no_absen` int(10) NOT NULL,
+  `id_emp` int(10) NOT NULL,
+  `id_lantai` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `absen`
+--
+
+INSERT INTO `absen` (`id_absen`, `no_absen`, `id_emp`, `id_lantai`) VALUES
+(8, 5, 17, 2),
+(9, 6, 14, 2),
+(10, 1, 30, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `akses_pintu`
+--
+
+CREATE TABLE `akses_pintu` (
+  `id_akses` int(10) NOT NULL,
+  `no_akses` int(10) NOT NULL,
+  `id_emp` int(10) NOT NULL,
+  `id_lantai` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `akses_pintu`
+--
+
+INSERT INTO `akses_pintu` (`id_akses`, `no_akses`, `id_emp`, `id_lantai`) VALUES
+(9, 2, 10, 2),
+(10, 1, 8, 1),
+(11, 2, 8, 2),
+(12, 3, 8, 2),
+(13, 4, 30, 2);
 
 -- --------------------------------------------------------
 
@@ -46,14 +92,10 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id_barang`, `kode_pengajuan`, `nama_barang`, `spek`, `deskripsi`, `qty`, `tgl_pengajuan`, `status`, `acc1`, `acc2`, `id_user`) VALUES
-(127, 112345232112131, 'Printer', 'EPSON L3210', 'Ecotank untuk replacement printer lama yang rusak', 1, '2024-01-12', 'On Progress in Purchasing', 'Henda Kurniawan', 'Aldi Taher', 9),
-(128, 112345232112132, 'Monitor', 'Acer 21 Inch', 'Buat Preview Grafik', 1, '2024-01-12', 'On Progress in Purchasing', 'Henda Kurniawan', 'Aldi Taher', 9),
-(130, 112345232112134, 'Mouse Wireless', 'Merk Logitech Silent Click', 'butuh cepat', 1, '2024-01-12', 'On Progress in Purchasing', 'Henda Kurniawan', 'Aldi Taher', 9),
-(131, 112345232112135, 'Aktip Speaker + bluetooth', 'Aktip Speaker + bluetooth', 'Aktip Speaker + bluetooth', 2, '2024-01-12', 'On Progress in Purchasing', 'Henda Kurniawan', 'Aldi Taher', 9),
-(132, 112345232112136, 'Liferaft', 'Liferaft', 'Liferaft', 1, '2024-01-12', 'On Progress in Purchasing', 'Henda Kurniawan', 'Aldi Taher', 9),
-(133, 112345232112137, 'Fan Cooler', '3 Kipas', 'Butuh cepat', 1, '2024-01-12', 'On Progress in Purchasing', 'Henda Kurniawan', 'Aldi Taher', 9),
-(152, 112345232112138, 'Charger Laptop', 'Asus ROG Strix 504', 'Butuh Cepat Karena Charger Lama Rusak', 1, '2024-01-10', 'On Progress in Purchasing', 'Henda Kurniawan', 'Aldi Taher', 10),
-(153, 112345232112139, 'CCTV', 'HDR Hikvision', 'Buat parkiran', 1, '2024-01-13', 'On Progress in Purchasing', 'Henda Kurniawan', 'Aldi Taher', 9);
+(157, 14351234445231, 'Fan cooler', '3 kaki', 'butuh cepat', 1, '2024-01-17', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 27),
+(158, 14351234445232, 'Oli', '2L', 'untuk mesin kapal', 1, '2024-01-17', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 28),
+(159, 14351234445233, 'Printer', 'Canon L3110 Ecotank', 'untuk administrasi', 1, '2024-01-17', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 27),
+(160, 14351234445234, 'Fan Cooler', '3 Kipas', 'Liferaft', 1, '2024-01-17', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 28);
 
 -- --------------------------------------------------------
 
@@ -66,19 +108,57 @@ CREATE TABLE `karyawan` (
   `nama_emp` varchar(40) NOT NULL,
   `jabatan` varchar(40) NOT NULL,
   `divisi` varchar(40) NOT NULL,
-  `status` varchar(30) NOT NULL
+  `status` varchar(30) NOT NULL,
+  `gambar` varchar(200) NOT NULL,
+  `tgl_lahir` date DEFAULT NULL,
+  `jenis_kelamin` varchar(30) DEFAULT NULL,
+  `alamat` varchar(200) DEFAULT NULL,
+  `no_hp` varchar(15) DEFAULT NULL,
+  `email` varchar(40) DEFAULT NULL,
+  `status_pernikahan` varchar(30) DEFAULT NULL,
+  `nik` varchar(30) DEFAULT NULL,
+  `npwp` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `karyawan`
 --
 
-INSERT INTO `karyawan` (`id_emp`, `nama_emp`, `jabatan`, `divisi`, `status`) VALUES
-(1, 'Muhammad Mabrur Al Mutaqi', 'Staff IT', 'IT', 'Aktif'),
-(2, 'Diki Fadhilah', 'Staff Admin', 'Finance', 'Aktif'),
-(3, 'Henda Kurniawan', 'Staff Purchasing', 'Finance', 'Aktif'),
-(4, 'Aldi Taher', 'Admin Officer', 'Office', 'Aktif'),
-(5, 'Andre Yogi', 'Direktur Operasional', 'Office', 'Aktif');
+INSERT INTO `karyawan` (`id_emp`, `nama_emp`, `jabatan`, `divisi`, `status`, `gambar`, `tgl_lahir`, `jenis_kelamin`, `alamat`, `no_hp`, `email`, `status_pernikahan`, `nik`, `npwp`) VALUES
+(5, 'Andre Yogi', 'Staff Operasional', 'Office', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(8, 'Raden Sulaiman Sanjeev', 'Direktur Utama', 'BSD', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(9, 'Regina', 'Direktur Keuangan', 'BSD', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(10, 'James Taju', 'Direktur HRD', 'HRM', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(11, 'Bambang Wahyudi', 'Direktur Operasional', 'Manager', 'Aktif', '65a4f45ead15a.png', '0000-00-00', 'Laki-laki', '', '', '', 'Belum Menikah', NULL, ''),
+(12, 'Michael Kawilarang', 'Kepala Cabang', 'Manager', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(13, 'Gahral', 'Kepala Shipping', 'Shipping', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(14, 'Elis', 'Finance', 'Finance', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(15, 'Rika', 'Staff Shipping', 'Shipping', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(16, 'Krisno', 'Staff Shipping', 'Shipping', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(17, 'Niken', 'Staff Finance', 'Finance', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(18, 'Robby T. Hamisi', 'Staff Operasional', 'Operasional', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(19, 'Alex', 'Staff Operasional', 'Operasional', 'Aktif', '65a4f99d7d9a8.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(30, 'Muhammad Mabrur Al Mutaqi', 'Staff IT', 'IT', 'Aktif', '65a644a80e773.png', '2002-05-21', 'Laki-laki', 'Cipta Asri blok Herba no.120', '082178192938', 'mabruralmutaqi@gmail.com', 'Belum Menikah', '2171012105020001', '95.461.480.6-225.000');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lantai`
+--
+
+CREATE TABLE `lantai` (
+  `id_lantai` int(10) NOT NULL,
+  `nama_lantai` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `lantai`
+--
+
+INSERT INTO `lantai` (`id_lantai`, `nama_lantai`) VALUES
+(1, 'Lantai 1'),
+(2, 'Lantai 2'),
+(3, 'Lantai 3');
 
 -- --------------------------------------------------------
 
@@ -90,7 +170,6 @@ CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `email` varchar(200) NOT NULL,
   `level` varchar(200) NOT NULL,
   `id_emp` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -99,16 +178,36 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `username`, `password`, `email`, `level`, `id_emp`) VALUES
-(9, 'mabrur', '$2y$10$IFfpvdyJyFuR6GCsvs8hje.Uy8gP41N0B9GijjPs5sgh8xGtnR56u', 'admin@gmail.com', 'user', 1),
-(10, 'diki', '$2y$10$qk3IdIT8A/oiu9lIaEGW/u/CDMgZeTT91wu4F4ww/f1P.EU2.gmpy', 'diki@gmail.com', 'user', 2),
-(11, 'admin', '$2y$10$jgzkM0mK8zHgZlhC7nuTjepzouD91p6z0PaZPp3aymL/BabwifU4e', 'admin@gmail.com', 'admin', 3),
-(12, 'admin2', '$2y$10$lhYFeDPMGWrR9.dVWm.NNe9THUiW.MOStkt/vpHnwrpjvBs9sE3yu', 'admin2@gmail.com', 'admin2', 4),
-(13, 'admin3', '$2y$10$0NepItZYt5bIyKOvPQhRpuGxb..ykUBm2BNLeeQ6iMNPb106CByli', 'admin3@gmail.com', 'admin3', 5);
+INSERT INTO `user` (`id_user`, `username`, `password`, `level`, `id_emp`) VALUES
+(11, 'admin', '$2y$10$5mTnrlgbiCbcJEjNk0zNV.Zmc8kcCzDhdGp8hrPHJJYi8BRWeXr3C', 'Kepala Cabang', 12),
+(12, 'admin2', '$2y$10$va9z7uP9p9qQWKGC/SJB/Ol3FXvn7.Q7h8R0dOtUSXtnHQGb.wQVS', 'Direktur Operasional', 11),
+(13, 'admin3', '$2y$10$YROA0FxiwOObUnAfJhapdOqRqhcNgzu38EInoy6QsYa9Q6lQPu2Oe', 'Purchasing', 14),
+(14, 'admin4', '$2y$10$3SspMiCSr.VJIpZy9thj2O1tNUeKc/EGPCLLRLaj4SznMsEmQliN.', 'admin4', 9),
+(15, 'hrd', '$2y$10$c/mAM0c0T96plIAFcIr2pOmR6t57sbLDsXLlsjGi6pPKICuVFVjM.', 'HRD', 10),
+(21, 'sanjeev', '$2y$10$lQ/zXZ7l5azPOn2pg/Af9uQUf.SlUtM31XGCKGlHUjVw5WO9SLSau', 'Direktur Utama', 8),
+(24, 'mabrur', '$2y$10$h4QsvUmkXntzEOPc7Ht4RuTYp5wS1rZHTJp4Mlbg9GMPn1zwvnlfy', 'Staff IT', 30),
+(27, 'alex', '$2y$10$ZVvLYoQV/lPPL20Ez6nKwu7Pkzy9RKxp22svLrHdLOKFTJZr6G.Pa', '', 19),
+(28, 'robi', '$2y$10$pi39ljqjbeI7Xgu6up8uie2wOUT6Gv7dwqsQXgvI60DotWKCmSvQC', 'Staff Operasional', 18);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `absen`
+--
+ALTER TABLE `absen`
+  ADD PRIMARY KEY (`id_absen`),
+  ADD KEY `id_emp` (`id_emp`),
+  ADD KEY `id_lantai` (`id_lantai`);
+
+--
+-- Indexes for table `akses_pintu`
+--
+ALTER TABLE `akses_pintu`
+  ADD PRIMARY KEY (`id_akses`),
+  ADD KEY `id_emp` (`id_emp`),
+  ADD KEY `id_lantai` (`id_lantai`);
 
 --
 -- Indexes for table `barang`
@@ -124,6 +223,12 @@ ALTER TABLE `karyawan`
   ADD PRIMARY KEY (`id_emp`);
 
 --
+-- Indexes for table `lantai`
+--
+ALTER TABLE `lantai`
+  ADD PRIMARY KEY (`id_lantai`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -135,26 +240,58 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `absen`
+--
+ALTER TABLE `absen`
+  MODIFY `id_absen` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `akses_pintu`
+--
+ALTER TABLE `akses_pintu`
+  MODIFY `id_akses` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
+  MODIFY `id_barang` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
 
 --
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id_emp` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_emp` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `lantai`
+--
+ALTER TABLE `lantai`
+  MODIFY `id_lantai` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `absen`
+--
+ALTER TABLE `absen`
+  ADD CONSTRAINT `absen_ibfk_1` FOREIGN KEY (`id_emp`) REFERENCES `karyawan` (`id_emp`),
+  ADD CONSTRAINT `absen_ibfk_2` FOREIGN KEY (`id_lantai`) REFERENCES `lantai` (`id_lantai`);
+
+--
+-- Constraints for table `akses_pintu`
+--
+ALTER TABLE `akses_pintu`
+  ADD CONSTRAINT `akses_pintu_ibfk_1` FOREIGN KEY (`id_emp`) REFERENCES `karyawan` (`id_emp`),
+  ADD CONSTRAINT `akses_pintu_ibfk_2` FOREIGN KEY (`id_lantai`) REFERENCES `lantai` (`id_lantai`);
 
 --
 -- Constraints for table `barang`

@@ -479,6 +479,28 @@ function hapusLogin($id_user) {
 	return mysqli_affected_rows($koneksi);
 
 }
+
+function changePassword($data) {
+	global $koneksi;
+	$id_user = $data["id_user"];
+	$username = htmlspecialchars($data["username"]);
+	$password = mysqli_real_escape_string($koneksi, $data["password"]);
+	$level = htmlspecialchars($data['level']);
+	$id_emp = htmlspecialchars($data["id_emp"]);
+
+	$password2 = password_hash($password, PASSWORD_DEFAULT);
+
+	$query = "UPDATE user SET
+				username = '$username',
+				password = '$password2',
+				level = '$level',
+				id_emp = '$id_emp'
+			  WHERE id_user = $id_user
+			";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
 function tambahAnggaran($data) {
 	global $koneksi;
 	$nama_anggaran = htmlspecialchars($data["nama_anggaran"]);

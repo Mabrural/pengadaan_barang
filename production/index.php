@@ -264,7 +264,8 @@ if ($_SESSION["level"] == "Staff IT") {
                         <span class="badge bg-red pull-right">50%</span>
                         <span>Settings</span>
                       </a> -->
-                    <a class="dropdown-item"  href="javascript:;">Profile</a>
+                    <a class="dropdown-item"  href="?page=changePassword">Change Password</a>
+                    <!-- <a class="dropdown-item"  href="javascript:;">Profile</a> -->
                     <a class="dropdown-item"  href="logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                   </div>
                 </li>
@@ -353,6 +354,9 @@ if ($_SESSION["level"] == "Staff IT") {
                                 include "page/history_pengajuan/history_pengajuan.php";
                                 break;
 
+                            case 'changePassword':
+                                include 'page/change_password/change_password.php';
+                               break;
                             
 
                             case 'cuti':
