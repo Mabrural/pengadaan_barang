@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2024 at 11:58 AM
+-- Generation Time: Jan 17, 2024 at 03:13 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -179,14 +179,14 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `level`, `id_emp`) VALUES
-(11, 'admin', '$2y$10$5mTnrlgbiCbcJEjNk0zNV.Zmc8kcCzDhdGp8hrPHJJYi8BRWeXr3C', 'Kepala Cabang', 12),
-(12, 'admin2', '$2y$10$va9z7uP9p9qQWKGC/SJB/Ol3FXvn7.Q7h8R0dOtUSXtnHQGb.wQVS', 'Direktur Operasional', 11),
-(13, 'admin3', '$2y$10$YROA0FxiwOObUnAfJhapdOqRqhcNgzu38EInoy6QsYa9Q6lQPu2Oe', 'Purchasing', 14),
+(11, 'admin', '$2y$10$IgW4FLMwe9euVk0Ne9.ks.8ZhYCvheo7j1at4NiMIW38uOXYUM8pi', 'Kepala Cabang', 12),
+(12, 'admin2', '$2y$10$HGD9twPbqY2jRuhsR6NMA.qUNiqShFNa8AFS8hy2LjDvFqdvGGM3e', 'Direktur Operasional', 11),
+(13, 'admin3', '$2y$10$Q3IQI9/N96Pkm12hhwZrRe152Y937dQmRcqeZZSshp0mpz2Mh7IjO', 'Purchasing', 14),
 (14, 'admin4', '$2y$10$3SspMiCSr.VJIpZy9thj2O1tNUeKc/EGPCLLRLaj4SznMsEmQliN.', 'admin4', 9),
-(15, 'hrd', '$2y$10$c/mAM0c0T96plIAFcIr2pOmR6t57sbLDsXLlsjGi6pPKICuVFVjM.', 'HRD', 10),
-(21, 'sanjeev', '$2y$10$lQ/zXZ7l5azPOn2pg/Af9uQUf.SlUtM31XGCKGlHUjVw5WO9SLSau', 'Direktur Utama', 8),
-(24, 'mabrur', '$2y$10$h4QsvUmkXntzEOPc7Ht4RuTYp5wS1rZHTJp4Mlbg9GMPn1zwvnlfy', 'Staff IT', 30),
-(27, 'alex', '$2y$10$ZVvLYoQV/lPPL20Ez6nKwu7Pkzy9RKxp22svLrHdLOKFTJZr6G.Pa', '', 19),
+(15, 'hrd', '$2y$10$rfSEEc5RaRZ/YjmxEF9G8uDTXi8w04f8PnuI/3Br7pXPWD9PKOhN2', 'HRD', 10),
+(21, 'sanjeev', '$2y$10$dqD5eyXMYFl5dmq.1s103OeZOPTBNN4gHGqbu/D5neofhrjWRKxBO', 'Direktur Utama', 8),
+(24, 'mabrur', '$2y$10$LEZfUfaSTm1EZoTwk5evSuVocWHjQJ8Xpd1KaHlL4UW5xMg/0wjn.', 'Staff IT', 30),
+(27, 'alex', '$2y$10$pKR0gqG2v6B0T7/3oiKvPexleYhzbBKMLyH1M6gnP3j6nJdVvi4SK', 'Staff Operasional', 19),
 (28, 'robi', '$2y$10$pi39ljqjbeI7Xgu6up8uie2wOUT6Gv7dwqsQXgvI60DotWKCmSvQC', 'Staff Operasional', 18);
 
 --
