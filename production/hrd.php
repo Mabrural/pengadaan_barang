@@ -6,11 +6,10 @@ if (!isset($_SESSION["login"])) {
   exit;
 }
 
-if ($_SESSION["level"] == "Staff") {
+if ($_SESSION["level"] == "Staff Operasional") {
     header("Location: index.php");
     exit;
 }
-
 if ($_SESSION["level"] == "Direktur Operasional") {
     header("Location: admin2.php");
     exit;
@@ -21,11 +20,20 @@ if ($_SESSION['level'] == "Kepala Cabang") {
     exit;
 }
 
+if ($_SESSION['level'] == "Direktur Utama") {
+    header("Location: dirut.php");
+    exit;
+}
+
 if ($_SESSION["level"] == "Purchasing") {
     header("Location: admin3.php");
     exit;
 }
 
+if ($_SESSION["level"] == "Staff IT") {
+    header("Location: it.php");
+    exit;
+}
   include "koneksi.php";
   $id_user = $_SESSION["id_user"];
 
@@ -155,6 +163,8 @@ if ($_SESSION["level"] == "Purchasing") {
                       <li><a href="hrd.php?page=absen">Data Absen</a></li>
                       <li><a href="hrd.php?page=aksesPintu">Data Akses Pintu</a></li>
                       <li><a href="hrd.php?page=userLogin">Data Login</a></li>
+                      <li><a href="hrd.php?page=attendance">Attendance</a></li>
+                      <li><a href="hrd.php?page=penilaian">Penilaian Karyawan</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
                   </li>
@@ -330,6 +340,14 @@ if ($_SESSION["level"] == "Purchasing") {
                             case 'userLogin':
                                 include 'page/hrd/user_login/user_login.php';
                               break;
+
+                            case 'attendance':
+                                include 'page/hrd/attendance/attendance.php';
+                                break;
+
+                            case 'penilaian':
+                                include 'page/hrd/penilaian_karyawan/penilaian.php';
+                                break;
 
                             case 'laporan':
                                 include "page/laporan/laporan.php";

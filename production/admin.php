@@ -21,8 +21,18 @@ if ($_SESSION["level"] == "Purchasing") {
     exit;
 }
 
+if ($_SESSION["level"] == "Direktur Utama") {
+    header("Location: dirut.php");
+    exit;
+}
+
 if ($_SESSION["level"] == "HRD") {
     header("Location: hrd.php");
+    exit;
+}
+
+if ($_SESSION["level"] == "Staff IT") {
+    header("Location: it.php");
     exit;
 }
 

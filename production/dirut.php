@@ -11,29 +11,28 @@ if ($_SESSION["level"] == "Staff Operasional") {
     exit;
 }
 
-if ($_SESSION["level"] == "Kepala Cabang") {
-    header("Location: admin.php");
-    exit;
-}
-
 if ($_SESSION["level"] == "Direktur Operasional") {
     header("Location: admin2.php");
     exit;
 }
 
-if ($_SESSION["level"] == "Direktur Utama") {
-    header("Location: dirut.php");
+if ($_SESSION['level'] == "Kepala Cabang") {
+    header("Location: admin.php");
     exit;
 }
 
-
-if ($_SESSION["level"] == "HRD") {
+if ($_SESSION['level'] == "HRD") {
     header("Location: hrd.php");
     exit;
 }
 
 if ($_SESSION["level"] == "Purchasing") {
     header("Location: admin3.php");
+    exit;
+}
+
+if ($_SESSION["level"] == "Staff IT") {
+    header("Location: it.php");
     exit;
 }
 
@@ -161,11 +160,13 @@ if ($_SESSION["level"] == "Purchasing") {
 
                   <li><a><i class="fa fa-users"></i> Human Resources<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="it.php?page=dataKaryawan">Data Karyawan</a></li>
-                      <li><a href="it.php?page=cuti">Form Cuti</a></li>
-                      <li><a href="it.php?page=absen">Data Absen</a></li>
-                      <li><a href="it.php?page=aksesPintu">Data Akses Pintu</a></li>
-                      <li><a href="it.php?page=userLogin">Data Login</a></li>
+                      <li><a href="hrd.php?page=dataKaryawan">Data Karyawan</a></li>
+                      <li><a href="hrd.php?page=cuti">Form Cuti</a></li>
+                      <li><a href="hrd.php?page=absen">Data Absen</a></li>
+                      <li><a href="hrd.php?page=aksesPintu">Data Akses Pintu</a></li>
+                      <li><a href="hrd.php?page=userLogin">Data Login</a></li>
+                      <li><a href="hrd.php?page=attendance">Attendance</a></li>
+                      <li><a href="hrd.php?page=penilaian">Penilaian Karyawan</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
                   </li>
@@ -326,6 +327,10 @@ if ($_SESSION["level"] == "Purchasing") {
                                 include "page/hrd/data_karyawan.php";
                                 break;
 
+                            case 'cuti':
+                                include "page/hrd/cuti/form_cuti.php";
+                                break;
+
                             case 'aksesPintu':
                                 include 'page/hrd/akses_pintu/akses_pintu.php';
                               break;
@@ -337,6 +342,14 @@ if ($_SESSION["level"] == "Purchasing") {
                             case 'userLogin':
                                 include 'page/hrd/user_login/user_login.php';
                               break;
+
+                            case 'attendance':
+                                include 'page/hrd/attendance/attendance.php';
+                                break;
+
+                            case 'penilaian':
+                                include 'page/hrd/penilaian_karyawan/penilaian.php';
+                                break;
 
                             case 'laporan':
                                 include "page/laporan/laporan.php";
@@ -464,7 +477,7 @@ if ($_SESSION["level"] == "Purchasing") {
                     }
 
                     else{
-                        include "dashboard2.php";
+                        include "dashboardHr.php";
                     }
                 ?>
         </div>
