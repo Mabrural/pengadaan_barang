@@ -3,10 +3,12 @@
 session_start();
 
 if (isset($_SESSION["login"])) {
-  if ($_SESSION["level"] === "admin") {
+  if ($_SESSION["level"] === "Kepala Cabang") {
     header("Location: admin.php");
-  }elseif ($_SESSION["level"] === "admin2") {
+  }elseif ($_SESSION["level"] === "Direktur Operasional") {
     header("Location: admin2.php");
+  }elseif ($_SESSION["level"] === "Purchasing") {
+    header("Location: admin3.php");
   }else{
     header("Location: index.php");
   }
@@ -44,7 +46,7 @@ if (isset($_POST['login'])) {
       $_SESSION['jabatan'] = $row['jabatan'];
 
       // Mengarahkan berdasarkan level pengguna
-      if ($row["level"] === "admin") {
+      if ($row["level"] === "Kepala Cabang") {
         echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
         echo '<script src="./sweetalert2.min.js"></script>';
         echo "<script>
@@ -62,7 +64,7 @@ if (isset($_POST['login'])) {
             window.location.href = 'admin.php'; //will redirect to your blog page (an ex: blog.html)
         }, 2000); //will call the function after 2 secs
         </script>";
-      }elseif ($row["level"] === "admin2") {
+      }elseif ($row["level"] === "Direktur Operasional") {
         echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
         echo '<script src="./sweetalert2.min.js"></script>';
         echo "<script>
@@ -80,7 +82,7 @@ if (isset($_POST['login'])) {
             window.location.href = 'admin2.php'; //will redirect to your blog page (an ex: blog.html)
         }, 2000); //will call the function after 2 secs
         </script>";
-      }elseif ($row["level"] === "admin3") {
+      }elseif ($row["level"] === "Purchasing") {
         echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
         echo '<script src="./sweetalert2.min.js"></script>';
         echo "<script>
@@ -116,7 +118,7 @@ if (isset($_POST['login'])) {
             window.location.href = 'admin4.php'; //will redirect to your blog page (an ex: blog.html)
         }, 2000); //will call the function after 2 secs
         </script>";
-      }elseif ($row["level"] === "hrd") {
+      }elseif ($row["level"] === "HRD") {
         echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
         echo '<script src="./sweetalert2.min.js"></script>';
         echo "<script>
@@ -132,6 +134,24 @@ if (isset($_POST['login'])) {
             });  
         },10);   setTimeout(function () {
             window.location.href = 'hrd.php'; //will redirect to your blog page (an ex: blog.html)
+        }, 2000); //will call the function after 2 secs
+        </script>";
+      }elseif ($row["level"] === "Staff IT") {
+        echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
+        echo '<script src="./sweetalert2.min.js"></script>';
+        echo "<script>
+        setTimeout(function () { 
+            swal.fire({
+                
+                title               : 'Berhasil',
+                text                :  'Login berhasil',
+                //footer              :  '',
+                icon                : 'success',
+                timer               : 2000,
+                showConfirmButton   : true
+            });  
+        },10);   setTimeout(function () {
+            window.location.href = 'it.php'; //will redirect to your blog page (an ex: blog.html)
         }, 2000); //will call the function after 2 secs
         </script>";
       }else{

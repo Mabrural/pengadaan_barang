@@ -6,21 +6,21 @@ if (!isset($_SESSION["login"])) {
   exit;
 }
 
-if ($_SESSION["level"] == "user") {
+if ($_SESSION["level"] == "Staff") {
     header("Location: index.php");
     exit;
 }
 
-if ($_SESSION["level"] == "admin") {
+if ($_SESSION["level"] == "Kepala Cabang") {
     header("Location: admin.php");
     exit;
 }
-if ($_SESSION["level"] == "admin2") {
+if ($_SESSION["level"] == "Direktur Operasional") {
     header("Location: admin2.php");
     exit;
 }
 
-if ($_SESSION["level"] == "hrd") {
+if ($_SESSION["level"] == "HRD") {
     header("Location: hrd.php");
     exit;
 }
@@ -29,7 +29,7 @@ if ($_SESSION["level"] == "hrd") {
   $id_user = $_SESSION["id_user"];
 
   $nama = $_SESSION["nama_emp"];
-  
+  $jabatan = $_SESSION['jabatan'];
   ?>
 
 <!DOCTYPE html>
@@ -144,6 +144,14 @@ if ($_SESSION["level"] == "hrd") {
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
                   </li>
+
+                  <li><a><i class="fa fa-credit-card"></i> Accounting & Finance <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="admin3.php?page=approve3">Data Keuangan</a></li>
+                      <li><a href="admin3.php?page=historyApprove3">History Keuangan</a></li>
+                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                    </ul>
+                  </li>
                   <!-- <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="chartjs.html">Chart JS</a></li>
@@ -236,7 +244,7 @@ if ($_SESSION["level"] == "hrd") {
               <ul class=" navbar-right">
                 <li class="nav-item dropdown open" style="padding-left: 15px;">
                   <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                    <?= $nama;?>
+                    <strong> <?= $nama;?></strong> ( <?= $jabatan?> )
                   </a>
                   <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item"  href="javascript:;"> Profile</a>

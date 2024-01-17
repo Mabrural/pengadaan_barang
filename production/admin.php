@@ -6,22 +6,22 @@ if (!isset($_SESSION["login"])) {
   exit;
 }
 
-if ($_SESSION["level"] == "user") {
+if ($_SESSION["level"] == "Staff" || $_SESSION['level'] == "Staff Operasional") {
     header("Location: index.php");
     exit;
 }
 
-if ($_SESSION["level"] == "admin2") {
+if ($_SESSION["level"] == "Direktur Operasional") {
     header("Location: admin2.php");
     exit;
 }
 
-if ($_SESSION["level"] == "admin3") {
+if ($_SESSION["level"] == "Purchasing") {
     header("Location: admin3.php");
     exit;
 }
 
-if ($_SESSION["level"] == "hrd") {
+if ($_SESSION["level"] == "HRD") {
     header("Location: hrd.php");
     exit;
 }
@@ -30,6 +30,8 @@ if ($_SESSION["level"] == "hrd") {
   $id_user = $_SESSION["id_user"];
 
   $nama = $_SESSION["nama_emp"];
+
+  $jabatan = $_SESSION['jabatan'];
   
   ?>
 
@@ -204,7 +206,7 @@ if ($_SESSION["level"] == "hrd") {
               <ul class=" navbar-right">
                 <li class="nav-item dropdown open" style="padding-left: 15px;">
                   <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                    <?= $nama;?>
+                    <strong> <?= $nama;?></strong> ( <?= $jabatan?> )
                   </a>
                   <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item"  href="javascript:;"> Profile</a>

@@ -6,22 +6,17 @@ if (!isset($_SESSION["login"])) {
   exit;
 }
 
-if ($_SESSION["level"] == "Staff") {
+if ($_SESSION["level"] == "user") {
     header("Location: index.php");
     exit;
 }
 
-if ($_SESSION["level"] == "Direktur Operasional") {
+if ($_SESSION["level"] == "admin2") {
     header("Location: admin2.php");
     exit;
 }
 
-if ($_SESSION['level'] == "Kepala Cabang") {
-    header("Location: admin.php");
-    exit;
-}
-
-if ($_SESSION["level"] == "Purchasing") {
+if ($_SESSION["level"] == "admin3") {
     header("Location: admin3.php");
     exit;
 }
@@ -150,11 +145,11 @@ if ($_SESSION["level"] == "Purchasing") {
 
                   <li><a><i class="fa fa-users"></i> Human Resources<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="hrd.php?page=dataKaryawan">Data Karyawan</a></li>
-                      <li><a href="hrd.php?page=cuti">Form Cuti</a></li>
-                      <li><a href="hrd.php?page=absen">Data Absen</a></li>
-                      <li><a href="hrd.php?page=aksesPintu">Data Akses Pintu</a></li>
-                      <li><a href="hrd.php?page=userLogin">Data Login</a></li>
+                      <li><a href="it.php?page=dataKaryawan">Data Karyawan</a></li>
+                      <li><a href="it.php?page=cuti">Form Cuti</a></li>
+                      <li><a href="it.php?page=absen">Data Absen</a></li>
+                      <li><a href="it.php?page=aksesPintu">Data Akses Pintu</a></li>
+                      <li><a href="it.php?page=userLogin">Data Login</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
                   </li>
@@ -313,10 +308,6 @@ if ($_SESSION["level"] == "Purchasing") {
 
                             case 'dataKaryawan':
                                 include "page/hrd/data_karyawan.php";
-                                break;
-
-                            case 'cuti':
-                                include "page/hrd/cuti/form_cuti.php";
                                 break;
 
                             case 'aksesPintu':

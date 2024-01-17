@@ -154,11 +154,15 @@ if (isset($_POST["submit"])) {
 											<div class="col-md-6 col-sm-6 ">
 												<select class="form-control" name="level" required>
 													<option value="">--Pilih Level--</option>
-													<option value="hrd">HRD</option>
-													<option value="user">Staff</option>
-													<option value="admin">Kacap</option>
-													<option value="admin1">Dir.Operasional</option>
-													<option value="dirut">Dir. Utama</option>
+													<option value="Staff Operasional">Staff Operasional</option>
+													<option value="Staff IT">Staff IT</option>
+													<option value="Kepala Cabang">Kepala Cabang</option>
+													<option value="Direktur Operasional">Direktur Operasional</option>
+													<option value="Purchasing">Purchasing</option>
+													<option value="HRD">HRD</option>
+													<option value="Direktur Utama">Direktur Utama</option>
+													
+													
 												</select>
 											</div>
 										</div>

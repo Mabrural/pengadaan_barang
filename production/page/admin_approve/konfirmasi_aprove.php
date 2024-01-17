@@ -74,7 +74,7 @@ if (isset($_POST["submit"])) {
 
     <div class="x_panel">
       <div class="">
-					<div class="page-title">
+					<!-- <div class="page-title">
 						<div class="title_left">
 							<h3>Konfirmasi Approval</h3>
 						</div>
@@ -89,7 +89,7 @@ if (isset($_POST["submit"])) {
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<div class="clearfix"></div>
 					<div class="row">
 						<div class="col-md-12 col-sm-12 ">
@@ -148,7 +148,7 @@ if (isset($_POST["submit"])) {
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Qty</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="qty" class="form-control" type="text" value="<?= $barang["qty"];?>" readonly>
+												<input id="middle-name" name="qty" class="form-control" type="number" value="<?= $barang["qty"];?>">
 											</div>
 										</div>
 										<div class="item form-group">

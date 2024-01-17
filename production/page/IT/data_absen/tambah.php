@@ -2,13 +2,16 @@
 
 // $id_mhs = $_SESSION["id_mhs"];
 
+$karyawan = query("SELECT * FROM karyawan");
+$lantai = query("SELECT * FROM lantai");
+
 // cek apakah tombol submit sudah ditekan atau belum
 if (isset($_POST["submit"])) {
 	
 
 
 	// cek apakah data berhasil ditambahkan atau tidak
-	if(tambahPengajuan($_POST) > 0 ) {
+	if(tambahAbsen($_POST) > 0 ) {
 		echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
 		echo '<script src="./sweetalert2.min.js"></script>';
 		echo "<script>
@@ -23,7 +26,7 @@ if (isset($_POST["submit"])) {
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=pengajuan'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=absen'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>"; 
 		// echo "
@@ -47,7 +50,7 @@ if (isset($_POST["submit"])) {
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=pengajuan'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=absen'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>";
 		// echo "
@@ -68,7 +71,7 @@ if (isset($_POST["submit"])) {
       <div class="">
 					<!-- <div class="page-title">
 						<div class="title_left">
-							<h3>Form Pengadaan Barang</h3>
+							<h3>Form Tambah Absen</h3>
 						</div> -->
 
 						<!-- <div class="title_right">
@@ -87,7 +90,7 @@ if (isset($_POST["submit"])) {
 						<div class="col-md-12 col-sm-12 ">
 							<div class="x_panel">
 								<div class="x_title">
-									<h2>Form Input Pengajuan Barang <small></small></h2>
+									<h2>Form Input Absen<small></small></h2>
 									<!-- <ul class="nav navbar-right panel_toolbox">
 										<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
 										</li>
@@ -107,50 +110,45 @@ if (isset($_POST["submit"])) {
 								</div>
 								<div class="x_content">
 									<br />
-									<form action="" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+									<form action="" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
 
 										<div class="item form-group">
-											<!-- <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">INV ID <span class="required">*</span> -->
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Nama Karyawan <span class="required">*</span></label>
+											<div class="col-md-6 col-sm-6 ">
+												<select class="form-control" name="id_emp" required>
+													<option value="">--Pilih Karyawan--</option>
+													<?php foreach($karyawan as $row) : ?>
+														<option value="<?= $row['id_emp']?>"><?= $row['nama_emp']?></option>
+													<?php endforeach;?>	
+												</select>
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">No. Absen <span class="required">*</span>
 											</label>
-											<!-- <div class="col-md-6 col-sm-6 ">
-												<input type="hidden" name="kode_pengajuan" id="first-name" required="required" class="form-control ">
-											</div> -->
-										</div>
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Nama Barang <span class="required">*</span>
-											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="nama_barang" id="last-name" required="required" class="form-control">
+												<input type="number" name="no_absen" id="last-name" required="required" class="form-control">
 											</div>
 										</div>
+										
+
 										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Spesifikasi</label>
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Nama Lantai <span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="spek" class="form-control" type="text">
+												<select class="form-control" name="id_lantai" required>
+													<option value="">--Pilih Lantai--</option>
+													<?php foreach($lantai as $row) : ?>
+														<option value="<?= $row['id_lantai']?>"><?= $row['nama_lantai']?></option>
+													<?php endforeach;?>	
+												</select>
 											</div>
 										</div>
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Deskripsi</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="deskripsi" class="form-control" type="text">
-											</div>
-										</div>
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Qty <span class="required">*</span></label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="qty" class="form-control" type="number" required>
-											</div>
-										</div>
-										<div class="item form-group">
-											<!-- <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Pengajuan</label> -->
-											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="tgl_pengajuan" class="form-control" placeholder="dd-mm-yyyy" type="hidden" value="<?php echo date('Y-m-d'); ?>" readonly>
-												<input id="middle-name" name="status" class="form-control" type="hidden" value="Menunggu Persetujuan KC">
-												<input id="middle-name" name="acc1" class="form-control" type="hidden" value="">
-												<input id="middle-name" name="acc2" class="form-control" type="hidden" value="">
-												
-											</div>
-										</div>
+										
+										
+										
+								
+										
 										
 										<!-- <div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Condition</label>

@@ -16,7 +16,7 @@ if (isset($_POST["submit"])) {
 	
 
 	// cek apakah data berhasil diubah atau tidak
-	if(ubahAbsen($_POST) > 0 ) {
+	if(ubahLogin($_POST) > 0 ) {
 		echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
 		echo '<script src="./sweetalert2.min.js"></script>';
 		echo "<script>
@@ -31,7 +31,7 @@ if (isset($_POST["submit"])) {
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=absen'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=userLogin'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>";
 		// echo "
@@ -55,7 +55,7 @@ if (isset($_POST["submit"])) {
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=absen'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=userLogin'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>";
 		// echo "
@@ -142,7 +142,7 @@ if (isset($_POST["submit"])) {
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="new_password">New Password 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="username" id="new_password" required="required" class="form-control" placeholder="New Password">
+												<input type="password" name="password" id="new_password" class="form-control" placeholder="Type New Password" required>
 											</div>
 										</div>
 										
@@ -152,11 +152,13 @@ if (isset($_POST["submit"])) {
 											<div class="col-md-6 col-sm-6 ">
 												<select class="form-control" name="level" required>
 													<option value="">--Pilih Level--</option>
-													<option value="hrd" <?php if ($user['level'] == 'hrd') { echo "selected"; } ?>>HRD</option>
-													<option value="user" <?php if ($user['level'] == 'user') { echo "selected"; } ?>>Staff</option>
-													<option value="admin">Kacap</option>
-													<option value="admin1">Dir.Operasional</option>
-													<option value="dirut">Dir. Utama</option>
+													<option value="Staff Operasional" <?php if ($user['level'] == 'Staff Operasional') { echo "selected"; } ?>>Staff Operasional</option>
+													<option value="Staff IT" <?php if ($user['level'] == 'Staff IT') { echo "selected"; } ?>>Staff IT</option>
+													<option value="Kepala Cabang" <?php if ($user['level'] == 'Kepala Cabang') { echo "selected"; } ?>>Kepala Cabang</option>
+													<option value="Direktur Operasional" <?php if ($user['level'] == 'Direktur Operasional') { echo "selected"; } ?>>Direktur Operasional</option>
+													<option value="Purchasing" <?php if ($user['level'] == 'Purchasing') { echo "selected"; } ?>>Purchasing</option>
+													<option value="HRD" <?php if ($user['level'] == 'HRD') { echo "selected"; } ?>>HRD</option>
+													<option value="Direktur Utama" <?php if ($user['level'] == 'Direktur Utama') { echo "selected"; } ?>>Direktur Utama</option>
 												</select>
 											</div>
 										</div>

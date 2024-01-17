@@ -7,8 +7,8 @@ $id_user = $_SESSION["id_user"];
 ?>
     <div class="x_panel">
       <div class="x_title">
-        <h2>History Pengajuan Barang <small></small></h2>
-        <!-- <a href="?form=tambahPengajuan" class="btn btn-primary">Form Pengajuan</a> -->
+        <h2>Data Karyawan <small></small></h2>
+        <a href="?form=tambahKaryawan" class="btn btn-primary btn-sm"><i class="fa fa-plus fa-sm"></i> Tambah Karyawan</a>
         <!-- <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>
@@ -37,16 +37,12 @@ $id_user = $_SESSION["id_user"];
                   <input type="checkbox" id="check-all" class="flat">
                 </th> -->
                 <th class="column-title">No. </th>
-                <th class="column-title">Kode Pengajuan </th>
-                <th class="column-title">Nama Barang </th>
-                <th class="column-title">Spesifikasi </th>
-                <th class="column-title">Deskripsi </th>
-                <th class="column-title">Qty </th>
-                <th class="column-title">Tanggal Pengajuan </th>
-                <th class="column-title">Approval 1</th>
-                <th class="column-title">Approval 2 </th>
+                <th class="column-title">Gambar </th>
+                <th class="column-title">Nama </th>
+                <th class="column-title">Jabatan </th>
+                <th class="column-title">Divisi </th>
                 <th class="column-title">Status </th>
-                <!-- <th class="column-title no-link last"><span class="nobr">Action</span> -->
+                <th class="column-title no-link last"><span class="nobr">Action</span>
                 </th>
                 <th class="bulk-actions" colspan="7">
                   <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
@@ -58,46 +54,23 @@ $id_user = $_SESSION["id_user"];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-                  $query = "SELECT * FROM barang WHERE id_user=$id_user";
-              		// $query = "SELECT * FROM barang WHERE barang.id_user=$id_user AND status='On Progress in Purchasing' OR status='Menunggu Persetujuan KC' OR status = 'Menunggu Persetujuan Dir.Ops' ORDER BY kode_pengajuan DESC";
+              		$query = "SELECT * FROM karyawan";
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
-              		
-              		
+              	      		
 
               	 ?>
                 <td class=" "><?= $no++;?></td>
-                <td class=" "><?= $data['kode_pengajuan'];?></td>
-                <td class=" "><?= $data['nama_barang'];?> </td>
-                <td class=" "><?= $data['spek'];?></td>
-                <td class=" "><?= $data['deskripsi'];?></td>
-                <td class=" "><?= $data['qty'];?></td>
-                <td class=" "><?= date('d-M-Y', strtotime($data['tgl_pengajuan']));?></td>
-                <td class=" "><?= $data['acc1'];?></td>
-                <td class=" "><?= $data['acc2'];?></td>
-                <td class=" " style="color: <?php
-                    if ($data['status'] == 'Menunggu Persetujuan KC') {
-                        echo '#b58709';
-                    } elseif ($data['status'] == 'Menunggu Persetujuan Dir.Ops') {
-                        echo '#b58709';
-                    } elseif ($data['status'] == 'On Progress in Purchasing') {
-                        echo '#14a664';
-                    } else {
-                        echo '#a62f26';
-                    }
-                ?>;">
-                    <strong><?= $data['status'];?></strong>
+                <td class=" "><a href="img/<?= $data['gambar'];?>"><img src="img/<?= $data['gambar'];?>" width="50"></a></td>
+                <td class=" "><a href="?form=rincianKaryawan&id_emp=<?=$data["id_emp"]?>"><?= $data['nama_emp'];?></a></td>
+                <td class=" "><?= $data['jabatan'];?> </td>
+                <td class=" "><?= $data['divisi'];?></td>
+                <td class=" "><?= $data['status'];?></td>
+                <!-- <td class=" "><?= $hari_indonesia[$hari].date(', d-M-Y', strtotime($data['tgl_pengajuan']));?></td> -->
+               
+
+                <td class=" last"><a href="?form=ubahKaryawan&id_emp=<?= $data["id_emp"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusKaryawan&id_emp=<?= $data["id_emp"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
                 </td>
-
-                
-
-              
-
-                
-
-
-               <!--  <td class=" last"><a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusPengajuan&id_barang=<?= $data["id_barang"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
-                </td> -->
               </tr>
               <?php } ?>
            
@@ -125,19 +98,6 @@ $id_user = $_SESSION["id_user"];
           });
 
           </script>
-
-          <!-- <script type="text/javascript">
-            new DataTable('#example', {
-            responsive: true,
-            columnDefs: [
-              {
-                targets: -1,
-                responsivePriority: 'auto'
-              }
-            ]
-          });
-
-          </script> -->
         </div>
 				
 			

@@ -9,7 +9,7 @@ $id_user = $_SESSION["id_user"];
 ?>
     <div class="x_panel">
       <div class="x_title">
-        <h2>Table Approval <small></small></h2>
+        <h2>Data Approval <small></small></h2>
         <!-- <a href="?form=tambahPengajuan" class="btn btn-primary">Form Pengajuan</a> -->
         <!-- <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>

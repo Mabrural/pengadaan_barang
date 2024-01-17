@@ -3,11 +3,11 @@
 // $id_mhs = $_SESSION["id_mhs"];
 
 // ambil data di URL
-$id_barang = $_GET["id_barang"];
+$id_user = $_GET["id_user"];
 // query data mahasiswa berdasarkan id
-$barang = query("SELECT * FROM barang WHERE id_barang = $id_barang")[0];
-
-
+$user = query("SELECT * FROM user WHERE id_user = $id_user")[0];
+$karyawan = query("SELECT * FROM karyawan");
+$lantai = query("SELECT * FROM lantai");
 
 // cek apakah tombol submit sudah ditekan atau belum
 if (isset($_POST["submit"])) {
@@ -16,7 +16,7 @@ if (isset($_POST["submit"])) {
 	
 
 	// cek apakah data berhasil diubah atau tidak
-	if(ubahApprove2($_POST) > 0 ) {
+	if(ubahLogin($_POST) > 0 ) {
 		echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
 		echo '<script src="./sweetalert2.min.js"></script>';
 		echo "<script>
@@ -24,14 +24,14 @@ if (isset($_POST["submit"])) {
 			swal.fire({
 				
 				title               : 'Berhasil',
-				text                :  'Data berhasil diapprove',
+				text                :  'Data berhasil diubah',
 				//footer              :  '',
 				icon                : 'success',
 				timer               : 2000,
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=approve2'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=userLogin'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>";
 		// echo "
@@ -55,7 +55,7 @@ if (isset($_POST["submit"])) {
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=approve2'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=userLogin'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>";
 		// echo "
@@ -76,7 +76,7 @@ if (isset($_POST["submit"])) {
       <div class="">
 					<!-- <div class="page-title">
 						<div class="title_left">
-							<h3>Konfirmasi Approval</h3>
+							<h3>Form Pengadaan Barang</h3>
 						</div>
 
 						<div class="title_right">
@@ -95,7 +95,7 @@ if (isset($_POST["submit"])) {
 						<div class="col-md-12 col-sm-12 ">
 							<div class="x_panel">
 								<div class="x_title">
-									<h2>Konfirmasi Data <small></small></h2>
+									<h2>Ubah Data Login<small></small></h2>
 									<!-- <ul class="nav navbar-right panel_toolbox">
 										<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
 										</li>
@@ -115,58 +115,60 @@ if (isset($_POST["submit"])) {
 								</div>
 								<div class="x_content">
 									<br />
-									<form action="" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-										<input type="hidden" name="id_barang" value="<?= $barang["id_barang"];?>">
+									<form action="" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
+										<input type="hidden" name="id_user" value="<?= $user["id_user"];?>">
+										
 										<div class="item form-group">
-											<!-- <input type="hidden" name="aksi" value="ubah"> -->
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Nama Karyawan <span class="required">*</span></label>
+											<div class="col-md-6 col-sm-6 ">
+												<select class="form-control" name="id_emp" required>
+													<option value="">--Pilih Karyawan--</option>
+													<?php foreach($karyawan as $row) : ?>
+														<option value="<?= $row['id_emp']?>" <?= ($row['id_emp'] == $user['id_emp'])?'selected': ''; ?>><?= $row['nama_emp']?></option>
+													<?php endforeach;?>	
+												</select>
+											</div>
+										</div>
 
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Kode Pengajuan <span class="required">*</span>
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Username <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="kode_pengajuan" id="first-name" required="required" class="form-control" value="<?= $barang["kode_pengajuan"];?>" readonly>
+												<input type="text" name="username" id="last-name" required="required" class="form-control" value="<?= $user['username']?>">
 											</div>
 										</div>
+
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Nama Barang <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="new_password">New Password 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="nama_barang" id="last-name" required="required" class="form-control" value="<?= $barang["nama_barang"];?>" readonly>
+												<input type="password" name="password" id="new_password" class="form-control" placeholder="Type New Password" required>
 											</div>
 										</div>
+										
+
 										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Spec</label>
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Level <span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="spek" class="form-control" type="text" value="<?= $barang["spek"];?>" readonly>
+												<select class="form-control" name="level" required>
+													<option value="">--Pilih Level--</option>
+													<option value="hrd" <?php if ($user['level'] == 'hrd') { echo "selected"; } ?>>HRD</option>
+													<option value="user" <?php if ($user['level'] == 'user') { echo "selected"; } ?>>Staff</option>
+													<option value="admin">Kacap</option>
+													<option value="admin1">Dir.Operasional</option>
+													<option value="dirut">Dir. Utama</option>
+												</select>
 											</div>
 										</div>
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Desc</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="deskripsi" class="form-control" type="text" value="<?= $barang["deskripsi"];?>" readonly>
-											</div>
-										</div>
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Qty</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="qty" class="form-control" type="number" value="<?= $barang["qty"];?>" >
-											</div>
-										</div>
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Pengajuan</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="tgl_pengajuan" class="form-control" type="date" value="<?= $barang["tgl_pengajuan"];?>" readonly>
-												<input id="middle-name" name="status" class="form-control" type="hidden" value="On Progress in Purchasing">
-												<input id="middle-name" name="acc2" class="form-control" type="hidden" value="<?= $nama;?>">
-											</div>
-										</div>
+
 										
 									
 										<div class="ln_solid"></div>
 										<div class="item form-group">
 											<div class="col-md-6 col-sm-6 offset-md-3">
 												<!-- <button class="btn btn-primary" type="button">Cancel</button> -->
-												<!-- <button class="btn btn-primary" type="reset">Reset</button> -->
-												<button type="submit" class="btn btn-success" name="submit">Approve</button>
+												<button class="btn btn-primary" type="reset">Reset</button>
+												<button type="submit" class="btn btn-success" name="submit">Submit</button>
 											</div>
 										</div>
 

@@ -8,7 +8,7 @@ if (isset($_POST["submit"])) {
 
 
 	// cek apakah data berhasil ditambahkan atau tidak
-	if(tambahPengajuan($_POST) > 0 ) {
+	if(tambahKaryawan($_POST) > 0 ) {
 		echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
 		echo '<script src="./sweetalert2.min.js"></script>';
 		echo "<script>
@@ -23,7 +23,7 @@ if (isset($_POST["submit"])) {
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=pengajuan'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=hrd'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>"; 
 		// echo "
@@ -47,7 +47,7 @@ if (isset($_POST["submit"])) {
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=pengajuan'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=hrd'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>";
 		// echo "
@@ -68,7 +68,7 @@ if (isset($_POST["submit"])) {
       <div class="">
 					<!-- <div class="page-title">
 						<div class="title_left">
-							<h3>Form Pengadaan Barang</h3>
+							<h3>Form Tambah Karyawan</h3>
 						</div> -->
 
 						<!-- <div class="title_right">
@@ -87,7 +87,7 @@ if (isset($_POST["submit"])) {
 						<div class="col-md-12 col-sm-12 ">
 							<div class="x_panel">
 								<div class="x_title">
-									<h2>Form Input Pengajuan Barang <small></small></h2>
+									<h2>Form Input Karyawan<small></small></h2>
 									<!-- <ul class="nav navbar-right panel_toolbox">
 										<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
 										</li>
@@ -107,49 +107,124 @@ if (isset($_POST["submit"])) {
 								</div>
 								<div class="x_content">
 									<br />
-									<form action="" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+									<form action="" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
 
 										<div class="item form-group">
-											<!-- <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">INV ID <span class="required">*</span> -->
-											</label>
-											<!-- <div class="col-md-6 col-sm-6 ">
-												<input type="hidden" name="kode_pengajuan" id="first-name" required="required" class="form-control ">
-											</div> -->
-										</div>
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Nama Barang <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">NIK <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="nama_barang" id="last-name" required="required" class="form-control">
+												<input type="number" name="nik" id="last-name" required="required" class="form-control">
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">NPWP <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" name="npwp" id="last-name" required="required" class="form-control">
+											</div>
+										</div>
+										
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Nama Lengkap <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" name="nama_emp" id="last-name" required="required" class="form-control">
 											</div>
 										</div>
 										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Spesifikasi</label>
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Jabatan</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="spek" class="form-control" type="text">
+												<input id="middle-name" name="jabatan" class="form-control" type="text">
 											</div>
 										</div>
 										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Deskripsi</label>
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Divisi</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="deskripsi" class="form-control" type="text">
+												<input id="middle-name" name="divisi" class="form-control" type="text">
 											</div>
 										</div>
+
 										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Qty <span class="required">*</span></label>
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Lahir <span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="qty" class="form-control" type="number" required>
+												<input id="middle-name" name="tgl_lahir" class="form-control" type="date" required>
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Jenis Kelamin <span class="required">*</span></label>
+											<div class="col-md-6 col-sm-6 ">
+												<select class="form-control" name="jenis_kelamin" required>
+													<option value="">--Pilih Jenis Kelamin--</option>
+													<option value="Laki-laki">Laki-laki</option>
+													<option value="Perempuan">Perempuan</option>	
+												</select>
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Alamat <span class="required">*</span></label>
+											<div class="col-md-6 col-sm-6 ">
+												<input id="middle-name" name="alamat" class="form-control" type="text" required>
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">No. HP <span class="required">*</span></label>
+											<div class="col-md-6 col-sm-6 ">
+												<input id="middle-name" name="no_hp" class="form-control" type="number" required>
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Email <span class="required">*</span></label>
+											<div class="col-md-6 col-sm-6 ">
+												<input id="middle-name" name="email" class="form-control" type="email" required>
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Status Pernikahan <span class="required">*</span></label>
+											<div class="col-md-6 col-sm-6 ">
+												<select class="form-control" name="status_pernikahan" required>
+													<option value="">--Pilih Status Pernikahan--</option>
+													<option value="Belum Menikah">Belum Menikah</option>
+													<option value="Sudah Menikah">Sudah Menikah</option>	
+													<option value="Cerai Hidup">Cerai Hidup</option>	
+													<option value="Cerai Mati">Cerai Mati</option>	
+												</select>
+											</div>
+										</div>
+
+										
+										
+										<div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Status Karyawan <span class="required">*</span></label>
+											<div class="col-md-6 col-sm-6 ">
+												<select class="form-control" name="status" required>
+													<option value="">--Pilih Status Karyawan--</option>
+													<option value="Aktif">Aktif</option>
+													<option value="Tidak Aktif">Tidak Aktif</option>	
+												</select>
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Gambar <span class="required">*</span></label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="file" name="gambar">
 											</div>
 										</div>
 										<div class="item form-group">
 											<!-- <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Pengajuan</label> -->
-											<div class="col-md-6 col-sm-6 ">
+											<!-- <div class="col-md-6 col-sm-6 ">
 												<input id="middle-name" name="tgl_pengajuan" class="form-control" placeholder="dd-mm-yyyy" type="hidden" value="<?php echo date('Y-m-d'); ?>" readonly>
-												<input id="middle-name" name="status" class="form-control" type="hidden" value="Menunggu Persetujuan KC">
+												<input id="middle-name" name="status" class="form-control" type="hidden" value="Menunggu Persetujuan">
 												<input id="middle-name" name="acc1" class="form-control" type="hidden" value="">
 												<input id="middle-name" name="acc2" class="form-control" type="hidden" value="">
 												
-											</div>
+											</div> -->
 										</div>
 										
 										<!-- <div class="item form-group">
