@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2024 at 03:13 PM
+-- Generation Time: Jan 18, 2024 at 11:43 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -100,6 +100,21 @@ INSERT INTO `barang` (`id_barang`, `kode_pengajuan`, `nama_barang`, `spek`, `des
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ijazah`
+--
+
+CREATE TABLE `ijazah` (
+  `id_ijazah` int(10) NOT NULL,
+  `no_ijazah` varchar(40) NOT NULL,
+  `tgl_penitipan` date NOT NULL,
+  `tgl_kembali` date DEFAULT NULL,
+  `status_ijazah` varchar(50) NOT NULL,
+  `id_emp` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `karyawan`
 --
 
@@ -126,19 +141,19 @@ CREATE TABLE `karyawan` (
 
 INSERT INTO `karyawan` (`id_emp`, `nama_emp`, `jabatan`, `divisi`, `status`, `gambar`, `tgl_lahir`, `jenis_kelamin`, `alamat`, `no_hp`, `email`, `status_pernikahan`, `nik`, `npwp`) VALUES
 (5, 'Andre Yogi', 'Staff Operasional', 'Office', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
-(8, 'Raden Sulaiman Sanjeev', 'Direktur Utama', 'BSD', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(8, 'Raden Sulaiman Sanjeev', 'Direktur Utama', 'BSD', 'Aktif', '65a4f45ead15a.png', '1985-01-01', 'Laki-laki', '-', '0', 'sanjeev@bumi-laut.com', 'Sudah Menikah', '1312', '1321'),
 (9, 'Regina', 'Direktur Keuangan', 'BSD', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
-(10, 'James Taju', 'Direktur HRD', 'HRM', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
-(11, 'Bambang Wahyudi', 'Direktur Operasional', 'Manager', 'Aktif', '65a4f45ead15a.png', '0000-00-00', 'Laki-laki', '', '', '', 'Belum Menikah', NULL, ''),
-(12, 'Michael Kawilarang', 'Kepala Cabang', 'Manager', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(10, 'James Taju', 'Direktur HRD', 'HRM', 'Aktif', '65a4f45ead15a.png', '1980-01-01', 'Laki-laki', '-', '1231231', 'btm@gmail.xom', 'Sudah Menikah', '123', '123'),
+(11, 'Bambang Wahyudi', 'Direktur Operasional', 'Manager', 'Aktif', '65a4f45ead15a.png', '0000-00-00', 'Laki-laki', '-', '0', 'btm@gmail.xom', 'Sudah Menikah', '132', '132'),
+(12, 'Michael Kawilarang', 'Kepala Cabang', 'Manager', 'Aktif', '65a8b1dbd087d.png', '0000-00-00', 'Laki-laki', '-', '0', 'batam@gmail.com', 'Sudah Menikah', '123', '123'),
 (13, 'Gahral', 'Kepala Shipping', 'Shipping', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
-(14, 'Elis', 'Finance', 'Finance', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(14, 'Elis', 'Finance', 'Finance', 'Aktif', '65a4f45ead15a.png', '0000-00-00', 'Laki-laki', '-', '0', 'btm@gmail.xom', 'Belum Menikah', '123', '1321'),
 (15, 'Rika', 'Staff Shipping', 'Shipping', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
 (16, 'Krisno', 'Staff Shipping', 'Shipping', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
 (17, 'Niken', 'Staff Finance', 'Finance', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
-(18, 'Robby T. Hamisi', 'Staff Operasional', 'Operasional', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
-(19, 'Alex', 'Staff Operasional', 'Operasional', 'Aktif', '65a4f99d7d9a8.png', NULL, NULL, NULL, '', '', '', NULL, ''),
-(30, 'Muhammad Mabrur Al Mutaqi', 'Staff IT', 'IT', 'Aktif', '65a644a80e773.png', '2002-05-21', 'Laki-laki', 'Cipta Asri blok Herba no.120', '082178192938', 'mabruralmutaqi@gmail.com', 'Belum Menikah', '2171012105020001', '95.461.480.6-225.000');
+(18, 'Robby T. Hamisi ', 'Staff Operasional', 'Operasional', 'Aktif', '65a4f45ead15a.png', '1980-08-08', 'Laki-laki', 'Nongsa', '082285686292', 'robby.t@gmail.com', 'Sudah Menikah', '2171012205180001', '082222050215000'),
+(19, 'Alex Untu', 'Staff Operasional', 'Operasional', 'Aktif', '65a8a7a4c616b.png', '0000-00-00', 'Laki-laki', 'Bengkong Kolam Swadaya', '081100001212', 'alex@gmail.com', 'Belum Menikah', '2171012122030001', '927824938215000'),
+(30, 'Muhammad Mabrur Al Mutaqi', 'Staff IT', 'IT', 'Aktif', '65a8cc3d11e59.png', '2002-05-21', 'Laki-laki', 'Cipta Asri blok Herba no.120', '082178192938', 'mabruralmutaqi@gmail.com', 'Belum Menikah', '2171012105020001', '95.461.480.6-225.000');
 
 -- --------------------------------------------------------
 
@@ -185,9 +200,10 @@ INSERT INTO `user` (`id_user`, `username`, `password`, `level`, `id_emp`) VALUES
 (14, 'admin4', '$2y$10$3SspMiCSr.VJIpZy9thj2O1tNUeKc/EGPCLLRLaj4SznMsEmQliN.', 'admin4', 9),
 (15, 'hrd', '$2y$10$rfSEEc5RaRZ/YjmxEF9G8uDTXi8w04f8PnuI/3Br7pXPWD9PKOhN2', 'HRD', 10),
 (21, 'sanjeev', '$2y$10$dqD5eyXMYFl5dmq.1s103OeZOPTBNN4gHGqbu/D5neofhrjWRKxBO', 'Direktur Utama', 8),
-(24, 'mabrur', '$2y$10$LEZfUfaSTm1EZoTwk5evSuVocWHjQJ8Xpd1KaHlL4UW5xMg/0wjn.', 'Staff IT', 30),
+(24, 'mabrur', '$2y$10$7/vY8tYc2RDIgAkh8dDDT.bIZoMqnEXG5vIBw9uscxp.7TCVJ.kPq', 'Staff IT', 30),
 (27, 'alex', '$2y$10$pKR0gqG2v6B0T7/3oiKvPexleYhzbBKMLyH1M6gnP3j6nJdVvi4SK', 'Staff Operasional', 19),
-(28, 'robi', '$2y$10$pi39ljqjbeI7Xgu6up8uie2wOUT6Gv7dwqsQXgvI60DotWKCmSvQC', 'Staff Operasional', 18);
+(28, 'robi', '$2y$10$pi39ljqjbeI7Xgu6up8uie2wOUT6Gv7dwqsQXgvI60DotWKCmSvQC', 'Staff Operasional', 18),
+(29, 'krisno', '$2y$10$wdmPEof2zbHxxFyJWXAZZOZOigLJucxD/Vy5oALS.0y5ZJkvzVNhC', 'Staff Operasional', 16);
 
 --
 -- Indexes for dumped tables
@@ -215,6 +231,13 @@ ALTER TABLE `akses_pintu`
 ALTER TABLE `barang`
   ADD PRIMARY KEY (`id_barang`),
   ADD KEY `id_user` (`id_user`);
+
+--
+-- Indexes for table `ijazah`
+--
+ALTER TABLE `ijazah`
+  ADD PRIMARY KEY (`id_ijazah`),
+  ADD KEY `id_emp` (`id_emp`);
 
 --
 -- Indexes for table `karyawan`
@@ -258,6 +281,12 @@ ALTER TABLE `barang`
   MODIFY `id_barang` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
 
 --
+-- AUTO_INCREMENT for table `ijazah`
+--
+ALTER TABLE `ijazah`
+  MODIFY `id_ijazah` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
@@ -273,7 +302,7 @@ ALTER TABLE `lantai`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Constraints for dumped tables
@@ -298,6 +327,12 @@ ALTER TABLE `akses_pintu`
 --
 ALTER TABLE `barang`
   ADD CONSTRAINT `barang_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
+
+--
+-- Constraints for table `ijazah`
+--
+ALTER TABLE `ijazah`
+  ADD CONSTRAINT `ijazah_ibfk_1` FOREIGN KEY (`id_emp`) REFERENCES `karyawan` (`id_emp`);
 
 --
 -- Constraints for table `user`
