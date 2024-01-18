@@ -41,6 +41,7 @@ if ($_SESSION["level"] == "Staff IT") {
 
   $jabatan = $_SESSION['jabatan'];
   
+  $karyawan = query("SELECT * FROM user JOIN karyawan ON karyawan.id_emp=user.id_emp WHERE user.id_user = $id_user")[0];
   ?>
 
 <!DOCTYPE html>
@@ -220,10 +221,11 @@ if ($_SESSION["level"] == "Staff IT") {
               <ul class=" navbar-right">
                 <li class="nav-item dropdown open" style="padding-left: 15px;">
                   <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                   <strong> <?= $nama;?></strong> ( <?= $jabatan?> )
+                  <img src="img/<?= $karyawan['gambar'];?>" alt=""> <strong> <?= $nama;?></strong> ( <?= $jabatan?> )
                   </a>
                   <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                     <!-- <a class="dropdown-item"  href="javascript:;"> Profile</a> -->
+                    <a class="dropdown-item"  href="?page=profile">Profile <i class="fa fa-user pull-right"></i></a>
                     <a class="dropdown-item"  href="?page=changePassword">Change Password<i class="fa fa-key pull-right"></i></a>
                       <!-- <a class="dropdown-item"  href="javascript:;">
                         <span class="badge bg-red pull-right">50%</span>
@@ -354,6 +356,10 @@ if ($_SESSION["level"] == "Staff IT") {
                                 include "page/change_password/change_password.php";
                                 break;
 
+                            case 'profile':
+                                include "page/profile/profile.php";
+                                break;
+
                             case 'laporan':
                                 include "page/laporan/laporan.php";
                                 break;
@@ -441,9 +447,9 @@ if ($_SESSION["level"] == "Staff IT") {
                                 include "page/pengajuan/hapus.php";
                                 break;
                 
-              case 'cariAnggaran':
-                include "page/anggaran/cari.php";
-                break;
+                            case 'updateProfile':
+                                include "page/profile/update_profile.php";
+                                break;
 
                             case 'ubahCatatan':
                                 include "page/catatan/ubah.php";

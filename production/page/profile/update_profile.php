@@ -31,7 +31,7 @@ if (isset($_POST["submit"])) {
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=dataKaryawan'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=profile'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>";
 		// echo "
@@ -55,7 +55,7 @@ if (isset($_POST["submit"])) {
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=dataKaryawan'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=profile'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>";
 		// echo "
@@ -206,13 +206,14 @@ if (isset($_POST["submit"])) {
 										</div>
 
 										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Status Karyawan<span class="required">*</span></label>
+											<!-- <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Status Karyawan<span class="required">*</span></label> -->
 											<div class="col-md-6 col-sm-6 ">
-												<select class="form-control" name="status">
+												<input type="hidden" name="status" value="<?= $karyawan['status']?>">
+												<!-- <select class="form-control" name="status">
 													<option value="Aktif" <?php if ($karyawan['status'] == 'Aktif') { echo "selected"; } ?>>Aktif</option>
 													<option value="Tidak Aktif" <?php if ($karyawan['status'] == 'Tidak Aktif') { echo "selected"; } ?>>Tidak Aktif</option>
 													
-												</select>
+												</select> -->
 											</div>
 										</div>
 

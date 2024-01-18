@@ -256,6 +256,8 @@ function ubahKaryawan($data) {
 	$no_hp = htmlspecialchars($data["no_hp"]);
 	$email = htmlspecialchars($data["email"]);
 	$status_p = htmlspecialchars($data["status_pernikahan"]);
+	$nik = htmlspecialchars($data["nik"]);
+	$npwp = htmlspecialchars($data["npwp"]);
 
 	// cek apakah user pilih gambar baru atau tidak
 	if ($_FILES['gambar']['error'] === 4 ) {
@@ -277,7 +279,9 @@ function ubahKaryawan($data) {
 				alamat = '$alamat',
 				no_hp = '$no_hp',
 				email = '$email',
-				status_pernikahan = '$status_p'
+				status_pernikahan = '$status_p',
+				nik = '$nik',
+				npwp = '$npwp'
 			  WHERE id_emp = $id_emp
 			";
 	mysqli_query($koneksi, $query);

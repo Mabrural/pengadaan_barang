@@ -40,6 +40,9 @@ if ($_SESSION["level"] == "Staff IT") {
 
   $nama = $_SESSION["nama_emp"];
   $jabatan = $_SESSION['jabatan'];
+
+ $karyawan = query("SELECT * FROM user JOIN karyawan ON karyawan.id_emp=user.id_emp WHERE user.id_user = $id_user")[0];
+
   
   ?>
 
@@ -256,7 +259,7 @@ if ($_SESSION["level"] == "Staff IT") {
               <ul class=" navbar-right">
                 <li class="nav-item dropdown open" style="padding-left: 15px;">
                   <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                    <strong> <?= $nama;?></strong> ( <?= $jabatan?> )
+                   <img src="img/<?= $karyawan['gambar'];?>" alt=""> <strong> <?= $nama;?></strong> ( <?= $jabatan?> )
                   </a>
                   <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                     <!-- <a class="dropdown-item"  href="javascript:;"> Profile</a>
@@ -264,8 +267,8 @@ if ($_SESSION["level"] == "Staff IT") {
                         <span class="badge bg-red pull-right">50%</span>
                         <span>Settings</span>
                       </a> -->
+                    <a class="dropdown-item"  href="?page=profile">Profile <i class="fa fa-user pull-right"></i></a>
                     <a class="dropdown-item"  href="?page=changePassword">Change Password<i class="fa fa-key pull-right"></i></a>
-                    <!-- <a class="dropdown-item"  href="javascript:;">Profile</a> -->
                     <a class="dropdown-item"  href="logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                   </div>
                 </li>
@@ -357,6 +360,10 @@ if ($_SESSION["level"] == "Staff IT") {
                             case 'changePassword':
                                 include 'page/change_password/change_password.php';
                                break;
+
+                            case 'profile':
+                                include "page/profile/profile.php";
+                                break;
                             
 
                             case 'cuti':
@@ -375,9 +382,7 @@ if ($_SESSION["level"] == "Staff IT") {
                                 include "page/tagihan/tagihan.php";
                                 break;
               
-                            case 'profil':
-                                include "page/profil/profil.php";
-                                break;
+                            
 
                             default:
                                 echo "<center><h3>Maaf. Halaman tidak di temukan!</h3></center>";
@@ -399,6 +404,10 @@ if ($_SESSION["level"] == "Staff IT") {
 
                             case 'hapusPengajuan':
                                 include "page/pengajuan/hapus.php";
+                                break;
+
+                            case 'updateProfile':
+                                include 'page/profile/update_profile.php';
                                 break;
 
                             case 'tambahKaryawan':
