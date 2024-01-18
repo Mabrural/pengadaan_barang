@@ -164,6 +164,7 @@ if ($_SESSION["level"] == "Staff IT") {
                       <li><a href="hrd.php?page=absen">Data Absen</a></li>
                       <li><a href="hrd.php?page=aksesPintu">Data Akses Pintu</a></li>
                       <li><a href="hrd.php?page=userLogin">Data Login</a></li>
+                      <li><a href="hrd.php?page=penitipanIjazah">Penitipan Ijazah</a></li>
                       <li><a href="hrd.php?page=attendance">Attendance</a></li>
                       <li><a href="hrd.php?page=penilaian">Penilaian Karyawan</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
@@ -344,6 +345,10 @@ if ($_SESSION["level"] == "Staff IT") {
                                 include 'page/hrd/user_login/user_login.php';
                               break;
 
+                            case 'penitipanIjazah':
+                                include 'page/hrd/penitipan_ijazah/data_ijazah.php';
+                                break;
+
                             case 'attendance':
                                 include 'page/hrd/attendance/attendance.php';
                                 break;
@@ -449,6 +454,22 @@ if ($_SESSION["level"] == "Staff IT") {
                 
                             case 'updateProfile':
                                 include "page/profile/update_profile.php";
+                                break;
+
+                            case 'tambahIjazah':
+                                include "page/hrd/penitipan_ijazah/tambah.php";
+                                break;
+
+                            case 'hapusIjazah':
+                                include 'page/hrd/penitipan_ijazah/hapus.php';
+                                break;
+
+                            case 'ubahIjazah':
+                                include 'page/hrd/penitipan_ijazah/ubah.php';
+                                break;
+
+                            case 'returnIjazah':
+                                include 'page/hrd/penitipan_ijazah/return.php';
                                 break;
 
                             case 'ubahCatatan':

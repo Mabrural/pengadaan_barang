@@ -505,6 +505,55 @@ function changePassword($data) {
 
 	return mysqli_affected_rows($koneksi);
 }
+
+function tambahIjazah($data) {
+	global $koneksi;
+	$no_ijazah = htmlspecialchars($data["no_ijazah"]);
+	$tgl_penitipan = htmlspecialchars($data["tgl_penitipan"]);
+	$tgl_kembali = htmlspecialchars($data["tgl_kembali"]);
+	$status_ijazah = htmlspecialchars($data["status_ijazah"]);
+	$id_emp = htmlspecialchars($data["id_emp"]);
+
+
+	$query = "INSERT INTO ijazah VALUES
+			('', '$no_ijazah', '$tgl_penitipan', '$tgl_kembali', '$status_ijazah', '$id_emp')";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function ubahIjazah($data) {
+	global $koneksi;
+	$id_ijazah = $data["id_ijazah"];
+	$no_ijazah = htmlspecialchars($data["no_ijazah"]);
+	$tgl_penitipan = htmlspecialchars($data["tgl_penitipan"]);
+	$tgl_kembali = htmlspecialchars($data["tgl_kembali"]);
+	$status_ijazah = htmlspecialchars($data["status_ijazah"]);
+	$id_emp = htmlspecialchars($data["id_emp"]);
+
+
+	$query = "UPDATE ijazah SET
+				no_ijazah = '$no_ijazah',
+				tgl_penitipan = '$tgl_penitipan',
+				tgl_kembali = '$tgl_kembali',
+				status_ijazah = '$status_ijazah',
+				id_emp = '$id_emp'
+			  WHERE id_ijazah = $id_ijazah
+			";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function hapusIjazah($id_ijazah) {
+	global $koneksi;
+	mysqli_query($koneksi, "DELETE FROM ijazah WHERE id_ijazah=$id_ijazah");
+
+	return mysqli_affected_rows($koneksi);
+
+}
+
+
 function tambahAnggaran($data) {
 	global $koneksi;
 	$nama_anggaran = htmlspecialchars($data["nama_anggaran"]);
