@@ -53,6 +53,13 @@
 		  </li>
 		</a>
 
+		<a href="?page=kontrakKerja">
+		  <li>
+		    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+		    <span class="glyphicon-class"><a href="?page=kontrakKerja">Manage Contract</span></a>
+		  </li>
+		</a>
+
 		  
 		  
 

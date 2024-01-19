@@ -3,11 +3,11 @@
 // $id_mhs = $_SESSION["id_mhs"];
 
 // ambil data di URL
-$id_user = $_GET["id_user"];
-// query data mahasiswa berdasarkan id
-$user = query("SELECT * FROM user WHERE id_user = $id_user")[0];
+$id_kontrak = $_GET["id_kontrak"];
+// query data kontrak berdasarkan id
+$kontrak = query("SELECT * FROM kontrak_kerja WHERE id_kontrak = $id_kontrak")[0];
 // $karyawan = query("SELECT * FROM karyawan");
-$karyawan = query("SELECT * FROM karyawan WHERE id_emp IN (SELECT id_emp FROM user WHERE id_user=$id_user)");
+$karyawan = query("SELECT * FROM karyawan WHERE jabatan != 'Direktur Utama' AND jabatan != 'Direktur HRD' AND jabatan != 'Direktur Keuangan' AND jabatan != 'Direktur Operasional' AND id_emp IN (SELECT id_emp FROM kontrak_kerja WHERE id_kontrak=$id_kontrak)");
 $lantai = query("SELECT * FROM lantai");
 
 // cek apakah tombol submit sudah ditekan atau belum
@@ -17,7 +17,7 @@ if (isset($_POST["submit"])) {
 	
 
 	// cek apakah data berhasil diubah atau tidak
-	if(ubahLogin($_POST) > 0 ) {
+	if(ubahKontrak($_POST) > 0 ) {
 		echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
 		echo '<script src="./sweetalert2.min.js"></script>';
 		echo "<script>
@@ -32,7 +32,7 @@ if (isset($_POST["submit"])) {
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=userLogin'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=kontrakKerja'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>";
 		// echo "
@@ -56,7 +56,7 @@ if (isset($_POST["submit"])) {
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=userLogin'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=kontrakKerja'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>";
 		// echo "
@@ -96,7 +96,7 @@ if (isset($_POST["submit"])) {
 						<div class="col-md-12 col-sm-12 ">
 							<div class="x_panel">
 								<div class="x_title">
-									<h2>Ubah Data Login<small></small></h2>
+									<h2>Ubah Data Kontrak<small></small></h2>
 									<!-- <ul class="nav navbar-right panel_toolbox">
 										<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
 										</li>
@@ -117,7 +117,7 @@ if (isset($_POST["submit"])) {
 								<div class="x_content">
 									<br />
 									<form action="" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
-										<input type="hidden" name="id_user" value="<?= $user["id_user"];?>">
+										<input type="hidden" name="id_kontrak" value="<?= $kontrak["id_kontrak"];?>">
 										
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Nama Karyawan <span class="required">*</span></label>
@@ -125,44 +125,80 @@ if (isset($_POST["submit"])) {
 												<select class="form-control" name="id_emp" required>
 													<!-- <option value="">--Pilih Karyawan--</option> -->
 													<?php foreach($karyawan as $row) : ?>
-														<option value="<?= $row['id_emp']?>" <?= ($row['id_emp'] == $user['id_emp'])?'selected': ''; ?>><?= $row['nama_emp']?></option>
+														<option value="<?= $row['id_emp']?>" <?= ($row['id_emp'] == $kontrak['id_emp'])?'selected': ''; ?>><?= $row['nama_emp']?></option>
 													<?php endforeach;?>	
 												</select>
 											</div>
 										</div>
 
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Username <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="tgl_mulai">Tanggal Mulai <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="username" id="last-name" required="required" class="form-control" value="<?= $user['username']?>">
+												<input type="date" name="tgl_mulai" id="tgl_mulai" required="required" class="form-control" value="<?= $kontrak['tgl_mulai']?>">
 											</div>
 										</div>
 
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="new_password">New Password 
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="tgl_akhir">Tanggal Akhir <span class="required">*</span>
 											</label>
+											<!-- <div class="col-md-6 col-sm-6 ">
+												<input type="date" name="tgl_akhir" id="tgl_akhir" class="form-control" value="<?= $kontrak['tgl_akhir']?>" >
+											</div> -->
 											<div class="col-md-6 col-sm-6 ">
-												<input type="password" name="password" id="new_password" class="form-control" placeholder="Type New Password" required>
+												<?php
+										        // Ambil nilai tgl_mulai dari $kontrak
+        										$tgl_mulai = $kontrak['tgl_akhir'];
+
+										        // Hitung tanggal akhir dengan menambahkan 1 tahun
+       											// $tgl_akhir = date('Y-m-d', strtotime('+1 year', strtotime($tgl_mulai)));
+       											$value_tgl_akhir = $kontrak['status_kontrak'] === 'Permanent' ? '0000-00-00' : date('Y-m-d', strtotime($tgl_mulai));
+
+       											// Tambahkan kondisi untuk menentukan apakah input readonly atau tidak
+            									$readonly_attr = $kontrak['status_kontrak'] === 'Permanent' ? 'readonly' : '';
+										        ?>
+												<input type="date" name="tgl_akhir" id="tgl_akhir" class="form-control" value="<?= $value_tgl_akhir;?>" <?= $readonly_attr;?>>
 											</div>
 										</div>
+
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="gaji_pokok">Gaji Pokok <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="number" name="gaji_pokok" id="gaji_pokok" class="form-control" value="<?= $kontrak['gaji_pokok']?>">
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="tunjangan">Tunjangan
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="number" name="tunjangan" id="tunjangan" class="form-control" value="<?= $kontrak['tunjangan']?>">
+												<input type="hidden" name="status_kontrak" value="<?= $kontrak['status_kontrak']?>">
+											</div>
+										</div>
+
+										<!-- <div class="item form-group">
+										    <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Upload Scan Ijazah (.pdf) <span class="required">*</span></label>
+										    <div class="col-md-6 col-sm-6 ">
+										        <input type="file" name="scan_ijazah">
+										        <?php if (!empty($ijazah['scan_ijazah'])): ?>
+										            <br>
+										            <p class="file-selected">File sebelumnya: <?= $ijazah['scan_ijazah'] ?></p>
+										            <input type="hidden" name="scan_ijazah_lama" value="<?= $ijazah['scan_ijazah'] ?>">
+										        <?php endif; ?>
+										    </div>
+										</div> -->
+
+
+										<!-- <div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Upload Scan Ijazah (.pdf) <span class="required">*</span></label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="file" name="scan_ijazah" required><br>
+												<a href="" value="<?= $ijazah['scan_ijazah']?>"><?= $ijazah['scan_ijazah']?></a>
+											</div>
+										</div> -->
 										
-
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Level <span class="required">*</span></label>
-											<div class="col-md-6 col-sm-6 ">
-												<select class="form-control" name="level" required>
-													<option value="">--Pilih Level--</option>
-													<option value="Staff Operasional" <?php if ($user['level'] == 'Staff Operasional') { echo "selected"; } ?>>Staff Operasional</option>
-													<option value="Staff IT" <?php if ($user['level'] == 'Staff IT') { echo "selected"; } ?>>Staff IT</option>
-													<option value="Kepala Cabang" <?php if ($user['level'] == 'Kepala Cabang') { echo "selected"; } ?>>Kepala Cabang</option>
-													<option value="Direktur Operasional" <?php if ($user['level'] == 'Direktur Operasional') { echo "selected"; } ?>>Direktur Operasional</option>
-													<option value="Purchasing" <?php if ($user['level'] == 'Purchasing') { echo "selected"; } ?>>Purchasing</option>
-													<option value="HRD" <?php if ($user['level'] == 'HRD') { echo "selected"; } ?>>HRD</option>
-													<option value="Direktur Utama" <?php if ($user['level'] == 'Direktur Utama') { echo "selected"; } ?>>Direktur Utama</option>
-												</select>
-											</div>
-										</div>
 
 										
 									

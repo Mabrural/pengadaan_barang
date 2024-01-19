@@ -3,11 +3,11 @@
 // $id_mhs = $_SESSION["id_mhs"];
 
 // ambil data di URL
-$id_ijazah = $_GET["id_ijazah"];
-// query data mahasiswa berdasarkan id
-$ijazah = query("SELECT * FROM ijazah WHERE id_ijazah = $id_ijazah")[0];
+$id_kontrak = $_GET["id_kontrak"];
+// query data kontrak berdasarkan id
+$kontrak = query("SELECT * FROM kontrak_kerja WHERE id_kontrak = $id_kontrak")[0];
 // $karyawan = query("SELECT * FROM karyawan");
-$karyawan = query("SELECT * FROM karyawan WHERE jabatan != 'Direktur Utama' AND jabatan != 'Direktur HRD' AND jabatan != 'Direktur Keuangan' AND jabatan != 'Direktur Operasional' AND id_emp IN (SELECT id_emp FROM ijazah WHERE id_ijazah=$id_ijazah)");
+$karyawan = query("SELECT * FROM karyawan WHERE jabatan != 'Direktur Utama' AND jabatan != 'Direktur HRD' AND jabatan != 'Direktur Keuangan' AND jabatan != 'Direktur Operasional' AND id_emp IN (SELECT id_emp FROM kontrak_kerja WHERE id_kontrak=$id_kontrak)");
 $lantai = query("SELECT * FROM lantai");
 
 // cek apakah tombol submit sudah ditekan atau belum
@@ -17,7 +17,7 @@ if (isset($_POST["submit"])) {
 	
 
 	// cek apakah data berhasil diubah atau tidak
-	if(ubahIjazah($_POST) > 0 ) {
+	if(ubahKontrak($_POST) > 0 ) {
 		echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
 		echo '<script src="./sweetalert2.min.js"></script>';
 		echo "<script>
@@ -25,14 +25,14 @@ if (isset($_POST["submit"])) {
 			swal.fire({
 				
 				title               : 'Berhasil',
-				text                :  'Data berhasil diubah',
+				text                :  'Extend Kontrak Berhasil',
 				//footer              :  '',
 				icon                : 'success',
 				timer               : 2000,
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=penitipanIjazah'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=kontrakKerja'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>";
 		// echo "
@@ -56,7 +56,7 @@ if (isset($_POST["submit"])) {
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=penitipanIjazah'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=kontrakKerja'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>";
 		// echo "
@@ -96,7 +96,7 @@ if (isset($_POST["submit"])) {
 						<div class="col-md-12 col-sm-12 ">
 							<div class="x_panel">
 								<div class="x_title">
-									<h2>Ubah Data Ijazah<small></small></h2>
+									<h2>Konfirmasi Extend Kontrak<small></small></h2>
 									<!-- <ul class="nav navbar-right panel_toolbox">
 										<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
 										</li>
@@ -117,7 +117,7 @@ if (isset($_POST["submit"])) {
 								<div class="x_content">
 									<br />
 									<form action="" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
-										<input type="hidden" name="id_ijazah" value="<?= $ijazah["id_ijazah"];?>">
+										<input type="hidden" name="id_kontrak" value="<?= $kontrak["id_kontrak"];?>">
 										
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Nama Karyawan <span class="required">*</span></label>
@@ -125,38 +125,66 @@ if (isset($_POST["submit"])) {
 												<select class="form-control" name="id_emp" required>
 													<!-- <option value="">--Pilih Karyawan--</option> -->
 													<?php foreach($karyawan as $row) : ?>
-														<option value="<?= $row['id_emp']?>" <?= ($row['id_emp'] == $ijazah['id_emp'])?'selected': ''; ?>><?= $row['nama_emp']?></option>
+														<option value="<?= $row['id_emp']?>" <?= ($row['id_emp'] == $kontrak['id_emp'])?'selected': ''; ?>><?= $row['nama_emp']?></option>
 													<?php endforeach;?>	
 												</select>
 											</div>
 										</div>
 
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">No. Ijazah <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="tgl_mulai">Tanggal Mulai <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="no_ijazah" id="last-name" required="required" class="form-control" value="<?= $ijazah['no_ijazah']?>">
+												<?php
+										            // Ambil nilai tgl_mulai dari $kontrak
+										            $tgl_mulai = $kontrak['tgl_akhir'];
+
+										            // Hitung tanggal mulai dengan menambahkan 1 hari
+										            $tgl_mulai2 = date('Y-m-d', strtotime('+1 day', strtotime($tgl_mulai)));
+										        ?>
+												<input type="date" name="tgl_mulai" id="tgl_mulai" required="required" class="form-control" value="<?= $tgl_mulai2?>">
 											</div>
 										</div>
 
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="tgl_penitipan">Tanggal Penitipan <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="tgl_akhir">Tanggal Akhir <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="date" name="tgl_penitipan" id="tgl_penitipan" class="form-control" value="<?= $ijazah['tgl_penitipan']?>" required>
+												<?php
+										        // Ambil nilai tgl_mulai dari $kontrak
+        										// $tgl_mulai = $kontrak['tgl_akhir'];
+
+										        // Hitung tanggal akhir dengan menambahkan 1 tahun
+       											// $tgl_akhir = date('Y-m-d', strtotime('+1 year', strtotime($tgl_mulai)));
+       											$value_tgl_akhir = $kontrak['status_kontrak'] === 'Kontrak 2' ? '0000-00-00' : date('Y-m-d', strtotime('+1 year', strtotime($tgl_mulai2)));
+
+       											// Tambahkan kondisi untuk menentukan apakah input readonly atau tidak
+            									$readonly_attr = $kontrak['status_kontrak'] === 'Kontrak 2' ? 'readonly' : '';
+										        ?>
+												<input type="date" name="tgl_akhir" id="tgl_akhir" class="form-control" value="<?= $value_tgl_akhir;?>" <?= $readonly_attr;?>>
 											</div>
 										</div>
 
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="tgl_kembali">Tanggal Pengembalian
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="gaji_pokok">Gaji Pokok <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="date" name="tgl_kembali" id="tgl_kembali" class="form-control" value="<?= $ijazah['tgl_kembali']?>">
-												<input type="hidden" name="status_ijazah" value="Sedang dititipkan">
+												<input type="number" name="gaji_pokok" id="gaji_pokok" class="form-control" value="<?= $kontrak['gaji_pokok']?>">
 											</div>
 										</div>
 
 										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="tunjangan">Tunjangan
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="number" name="tunjangan" id="tunjangan" class="form-control" value="<?= $kontrak['tunjangan']?>">
+												<!-- <input type="text" name="status_kontrak" value="<?= $kontrak['status_kontrak']?>"> -->
+												<input type="hidden" name="status_kontrak" value="<?= $kontrak['status_kontrak'] === 'Kontrak 1' ? 'Kontrak 2' : ($kontrak['status_kontrak'] === 'Kontrak 2' ? 'Permanent' : $kontrak['status_kontrak']) ?>">
+
+											</div>
+										</div>
+
+										<!-- <div class="item form-group">
 										    <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Upload Scan Ijazah (.pdf) <span class="required">*</span></label>
 										    <div class="col-md-6 col-sm-6 ">
 										        <input type="file" name="scan_ijazah">
@@ -166,7 +194,7 @@ if (isset($_POST["submit"])) {
 										            <input type="hidden" name="scan_ijazah_lama" value="<?= $ijazah['scan_ijazah'] ?>">
 										        <?php endif; ?>
 										    </div>
-										</div>
+										</div> -->
 
 
 										<!-- <div class="item form-group">
@@ -185,7 +213,7 @@ if (isset($_POST["submit"])) {
 											<div class="col-md-6 col-sm-6 offset-md-3">
 												<!-- <button class="btn btn-primary" type="button">Cancel</button> -->
 												<button class="btn btn-primary" type="reset">Reset</button>
-												<button type="submit" class="btn btn-success" name="submit">Submit</button>
+												<button type="submit" class="btn btn-success" name="submit">Extend</button>
 											</div>
 										</div>
 

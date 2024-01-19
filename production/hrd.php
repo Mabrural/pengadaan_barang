@@ -160,6 +160,7 @@ if ($_SESSION["level"] == "Staff IT") {
                   <li><a><i class="fa fa-users"></i> Human Resources<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="hrd.php?page=dataKaryawan">Data Karyawan</a></li>
+                      <li><a href="hrd.php?page=kontrakKerja">Kontrak Kerja</a></li>
                       <li><a href="hrd.php?page=cuti">Form Cuti</a></li>
                       <li><a href="hrd.php?page=absen">Data Absen</a></li>
                       <li><a href="hrd.php?page=aksesPintu">Data Akses Pintu</a></li>
@@ -365,6 +366,10 @@ if ($_SESSION["level"] == "Staff IT") {
                                 include "page/profile/profile.php";
                                 break;
 
+                            case 'kontrakKerja':
+                                include "page/hrd/kontrak_kerja/kontrak_kerja.php";
+                                break;
+
                             case 'laporan':
                                 include "page/laporan/laporan.php";
                                 break;
@@ -470,6 +475,22 @@ if ($_SESSION["level"] == "Staff IT") {
 
                             case 'returnIjazah':
                                 include 'page/hrd/penitipan_ijazah/return.php';
+                                break;
+
+                            case 'tambahKontrak':
+                                include "page/hrd/kontrak_kerja/tambah.php";
+                                break;
+
+                            case 'hapusKontrak':
+                                include "page/hrd/kontrak_kerja/hapus.php";
+                                break;
+
+                            case 'ubahKontrak':
+                                include "page/hrd/kontrak_kerja/ubah.php";
+                                break;
+
+                            case 'extendKontrak':
+                                include "page/hrd/kontrak_kerja/extend.php";
                                 break;
 
                             case 'ubahCatatan':

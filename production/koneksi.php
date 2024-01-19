@@ -616,6 +616,55 @@ function hapusIjazah($id_ijazah) {
 
 }
 
+function tambahKontrak($data) {
+	global $koneksi;
+	$tgl_mulai = htmlspecialchars($data["tgl_mulai"]);
+	$tgl_akhir = htmlspecialchars($data["tgl_akhir"]);
+	$gaji_pokok = htmlspecialchars($data["gaji_pokok"]);
+	$tunjangan = htmlspecialchars($data["tunjangan"]);
+	$status_kontrak = htmlspecialchars($data["status_kontrak"]);
+	$id_emp = htmlspecialchars($data["id_emp"]);
+
+
+	$query = "INSERT INTO kontrak_kerja VALUES
+			('', '$tgl_mulai', '$tgl_akhir', '$gaji_pokok', '$tunjangan', '$status_kontrak', '$id_emp')";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function ubahKontrak($data) {
+	global $koneksi;
+	$id_kontrak = $data["id_kontrak"];
+	$tgl_mulai = htmlspecialchars($data["tgl_mulai"]);
+	$tgl_akhir = htmlspecialchars($data["tgl_akhir"]);
+	$gaji_pokok = htmlspecialchars($data["gaji_pokok"]);
+	$tunjangan = htmlspecialchars($data["tunjangan"]);
+	$status_kontrak = htmlspecialchars($data["status_kontrak"]);
+	$id_emp = htmlspecialchars($data["id_emp"]);
+
+
+	$query = "UPDATE kontrak_kerja SET
+				tgl_mulai = '$tgl_mulai',
+				tgl_akhir = '$tgl_akhir',
+				gaji_pokok = '$gaji_pokok',
+				tunjangan = '$tunjangan',
+				status_kontrak = '$status_kontrak',
+				id_emp = '$id_emp'
+			  WHERE id_kontrak = $id_kontrak
+			";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function hapusKontrak($id_kontrak) {
+	global $koneksi;
+	mysqli_query($koneksi, "DELETE FROM kontrak_kerja WHERE id_kontrak=$id_kontrak");
+
+	return mysqli_affected_rows($koneksi);
+
+}
 
 function tambahAnggaran($data) {
 	global $koneksi;

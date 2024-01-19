@@ -1,10 +1,10 @@
 <?php
 
 // $id_mhs = $_SESSION["id_mhs"];
+// $karyawan = query("SELECT * FROM karyawan WHERE jabatan != 'Direktur Utama' AND jabatan != 'Direktur HRD' AND jabatan != 'Direktur Keuangan' AND jabatan != 'Direktur Operasional'");
 
+$karyawan = query("SELECT * FROM karyawan WHERE jabatan != 'Direktur Utama' AND jabatan != 'Direktur HRD' AND jabatan != 'Direktur Keuangan' AND jabatan != 'Direktur Operasional' AND id_emp NOT IN (SELECT id_emp FROM kontrak_kerja)");
 // $karyawan = query("SELECT * FROM karyawan");
-$karyawan = query("SELECT * FROM karyawan WHERE jabatan != 'Direktur Utama' AND jabatan != 'Direktur HRD' AND jabatan != 'Direktur Keuangan' AND jabatan != 'Direktur Operasional' AND id_emp NOT IN (SELECT id_emp FROM user)");
-$lantai = query("SELECT * FROM lantai");
 
 // cek apakah tombol submit sudah ditekan atau belum
 if (isset($_POST["submit"])) {
@@ -12,7 +12,7 @@ if (isset($_POST["submit"])) {
 
 
 	// cek apakah data berhasil ditambahkan atau tidak
-	if(tambahLogin($_POST) > 0 ) {
+	if(tambahKontrak($_POST) > 0 ) {
 		echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
 		echo '<script src="./sweetalert2.min.js"></script>';
 		echo "<script>
@@ -27,7 +27,7 @@ if (isset($_POST["submit"])) {
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=userLogin'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=kontrakKerja'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>"; 
 		// echo "
@@ -51,7 +51,7 @@ if (isset($_POST["submit"])) {
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=userLogin'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=kontrakKerja'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>";
 		// echo "
@@ -72,7 +72,7 @@ if (isset($_POST["submit"])) {
       <div class="">
 					<!-- <div class="page-title">
 						<div class="title_left">
-							<h3>Form Tambah Absen</h3>
+							<h3>Form Tambah Karyawan</h3>
 						</div> -->
 
 						<!-- <div class="title_right">
@@ -91,7 +91,7 @@ if (isset($_POST["submit"])) {
 						<div class="col-md-12 col-sm-12 ">
 							<div class="x_panel">
 								<div class="x_title">
-									<h2>Form Input Data Login<small></small></h2>
+									<h2>Form Input Kontrak<small></small></h2>
 									<!-- <ul class="nav navbar-right panel_toolbox">
 										<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
 										</li>
@@ -114,9 +114,10 @@ if (isset($_POST["submit"])) {
 									<form action="" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
 
 										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Nama Karyawan <span class="required">*</span></label>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="id_emp">Nama Karyawan <span class="required">*</span>
+											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<select class="form-control" name="id_emp" required>
+												<select class="form-control" name="id_emp" id="id_emp" required>
 													<option value="">--Pilih Karyawan--</option>
 													<?php foreach($karyawan as $row) : ?>
 														<option value="<?= $row['id_emp']?>"><?= $row['nama_emp']?></option>
@@ -125,53 +126,59 @@ if (isset($_POST["submit"])) {
 											</div>
 										</div>
 
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="username">Username <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="username" id="username" required="required" class="form-control">
-											</div>
-										</div>
-
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="password">Password <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="password" name="password" id="password" required="required" class="form-control">
-											</div>
-										</div>
-
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="password2">Konfirmasi Password <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="password" name="password2" id="password2" required="required" class="form-control">
-											</div>
-										</div>
-										
-
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Level <span class="required">*</span></label>
-											<div class="col-md-6 col-sm-6 ">
-												<select class="form-control" name="level" required>
-													<option value="">--Pilih Level--</option>
-													<option value="Staff Operasional">Staff Operasional</option>
-													<option value="Staff IT">Staff IT</option>
-													<option value="Kepala Cabang">Kepala Cabang</option>
-													<option value="Direktur Operasional">Direktur Operasional</option>
-													<option value="Purchasing">Purchasing</option>
-													<option value="HRD">HRD</option>
-													<option value="Direktur Utama">Direktur Utama</option>
-													
-													
-												</select>
-											</div>
-										</div>
-										
-										
-										
 								
+
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="tgl_mulai">Tanggal Mulai <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="date" name="tgl_mulai" id="tgl_mulai" required="required" class="form-control">
+											</div>
+										</div>
 										
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="tgl_akhir">Tanggal Akhir <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="date" name="tgl_akhir" id="tgl_akhir" class="form-control" required>
+											</div>
+										</div>
+
+
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="gaji_pokok">Gaji Pokok <span class="required">*</span> 
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="number" name="gaji_pokok" id="gaji_pokok" class="form-control" required>
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="tunjangan">Tunjangan 
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="number" name="tunjangan" id="tunjangan" class="form-control">
+												<input type="hidden" name="status_kontrak" class="form-control" value="Kontrak 1">
+											</div>
+										</div>
+
+										<!-- <div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Upload Scan Ijazah (.pdf) <span class="required">*</span></label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="file" name="scan_ijazah" required>
+											</div>
+										</div> -->
+										
+										<div class="item form-group">
+											<!-- <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Pengajuan</label> -->
+											<!-- <div class="col-md-6 col-sm-6 ">
+												<input id="middle-name" name="tgl_pengajuan" class="form-control" placeholder="dd-mm-yyyy" type="hidden" value="<?php echo date('Y-m-d'); ?>" readonly>
+												<input id="middle-name" name="status" class="form-control" type="hidden" value="Menunggu Persetujuan">
+												<input id="middle-name" name="acc1" class="form-control" type="hidden" value="">
+												<input id="middle-name" name="acc2" class="form-control" type="hidden" value="">
+												
+											</div> -->
+										</div>
 										
 										<!-- <div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Condition</label>
