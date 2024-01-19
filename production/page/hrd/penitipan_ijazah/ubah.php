@@ -155,6 +155,27 @@ if (isset($_POST["submit"])) {
 												<input type="hidden" name="status_ijazah" value="Sedang dititipkan">
 											</div>
 										</div>
+
+										<div class="item form-group">
+										    <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Upload Scan Ijazah (.pdf) <span class="required">*</span></label>
+										    <div class="col-md-6 col-sm-6 ">
+										        <input type="file" name="scan_ijazah">
+										        <?php if (!empty($ijazah['scan_ijazah'])): ?>
+										            <br>
+										            <p class="file-selected">File sebelumnya: <?= $ijazah['scan_ijazah'] ?></p>
+										            <input type="hidden" name="scan_ijazah_lama" value="<?= $ijazah['scan_ijazah'] ?>">
+										        <?php endif; ?>
+										    </div>
+										</div>
+
+
+										<!-- <div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Upload Scan Ijazah (.pdf) <span class="required">*</span></label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="file" name="scan_ijazah" required><br>
+												<a href="" value="<?= $ijazah['scan_ijazah']?>"><?= $ijazah['scan_ijazah']?></a>
+											</div>
+										</div> -->
 										
 
 										

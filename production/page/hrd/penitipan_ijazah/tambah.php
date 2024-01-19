@@ -150,6 +150,13 @@ if (isset($_POST["submit"])) {
 												<input type="hidden" name="status_ijazah" value="Sedang dititipkan">
 											</div>
 										</div>
+
+										<div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Upload Scan Ijazah (.pdf) <span class="required">*</span></label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="file" name="scan_ijazah" required>
+											</div>
+										</div>
 										
 										<div class="item form-group">
 											<!-- <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Pengajuan</label> -->

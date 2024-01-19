@@ -39,6 +39,7 @@ $id_user = $_SESSION["id_user"];
                 <th class="column-title">No. </th>
                 <th class="column-title">Nama </th>
                 <th class="column-title">No. Ijazah </th>
+                <th class="column-title">Scan Ijazah </th>
                 <th class="column-title">Tanggal Penitipan </th>
                 <th class="column-title">Tanggal Pengembalian </th>
                 <th class="column-title">Status </th>
@@ -63,17 +64,18 @@ $id_user = $_SESSION["id_user"];
                 <td class=" "><?= $no++;?></td>
                 <td class=" "><a href="?form=rincianKaryawan&id_emp=<?=$data["id_emp"]?>"><?= $data['nama_emp'];?></a></td>
                 <td class=" "><?= $data['no_ijazah'];?> </td>
+                <td class=" "><a href="files/ijazah/<?= $data['scan_ijazah'];?>" style="color:blue; text-decoration: underline;"><?= $data['scan_ijazah'];?></a></td>
                 <td class=" "><?= date('d-M-Y', strtotime($data['tgl_penitipan']));?> </td>
                 <td class=" ">
-				    <?php
-				        if ($data['tgl_kembali'] == NULL || $data['tgl_kembali'] == '' || $data['tgl_kembali'] == '0000-00-00') {
-				            echo '-';
-				        } else {
-				            echo date('d-M-Y', strtotime($data['tgl_kembali']));
-				        }
-				    ?>
-				</td>
-                <!-- <td class=" "><?= $data['status_ijazah'];?></td> -->
+        				    <?php
+        				        if ($data['tgl_kembali'] == NULL || $data['tgl_kembali'] == '' || $data['tgl_kembali'] == '0000-00-00') {
+        				            echo '-';
+        				        } else {
+        				            echo date('d-M-Y', strtotime($data['tgl_kembali']));
+        				        }
+        				    ?>
+        				</td>
+                
                 <td class=" " style=" color: <?= $data['status_ijazah'] == 'Sedang dititipkan' ? '#b58709' : '#14a664'; ?>">
 				    <strong><?= $data['status_ijazah'];?></strong>
 				</td>

@@ -514,13 +514,67 @@ function tambahIjazah($data) {
 	$status_ijazah = htmlspecialchars($data["status_ijazah"]);
 	$id_emp = htmlspecialchars($data["id_emp"]);
 
+	$file =  uploadFile();
+	if (!$file) {
+		return false;
+	}
 
 	$query = "INSERT INTO ijazah VALUES
-			('', '$no_ijazah', '$tgl_penitipan', '$tgl_kembali', '$status_ijazah', '$id_emp')";
+			('', '$no_ijazah', '$tgl_penitipan', '$tgl_kembali', '$status_ijazah', '$file', '$id_emp')";
 	mysqli_query($koneksi, $query);
 
 	return mysqli_affected_rows($koneksi);
 }
+
+function uploadFile(){
+
+	$namaFile = $_FILES['scan_ijazah']['name'];
+	$ukuranFile = $_FILES['scan_ijazah']['size'];
+	$error = $_FILES['scan_ijazah']['error'];
+	$tmpName = $_FILES['scan_ijazah']['tmp_name'];
+
+	// cek apakah tidak ada file yang diupload
+	if ($error === 4) {
+		echo "
+			<script>
+				alert('pilih file terlebih dahulu!');
+			</script>
+		";
+		return false;
+	}
+
+	// cek apakah yang diupload adalah pdf
+	$ekstensiFileValid = ['pdf'];
+	$ekstensiFile = explode('.', $namaFile);
+	$ekstensiFile = strtolower(end($ekstensiFile));
+	if (!in_array($ekstensiFile, $ekstensiFileValid) ){
+		echo "
+			<script>
+				alert('yang anda upload bukan pdf!');
+			</script>
+		";
+		return false;
+	}
+
+	// cek jika ukurannya terlalu besar
+	if ($ukuranFile > 1000000){
+		echo "
+			<script>
+				alert('ukuran pdf terlalu besar!');
+			</script>
+		";
+		return false;
+	}
+
+	// lolos pengecekan, pdf siap diupload
+	// generate nama pdf baru
+	$namaFileBaru = uniqid();
+	$namaFileBaru .= '.';
+	$namaFileBaru .= $ekstensiFile;
+
+	move_uploaded_file($tmpName, 'files/ijazah/'. $namaFileBaru);
+	return $namaFileBaru;
+ }
 
 function ubahIjazah($data) {
 	global $koneksi;
@@ -529,14 +583,23 @@ function ubahIjazah($data) {
 	$tgl_penitipan = htmlspecialchars($data["tgl_penitipan"]);
 	$tgl_kembali = htmlspecialchars($data["tgl_kembali"]);
 	$status_ijazah = htmlspecialchars($data["status_ijazah"]);
+	$fileLama = htmlspecialchars($data['scan_ijazah_lama']);
 	$id_emp = htmlspecialchars($data["id_emp"]);
 
+	// cek apakah user pilih gambar baru atau tidak
+	if ($_FILES['scan_ijazah']['error'] === 4 ) {
+		$file = $fileLama;
+	} else {
+
+		$file = uploadFile();
+	}
 
 	$query = "UPDATE ijazah SET
 				no_ijazah = '$no_ijazah',
 				tgl_penitipan = '$tgl_penitipan',
 				tgl_kembali = '$tgl_kembali',
 				status_ijazah = '$status_ijazah',
+				scan_ijazah = '$file',
 				id_emp = '$id_emp'
 			  WHERE id_ijazah = $id_ijazah
 			";

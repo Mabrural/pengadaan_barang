@@ -122,8 +122,10 @@ if (isset($_POST["submit"])) {
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Nama Karyawan <span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 " readonly>
+											
+
 												<select class="form-control" name="id_emp" required readonly>
-													<option value="">--Pilih Karyawan--</option>
+													<!-- <option value="">--Pilih Karyawan--</option> -->
 													<?php foreach($karyawan as $row) : ?>
 														<option value="<?= $row['id_emp']?>" <?= ($row['id_emp'] == $ijazah['id_emp'])?'selected': ''; ?>><?= $row['nama_emp']?></option>
 													<?php endforeach;?>	
@@ -154,6 +156,18 @@ if (isset($_POST["submit"])) {
 												<input type="date" name="tgl_kembali" id="tgl_kembali" class="form-control" value="<?= date('Y-m-d');?>" readonly>
 												<input type="hidden" name="status_ijazah" value="Sudah dikembalikan">
 											</div>
+										</div>
+
+										<div class="item form-group">
+										    <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Scan Ijazah (.pdf) <span class="required">*</span></label>
+										    <div class="col-md-6 col-sm-6 ">
+										        <input type="file" name="scan_ijazah" hidden>
+										        <?php if (!empty($ijazah['scan_ijazah'])): ?>
+										            
+										            <input type="text" class="form-control" name="" value="<?= $ijazah['scan_ijazah'] ?>" readonly>
+										            <input type="hidden" name="scan_ijazah_lama" value="<?= $ijazah['scan_ijazah'] ?>">
+										        <?php endif; ?>
+										    </div>
 										</div>
 										
 
