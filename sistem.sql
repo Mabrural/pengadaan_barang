@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 19, 2024 at 05:03 AM
+-- Generation Time: Jan 19, 2024 at 11:51 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -118,7 +118,7 @@ CREATE TABLE `ijazah` (
 --
 
 INSERT INTO `ijazah` (`id_ijazah`, `no_ijazah`, `tgl_penitipan`, `tgl_kembali`, `status_ijazah`, `scan_ijazah`, `id_emp`) VALUES
-(58, 'M-SMK/1100023', '2024-01-19', '0000-00-00', 'Sedang dititipkan', '65a9f4661eed8.pdf', 30);
+(60, 'M-SMK/1100023', '2024-01-02', '0000-00-00', 'Sedang dititipkan', '65aa48284ecd6.pdf', 30);
 
 -- --------------------------------------------------------
 
@@ -166,6 +166,29 @@ INSERT INTO `karyawan` (`id_emp`, `nama_emp`, `jabatan`, `divisi`, `status`, `ga
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `kontrak_kerja`
+--
+
+CREATE TABLE `kontrak_kerja` (
+  `id_kontrak` int(10) NOT NULL,
+  `tgl_mulai` date NOT NULL,
+  `tgl_akhir` date DEFAULT NULL,
+  `gaji_pokok` int(10) NOT NULL,
+  `tunjangan` int(10) NOT NULL,
+  `status_kontrak` varchar(40) NOT NULL,
+  `id_emp` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `kontrak_kerja`
+--
+
+INSERT INTO `kontrak_kerja` (`id_kontrak`, `tgl_mulai`, `tgl_akhir`, `gaji_pokok`, `tunjangan`, `status_kontrak`, `id_emp`) VALUES
+(27, '2025-04-04', '0000-00-00', 6000000, 0, 'Permanent', 30);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `lantai`
 --
 
@@ -208,10 +231,11 @@ INSERT INTO `user` (`id_user`, `username`, `password`, `level`, `id_emp`) VALUES
 (14, 'admin4', '$2y$10$3SspMiCSr.VJIpZy9thj2O1tNUeKc/EGPCLLRLaj4SznMsEmQliN.', 'admin4', 9),
 (15, 'hrd', '$2y$10$rfSEEc5RaRZ/YjmxEF9G8uDTXi8w04f8PnuI/3Br7pXPWD9PKOhN2', 'HRD', 10),
 (21, 'sanjeev', '$2y$10$dqD5eyXMYFl5dmq.1s103OeZOPTBNN4gHGqbu/D5neofhrjWRKxBO', 'Direktur Utama', 8),
-(24, 'mabrur', '$2y$10$7/vY8tYc2RDIgAkh8dDDT.bIZoMqnEXG5vIBw9uscxp.7TCVJ.kPq', 'Staff IT', 30),
 (27, 'alex', '$2y$10$pKR0gqG2v6B0T7/3oiKvPexleYhzbBKMLyH1M6gnP3j6nJdVvi4SK', 'Staff Operasional', 19),
 (28, 'robi', '$2y$10$pi39ljqjbeI7Xgu6up8uie2wOUT6Gv7dwqsQXgvI60DotWKCmSvQC', 'Staff Operasional', 18),
-(29, 'krisno', '$2y$10$wdmPEof2zbHxxFyJWXAZZOZOigLJucxD/Vy5oALS.0y5ZJkvzVNhC', 'Staff Operasional', 16);
+(29, 'krisno', '$2y$10$wdmPEof2zbHxxFyJWXAZZOZOigLJucxD/Vy5oALS.0y5ZJkvzVNhC', 'Staff Operasional', 16),
+(30, 'niken', '$2y$10$Kzzb.fetZnuGPtKI03hX6.p.b.XP81bzSX92q0P3/HpRpWFSpdPZa', 'Staff Operasional', 17),
+(31, 'mabrur', '$2y$10$zxwFH.e4ooAM3CgI8Wzi8Ot0AIZhzcnKMHNPSIprWt.gbQiArYqki', 'Staff IT', 30);
 
 --
 -- Indexes for dumped tables
@@ -254,6 +278,13 @@ ALTER TABLE `karyawan`
   ADD PRIMARY KEY (`id_emp`);
 
 --
+-- Indexes for table `kontrak_kerja`
+--
+ALTER TABLE `kontrak_kerja`
+  ADD PRIMARY KEY (`id_kontrak`),
+  ADD KEY `id_emp` (`id_emp`);
+
+--
 -- Indexes for table `lantai`
 --
 ALTER TABLE `lantai`
@@ -292,13 +323,19 @@ ALTER TABLE `barang`
 -- AUTO_INCREMENT for table `ijazah`
 --
 ALTER TABLE `ijazah`
-  MODIFY `id_ijazah` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id_ijazah` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
   MODIFY `id_emp` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `kontrak_kerja`
+--
+ALTER TABLE `kontrak_kerja`
+  MODIFY `id_kontrak` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `lantai`
@@ -310,7 +347,7 @@ ALTER TABLE `lantai`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Constraints for dumped tables
@@ -341,6 +378,12 @@ ALTER TABLE `barang`
 --
 ALTER TABLE `ijazah`
   ADD CONSTRAINT `ijazah_ibfk_1` FOREIGN KEY (`id_emp`) REFERENCES `karyawan` (`id_emp`);
+
+--
+-- Constraints for table `kontrak_kerja`
+--
+ALTER TABLE `kontrak_kerja`
+  ADD CONSTRAINT `kontrak_kerja_ibfk_1` FOREIGN KEY (`id_emp`) REFERENCES `karyawan` (`id_emp`);
 
 --
 -- Constraints for table `user`
