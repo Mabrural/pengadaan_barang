@@ -707,6 +707,27 @@ function hapusManageCuti($id_manage_cuti) {
 
 }
 
+function tambahRequestCuti($data) {
+	global $koneksi;
+
+	$tgl_mulai = htmlspecialchars($data["tgl_mulai"]);
+	$tgl_akhir = htmlspecialchars($data["tgl_akhir"]);
+	$jml_hari = htmlspecialchars($data["jml_hari"]);
+	$alasan = htmlspecialchars($data["alasan"]);
+	$status_cuti = htmlspecialchars($data["status_cuti"]);
+	$created_at = htmlspecialchars($data["created_at"]);
+	$updated_at = htmlspecialchars($data["updated_at"]);
+	$id_kategori_cuti = htmlspecialchars($data["id_kategori_cuti"]);
+	$id_emp = htmlspecialchars($data["id_emp"]);
+
+
+	$query = "INSERT INTO req_cuti VALUES
+			('', '$tgl_mulai', '$tgl_akhir', '$jml_hari', '$alasan', '$status_cuti', '$created_at', '$updated_at', '$id_emp', '$id_kategori_cuti')";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
 function tambahAnggaran($data) {
 	global $koneksi;
 	$nama_anggaran = htmlspecialchars($data["nama_anggaran"]);

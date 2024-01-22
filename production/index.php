@@ -159,13 +159,13 @@ if ($_SESSION["level"] == "Staff IT") {
                     </ul>
                   </li>
 
-                 <!--  <li><a><i class="fa fa-users"></i> Human Resources<span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-users"></i> Human Resources<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="index.php?page=hrd">Data Karyawan</a></li>
-                      <li><a href="index.php?page=cuti">Form Cuti</a></li>
+                      <li><a href="index.php?page=reqCuti">Form Cuti</a></li>
+                      <li><a href="index.php?page=historyCuti">History Cuti</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
-                  </li> -->
+                  </li>
 
                   <!-- li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -366,9 +366,12 @@ if ($_SESSION["level"] == "Staff IT") {
                                 break;
                             
 
-                            case 'cuti':
-                                include "page/cuti/form_cuti.php";
-                              break;
+                            case 'reqCuti':
+                                include "page/hrd/cuti/req_cuti/form_cuti.php";
+                                break;
+                            case 'historyCuti':
+                                include "page/hrd/cuti/req_cuti/history_request.php";
+                                break;
 
                             case 'dashboard':
                                 include "page/dashboard/dashboard.php";

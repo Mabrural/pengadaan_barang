@@ -164,7 +164,8 @@ if ($_SESSION["level"] == "Purchasing") {
                   <li><a><i class="fa fa-users"></i> Human Resources<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="it.php?page=dataKaryawan">Data Karyawan</a></li>
-                      <li><a href="it.php?page=cuti">Form Cuti</a></li>
+                      <li><a href="it.php?page=reqCuti">Form Cuti</a></li>
+                      <li><a href="it.php?page=historyCuti">History Cuti</a></li>
                       <li><a href="it.php?page=absen">Data Absen</a></li>
                       <li><a href="it.php?page=aksesPintu">Data Akses Pintu</a></li>
                       <li><a href="it.php?page=userLogin">Data Login</a></li>
@@ -348,6 +349,13 @@ if ($_SESSION["level"] == "Purchasing") {
 
                             case 'profile':
                                 include "page/profile/profile.php";
+                                break;
+
+                            case 'reqCuti':
+                                include "page/hrd/cuti/req_cuti/form_cuti.php";
+                                break;
+                            case 'historyCuti':
+                                include "page/hrd/cuti/req_cuti/history_request.php";
                                 break;
 
                             case 'laporan':

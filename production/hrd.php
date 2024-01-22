@@ -167,7 +167,7 @@ if ($_SESSION["level"] == "Staff IT") {
                       <li><a href="hrd.php?page=userLogin">Data Login</a></li>
                       <li><a href="hrd.php?page=penitipanIjazah">Penitipan Ijazah</a></li>
                       <li><a href="hrd.php?page=manageCuti">Manage Cuti</a></li>
-                      <li><a href="hrd.php?page=cuti">Form Cuti</a></li>
+                      <li><a href="hrd.php?page=reqCuti">Form Cuti</a></li>
                       <li><a href="hrd.php?page=attendance">Attendance</a></li>
                       <li><a href="hrd.php?page=penilaian">Penilaian Karyawan</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
@@ -372,6 +372,13 @@ if ($_SESSION["level"] == "Staff IT") {
                                 include "page/hrd/kontrak_kerja/kontrak_kerja.php";
                                 break;
 
+                            case 'reqCuti':
+                                include "page/hrd/cuti/req_cuti/form_cuti.php";
+                                break;
+                            case 'historyCuti':
+                                include "page/hrd/cuti/req_cuti/history_request.php";
+                                break;
+
                             case 'laporan':
                                 include "page/laporan/laporan.php";
                                 break;
@@ -509,6 +516,10 @@ if ($_SESSION["level"] == "Staff IT") {
 
                             case 'detilKuota':
                                 include 'page/hrd/cuti/manage_cuti/detil_manage_cuti.php';
+                                break;
+
+                            case 'approveCuti':
+                                include 'page/hrd/cuti/approve_cuti/approve_cuti.php';
                                 break;
 
                             case 'ubahCatatan':
