@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 19, 2024 at 11:51 AM
+-- Generation Time: Jan 22, 2024 at 09:41 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -166,6 +166,26 @@ INSERT INTO `karyawan` (`id_emp`, `nama_emp`, `jabatan`, `divisi`, `status`, `ga
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `kategori_cuti`
+--
+
+CREATE TABLE `kategori_cuti` (
+  `id_kategori_cuti` int(10) NOT NULL,
+  `kategori_cuti` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `kategori_cuti`
+--
+
+INSERT INTO `kategori_cuti` (`id_kategori_cuti`, `kategori_cuti`) VALUES
+(1, 'Annual Leave'),
+(2, 'Sick Leave'),
+(3, 'Unpaid Leave');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `kontrak_kerja`
 --
 
@@ -205,6 +225,55 @@ INSERT INTO `lantai` (`id_lantai`, `nama_lantai`) VALUES
 (1, 'Lantai 1'),
 (2, 'Lantai 2'),
 (3, 'Lantai 3');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `manage_cuti`
+--
+
+CREATE TABLE `manage_cuti` (
+  `id_manage_cuti` int(10) NOT NULL,
+  `id_kategori_cuti` int(10) NOT NULL,
+  `kuota_cuti` int(5) NOT NULL,
+  `id_emp` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `manage_cuti`
+--
+
+INSERT INTO `manage_cuti` (`id_manage_cuti`, `id_kategori_cuti`, `kuota_cuti`, `id_emp`) VALUES
+(14, 2, 6, 30),
+(18, 1, 12, 30),
+(20, 1, 0, 19),
+(21, 2, 6, 19),
+(22, 3, 3, 19),
+(23, 1, 13, 18),
+(24, 1, 20, 16),
+(25, 3, 1, 30),
+(26, 2, 5, 18),
+(27, 3, 3, 18);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `req_cuti`
+--
+
+CREATE TABLE `req_cuti` (
+  `id_req_cuti` int(10) NOT NULL,
+  `tgl_mulai` date NOT NULL,
+  `tgl_akhir` date NOT NULL,
+  `jml_hari` int(5) NOT NULL,
+  `alasan` text NOT NULL,
+  `status_cuti` varchar(100) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `id_emp` int(10) NOT NULL,
+  `id_kategori_cuti` int(10) NOT NULL,
+  `id_manage_cuti` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -278,6 +347,12 @@ ALTER TABLE `karyawan`
   ADD PRIMARY KEY (`id_emp`);
 
 --
+-- Indexes for table `kategori_cuti`
+--
+ALTER TABLE `kategori_cuti`
+  ADD PRIMARY KEY (`id_kategori_cuti`);
+
+--
 -- Indexes for table `kontrak_kerja`
 --
 ALTER TABLE `kontrak_kerja`
@@ -289,6 +364,23 @@ ALTER TABLE `kontrak_kerja`
 --
 ALTER TABLE `lantai`
   ADD PRIMARY KEY (`id_lantai`);
+
+--
+-- Indexes for table `manage_cuti`
+--
+ALTER TABLE `manage_cuti`
+  ADD PRIMARY KEY (`id_manage_cuti`),
+  ADD KEY `id_kategori_cuti` (`id_kategori_cuti`),
+  ADD KEY `id_emp` (`id_emp`);
+
+--
+-- Indexes for table `req_cuti`
+--
+ALTER TABLE `req_cuti`
+  ADD PRIMARY KEY (`id_req_cuti`),
+  ADD KEY `id_emp` (`id_emp`),
+  ADD KEY `id_kategori_cuti` (`id_kategori_cuti`),
+  ADD KEY `id_manage_cuti` (`id_manage_cuti`);
 
 --
 -- Indexes for table `user`
@@ -332,6 +424,12 @@ ALTER TABLE `karyawan`
   MODIFY `id_emp` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
+-- AUTO_INCREMENT for table `kategori_cuti`
+--
+ALTER TABLE `kategori_cuti`
+  MODIFY `id_kategori_cuti` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `kontrak_kerja`
 --
 ALTER TABLE `kontrak_kerja`
@@ -342,6 +440,18 @@ ALTER TABLE `kontrak_kerja`
 --
 ALTER TABLE `lantai`
   MODIFY `id_lantai` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `manage_cuti`
+--
+ALTER TABLE `manage_cuti`
+  MODIFY `id_manage_cuti` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `req_cuti`
+--
+ALTER TABLE `req_cuti`
+  MODIFY `id_req_cuti` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -384,6 +494,21 @@ ALTER TABLE `ijazah`
 --
 ALTER TABLE `kontrak_kerja`
   ADD CONSTRAINT `kontrak_kerja_ibfk_1` FOREIGN KEY (`id_emp`) REFERENCES `karyawan` (`id_emp`);
+
+--
+-- Constraints for table `manage_cuti`
+--
+ALTER TABLE `manage_cuti`
+  ADD CONSTRAINT `manage_cuti_ibfk_1` FOREIGN KEY (`id_kategori_cuti`) REFERENCES `kategori_cuti` (`id_kategori_cuti`),
+  ADD CONSTRAINT `manage_cuti_ibfk_2` FOREIGN KEY (`id_emp`) REFERENCES `karyawan` (`id_emp`);
+
+--
+-- Constraints for table `req_cuti`
+--
+ALTER TABLE `req_cuti`
+  ADD CONSTRAINT `req_cuti_ibfk_1` FOREIGN KEY (`id_emp`) REFERENCES `karyawan` (`id_emp`),
+  ADD CONSTRAINT `req_cuti_ibfk_2` FOREIGN KEY (`id_kategori_cuti`) REFERENCES `kategori_cuti` (`id_kategori_cuti`),
+  ADD CONSTRAINT `req_cuti_ibfk_3` FOREIGN KEY (`id_manage_cuti`) REFERENCES `manage_cuti` (`id_manage_cuti`);
 
 --
 -- Constraints for table `user`
