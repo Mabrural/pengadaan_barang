@@ -666,6 +666,47 @@ function hapusKontrak($id_kontrak) {
 
 }
 
+function tambahManageCuti($data) {
+	global $koneksi;
+	$id_kategori_cuti = htmlspecialchars($data["id_kategori_cuti"]);
+	$kuota_cuti = htmlspecialchars($data["kuota_cuti"]);
+	$id_emp = htmlspecialchars($data["id_emp"]);
+
+
+	$query = "INSERT INTO manage_cuti VALUES
+			('', '$id_kategori_cuti', '$kuota_cuti', '$id_emp')";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function ubahManageCuti($data) {
+	global $koneksi;
+	$id_manage_cuti = $data["id_manage_cuti"];
+	$id_kategori_cuti = htmlspecialchars($data["id_kategori_cuti"]);
+	$kuota_cuti = htmlspecialchars($data["kuota_cuti"]);
+	$id_emp = htmlspecialchars($data["id_emp"]);
+
+
+	$query = "UPDATE manage_cuti SET
+				id_kategori_cuti = '$id_kategori_cuti',
+				kuota_cuti = '$kuota_cuti',
+				id_emp = '$id_emp'
+			  WHERE id_manage_cuti = $id_manage_cuti
+			";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function hapusManageCuti($id_manage_cuti) {
+	global $koneksi;
+	mysqli_query($koneksi, "DELETE FROM manage_cuti WHERE id_manage_cuti=$id_manage_cuti");
+
+	return mysqli_affected_rows($koneksi);
+
+}
+
 function tambahAnggaran($data) {
 	global $koneksi;
 	$nama_anggaran = htmlspecialchars($data["nama_anggaran"]);

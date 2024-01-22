@@ -161,11 +161,13 @@ if ($_SESSION["level"] == "Staff IT") {
                     <ul class="nav child_menu">
                       <li><a href="hrd.php?page=dataKaryawan">Data Karyawan</a></li>
                       <li><a href="hrd.php?page=kontrakKerja">Kontrak Kerja</a></li>
-                      <li><a href="hrd.php?page=cuti">Form Cuti</a></li>
+                      <!-- <li><a href="hrd.php?page=cuti">Form Cuti</a></li> -->
                       <li><a href="hrd.php?page=absen">Data Absen</a></li>
                       <li><a href="hrd.php?page=aksesPintu">Data Akses Pintu</a></li>
                       <li><a href="hrd.php?page=userLogin">Data Login</a></li>
                       <li><a href="hrd.php?page=penitipanIjazah">Penitipan Ijazah</a></li>
+                      <li><a href="hrd.php?page=manageCuti">Manage Cuti</a></li>
+                      <li><a href="hrd.php?page=cuti">Form Cuti</a></li>
                       <li><a href="hrd.php?page=attendance">Attendance</a></li>
                       <li><a href="hrd.php?page=penilaian">Penilaian Karyawan</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
@@ -330,8 +332,8 @@ if ($_SESSION["level"] == "Staff IT") {
                                 include "page/hrd/data_karyawan.php";
                                 break;
 
-                            case 'cuti':
-                                include "page/hrd/cuti/form_cuti.php";
+                            case 'manageCuti':
+                                include "page/hrd/cuti/manage_cuti/manage_cuti.php";
                                 break;
 
                             case 'aksesPintu':
@@ -491,6 +493,22 @@ if ($_SESSION["level"] == "Staff IT") {
 
                             case 'extendKontrak':
                                 include "page/hrd/kontrak_kerja/extend.php";
+                                break;
+
+                            case 'tambahManageCuti':
+                                include "page/hrd/cuti/manage_cuti/tambah.php";
+                                break;
+
+                            case 'hapusManageCuti':
+                                include 'page/hrd/cuti/manage_cuti/hapus.php';
+                                break;
+
+                            case 'ubahManageCuti':
+                                include 'page/hrd/cuti/manage_cuti/ubah.php';
+                                break;
+
+                            case 'detilKuota':
+                                include 'page/hrd/cuti/manage_cuti/detil_manage_cuti.php';
                                 break;
 
                             case 'ubahCatatan':
