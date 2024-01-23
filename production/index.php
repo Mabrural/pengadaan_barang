@@ -413,6 +413,14 @@ if ($_SESSION["level"] == "Staff IT") {
                                 include 'page/profile/update_profile.php';
                                 break;
 
+                            case 'ubahRequestCuti':
+                                include 'page/hrd/cuti/req_cuti/ubah.php';
+                                break;
+
+                            case 'hapusRequestCuti':
+                                include 'page/hrd/cuti/req_cuti/hapus.php';
+                                break;
+
                             case 'tambahKaryawan':
                                 include 'page/hrd/tambah.php';
                               break;

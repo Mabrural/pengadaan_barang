@@ -7,8 +7,8 @@ $id_user = $_SESSION["id_user"];
 ?>
     <div class="x_panel">
       <div class="x_title">
-        <h2>History Request Cuti <small></small></h2>
-        <a href="?form=tambahManageCuti" class="btn btn-primary btn-sm"><i class="fa fa-plus fa-sm"></i> Tambah Request Cuti</a>
+        <h2>Approval Cuti <small></small></h2>
+        <!-- <a href="?form=tambahManageCuti" class="btn btn-primary btn-sm"><i class="fa fa-plus fa-sm"></i> Tambah Request Cuti</a> -->
         <!-- <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>

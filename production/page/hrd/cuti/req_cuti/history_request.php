@@ -8,7 +8,7 @@ $id_user = $_SESSION["id_user"];
     <div class="x_panel">
       <div class="x_title">
         <h2>History Request Cuti <small></small></h2>
-        <a href="?form=tambahManageCuti" class="btn btn-primary btn-sm"><i class="fa fa-plus fa-sm"></i> Tambah Request Cuti</a>
+        <a href="?page=reqCuti" class="btn btn-primary btn-sm"><i class="fa fa-plus fa-sm"></i> Tambah Request Cuti</a>
         <!-- <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>
@@ -41,9 +41,10 @@ $id_user = $_SESSION["id_user"];
                 <th class="column-title">Tanggal Mulai</th>
                 <th class="column-title">Tanggal Akhir</th>
                 <th class="column-title">Jumlah Hari</th>
+                <th class="column-title">Tipe Cuti</th>
                 <th class="column-title">Alasan</th>
                 <th class="column-title">Created At</th>
-                <th class="column-title">Updated At</th>
+                <th class="column-title">Approved At</th>
                 <th class="column-title">Status Cuti</th>
                 
 <!--                 <th class="column-title">Jenis Cuti</th>
@@ -72,6 +73,7 @@ $id_user = $_SESSION["id_user"];
                 <td class=" "><?= date('d-M-Y', strtotime($data['tgl_mulai']));?> </td>
                 <td class=" "><?= date('d-M-Y', strtotime($data['tgl_mulai']));?> </td>
                 <td class=" "><?= $data['jml_hari'];?> Hari</td>
+                <td class=" "><?= $data['tipe_cuti'];?> </td>
                 <td class=" "><?= $data['alasan'];?> </td>
                 <td class=" "><?= date('d-M-Y H:i:s', strtotime($data['created_at']));?> </td>
                 <td class=" "><?= $data['updated_at'];?> </td>

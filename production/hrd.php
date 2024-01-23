@@ -168,6 +168,7 @@ if ($_SESSION["level"] == "Staff IT") {
                       <li><a href="hrd.php?page=penitipanIjazah">Penitipan Ijazah</a></li>
                       <li><a href="hrd.php?page=manageCuti">Manage Cuti</a></li>
                       <li><a href="hrd.php?page=reqCuti">Form Cuti</a></li>
+                      <li><a href="hrd.php?page=approveCuti">Approve Cuti</a></li>
                       <li><a href="hrd.php?page=attendance">Attendance</a></li>
                       <li><a href="hrd.php?page=penilaian">Penilaian Karyawan</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
@@ -377,6 +378,10 @@ if ($_SESSION["level"] == "Staff IT") {
                                 break;
                             case 'historyCuti':
                                 include "page/hrd/cuti/req_cuti/history_request.php";
+                                break;
+
+                            case 'approveCuti':
+                                include "page/hrd/cuti/approve_cuti/approve_cuti.php";
                                 break;
 
                             case 'laporan':

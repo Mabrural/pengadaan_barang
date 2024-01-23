@@ -713,6 +713,7 @@ function tambahRequestCuti($data) {
 	$tgl_mulai = htmlspecialchars($data["tgl_mulai"]);
 	$tgl_akhir = htmlspecialchars($data["tgl_akhir"]);
 	$jml_hari = htmlspecialchars($data["jml_hari"]);
+	$tipe_cuti = htmlspecialchars($data["tipe_cuti"]);
 	$alasan = htmlspecialchars($data["alasan"]);
 	$status_cuti = htmlspecialchars($data["status_cuti"]);
 	$created_at = htmlspecialchars($data["created_at"]);
@@ -722,10 +723,51 @@ function tambahRequestCuti($data) {
 
 
 	$query = "INSERT INTO req_cuti VALUES
-			('', '$tgl_mulai', '$tgl_akhir', '$jml_hari', '$alasan', '$status_cuti', '$created_at', '$updated_at', '$id_emp', '$id_kategori_cuti')";
+			('', '$tgl_mulai', '$tgl_akhir', '$jml_hari', '$tipe_cuti', '$alasan', '$status_cuti', '$created_at', '$updated_at', '$id_emp', '$id_kategori_cuti')";
 	mysqli_query($koneksi, $query);
 
 	return mysqli_affected_rows($koneksi);
+}
+
+function ubahRequestCuti($data) {
+	global $koneksi;
+	$id_req_cuti = $data["id_req_cuti"];
+	$tgl_mulai = htmlspecialchars($data["tgl_mulai"]);
+	$tgl_akhir = htmlspecialchars($data["tgl_akhir"]);
+	$jml_hari = htmlspecialchars($data["jml_hari"]);
+	$tipe_cuti = htmlspecialchars($data["tipe_cuti"]);
+	$alasan = htmlspecialchars($data["alasan"]);
+	$status_cuti = htmlspecialchars($data["status_cuti"]);
+	$created_at = htmlspecialchars($data["created_at"]);
+	$updated_at = htmlspecialchars($data["updated_at"]);
+	$id_kategori_cuti = htmlspecialchars($data["id_kategori_cuti"]);
+	$id_emp = htmlspecialchars($data["id_emp"]);
+
+
+	$query = "UPDATE req_cuti SET
+				tgl_mulai = '$tgl_mulai',
+				tgl_akhir = '$tgl_akhir',
+				jml_hari = '$jml_hari',
+				tipe_cuti = '$tipe_cuti',
+				alasan = '$alasan',
+				status_cuti = '$status_cuti',
+				created_at = '$created_at',
+				updated_at = '$updated_at',
+				id_emp = '$id_emp',
+				id_kategori_cuti = '$id_kategori_cuti'
+			  WHERE id_req_cuti = $id_req_cuti
+			";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function hapusRequestCuti($id_req_cuti) {
+	global $koneksi;
+	mysqli_query($koneksi, "DELETE FROM req_cuti WHERE id_req_cuti=$id_req_cuti");
+
+	return mysqli_affected_rows($koneksi);
+
 }
 
 function tambahAnggaran($data) {
