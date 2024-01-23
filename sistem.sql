@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2024 at 12:05 PM
+-- Generation Time: Jan 23, 2024 at 11:52 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -95,7 +95,8 @@ INSERT INTO `barang` (`id_barang`, `kode_pengajuan`, `nama_barang`, `spek`, `des
 (157, 14351234445231, 'Fan cooler', '3 kaki', 'butuh cepat', 1, '2024-01-17', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 27),
 (158, 14351234445232, 'Oli', '2L', 'untuk mesin kapal', 1, '2024-01-17', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 28),
 (159, 14351234445233, 'Printer', 'Canon L3110 Ecotank', 'untuk administrasi', 1, '2024-01-17', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 27),
-(160, 14351234445234, 'Fan Cooler', '3 Kipas', 'Liferaft', 1, '2024-01-17', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 28);
+(160, 14351234445234, 'Fan Cooler', '3 Kipas', 'Liferaft', 1, '2024-01-17', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 28),
+(163, 14351234445235, 'Charger Laptop', 'Asus ROG Strix 504', 'butuh cepat. charger lama rusak', 2, '2024-01-23', 'Menunggu Persetujuan KC', '', '', 27);
 
 -- --------------------------------------------------------
 
@@ -204,7 +205,8 @@ CREATE TABLE `kontrak_kerja` (
 --
 
 INSERT INTO `kontrak_kerja` (`id_kontrak`, `tgl_mulai`, `tgl_akhir`, `gaji_pokok`, `tunjangan`, `status_kontrak`, `id_emp`) VALUES
-(27, '2025-04-04', '0000-00-00', 6000000, 0, 'Permanent', 30);
+(27, '2025-04-04', '0000-00-00', 6000000, 0, 'Permanent', 30),
+(28, '2025-04-25', '0000-00-00', 6000000, 500000, 'Permanent', 17);
 
 -- --------------------------------------------------------
 
@@ -244,9 +246,12 @@ CREATE TABLE `manage_cuti` (
 --
 
 INSERT INTO `manage_cuti` (`id_manage_cuti`, `id_kategori_cuti`, `kuota_cuti`, `id_emp`) VALUES
-(28, 4, 12, 30),
+(28, 4, 9, 30),
 (29, 6, 3, 30),
-(30, 5, 6, 30);
+(30, 5, 6, 30),
+(32, 4, 8, 19),
+(33, 5, 6, 19),
+(34, 6, 3, 19);
 
 -- --------------------------------------------------------
 
@@ -259,6 +264,7 @@ CREATE TABLE `req_cuti` (
   `tgl_mulai` date NOT NULL,
   `tgl_akhir` date NOT NULL,
   `jml_hari` int(5) NOT NULL,
+  `tipe_cuti` varchar(30) DEFAULT NULL,
   `alasan` text NOT NULL,
   `status_cuti` varchar(100) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
@@ -271,9 +277,10 @@ CREATE TABLE `req_cuti` (
 -- Dumping data for table `req_cuti`
 --
 
-INSERT INTO `req_cuti` (`id_req_cuti`, `tgl_mulai`, `tgl_akhir`, `jml_hari`, `alasan`, `status_cuti`, `created_at`, `updated_at`, `id_emp`, `id_kategori_cuti`) VALUES
-(10, '2024-01-22', '2024-01-23', 2, 'liburan', 'Belum diapprove', '2024-01-22 17:28:02', '0000-00-00 00:00:00', 30, 4),
-(11, '2024-01-22', '2024-01-22', 1, 'liburan', 'Belum diapprove', '2024-01-22 17:34:58', '0000-00-00 00:00:00', 19, 4);
+INSERT INTO `req_cuti` (`id_req_cuti`, `tgl_mulai`, `tgl_akhir`, `jml_hari`, `tipe_cuti`, `alasan`, `status_cuti`, `created_at`, `updated_at`, `id_emp`, `id_kategori_cuti`) VALUES
+(22, '2024-01-25', '2024-01-25', 1, 'Full Day', 'perpanjang STNK', 'Sudah diapprove', '2024-01-23 14:39:37', '2024-01-23 14:54:18', 30, 4),
+(23, '2024-01-25', '2024-01-26', 2, 'Full Day', 'Pulang Kampung', 'Sudah diapprove', '2024-01-23 14:56:52', '2024-01-23 15:03:19', 30, 4),
+(30, '2024-01-24', '2024-01-24', 1, 'Full Day', 'Ngurus ATM', 'Sudah diapprove', '2024-01-23 17:47:40', '2024-01-23 17:48:41', 19, 4);
 
 -- --------------------------------------------------------
 
@@ -396,7 +403,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `absen`
 --
 ALTER TABLE `absen`
-  MODIFY `id_absen` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_absen` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `akses_pintu`
@@ -408,7 +415,7 @@ ALTER TABLE `akses_pintu`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
+  MODIFY `id_barang` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
 
 --
 -- AUTO_INCREMENT for table `ijazah`
@@ -420,7 +427,7 @@ ALTER TABLE `ijazah`
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id_emp` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_emp` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `kategori_cuti`
@@ -432,7 +439,7 @@ ALTER TABLE `kategori_cuti`
 -- AUTO_INCREMENT for table `kontrak_kerja`
 --
 ALTER TABLE `kontrak_kerja`
-  MODIFY `id_kontrak` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_kontrak` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `lantai`
@@ -444,13 +451,13 @@ ALTER TABLE `lantai`
 -- AUTO_INCREMENT for table `manage_cuti`
 --
 ALTER TABLE `manage_cuti`
-  MODIFY `id_manage_cuti` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_manage_cuti` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `req_cuti`
 --
 ALTER TABLE `req_cuti`
-  MODIFY `id_req_cuti` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_req_cuti` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `user`
