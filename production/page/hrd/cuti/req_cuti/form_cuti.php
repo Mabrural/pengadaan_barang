@@ -9,6 +9,7 @@ $nama = $_SESSION["nama_emp"];
 // $karyawan = query("SELECT * FROM karyawan");
 $karyawan = query("SELECT * FROM user JOIN karyawan ON karyawan.id_emp=user.id_emp WHERE user.id_user=$id_user");
 $kategori_cuti = query("SELECT * FROM kategori_cuti");
+// $kategori_cuti = query("SELECT * FROM kategori_cuti");
 // $kategori_cuti = query("SELECT * FROM kategori_cuti WHERE id_kategori_cuti NOT IN (SELECT id_kategori_cuti FROM manage_cuti)");
 $manage_cuti = query("SELECT * FROM manage_cuti");
 date_default_timezone_set('Asia/Jakarta');

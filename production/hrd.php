@@ -168,7 +168,69 @@ if ($_SESSION["level"] == "Staff IT") {
                       <li><a href="hrd.php?page=penitipanIjazah">Penitipan Ijazah</a></li>
                       <li><a href="hrd.php?page=manageCuti">Manage Cuti</a></li>
                       <li><a href="hrd.php?page=reqCuti">Form Cuti</a></li>
-                      <li><a href="hrd.php?page=approveCuti">Approve Cuti</a></li>
+                      <!-- <li><a href="hrd.php?page=approveCuti">Approve Cuti</a></li> -->
+
+                      <!-- notifikasi lengket jika tidak ada data yang ditampilkan maka spannya tetap ada tapi 0 -->
+                     <!--  <li class="nav-item">
+                          <a href="hrd.php?page=approveCuti" class="nav-link">
+                              Approve Cuti <span class="badge badge-primary">
+                                  <?php
+                                      // Query untuk menghitung jumlah cuti yang belum diapprove
+                                      $query = "SELECT COUNT(*) AS jml_cuti_belum_diapprove FROM req_cuti JOIN kategori_cuti ON kategori_cuti.id_kategori_cuti=req_cuti.id_kategori_cuti JOIN karyawan ON karyawan.id_emp=req_cuti.id_emp WHERE req_cuti.status_cuti='Belum diapprove'";
+                                      $result = mysqli_query($koneksi, $query);
+                                      $data = mysqli_fetch_assoc($result);
+                                      echo $data['jml_cuti_belum_diapprove'];
+                                  ?>
+                              </span>
+                          </a>
+                      </li> -->
+
+                      <!-- untuk menampilkan notifikasi permanent alias tidak hilang sebelum klik tombol approve -->
+                      <!-- <li class="nav-item">
+                          <a href="hrd.php?page=approveCuti" class="nav-link">
+                              Approve Cuti <?php
+                                  // Query untuk menghitung jumlah cuti yang belum diapprove
+                                  $query = "SELECT COUNT(*) AS jml_cuti_belum_diapprove FROM req_cuti JOIN kategori_cuti ON kategori_cuti.id_kategori_cuti=req_cuti.id_kategori_cuti JOIN karyawan ON karyawan.id_emp=req_cuti.id_emp WHERE req_cuti.status_cuti='Belum diapprove'";
+                                  $result = mysqli_query($koneksi, $query);
+                                  $data = mysqli_fetch_assoc($result);
+
+                                  // Cek apakah ada data
+                                  if ($data['jml_cuti_belum_diapprove'] > 0) {
+                                      echo "<span class='badge badge-primary'>{$data['jml_cuti_belum_diapprove']}</span>";
+                                  }
+                              ?>
+                          </a>
+                      </li> -->
+
+                      <!-- untuk menampilkan notif sekali lihat -->
+                        <li class="nav-item">
+                            <a href="hrd.php?page=approveCuti" class="nav-link">
+                                Approve Cuti 
+                                <?php
+                                    // Check if the notification should be displayed
+                                    if (!isset($_SESSION['cuti_notification_displayed'])) {
+                                        // Query untuk menghitung jumlah cuti yang belum diapprove
+                                        $query = "SELECT COUNT(*) AS jml_cuti_belum_diapprove FROM req_cuti JOIN kategori_cuti ON kategori_cuti.id_kategori_cuti=req_cuti.id_kategori_cuti JOIN karyawan ON karyawan.id_emp=req_cuti.id_emp WHERE req_cuti.status_cuti='Belum diapprove'";
+                                        $result = mysqli_query($koneksi, $query);
+                                        $data = mysqli_fetch_assoc($result);
+
+                                        // Cek apakah ada data
+                                        if ($data['jml_cuti_belum_diapprove'] > 0) {
+                                            echo "<span class='badge badge-primary'>{$data['jml_cuti_belum_diapprove']}</span>";
+                                        }
+
+                                        // Set session to indicate that the notification has been displayed
+                                        $_SESSION['cuti_notification_displayed'] = true;
+                                    }
+                                ?>
+                            </a>
+                        </li>
+
+                      
+
+
+
+
                       <li><a href="hrd.php?page=historyApproveCuti">History Approve Cuti</a></li>
                       <li><a href="hrd.php?page=attendance">Attendance</a></li>
                       <li><a href="hrd.php?page=penilaian">Penilaian Karyawan</a></li>
