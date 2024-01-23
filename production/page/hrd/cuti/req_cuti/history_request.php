@@ -78,11 +78,17 @@ $id_user = $_SESSION["id_user"];
                 <td class=" "><?= date('d-M-Y H:i:s', strtotime($data['created_at']));?> </td>
                 <td class=" "><?= $data['updated_at'];?> </td>
                 <td class=" "><?= $data['status_cuti'];?> </td>
-              
-                <td class=" last"><a href="?form=ubahRequestCuti&id_req_cuti=<?= $data["id_req_cuti"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusRequestCuti&id_req_cuti=<?= $data["id_req_cuti"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
+                
+                <td class=" last">
+                    <?php if ($data['status_cuti'] == 'Belum diapprove') : ?>
+                        <a href="?form=ubahRequestCuti&id_req_cuti=<?= $data["id_req_cuti"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusRequestCuti&id_req_cuti=<?= $data["id_req_cuti"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
+                    <?php else : ?>
+                        <button class="btn btn-secondary btn-sm" disabled>SELESAI</button>
+                    <?php endif; ?>
                 </td>
-                <!-- <td class=" last"> | <a href="?form=detilKuota&id_emp=<?= $data['id_emp'];?>" class="btn btn-secondary btn-sm">Detil Kuota</a>  -->
-                </td>
+                <!-- <td class=" last"><a href="?form=ubahRequestCuti&id_req_cuti=<?= $data["id_req_cuti"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusRequestCuti&id_req_cuti=<?= $data["id_req_cuti"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
+                </td> -->
+                
               </tr>
               <?php } ?>
            

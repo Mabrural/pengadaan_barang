@@ -149,13 +149,13 @@ if ($_SESSION["level"] == "Staff IT") {
                     </ul>
                   </li> -->
 
-                  <li><a><i class="fa fa-edit"></i> Approval <span class="fa fa-chevron-down"></span></a>
+                  <!-- <li><a><i class="fa fa-edit"></i> Approval <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="admin.php?page=approve">Approval</a></li>
                       <li><a href="admin.php?page=historyApprove">History Approve</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
-                  </li>
+                  </li> -->
 
                   <li><a><i class="fa fa-users"></i> Human Resources<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -169,6 +169,7 @@ if ($_SESSION["level"] == "Staff IT") {
                       <li><a href="hrd.php?page=manageCuti">Manage Cuti</a></li>
                       <li><a href="hrd.php?page=reqCuti">Form Cuti</a></li>
                       <li><a href="hrd.php?page=approveCuti">Approve Cuti</a></li>
+                      <li><a href="hrd.php?page=historyApproveCuti">History Approve Cuti</a></li>
                       <li><a href="hrd.php?page=attendance">Attendance</a></li>
                       <li><a href="hrd.php?page=penilaian">Penilaian Karyawan</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
@@ -384,6 +385,10 @@ if ($_SESSION["level"] == "Staff IT") {
                                 include "page/hrd/cuti/approve_cuti/approve_cuti.php";
                                 break;
 
+                            case 'historyApproveCuti':
+                                include "page/hrd/cuti/approve_cuti/history_approve_cuti.php";
+                                break;
+
                             case 'laporan':
                                 include "page/laporan/laporan.php";
                                 break;
@@ -524,7 +529,7 @@ if ($_SESSION["level"] == "Staff IT") {
                                 break;
 
                             case 'approveCuti':
-                                include 'page/hrd/cuti/approve_cuti/approve_cuti.php';
+                                include 'page/hrd/cuti/approve_cuti/konfirmasi_approve_cuti.php';
                                 break;
 
                             case 'ubahCatatan':

@@ -7,7 +7,7 @@ $id_user = $_SESSION["id_user"];
 ?>
     <div class="x_panel">
       <div class="x_title">
-        <h2>Approval Cuti <small></small></h2>
+        <h2>History Approval Cuti <small></small></h2>
         <!-- <a href="?form=tambahManageCuti" class="btn btn-primary btn-sm"><i class="fa fa-plus fa-sm"></i> Tambah Request Cuti</a> -->
         <!-- <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -62,7 +62,7 @@ $id_user = $_SESSION["id_user"];
                 <?php 
                   $no = 1;
                  
-                  $query = "SELECT * FROM req_cuti JOIN kategori_cuti ON kategori_cuti.id_kategori_cuti=req_cuti.id_kategori_cuti JOIN karyawan ON karyawan.id_emp=req_cuti.id_emp WHERE req_cuti.status_cuti='Belum diapprove'";
+                  $query = "SELECT * FROM req_cuti JOIN kategori_cuti ON kategori_cuti.id_kategori_cuti=req_cuti.id_kategori_cuti JOIN karyawan ON karyawan.id_emp=req_cuti.id_emp WHERE req_cuti.status_cuti='Sudah diapprove'";
                   $tampil = mysqli_query($koneksi, $query);
                   while ($data = mysqli_fetch_assoc($tampil)) {
                           
@@ -79,7 +79,7 @@ $id_user = $_SESSION["id_user"];
                 <td class=" "><?= $data['updated_at'];?> </td>
                 <td class=" "><?= $data['status_cuti'];?> </td>
               
-                <td class=" last"><a href="?form=approveCuti&id_req_cuti=<?= $data["id_req_cuti"]; ?>" class="btn btn-info btn-sm">Approve </a>
+                <td class=" last"><button class="btn btn-secondary btn-sm" disabled>SELESAI</button>
                 </td>
                 <!-- <td class=" last"><a href="?form=ubahRequestCuti&id_req_cuti=<?= $data["id_req_cuti"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusRequestCuti&id_req_cuti=<?= $data["id_req_cuti"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
                 </td> -->

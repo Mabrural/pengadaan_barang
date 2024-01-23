@@ -143,7 +143,7 @@ $karyawan = query("SELECT * FROM user JOIN karyawan ON karyawan.id_emp=user.id_e
 				                <th class="column-title">Nama Karyawan</th>
 				                <th class="column-title">Jabatan</th>
 				                <th class="column-title">Divisi</th>
-				                <th class="column-title">Jenis Cuti</th>
+				                <th class="column-title">Kategori Cuti</th>
 				                <th class="column-title">Kuota</th>
 				                </th>
 				                <th class="bulk-actions" colspan="7">
