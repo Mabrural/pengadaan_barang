@@ -149,7 +149,7 @@ if (isset($_POST["submit"])) {
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="gaji_pokok">Gaji Pokok <span class="required">*</span> 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="number" name="gaji_pokok" id="gaji_pokok" class="form-control" required>
+												<input type="number" name="gaji_pokok" id="gaji_pokok" class="form-control" min="0" required>
 											</div>
 										</div>
 
@@ -157,7 +157,7 @@ if (isset($_POST["submit"])) {
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="tunjangan">Tunjangan 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="number" name="tunjangan" id="tunjangan" class="form-control">
+												<input type="number" name="tunjangan" id="tunjangan" min="0" class="form-control">
 												<input type="hidden" name="status_kontrak" class="form-control" value="Kontrak 1">
 											</div>
 										</div>

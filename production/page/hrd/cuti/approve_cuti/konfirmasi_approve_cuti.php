@@ -124,7 +124,7 @@ if (isset($_POST["submit"])) {
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Nama Karyawan <span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<select class="form-control" name="id_emp" required>
+												<select class="form-control" name="id_emp" required readonly>
 													<!-- <option value="">--Pilih Karyawan--</option> -->
 													<?php foreach($karyawan as $row) : ?>
 														<option value="<?= $row['id_emp']?>" <?= ($row['id_emp'] == $req_cuti['id_emp'])?'selected': ''; ?>><?= $row['nama_emp']?></option>
@@ -136,7 +136,7 @@ if (isset($_POST["submit"])) {
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Nama Kategori Cuti <span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<select class="form-control" name="id_kategori_cuti" required>
+												<select class="form-control" name="id_kategori_cuti" required readonly>
 													<option value="">--Pilih Kategori Cuti--</option>
 													<?php foreach($kategori_cuti as $row) : ?>
 														<option value="<?= $row['id_kategori_cuti']?>" <?= ($row['id_kategori_cuti'] == $req_cuti['id_kategori_cuti'])?'selected': ''; ?>><?= $row['kategori_cuti']?></option>
@@ -149,7 +149,7 @@ if (isset($_POST["submit"])) {
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="tgl_mulai">Dari <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="date" name="tgl_mulai" id="tgl_mulai" required="required" class="form-control" value="<?= $req_cuti['tgl_mulai']?>">
+												<input type="date" name="tgl_mulai" id="tgl_mulai" required="required" class="form-control" value="<?= $req_cuti['tgl_mulai']?>" readonly>
 											</div>
 										</div>
 								
@@ -157,7 +157,7 @@ if (isset($_POST["submit"])) {
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="tgl_akhir">Sampai <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="date" name="tgl_akhir" id="tgl_akhir" required="required" class="form-control" value="<?= $req_cuti['tgl_akhir']?>">
+												<input type="date" name="tgl_akhir" id="tgl_akhir" required="required" class="form-control" value="<?= $req_cuti['tgl_akhir']?>" readonly>
 											</div>
 										</div>
 
@@ -165,14 +165,14 @@ if (isset($_POST["submit"])) {
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="jml_hari">Jumlah Hari <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="number" name="jml_hari" id="jml_hari" required="required" class="form-control" min="0" value="<?= $req_cuti['jml_hari']?>">
+												<input type="number" name="jml_hari" id="jml_hari" required="required" class="form-control" min="0" value="<?= $req_cuti['jml_hari']?>" readonly>
 											</div>
 										</div>
 
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Tipe Cuti <span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<select class="form-control" name="tipe_cuti" required>
+												<select class="form-control" name="tipe_cuti" required readonly>
 													<option value="">--Pilih Tipe Cuti--</option>
 													<option value="Half Day" <?php if ($req_cuti['tipe_cuti'] == 'Half Day') { echo "selected"; } ?>>Half Day</option>
 													<option value="Full Day" <?php if ($req_cuti['tipe_cuti'] == 'Full Day') { echo "selected"; } ?>>Full Day</option>	
@@ -185,7 +185,8 @@ if (isset($_POST["submit"])) {
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="alasan">Alasan 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="alasan" id="alasan" required="required" class="form-control" value="<?= $req_cuti['alasan']?>">
+												<!-- <input type="text" name="alasan" id="alasan" required="required" class="form-control" value="<?= $req_cuti['alasan']?>"> -->
+												<textarea class="form-control" rows="4" name="alasan" id="alasan" style="resize:none;" placeholder="" readonly><?= $req_cuti['alasan']?></textarea>
 												<input type="hidden" name="status_cuti" class="form-control" value="Sudah diapprove">
 												<input type="hidden" name="created_at" class="form-control" value="<?= $req_cuti['created_at'] ?>">
 												<input type="hidden" name="updated_at" class="form-control" value="<?= date('Y-m-d H:i:s') ?>">

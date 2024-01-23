@@ -23,7 +23,7 @@ if (isset($_POST["submit"])) {
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=hrd'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=dataKaryawan'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>"; 
 		// echo "
@@ -47,7 +47,7 @@ if (isset($_POST["submit"])) {
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=hrd'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=dataKaryawan'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>";
 		// echo "
@@ -113,7 +113,7 @@ if (isset($_POST["submit"])) {
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">NIK <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="number" name="nik" id="last-name" required="required" class="form-control">
+												<input type="number" name="nik" id="last-name" required="required" class="form-control" placeholder="Ketikkan NIK">
 											</div>
 										</div>
 
@@ -121,7 +121,7 @@ if (isset($_POST["submit"])) {
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">NPWP <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="npwp" id="last-name" required="required" class="form-control">
+												<input type="text" name="npwp" id="last-name" required="required" class="form-control" placeholder="Ketikkan NPWP">
 											</div>
 										</div>
 										
@@ -129,19 +129,19 @@ if (isset($_POST["submit"])) {
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Nama Lengkap <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="nama_emp" id="last-name" required="required" class="form-control">
+												<input type="text" name="nama_emp" id="last-name" required="required" class="form-control" placeholder="Ketikkan Nama Lengkap">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Jabatan</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="jabatan" class="form-control" type="text">
+												<input id="middle-name" name="jabatan" class="form-control" type="text" placeholder="Ketikkan Jabatan">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Divisi</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="divisi" class="form-control" type="text">
+												<input id="middle-name" name="divisi" class="form-control" type="text" placeholder="Ketikkan Divisi">
 											</div>
 										</div>
 
@@ -166,21 +166,22 @@ if (isset($_POST["submit"])) {
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Alamat <span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="alamat" class="form-control" type="text" required>
+												<!-- <input id="middle-name" name="alamat" class="form-control" type="text" required> -->
+												<textarea class="form-control" rows="4" name="alamat" id="alamat" placeholder="Ketikkan Alamat" style="resize:none;" required></textarea>
 											</div>
 										</div>
 
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">No. HP <span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="no_hp" class="form-control" type="number" required>
+												<input id="middle-name" name="no_hp" class="form-control" type="number" placeholder="Ketikkan No. HP" required>
 											</div>
 										</div>
 
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Email <span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="email" class="form-control" type="email" required>
+												<input id="middle-name" name="email" class="form-control" type="email" placeholder="Ketikkan Email" required>
 											</div>
 										</div>
 

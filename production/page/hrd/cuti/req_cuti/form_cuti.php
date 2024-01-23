@@ -168,7 +168,7 @@ if (isset($_POST["submit"])) {
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="jml_hari">Jumlah Hari <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="number" name="jml_hari" id="jml_hari" required="required" class="form-control" min="0">
+												<input type="number" name="jml_hari" id="jml_hari" required="required" placeholder="Ketikkan Jumlah Hari" class="form-control" min="0">
 											</div>
 										</div>
 
@@ -187,7 +187,8 @@ if (isset($_POST["submit"])) {
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="alasan">Alasan 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="alasan" id="alasan" required="required" class="form-control" min="0">
+												<!-- <input type="text" name="alasan" id="alasan" required="required" class="form-control" min="0"> -->
+												<textarea class="form-control" rows="4" name="alasan" id="alasan" placeholder="Ketikkan Alasan" style="resize:none;"></textarea>
 												<input type="hidden" name="status_cuti" class="form-control" value="Belum diapprove">
 												<input type="hidden" name="created_at" class="form-control" value="<?= date('Y-m-d H:i:s') ?>">
 												<input type="hidden" name="updated_at" class="form-control" value="NULL">

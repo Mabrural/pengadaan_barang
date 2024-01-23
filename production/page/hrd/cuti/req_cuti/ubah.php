@@ -184,7 +184,8 @@ if (isset($_POST["submit"])) {
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="alasan">Alasan 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="alasan" id="alasan" required="required" class="form-control" value="<?= $req_cuti['alasan']?>">
+												<textarea class="form-control" rows="4" name="alasan" id="alasan" style="resize:none;" placeholder=""><?= $req_cuti['alasan']?></textarea>
+												<!-- <input type="text" name="alasan" id="alasan" required="required" class="form-control" value="<?= $req_cuti['alasan']?>"> -->
 												<input type="hidden" name="status_cuti" class="form-control" value="Belum diapprove">
 												<input type="hidden" name="created_at" class="form-control" value="<?= date('Y-m-d H:i:s') ?>">
 												<input type="hidden" name="updated_at" class="form-control" value="NULL">

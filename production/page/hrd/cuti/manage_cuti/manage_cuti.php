@@ -9,7 +9,7 @@ $id_user = $_SESSION["id_user"];
       <div class="x_title">
         <h2>Data Manage Cuti <small></small></h2>
         <a href="?form=tambahManageCuti" class="btn btn-primary btn-sm"><i class="fa fa-plus fa-sm"></i> Tambah Manage Cuti</a>
-        <a href="?form=approveCuti" class="btn btn-info btn-sm"><i class="fa fa-check fa-sm"></i> Approval Cuti</a>
+        <a href="?page=approveCuti" class="btn btn-info btn-sm"><i class="fa fa-check fa-sm"></i> Approval Cuti</a>
         <!-- <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>

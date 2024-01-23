@@ -150,9 +150,31 @@ if ($_SESSION["level"] == "Staff IT") {
                     </ul>
                   </li> -->
 
-                  <li><a><i class="fa fa-edit"></i> Approval <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-edit"></i> Approval Barang<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="admin2.php?page=approve2">Approval</a></li>
+                      <!-- <li><a href="admin2.php?page=approve2">Approval Barang</a></li> -->
+                      <li class="nav-item">
+                            <a href="admin2.php?page=approve2" class="nav-link">
+                                Approve Barang 
+                                <?php
+                                    // Check if the notification should be displayed
+                                    if (!isset($_SESSION['cuti_notification_displayed'])) {
+                                        // Query untuk menghitung jumlah cuti yang belum diapprove
+                                        $query = "SELECT COUNT(*) AS jml_barang_belum_diapprove FROM barang JOIN user ON user.id_user=barang.id_user WHERE barang.status='Menunggu Persetujuan Dir.Ops'";
+                                        $result = mysqli_query($koneksi, $query);
+                                        $data = mysqli_fetch_assoc($result);
+
+                                        // Cek apakah ada data
+                                        if ($data['jml_barang_belum_diapprove'] > 0) {
+                                            echo "<span class='badge badge-primary'>{$data['jml_barang_belum_diapprove']}</span>";
+                                        }
+
+                                        // Set session to indicate that the notification has been displayed
+                                        $_SESSION['cuti_notification_displayed'] = true;
+                                    }
+                                ?>
+                            </a>
+                        </li>
                       <li><a href="admin2.php?page=historyApprove2">History Approval</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>

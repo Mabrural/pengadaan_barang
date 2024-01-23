@@ -130,7 +130,7 @@ if (isset($_POST["submit"])) {
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="no_ijazah">No. Ijazah <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="no_ijazah" id="no_ijazah" required="required" class="form-control">
+												<input type="text" name="no_ijazah" id="no_ijazah" required="required" placeholder="Ketikkan No. Ijazah" class="form-control">
 											</div>
 										</div>
 

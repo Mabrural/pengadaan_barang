@@ -165,7 +165,7 @@ if (isset($_POST["submit"])) {
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="gaji_pokok">Gaji Pokok <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="number" name="gaji_pokok" id="gaji_pokok" class="form-control" value="<?= $kontrak['gaji_pokok']?>">
+												<input type="number" name="gaji_pokok" id="gaji_pokok" class="form-control" min="0" value="<?= $kontrak['gaji_pokok']?>">
 											</div>
 										</div>
 
@@ -173,7 +173,7 @@ if (isset($_POST["submit"])) {
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="tunjangan">Tunjangan
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="number" name="tunjangan" id="tunjangan" class="form-control" value="<?= $kontrak['tunjangan']?>">
+												<input type="number" name="tunjangan" id="tunjangan" class="form-control" min="0" value="<?= $kontrak['tunjangan']?>">
 												<input type="hidden" name="status_kontrak" value="<?= $kontrak['status_kontrak']?>">
 											</div>
 										</div>

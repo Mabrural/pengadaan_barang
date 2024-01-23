@@ -17,7 +17,7 @@ if( hapusKaryawan($id_emp) > 0 ){
 			showConfirmButton   : true
 		});  
 	},10);   setTimeout(function () {
-		window.location.href = '?page=hrd'; //will redirect to your blog page (an ex: blog.html)
+		window.location.href = '?page=dataKaryawan'; //will redirect to your blog page (an ex: blog.html)
 	}, 2000); //will call the function after 2 secs
 	</script>";
 	// echo "
@@ -41,7 +41,7 @@ if( hapusKaryawan($id_emp) > 0 ){
 			showConfirmButton   : true
 		});  
 	},10);   setTimeout(function () {
-		window.location.href = '?page=hrd'; //will redirect to your blog page (an ex: blog.html)
+		window.location.href = '?page=dataKaryawan'; //will redirect to your blog page (an ex: blog.html)
 	}, 2000); //will call the function after 2 secs
 	</script>";
 	// echo "

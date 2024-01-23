@@ -120,25 +120,26 @@ if (isset($_POST["submit"])) {
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Nama Barang <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="nama_barang" id="last-name" required="required" class="form-control">
+												<input type="text" name="nama_barang" id="last-name" required="required" class="form-control" placeholder="Ketikkan Nama Barang">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Spesifikasi</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="spek" class="form-control" type="text">
+												<input id="middle-name" name="spek" class="form-control" type="text" placeholder="Ketikkan Spesifikasi">
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Deskripsi</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="deskripsi" class="form-control" type="text">
+												<!-- <input id="middle-name" name="deskripsi" class="form-control" type="text"> -->
+												<textarea class="form-control" rows="4" name="deskripsi" id="deskripsi" placeholder="Ketikkan Deskripsi" style="resize:none;"></textarea>
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Qty <span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="qty" class="form-control" type="number" required>
+												<input id="middle-name" name="qty" class="form-control" type="number" placeholder="Ketikkan Qty" min="1" required>
 											</div>
 										</div>
 										<div class="item form-group">

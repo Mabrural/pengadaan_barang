@@ -89,7 +89,7 @@ $id_user = $_SESSION["id_user"];
 				    <?php } else { ?>
 				        <!-- Jika status_kontrak = "Permanent", maka disable tombol Extend -->
 				        <a href="?form=ubahKontrak&id_kontrak=<?= $data["id_kontrak"]; ?>" class="btn btn-info btn-sm">Ubah</a> | 
-				        <a href="?form=hapusKontrak&id_kontrak=<?= $data["id_kontrak"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus</a>
+				        <a href="?form=hapusKontrak&id_kontrak=<?= $data["id_kontrak"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus</a> |
 				        <button class="btn btn-secondary btn-sm" disabled>Extend</button>
 				    <?php } ?>
 				</td>

@@ -135,13 +135,14 @@ if (isset($_POST["submit"])) {
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Desc</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="deskripsi" class="form-control" type="text" value="<?= $barang["deskripsi"];?>">
+												<textarea class="form-control" rows="4" name="deskripsi" id="deskripsi" placeholder="Ketikkan Deskripsi" style="resize:none;"><?= $barang["deskripsi"];?></textarea>
+												<!-- <input id="middle-name" name="deskripsi" class="form-control" type="text" value="<?= $barang["deskripsi"];?>"> -->
 											</div>
 										</div>
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Qty <span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="qty" class="form-control" type="text" value="<?= $barang["qty"];?>" required>
+												<input id="middle-name" name="qty" class="form-control" type="number" value="<?= $barang["qty"];?>" min="1" required>
 											</div>
 										</div>
 										<div class="item form-group">

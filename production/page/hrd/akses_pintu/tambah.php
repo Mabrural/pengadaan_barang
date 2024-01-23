@@ -128,7 +128,7 @@ if (isset($_POST["submit"])) {
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">No. Akses Pintu <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="number" name="no_akses" id="last-name" required="required" class="form-control">
+												<input type="number" name="no_akses" id="last-name" required="required" min="0" class="form-control">
 											</div>
 										</div>
 										

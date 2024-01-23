@@ -14,7 +14,7 @@
 		<a href="?page=approve2">
 		  <li>
 		    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-		    <span class="glyphicon-class"><a href="?page=approve2">Approval</span></a>
+		    <span class="glyphicon-class"><a href="?page=approve2">Approval Barang</span></a>
 		  </li>
 		</a>
 
