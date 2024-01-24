@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 23, 2024 at 11:52 AM
+-- Generation Time: Jan 24, 2024 at 12:07 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -96,7 +96,9 @@ INSERT INTO `barang` (`id_barang`, `kode_pengajuan`, `nama_barang`, `spek`, `des
 (158, 14351234445232, 'Oli', '2L', 'untuk mesin kapal', 1, '2024-01-17', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 28),
 (159, 14351234445233, 'Printer', 'Canon L3110 Ecotank', 'untuk administrasi', 1, '2024-01-17', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 27),
 (160, 14351234445234, 'Fan Cooler', '3 Kipas', 'Liferaft', 1, '2024-01-17', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 28),
-(163, 14351234445235, 'Charger Laptop', 'Asus ROG Strix 504', 'butuh cepat. charger lama rusak', 2, '2024-01-23', 'Menunggu Persetujuan KC', '', '', 27);
+(163, 14351234445235, 'Charger Laptop', 'Asus ROG Strix 504', 'butuh cepat. charger lama rusak', 2, '2024-01-23', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 27),
+(164, 14351234445236, 'Sapu ', '-', 'untuk kebersihan kantor', 1, '2024-01-24', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 28),
+(165, 14351234445237, 'Kain Pel', '-', 'untuk inventaris kantor', 1, '2024-01-24', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 28);
 
 -- --------------------------------------------------------
 
@@ -231,6 +233,48 @@ INSERT INTO `lantai` (`id_lantai`, `nama_lantai`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `lokasi_barang`
+--
+
+CREATE TABLE `lokasi_barang` (
+  `id_lokasi` int(10) NOT NULL,
+  `nama_lokasi` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `lokasi_barang`
+--
+
+INSERT INTO `lokasi_barang` (`id_lokasi`, `nama_lokasi`) VALUES
+(1, 'OB Mitra Utama 03'),
+(2, 'OB Selaras 01'),
+(3, 'OB Garuda'),
+(4, 'TB Tiga Permata');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lokasi_room`
+--
+
+CREATE TABLE `lokasi_room` (
+  `id_room` int(10) NOT NULL,
+  `room_name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `lokasi_room`
+--
+
+INSERT INTO `lokasi_room` (`id_room`, `room_name`) VALUES
+(1, 'Engine Room'),
+(2, 'Store Room'),
+(3, 'Main Deck'),
+(4, 'Cabin Crew');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `manage_cuti`
 --
 
@@ -252,6 +296,25 @@ INSERT INTO `manage_cuti` (`id_manage_cuti`, `id_kategori_cuti`, `kuota_cuti`, `
 (32, 4, 8, 19),
 (33, 5, 6, 19),
 (34, 6, 3, 19);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `req_barang`
+--
+
+CREATE TABLE `req_barang` (
+  `id_req_brg` int(10) NOT NULL,
+  `kode_brg` varchar(40) NOT NULL,
+  `qty_req` int(5) NOT NULL,
+  `tgl_req_brg` date NOT NULL,
+  `status_req` varchar(50) NOT NULL,
+  `acc1` varchar(50) DEFAULT NULL,
+  `acc2` varchar(50) DEFAULT NULL,
+  `id_lokasi` int(10) NOT NULL,
+  `id_room` int(10) NOT NULL,
+  `id_user` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -285,6 +348,38 @@ INSERT INTO `req_cuti` (`id_req_cuti`, `tgl_mulai`, `tgl_akhir`, `jml_hari`, `ti
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `storage_barang`
+--
+
+CREATE TABLE `storage_barang` (
+  `kode_brg` varchar(40) NOT NULL,
+  `nama_barang` varchar(50) NOT NULL,
+  `gambar_brg` varchar(100) DEFAULT NULL,
+  `spek` text DEFAULT NULL,
+  `deskripsi` text DEFAULT NULL,
+  `qty` int(5) NOT NULL,
+  `date_in` date DEFAULT NULL,
+  `renewal` date DEFAULT NULL,
+  `kondisi_brg` varchar(100) NOT NULL,
+  `id_room` int(10) NOT NULL,
+  `id_lokasi` int(10) NOT NULL,
+  `id_vendor` int(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `storage_barang`
+--
+
+INSERT INTO `storage_barang` (`kode_brg`, `nama_barang`, `gambar_brg`, `spek`, `deskripsi`, `qty`, `date_in`, `renewal`, `kondisi_brg`, `id_room`, `id_lokasi`, `id_vendor`) VALUES
+('BRG001', 'Mesin pompa 1', '65b0eb4449ab1.jpg', 'Mitsubishi', '-', 1, '0000-00-00', '0000-00-00', 'Baik', 1, 1, 1),
+('BRG002', 'Mesin Pompa 2', '65b0eb8f211c4.jpg', 'Mitsubishi', '-', 1, '0000-00-00', '0000-00-00', 'Baik', 1, 1, 1),
+('BRG003', 'Mesin AE ', '65b0ec71bedae.jpg', 'Mitsubishi', '-', 1, '0000-00-00', '0000-00-00', 'Baik', 1, 1, 1),
+('BRG004', 'Accu GS p N100', '65b0ed4bae24b.jpg', 'GS p N100', '-', 4, '0000-00-00', '0000-00-00', 'Baik', 1, 1, 1),
+('BRG005', 'Accu NS p N120', '65b0ed8be0474.jpg', 'NS p N120', '-', 2, '0000-00-00', '0000-00-00', 'Baik', 1, 1, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -312,6 +407,27 @@ INSERT INTO `user` (`id_user`, `username`, `password`, `level`, `id_emp`) VALUES
 (29, 'krisno', '$2y$10$wdmPEof2zbHxxFyJWXAZZOZOigLJucxD/Vy5oALS.0y5ZJkvzVNhC', 'Staff Operasional', 16),
 (30, 'niken', '$2y$10$Kzzb.fetZnuGPtKI03hX6.p.b.XP81bzSX92q0P3/HpRpWFSpdPZa', 'Staff Operasional', 17),
 (31, 'mabrur', '$2y$10$zxwFH.e4ooAM3CgI8Wzi8Ot0AIZhzcnKMHNPSIprWt.gbQiArYqki', 'Staff IT', 30);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendor`
+--
+
+CREATE TABLE `vendor` (
+  `id_vendor` int(10) NOT NULL,
+  `nama_vendor` varchar(50) NOT NULL,
+  `no_telp_vendor` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `vendor`
+--
+
+INSERT INTO `vendor` (`id_vendor`, `nama_vendor`, `no_telp_vendor`) VALUES
+(1, 'PT Karimun Marine Suplarindo', NULL),
+(2, 'PT Evercode Internasional', NULL),
+(3, 'PT Securindo Jaya Pratama', NULL);
 
 --
 -- Indexes for dumped tables
@@ -373,12 +489,34 @@ ALTER TABLE `lantai`
   ADD PRIMARY KEY (`id_lantai`);
 
 --
+-- Indexes for table `lokasi_barang`
+--
+ALTER TABLE `lokasi_barang`
+  ADD PRIMARY KEY (`id_lokasi`);
+
+--
+-- Indexes for table `lokasi_room`
+--
+ALTER TABLE `lokasi_room`
+  ADD PRIMARY KEY (`id_room`);
+
+--
 -- Indexes for table `manage_cuti`
 --
 ALTER TABLE `manage_cuti`
   ADD PRIMARY KEY (`id_manage_cuti`),
   ADD KEY `id_kategori_cuti` (`id_kategori_cuti`),
   ADD KEY `id_emp` (`id_emp`);
+
+--
+-- Indexes for table `req_barang`
+--
+ALTER TABLE `req_barang`
+  ADD PRIMARY KEY (`id_req_brg`),
+  ADD KEY `kode_brg` (`kode_brg`),
+  ADD KEY `id_lokasi` (`id_lokasi`),
+  ADD KEY `id_room` (`id_room`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indexes for table `req_cuti`
@@ -389,11 +527,26 @@ ALTER TABLE `req_cuti`
   ADD KEY `id_kategori_cuti` (`id_kategori_cuti`);
 
 --
+-- Indexes for table `storage_barang`
+--
+ALTER TABLE `storage_barang`
+  ADD PRIMARY KEY (`kode_brg`),
+  ADD KEY `id_room` (`id_room`),
+  ADD KEY `id_lokasi` (`id_lokasi`),
+  ADD KEY `id_vendor` (`id_vendor`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`),
   ADD KEY `id_emp` (`id_emp`);
+
+--
+-- Indexes for table `vendor`
+--
+ALTER TABLE `vendor`
+  ADD PRIMARY KEY (`id_vendor`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -415,7 +568,7 @@ ALTER TABLE `akses_pintu`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
+  MODIFY `id_barang` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
 
 --
 -- AUTO_INCREMENT for table `ijazah`
@@ -448,10 +601,28 @@ ALTER TABLE `lantai`
   MODIFY `id_lantai` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `lokasi_barang`
+--
+ALTER TABLE `lokasi_barang`
+  MODIFY `id_lokasi` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `lokasi_room`
+--
+ALTER TABLE `lokasi_room`
+  MODIFY `id_room` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `manage_cuti`
 --
 ALTER TABLE `manage_cuti`
   MODIFY `id_manage_cuti` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT for table `req_barang`
+--
+ALTER TABLE `req_barang`
+  MODIFY `id_req_brg` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `req_cuti`
@@ -464,6 +635,12 @@ ALTER TABLE `req_cuti`
 --
 ALTER TABLE `user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT for table `vendor`
+--
+ALTER TABLE `vendor`
+  MODIFY `id_vendor` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -509,11 +686,28 @@ ALTER TABLE `manage_cuti`
   ADD CONSTRAINT `manage_cuti_ibfk_2` FOREIGN KEY (`id_emp`) REFERENCES `karyawan` (`id_emp`);
 
 --
+-- Constraints for table `req_barang`
+--
+ALTER TABLE `req_barang`
+  ADD CONSTRAINT `req_barang_ibfk_1` FOREIGN KEY (`kode_brg`) REFERENCES `storage_barang` (`kode_brg`),
+  ADD CONSTRAINT `req_barang_ibfk_2` FOREIGN KEY (`id_lokasi`) REFERENCES `lokasi_barang` (`id_lokasi`),
+  ADD CONSTRAINT `req_barang_ibfk_3` FOREIGN KEY (`id_room`) REFERENCES `lokasi_room` (`id_room`),
+  ADD CONSTRAINT `req_barang_ibfk_4` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
+
+--
 -- Constraints for table `req_cuti`
 --
 ALTER TABLE `req_cuti`
   ADD CONSTRAINT `req_cuti_ibfk_1` FOREIGN KEY (`id_emp`) REFERENCES `karyawan` (`id_emp`),
   ADD CONSTRAINT `req_cuti_ibfk_2` FOREIGN KEY (`id_kategori_cuti`) REFERENCES `kategori_cuti` (`id_kategori_cuti`);
+
+--
+-- Constraints for table `storage_barang`
+--
+ALTER TABLE `storage_barang`
+  ADD CONSTRAINT `storage_barang_ibfk_1` FOREIGN KEY (`id_room`) REFERENCES `lokasi_room` (`id_room`),
+  ADD CONSTRAINT `storage_barang_ibfk_2` FOREIGN KEY (`id_lokasi`) REFERENCES `lokasi_barang` (`id_lokasi`),
+  ADD CONSTRAINT `storage_barang_ibfk_3` FOREIGN KEY (`id_vendor`) REFERENCES `vendor` (`id_vendor`);
 
 --
 -- Constraints for table `user`
