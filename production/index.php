@@ -150,6 +150,13 @@ if ($_SESSION["level"] == "Staff IT") {
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
                   </li> -->
+                  <li><a><i class="fa fa-folder"></i> Asset dan Inventaris<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="index.php?page=dataInventaris">Storage Barang</a></li>
+ <!--                      <li><a href="index.php?page=historyPengajuan">History Pengajuan</a></li>
+                      <li><a href="tables_dynamic.html">Table Dynamic</a></li> -->
+                    </ul>
+                  </li>
 
                   <li><a><i class="fa fa-list"></i> Pengajuan Barang<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -377,6 +384,10 @@ if ($_SESSION["level"] == "Staff IT") {
                                 include "page/dashboard/dashboard.php";
                                 break;
 
+                            case 'dataInventaris':
+                                include 'page/asset_dan_inventaris/inventaris.php';
+                                break;
+
                             case 'laporan':
                                 include "page/laporan/laporan.php";
                                 break;
@@ -424,6 +435,18 @@ if ($_SESSION["level"] == "Staff IT") {
                             case 'tambahKaryawan':
                                 include 'page/hrd/tambah.php';
                               break;
+
+                            case 'tambahInventaris':
+                                include "page/asset_dan_inventaris/tambah.php";
+                                break;
+
+                            case 'ubahInventaris':
+                                include "page/asset_dan_inventaris/ubah.php";
+                                break;
+
+                            case 'hapusInventaris':
+                                include 'page/asset_dan_inventaris/hapus.php';
+                                break;
                 
                             case 'cariAnggaran':
                               include "page/anggaran/cari.php";

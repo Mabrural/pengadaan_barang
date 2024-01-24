@@ -824,6 +824,112 @@ function approveCuti($data) {
 }
 
 
+function generate_kode_barang() {
+  global $koneksi;
+  
+  // Ambil nilai auto increment terakhir
+  $query = "SELECT MAX(CAST(SUBSTRING(kode_brg, 4) AS SIGNED)) AS kode_terakhir FROM storage_barang";
+  $result = mysqli_query($koneksi, $query);
+  $row = mysqli_fetch_assoc($result);
+  $kode_terakhir = $row['kode_terakhir'];
+
+  // Generate kode barang baru
+  $kode_baru = "BRG";
+  if ($kode_terakhir !== null) {
+    $kode_baru .= sprintf("%03d", $kode_terakhir + 1);
+  } else {
+    $kode_baru .= "001";
+  }
+
+  return $kode_baru;
+}
+
+
+function tambahInventaris($data) {
+	global $koneksi;
+
+	$kode_brg = generate_kode_barang();
+	// $kode_brg = htmlspecialchars($data["kode_brg"]);
+	$nama_barang = htmlspecialchars($data["nama_barang"]);
+	$spek = htmlspecialchars($data["spek"]);
+	$deskripsi = htmlspecialchars($data["deskripsi"]);
+	$qty = htmlspecialchars($data["qty"]);
+	$date_in = htmlspecialchars($data["date_in"]);
+	$renewal = htmlspecialchars($data["renewal"]);
+	$kondisi_brg = htmlspecialchars($data["kondisi_brg"]);
+	$id_room = htmlspecialchars($data["id_room"]);
+	$id_lokasi = htmlspecialchars($data["id_lokasi"]);
+	$id_vendor = htmlspecialchars($data["id_vendor"]);
+
+	$gambar_brg =  uploadGambarBarang();
+	if (!$gambar_brg) {
+		return false;
+	}
+
+	$query = "INSERT INTO storage_barang VALUES
+			('$kode_brg', '$nama_barang', '$gambar_brg', '$spek', '$deskripsi', '$qty', '$date_in', '$renewal', '$kondisi_brg', '$id_room', '$id_lokasi', '$id_vendor')";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function uploadGambarBarang(){
+
+	$namaFile = $_FILES['gambar_brg']['name'];
+	$ukuranFile = $_FILES['gambar_brg']['size'];
+	$error = $_FILES['gambar_brg']['error'];
+	$tmpName = $_FILES['gambar_brg']['tmp_name'];
+
+	// cek apakah tidak ada gambar yang diupload
+	if ($error === 4) {
+		echo "
+			<script>
+				alert('pilih gambar terlebih dahulu!');
+			</script>
+		";
+		return false;
+	}
+
+	// cek apakah yang diupload adalah gambar
+	$ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
+	$ekstensiGambar = explode('.', $namaFile);
+	$ekstensiGambar = strtolower(end($ekstensiGambar));
+	if (!in_array($ekstensiGambar, $ekstensiGambarValid) ){
+		echo "
+			<script>
+				alert('yang anda upload bukan gambar!');
+			</script>
+		";
+		return false;
+	}
+
+	// cek jika ukurannya terlalu besar
+	if ($ukuranFile > 1000000){
+		echo "
+			<script>
+				alert('ukuran gambar terlalu besar!');
+			</script>
+		";
+		return false;
+	}
+
+	// lolos pengecekan, gambar siap diupload
+	// generate nama gambar baru
+	$namaFileBaru = uniqid();
+	$namaFileBaru .= '.';
+	$namaFileBaru .= $ekstensiGambar;
+
+	move_uploaded_file($tmpName, 'img/asset_dan_inventaris/'. $namaFileBaru);
+	return $namaFileBaru;
+ }
+
+function hapusInventaris($kode_brg) {
+	global $koneksi;
+	mysqli_query($koneksi, "DELETE FROM storage_barang WHERE kode_brg='$kode_brg'");
+
+	return mysqli_affected_rows($koneksi);
+
+}
 // function approveCuti($data) {
 // 	global $koneksi;
 // 	$id_req_cuti = $data["id_req_cuti"];
