@@ -155,12 +155,12 @@ if ($_SESSION["level"] == "Staff IT") {
                       <!-- <li><a href="admin2.php?page=approve2">Approval Barang</a></li> -->
                       <li class="nav-item">
                             <a href="admin2.php?page=approve2" class="nav-link">
-                                Approve Barang 
+                                Approve Permintaan Barang 
                                 <?php
                                     // Check if the notification should be displayed
                                     if (!isset($_SESSION['cuti_notification_displayed'])) {
                                         // Query untuk menghitung jumlah cuti yang belum diapprove
-                                        $query = "SELECT COUNT(*) AS jml_barang_belum_diapprove FROM barang JOIN user ON user.id_user=barang.id_user WHERE barang.status='Menunggu Persetujuan Dir.Ops'";
+                                        $query = "SELECT COUNT(*) AS jml_barang_belum_diapprove FROM req_barang JOIN user ON user.id_user=req_barang.id_user WHERE req_barang.status_req='Menunggu Persetujuan Dir.Ops'";
                                         $result = mysqli_query($koneksi, $query);
                                         $data = mysqli_fetch_assoc($result);
 
@@ -175,7 +175,7 @@ if ($_SESSION["level"] == "Staff IT") {
                                 ?>
                             </a>
                         </li>
-                      <li><a href="admin2.php?page=historyApprove2">History Approval</a></li>
+                      <li><a href="admin2.php?page=historyApprove2">History Approval Barang</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
                   </li>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2024 at 12:07 PM
+-- Generation Time: Jan 25, 2024 at 11:51 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -74,31 +74,27 @@ INSERT INTO `akses_pintu` (`id_akses`, `no_akses`, `id_emp`, `id_lantai`) VALUES
 --
 
 CREATE TABLE `barang` (
-  `id_barang` int(10) NOT NULL,
-  `kode_pengajuan` bigint(30) NOT NULL,
+  `kode_brg` varchar(40) NOT NULL,
   `nama_barang` varchar(200) NOT NULL,
-  `spek` varchar(200) NOT NULL,
-  `deskripsi` varchar(200) NOT NULL,
-  `qty` int(5) NOT NULL,
-  `tgl_pengajuan` date NOT NULL,
-  `status` varchar(200) DEFAULT NULL,
-  `acc1` varchar(200) DEFAULT NULL,
-  `acc2` varchar(200) DEFAULT NULL,
-  `id_user` int(10) NOT NULL
+  `gambar_barang` varchar(100) NOT NULL,
+  `spek` text DEFAULT NULL,
+  `deskripsi` text DEFAULT NULL,
+  `stok_barang` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `barang`
 --
 
-INSERT INTO `barang` (`id_barang`, `kode_pengajuan`, `nama_barang`, `spek`, `deskripsi`, `qty`, `tgl_pengajuan`, `status`, `acc1`, `acc2`, `id_user`) VALUES
-(157, 14351234445231, 'Fan cooler', '3 kaki', 'butuh cepat', 1, '2024-01-17', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 27),
-(158, 14351234445232, 'Oli', '2L', 'untuk mesin kapal', 1, '2024-01-17', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 28),
-(159, 14351234445233, 'Printer', 'Canon L3110 Ecotank', 'untuk administrasi', 1, '2024-01-17', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 27),
-(160, 14351234445234, 'Fan Cooler', '3 Kipas', 'Liferaft', 1, '2024-01-17', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 28),
-(163, 14351234445235, 'Charger Laptop', 'Asus ROG Strix 504', 'butuh cepat. charger lama rusak', 2, '2024-01-23', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 27),
-(164, 14351234445236, 'Sapu ', '-', 'untuk kebersihan kantor', 1, '2024-01-24', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 28),
-(165, 14351234445237, 'Kain Pel', '-', 'untuk inventaris kantor', 1, '2024-01-24', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 28);
+INSERT INTO `barang` (`kode_brg`, `nama_barang`, `gambar_barang`, `spek`, `deskripsi`, `stok_barang`) VALUES
+('BRG00001', 'Mesin pompa 1', '65b1eab76c9b4.jpg', 'Mitsubishi', '-', 1),
+('BRG00002', 'Mesin Pompa 2', '65b1ead4019a7.jpg', 'Mitsubishi', '-', 1),
+('BRG00003', 'Mesin AE ', '65b1eaee10a9b.jpg', 'Mitsubishi', '-', 1),
+('BRG00004', 'Accu GS p N100', '65b1eb17d0683.jpg', 'GS p N100', '-', 4),
+('BRG00005', 'Accu NS p N120', '65b1eb35d2247.jpg', 'NS p N120', '-', 2),
+('BRG00006', 'Charger Accu', '65b1eb9514851.jpg', 'Maxtron CB 30', '-', 1),
+('BRG00007', 'Fire Extinguisher', '65b1ebbe050fe.jpg', 'Dry Powder 9kg', '-', 2),
+('BRG00008', 'Fire Extinguisher', '65b20422c0929.jpg', 'Chemical 4,6kg', '-', 1);
 
 -- --------------------------------------------------------
 
@@ -249,7 +245,8 @@ INSERT INTO `lokasi_barang` (`id_lokasi`, `nama_lokasi`) VALUES
 (1, 'OB Mitra Utama 03'),
 (2, 'OB Selaras 01'),
 (3, 'OB Garuda'),
-(4, 'TB Tiga Permata');
+(4, 'TB Tiga Permata'),
+(5, 'Office');
 
 -- --------------------------------------------------------
 
@@ -270,7 +267,10 @@ INSERT INTO `lokasi_room` (`id_room`, `room_name`) VALUES
 (1, 'Engine Room'),
 (2, 'Store Room'),
 (3, 'Main Deck'),
-(4, 'Cabin Crew');
+(4, 'Cabin Crew'),
+(5, 'Office Lt. 1'),
+(6, 'Office Lt. 2'),
+(7, 'Office Lt. 3');
 
 -- --------------------------------------------------------
 
@@ -305,9 +305,11 @@ INSERT INTO `manage_cuti` (`id_manage_cuti`, `id_kategori_cuti`, `kuota_cuti`, `
 
 CREATE TABLE `req_barang` (
   `id_req_brg` int(10) NOT NULL,
+  `kode_pengajuan` varchar(100) NOT NULL,
   `kode_brg` varchar(40) NOT NULL,
   `qty_req` int(5) NOT NULL,
   `tgl_req_brg` date NOT NULL,
+  `alasan` text DEFAULT NULL,
   `status_req` varchar(50) NOT NULL,
   `acc1` varchar(50) DEFAULT NULL,
   `acc2` varchar(50) DEFAULT NULL,
@@ -315,6 +317,15 @@ CREATE TABLE `req_barang` (
   `id_room` int(10) NOT NULL,
   `id_user` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `req_barang`
+--
+
+INSERT INTO `req_barang` (`id_req_brg`, `kode_pengajuan`, `kode_brg`, `qty_req`, `tgl_req_brg`, `alasan`, `status_req`, `acc1`, `acc2`, `id_lokasi`, `id_room`, `id_user`) VALUES
+(9, 'REQ2024012500001', 'BRG00001', 1, '2024-01-25', '-', 'Menunggu Persetujuan KC', '', '', 1, 1, 28),
+(10, 'REQ2024012500002', 'BRG00002', 2, '2024-01-25', '-', 'Menunggu Persetujuan KC', '', '', 1, 2, 28),
+(11, 'REQ2024012500003', 'BRG00001', 1, '2024-01-25', '-', 'Menunggu Persetujuan KC', '', '', 2, 1, 29);
 
 -- --------------------------------------------------------
 
@@ -402,9 +413,9 @@ INSERT INTO `user` (`id_user`, `username`, `password`, `level`, `id_emp`) VALUES
 (14, 'admin4', '$2y$10$3SspMiCSr.VJIpZy9thj2O1tNUeKc/EGPCLLRLaj4SznMsEmQliN.', 'admin4', 9),
 (15, 'hrd', '$2y$10$rfSEEc5RaRZ/YjmxEF9G8uDTXi8w04f8PnuI/3Br7pXPWD9PKOhN2', 'HRD', 10),
 (21, 'sanjeev', '$2y$10$dqD5eyXMYFl5dmq.1s103OeZOPTBNN4gHGqbu/D5neofhrjWRKxBO', 'Direktur Utama', 8),
-(27, 'alex', '$2y$10$pKR0gqG2v6B0T7/3oiKvPexleYhzbBKMLyH1M6gnP3j6nJdVvi4SK', 'Staff Operasional', 19),
-(28, 'robi', '$2y$10$pi39ljqjbeI7Xgu6up8uie2wOUT6Gv7dwqsQXgvI60DotWKCmSvQC', 'Staff Operasional', 18),
-(29, 'krisno', '$2y$10$wdmPEof2zbHxxFyJWXAZZOZOigLJucxD/Vy5oALS.0y5ZJkvzVNhC', 'Staff Operasional', 16),
+(27, 'alex', '$2y$10$AIPkK9rwsTtwIpWxWxQyl.B4q1KZkeHJuzk9htMLmXM3k7hgRuyzW', 'Purchasing', 19),
+(28, 'robi', '$2y$10$pi39ljqjbeI7Xgu6up8uie2wOUT6Gv7dwqsQXgvI60DotWKCmSvQC', 'Crew', 18),
+(29, 'krisno', '$2y$10$wdmPEof2zbHxxFyJWXAZZOZOigLJucxD/Vy5oALS.0y5ZJkvzVNhC', 'Crew', 16),
 (30, 'niken', '$2y$10$Kzzb.fetZnuGPtKI03hX6.p.b.XP81bzSX92q0P3/HpRpWFSpdPZa', 'Staff Operasional', 17),
 (31, 'mabrur', '$2y$10$zxwFH.e4ooAM3CgI8Wzi8Ot0AIZhzcnKMHNPSIprWt.gbQiArYqki', 'Staff IT', 30);
 
@@ -453,8 +464,7 @@ ALTER TABLE `akses_pintu`
 -- Indexes for table `barang`
 --
 ALTER TABLE `barang`
-  ADD PRIMARY KEY (`id_barang`),
-  ADD KEY `id_user` (`id_user`);
+  ADD PRIMARY KEY (`kode_brg`);
 
 --
 -- Indexes for table `ijazah`
@@ -565,12 +575,6 @@ ALTER TABLE `akses_pintu`
   MODIFY `id_akses` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `barang`
---
-ALTER TABLE `barang`
-  MODIFY `id_barang` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
-
---
 -- AUTO_INCREMENT for table `ijazah`
 --
 ALTER TABLE `ijazah`
@@ -604,13 +608,13 @@ ALTER TABLE `lantai`
 -- AUTO_INCREMENT for table `lokasi_barang`
 --
 ALTER TABLE `lokasi_barang`
-  MODIFY `id_lokasi` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_lokasi` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `lokasi_room`
 --
 ALTER TABLE `lokasi_room`
-  MODIFY `id_room` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_room` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `manage_cuti`
@@ -622,7 +626,7 @@ ALTER TABLE `manage_cuti`
 -- AUTO_INCREMENT for table `req_barang`
 --
 ALTER TABLE `req_barang`
-  MODIFY `id_req_brg` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_req_brg` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `req_cuti`
@@ -661,12 +665,6 @@ ALTER TABLE `akses_pintu`
   ADD CONSTRAINT `akses_pintu_ibfk_2` FOREIGN KEY (`id_lantai`) REFERENCES `lantai` (`id_lantai`);
 
 --
--- Constraints for table `barang`
---
-ALTER TABLE `barang`
-  ADD CONSTRAINT `barang_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
-
---
 -- Constraints for table `ijazah`
 --
 ALTER TABLE `ijazah`
@@ -689,7 +687,7 @@ ALTER TABLE `manage_cuti`
 -- Constraints for table `req_barang`
 --
 ALTER TABLE `req_barang`
-  ADD CONSTRAINT `req_barang_ibfk_1` FOREIGN KEY (`kode_brg`) REFERENCES `storage_barang` (`kode_brg`),
+  ADD CONSTRAINT `req_barang_ibfk_1` FOREIGN KEY (`kode_brg`) REFERENCES `barang` (`kode_brg`),
   ADD CONSTRAINT `req_barang_ibfk_2` FOREIGN KEY (`id_lokasi`) REFERENCES `lokasi_barang` (`id_lokasi`),
   ADD CONSTRAINT `req_barang_ibfk_3` FOREIGN KEY (`id_room`) REFERENCES `lokasi_room` (`id_room`),
   ADD CONSTRAINT `req_barang_ibfk_4` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);

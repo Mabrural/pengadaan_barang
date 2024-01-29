@@ -81,6 +81,8 @@ if ($_SESSION["level"] == "Staff IT") {
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   </head>
 
   <body class="nav-md">
@@ -150,21 +152,64 @@ if ($_SESSION["level"] == "Staff IT") {
                     </ul>
                   </li> -->
 
-                  <li><a><i class="fa fa-list-alt"></i> Laporan Pengajuan <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-folder"></i> Master Barang<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="admin3.php?page=approve3">Rekap Data Approval</a></li>
-                      <li><a href="admin3.php?page=historyApprove3">History Approval</a></li>
+                      <li><a href="admin3.php?page=dataBarang">Daftar Barang</a></li>
+                    </ul>
+                  </li>
+
+                  <li><a><i class="fa fa-database"></i> Asset dan Inventaris<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="admin3.php?page=dataInventaris">Storage Barang</a></li>
+                    </ul>
+                  </li>
+
+
+                  <li><a><i class="fa fa-external-link"></i> Permintaan Barang<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="admin3.php?page=approve3">Data Permintaan Barang</a></li>
+                      <!-- <li><a href="index.php?page=historyPengajuan">Barang Masuk</a></li>
+                      <li><a href="index.php?page=historyPengajuan">Barang Keluar</a></li> -->
+                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                    </ul>
+                  </li>
+
+                  <li><a><i class="fa fa-shopping-cart"></i> Pembelian Barang<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="admin3.php?page=pengajuanPembelian">Data Pembelian Barang</a></li>
+                      <!-- <li><a href="index.php?page=historyPengajuan">Barang Masuk</a></li>
+                      <li><a href="index.php?page=historyPengajuan">Barang Keluar</a></li> -->
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
                   </li>
 
                   <li><a><i class="fa fa-credit-card"></i> Accounting & Finance <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
+                      <li><a href="admin3.php?page=pengajuanPembelian">Pengajuan Pembelian Barang</a></li>
                       <li><a href="admin3.php?page=approve3">Data Keuangan</a></li>
                       <li><a href="admin3.php?page=historyApprove3">History Keuangan</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
                   </li>
+
+                  <li><a><i class="fa fa-exchange"></i>Transaksi Barang<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="admin3.php?page=transaksiBarangMasuk">Barang Masuk</a></li>
+                      <li><a href="index.php?page=historyTransaksi">History Transaksi</a></li>
+                      <!-- <li><a href="tables_dynamic.html">Table Dynamic</a></li> -->
+                    </ul>
+                  </li>
+
+                  
+                  <!-- <li><a><i class="fa fa-list-alt"></i> Laporan Pengajuan <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="admin3.php?page=approve3">Rekap Data Approval</a></li>
+                      <li><a href="admin3.php?page=historyApprove3">History Approval</a></li>
+                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                    </ul>
+                  </li> -->
+
+                  
                   <!-- <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="chartjs.html">Chart JS</a></li>
@@ -368,6 +413,22 @@ if ($_SESSION["level"] == "Staff IT") {
                                 include "page/profile/profile.php";
                                 break;
 
+                            case 'dataBarang':
+                                include "page/data_barang/barang.php";
+                                break;
+
+                            case 'transaksiBarangMasuk':
+                                include 'page/transaksi_barang/barang_masuk/barang_masuk.php';
+                                break;
+
+                            case 'dataInventaris':
+                                include "page/asset_dan_inventaris/inventaris.php";
+                                break;
+
+                            case 'pengajuanPembelian':
+                                include 'page/pembelian_barang/pengajuan_pembelian/pengajuan_pembelian.php';
+                                break;
+
                             case 'laporan':
                                 include "page/laporan/rekap_data.php";
                                 break;
@@ -416,6 +477,34 @@ if ($_SESSION["level"] == "Staff IT") {
                 
                             case 'updateProfile':
                                 include 'page/profile/update_profile.php';
+                                break;
+
+                            case 'tambahBarangMasuk':
+                                include 'page/transaksi_barang/barang_masuk/tambah.php';
+                                break;
+
+                            case 'tambahInventaris':
+                                include "page/asset_dan_inventaris/tambah.php";
+                                break;
+
+                            case 'tambahBarang':
+                                include 'page/data_barang/tambah.php';
+                                break;
+
+                            case 'ubahBarang':
+                                include 'page/data_barang/ubah.php';
+                                break;
+
+                            case 'hapusBarang':
+                                include 'page/data_barang/hapus.php';
+                                break;
+
+                            case 'tambahPembelian':
+                                include 'page/pembelian_barang/pengajuan_pembelian/tambah.php';
+                                break;
+
+                            case 'cetakInventaris':
+                                include 'page/laporan/cetak_inventaris.php';
                                 break;
 
                             case 'ubahCatatan':

@@ -43,27 +43,81 @@ function query($query){
 // 	return mysqli_affected_rows($koneksi);
 // }
 
+
+// function generate_kode_pengajuan() {
+//   global $koneksi;
+  
+//   // Ambil nilai auto increment terakhir
+//   $query = "SELECT MAX(CAST(SUBSTRING(kode_brg, 4) AS SIGNED)) AS kode_terakhir FROM req_barang";
+//   $result = mysqli_query($koneksi, $query);
+//   $row = mysqli_fetch_assoc($result);
+//   $kode_terakhir = $row['kode_terakhir'];
+
+//   // Generate kode barang baru
+//   $kode_baru = "REQ". date('Ymd');
+//   if ($kode_terakhir !== null) {
+//     $kode_baru .= sprintf("%05d", $kode_terakhir + 1);
+//   } else {
+//     $kode_baru .= "00001";
+//   }
+
+//   return $kode_baru;
+// }
+
+function generate_kode_pengajuan() {
+  global $koneksi;
+
+  // Ambil nilai auto increment terakhir
+  $query = "SELECT MAX(CAST(SUBSTRING(kode_pengajuan, 13, 5) AS SIGNED)) AS kode_terakhir FROM req_barang";
+  $result = mysqli_query($koneksi, $query);
+  $row = mysqli_fetch_assoc($result);
+  $kode_terakhir = $row['kode_terakhir'];
+
+  // Generate kode pengajuan baru
+  $kode_baru = "REQ-" . date('ymd');
+  if ($kode_terakhir !== null) {
+    $kode_baru .= sprintf("%05d", $kode_terakhir + 1);
+  } else {
+    $kode_baru .= "00001";
+  }
+
+  // Generate angka random
+  $angka_random = random_int(10000, 99999);
+
+  // Cek apakah angka random sudah pernah digunakan
+  $query = "SELECT kode_pengajuan FROM req_barang WHERE kode_pengajuan LIKE 'REQ-%' AND RIGHT(kode_pengajuan, 5) = '$angka_random'";
+  $result = mysqli_query($koneksi, $query);
+  while (mysqli_num_rows($result) > 0) {
+    // Jika sudah pernah digunakan, generate angka random lagi
+    $angka_random = random_int(10000, 99999);
+    $query = "SELECT kode_pengajuan FROM req_barang WHERE kode_pengajuan LIKE 'REQ-%' AND RIGHT(kode_pengajuan, 5) = '$angka_random'";
+    $result = mysqli_query($koneksi, $query);
+  }
+
+  // Tambahkan angka random ke kode pengajuan
+  $kode_baru .= "-" . $angka_random;
+
+  return $kode_baru;
+}
+
+
+
 function tambahPengajuan($data) {
 
 	global $koneksi;
-	// $kode_pengajuan = htmlspecialchars($data["kode_pengajuan"]);
-	$nama_barang = htmlspecialchars($data["nama_barang"]);
-	$spek = htmlspecialchars($data["spek"]);
-	$deskripsi = htmlspecialchars($data["deskripsi"]);
-	$qty = htmlspecialchars($data["qty"]);
-	$tgl_pengajuan = htmlspecialchars($data["tgl_pengajuan"]);
-	$status = htmlspecialchars($data["status"]);
-	// $acc1 = htmlspecialchars($data["acc1"]);
-	// $acc2 = htmlspecialchars($data["acc2"]);
+	$kode_pengajuan = generate_kode_pengajuan();
+	$kode_brg = htmlspecialchars($data["kode_brg"]);
+	$qty_req = htmlspecialchars($data["qty_req"]);
+	$tgl_req_brg = htmlspecialchars($data["tgl_req_brg"]);
+	$alasan = htmlspecialchars($data["alasan"]);
+	$status_req = htmlspecialchars($data["status_req"]);
+	$id_lokasi = htmlspecialchars($data["id_lokasi"]);
+	$id_room = htmlspecialchars($data["id_room"]);
+	$id_satuan = htmlspecialchars($data["id_satuan"]);
 	$id_user = mysqli_real_escape_string($koneksi, $_SESSION["id_user"]);
 
-	$query = "SELECT MAX(kode_pengajuan) AS kode_pengajuan FROM barang";
-	$result = mysqli_query($koneksi, $query);
-	$row = mysqli_fetch_assoc($result);
-	$new_kode_pengajuan = $row["kode_pengajuan"] + 1;
-
-	$query = "INSERT INTO barang VALUES
-			('', '$new_kode_pengajuan', '$nama_barang', '$spek', '$deskripsi', '$qty', '$tgl_pengajuan', '$status', '', '', '$id_user')";
+	$query = "INSERT INTO req_barang VALUES
+			('', '$kode_pengajuan', '$kode_brg', '$qty_req', '$tgl_req_brg', '$alasan', '$status_req', '', '', '$id_lokasi', '$id_room', '$id_user', '$id_satuan')";
 	mysqli_query($koneksi, $query);
 
 	return mysqli_affected_rows($koneksi);
@@ -74,24 +128,29 @@ function tambahPengajuan($data) {
 
 function ubahPengajuan($data) {
 	global $koneksi;
-	$id_barang = $data["id_barang"];
-	// $kode_pengajuan = htmlspecialchars($data["kode_pengajuan"]);
-	$nama_barang = htmlspecialchars($data["nama_barang"]);
-	$spek = htmlspecialchars($data["spek"]);
-	$deskripsi = htmlspecialchars($data["deskripsi"]);
-	$qty = htmlspecialchars($data["qty"]);
-	$tgl_pengajuan = htmlspecialchars($data["tgl_pengajuan"]);
-	$status = htmlspecialchars($data["status"]);
+	$id_req_brg = $data["id_req_brg"];
+	$kode_pengajuan = htmlspecialchars($data['kode_pengajuan']);
+	$kode_brg = htmlspecialchars($data["kode_brg"]);
+	$qty_req = htmlspecialchars($data["qty_req"]);
+	$tgl_req_brg = htmlspecialchars($data["tgl_req_brg"]);
+	$alasan = htmlspecialchars($data["alasan"]);
+	$status_req = htmlspecialchars($data["status_req"]);
+	$id_lokasi = htmlspecialchars($data["id_lokasi"]);
+	$id_room = htmlspecialchars($data["id_room"]);
+	$id_satuan = htmlspecialchars($data["id_satuan"]);
 
 
-	$query = "UPDATE barang SET
-				nama_barang = '$nama_barang',
-				spek = '$spek',
-				deskripsi = '$deskripsi',
-				qty = '$qty',
-				tgl_pengajuan = '$tgl_pengajuan',
-				status = '$status'
-			  WHERE id_barang = $id_barang
+	$query = "UPDATE req_barang SET
+				kode_pengajuan = '$kode_pengajuan',
+				kode_brg = '$kode_brg',
+				qty_req = '$qty_req',
+				tgl_req_brg = '$tgl_req_brg',
+				alasan = '$alasan',
+				status_req = '$status_req',
+				id_lokasi = '$id_lokasi',
+				id_room = '$id_room',
+				id_satuan = '$id_satuan'
+			  WHERE id_req_brg = $id_req_brg
 			";
 	mysqli_query($koneksi, $query);
 
@@ -100,27 +159,29 @@ function ubahPengajuan($data) {
 
 function ubahApprove($data) {
 	global $koneksi;
-	$id_barang = $data["id_barang"];
-	$kode_pengajuan = htmlspecialchars($data["kode_pengajuan"]);
-	$nama_barang = htmlspecialchars($data["nama_barang"]);
-	$spek = htmlspecialchars($data["spek"]);
-	$deskripsi = htmlspecialchars($data["deskripsi"]);
-	$qty = htmlspecialchars($data["qty"]);
-	$tgl_pengajuan = htmlspecialchars($data["tgl_pengajuan"]);
-	$status = htmlspecialchars($data["status"]);
+	$id_req_brg = $data["id_req_brg"];
+	$kode_pengajuan = htmlspecialchars($data['kode_pengajuan']);
+	$kode_brg = htmlspecialchars($data["kode_brg"]);
+	$qty_req = htmlspecialchars($data["qty_req"]);
+	$tgl_req_brg = htmlspecialchars($data["tgl_req_brg"]);
+	$alasan = htmlspecialchars($data["alasan"]);
+	$status_req = htmlspecialchars($data["status_req"]);
+	$id_lokasi = htmlspecialchars($data["id_lokasi"]);
+	$id_room = htmlspecialchars($data["id_room"]);
 	$acc1 = htmlspecialchars($data["acc1"]);
 
 
-	$query = "UPDATE barang SET
+	$query = "UPDATE req_barang SET
 				kode_pengajuan = '$kode_pengajuan',
-				nama_barang = '$nama_barang',
-				spek = '$spek',
-				deskripsi = '$deskripsi',
-				qty = '$qty',
-				tgl_pengajuan = '$tgl_pengajuan',
-				status = '$status',
+				kode_brg = '$kode_brg',
+				qty_req = '$qty_req',
+				tgl_req_brg = '$tgl_req_brg',
+				alasan = '$alasan',
+				status_req = '$status_req',
+				id_lokasi = '$id_lokasi',
+				id_room = '$id_room',
 				acc1 = '$acc1'
-			  WHERE id_barang = $id_barang
+			  WHERE id_req_brg = $id_req_brg
 			";
 	mysqli_query($koneksi, $query);
 
@@ -129,36 +190,39 @@ function ubahApprove($data) {
 
 function ubahApprove2($data) {
 	global $koneksi;
-	$id_barang = $data["id_barang"];
-	$kode_pengajuan = htmlspecialchars($data["kode_pengajuan"]);
-	$nama_barang = htmlspecialchars($data["nama_barang"]);
-	$spek = htmlspecialchars($data["spek"]);
-	$deskripsi = htmlspecialchars($data["deskripsi"]);
-	$qty = htmlspecialchars($data["qty"]);
-	$tgl_pengajuan = htmlspecialchars($data["tgl_pengajuan"]);
-	$status = htmlspecialchars($data["status"]);
+	$id_req_brg = $data["id_req_brg"];
+	$kode_pengajuan = htmlspecialchars($data['kode_pengajuan']);
+	$kode_brg = htmlspecialchars($data["kode_brg"]);
+	$qty_req = htmlspecialchars($data["qty_req"]);
+	$tgl_req_brg = htmlspecialchars($data["tgl_req_brg"]);
+	$alasan = htmlspecialchars($data["alasan"]);
+	$status_req = htmlspecialchars($data["status_req"]);
+	$id_lokasi = htmlspecialchars($data["id_lokasi"]);
+	$id_room = htmlspecialchars($data["id_room"]);
 	$acc2 = htmlspecialchars($data["acc2"]);
 
 
-	$query = "UPDATE barang SET
+
+	$query = "UPDATE req_barang SET
 				kode_pengajuan = '$kode_pengajuan',
-				nama_barang = '$nama_barang',
-				spek = '$spek',
-				deskripsi = '$deskripsi',
-				qty = '$qty',
-				tgl_pengajuan = '$tgl_pengajuan',
-				status = '$status',
+				kode_brg = '$kode_brg',
+				qty_req = '$qty_req',
+				tgl_req_brg = '$tgl_req_brg',
+				alasan = '$alasan',
+				status_req = '$status_req',
+				id_lokasi = '$id_lokasi',
+				id_room = '$id_room',
 				acc2 = '$acc2'
-			  WHERE id_barang = $id_barang
+			  WHERE id_req_brg = $id_req_brg
 			";
 	mysqli_query($koneksi, $query);
 
 	return mysqli_affected_rows($koneksi);
 }
 
-function hapusPengajuan($id_barang) {
+function hapusPengajuan($id_req_brg) {
 	global $koneksi;
-	mysqli_query($koneksi, "DELETE FROM barang WHERE id_barang=$id_barang");
+	mysqli_query($koneksi, "DELETE FROM req_barang WHERE id_req_brg=$id_req_brg");
 
 	return mysqli_affected_rows($koneksi);
 
@@ -824,11 +888,31 @@ function approveCuti($data) {
 }
 
 
+// function generate_kode_barang() {
+//   global $koneksi;
+  
+//   // Ambil nilai auto increment terakhir
+//   $query = "SELECT MAX(CAST(SUBSTRING(kode_brg, 4) AS SIGNED)) AS kode_terakhir FROM storage_barang";
+//   $result = mysqli_query($koneksi, $query);
+//   $row = mysqli_fetch_assoc($result);
+//   $kode_terakhir = $row['kode_terakhir'];
+
+//   // Generate kode barang baru
+//   $kode_baru = "BRG";
+//   if ($kode_terakhir !== null) {
+//     $kode_baru .= sprintf("%03d", $kode_terakhir + 1);
+//   } else {
+//     $kode_baru .= "001";
+//   }
+
+//   return $kode_baru;
+// }
+
 function generate_kode_barang() {
   global $koneksi;
   
   // Ambil nilai auto increment terakhir
-  $query = "SELECT MAX(CAST(SUBSTRING(kode_brg, 4) AS SIGNED)) AS kode_terakhir FROM storage_barang";
+  $query = "SELECT MAX(CAST(SUBSTRING(kode_brg, 4) AS SIGNED)) AS kode_terakhir FROM barang";
   $result = mysqli_query($koneksi, $query);
   $row = mysqli_fetch_assoc($result);
   $kode_terakhir = $row['kode_terakhir'];
@@ -836,38 +920,90 @@ function generate_kode_barang() {
   // Generate kode barang baru
   $kode_baru = "BRG";
   if ($kode_terakhir !== null) {
-    $kode_baru .= sprintf("%03d", $kode_terakhir + 1);
+    $kode_baru .= sprintf("%05d", $kode_terakhir + 1);
   } else {
-    $kode_baru .= "001";
+    $kode_baru .= "00001";
   }
 
   return $kode_baru;
 }
 
-
-function tambahInventaris($data) {
+function tambahBarang($data) {
 	global $koneksi;
 
 	$kode_brg = generate_kode_barang();
-	// $kode_brg = htmlspecialchars($data["kode_brg"]);
 	$nama_barang = htmlspecialchars($data["nama_barang"]);
 	$spek = htmlspecialchars($data["spek"]);
 	$deskripsi = htmlspecialchars($data["deskripsi"]);
-	$qty = htmlspecialchars($data["qty"]);
-	$date_in = htmlspecialchars($data["date_in"]);
-	$renewal = htmlspecialchars($data["renewal"]);
-	$kondisi_brg = htmlspecialchars($data["kondisi_brg"]);
-	$id_room = htmlspecialchars($data["id_room"]);
-	$id_lokasi = htmlspecialchars($data["id_lokasi"]);
-	$id_vendor = htmlspecialchars($data["id_vendor"]);
+	// $stok_barang = htmlspecialchars($data["stok_barang"]);
 
-	$gambar_brg =  uploadGambarBarang();
-	if (!$gambar_brg) {
+	$gambar_barang =  uploadGambarBarang();
+	if (!$gambar_barang) {
 		return false;
 	}
 
+	$query = "INSERT INTO barang VALUES
+			('$kode_brg', '$nama_barang', '$gambar_barang', '$spek', '$deskripsi')";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+ function hapusBarang($kode_brg) {
+	global $koneksi;
+	mysqli_query($koneksi, "DELETE FROM barang WHERE kode_brg='$kode_brg'");
+
+	return mysqli_affected_rows($koneksi);
+
+}
+
+function ubahBarang($data) {
+	global $koneksi;
+	// $kode_brg_lama = $data["kode_brg_lama"];
+	$kode_brg = $data["kode_brg"];
+	$gambarLama = htmlspecialchars($data["gambarBarangLama"]);
+	$nama_barang = htmlspecialchars($data["nama_barang"]);
+	$spek = htmlspecialchars($data["spek"]);
+	$deskripsi = htmlspecialchars($data["deskripsi"]);
+	// $stok_barang = htmlspecialchars($data["stok_barang"]);
+	
+	// cek apakah user pilih gambar baru atau tidak
+	if ($_FILES['gambar_barang']['error'] === 4 ) {
+		$gambar_barang = $gambarLama;
+	} else {
+
+		$gambar_barang = uploadGambarBarang();
+	}
+
+
+	$query = "UPDATE barang SET
+				kode_brg = '$kode_brg',
+				nama_barang = '$nama_barang',
+				gambar_barang = '$gambar_barang',
+				spek = '$spek',
+				deskripsi = '$deskripsi'
+			  WHERE kode_brg = '$kode_brg'
+			";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+function tambahInventaris($data) {
+	global $koneksi;
+
+	$tgl_input = htmlspecialchars($data['tgl_input']);
+	$qty_brg = htmlspecialchars($data['qty_brg']);
+	$kondisi_brg = htmlspecialchars($data["kondisi_brg"]);
+	$ket_kondisi = htmlspecialchars($data["ket_kondisi"]);
+	$kode_brg = htmlspecialchars($data["kode_brg"]);
+	$id_room = htmlspecialchars($data["id_room"]);
+	$id_lokasi = htmlspecialchars($data["id_lokasi"]);
+	$id_satuan = htmlspecialchars($data["id_satuan"]);
+	$id_user = htmlspecialchars($_SESSION['id_user']);
+
+
 	$query = "INSERT INTO storage_barang VALUES
-			('$kode_brg', '$nama_barang', '$gambar_brg', '$spek', '$deskripsi', '$qty', '$date_in', '$renewal', '$kondisi_brg', '$id_room', '$id_lokasi', '$id_vendor')";
+			('', '$tgl_input', '$qty_brg', '$kondisi_brg', '$ket_kondisi', '$kode_brg', '$id_lokasi', '$id_satuan', '$id_room', '$id_user')";
 	mysqli_query($koneksi, $query);
 
 	return mysqli_affected_rows($koneksi);
@@ -875,10 +1011,10 @@ function tambahInventaris($data) {
 
 function uploadGambarBarang(){
 
-	$namaFile = $_FILES['gambar_brg']['name'];
-	$ukuranFile = $_FILES['gambar_brg']['size'];
-	$error = $_FILES['gambar_brg']['error'];
-	$tmpName = $_FILES['gambar_brg']['tmp_name'];
+	$namaFile = $_FILES['gambar_barang']['name'];
+	$ukuranFile = $_FILES['gambar_barang']['size'];
+	$error = $_FILES['gambar_barang']['error'];
+	$tmpName = $_FILES['gambar_barang']['tmp_name'];
 
 	// cek apakah tidak ada gambar yang diupload
 	if ($error === 4) {
@@ -919,7 +1055,7 @@ function uploadGambarBarang(){
 	$namaFileBaru .= '.';
 	$namaFileBaru .= $ekstensiGambar;
 
-	move_uploaded_file($tmpName, 'img/asset_dan_inventaris/'. $namaFileBaru);
+	move_uploaded_file($tmpName, 'img/barang/'. $namaFileBaru);
 	return $namaFileBaru;
  }
 

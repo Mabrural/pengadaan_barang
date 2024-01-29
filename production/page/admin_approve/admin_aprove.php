@@ -9,7 +9,7 @@ $id_user = $_SESSION["id_user"];
 ?>
     <div class="x_panel">
       <div class="x_title">
-        <h2>Data Approval <small></small></h2>
+        <h2>Data Approval Barang<small></small></h2>
         <!-- <a href="?form=tambahPengajuan" class="btn btn-primary">Form Pengajuan</a> -->
         <!-- <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -40,11 +40,15 @@ $id_user = $_SESSION["id_user"];
                 </th> -->
                 <th class="column-title">No. </th>
                 <th class="column-title">Kode Pengajuan </th>
+                <th class="column-title">Kode Barang </th>
                 <th class="column-title">Nama Barang </th>
-                <th class="column-title">Spec </th>
-                <th class="column-title">Desc </th>
+                <th class="column-title">Spesifikasi </th>
                 <th class="column-title">Qty </th>
+                <th class="column-title">Satuan </th>
+                <th class="column-title">Lokasi Barang </th>
+                <th class="column-title">Lokasi Ruangan </th>
                 <th class="column-title">Tanggal Pengajuan </th>
+                <th class="column-title">Alasan </th>
                 <th class="column-title">Nama Pemohon </th>
                 <th class="column-title">Status </th>
                 <th class="column-title no-link last"><span class="nobr">Action</span>
@@ -60,9 +64,17 @@ $id_user = $_SESSION["id_user"];
               	<?php 
               		$no = 1;
                   // $query = "SELECT * FROM karyawan JOIN user ON user.id_emp=karyawan.id_emp JOIN barang ON user.id_user=barang.id_user WHERE status='Menunggu Persetujuan' OR status='Sedang diproses'";
-                  $query2 = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user JOIN karyawan ON karyawan.id_emp=user.id_emp WHERE barang.status='Menunggu Persetujuan KC' AND karyawan.id_emp=user.id_emp";
-              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='Menunggu Persetujuan KC'";
-              		// $query = "SELECT * FROM barang WHERE barang.id_user=$id_user";
+                  $query2 = "SELECT * FROM req_barang JOIN user ON user.id_user=req_barang.id_user JOIN karyawan ON karyawan.id_emp=user.id_emp WHERE req_barang.status_req='Menunggu Persetujuan KC' AND karyawan.id_emp=user.id_emp";
+              		$query3 = "SELECT * FROM req_barang JOIN user ON user.id_user=req_barang.id_user JOIN barang ON barang.kode_brg=req_barang.kode_brg WHERE status_req='Menunggu Persetujuan KC'";
+
+                  $query = "SELECT * FROM req_barang
+                            JOIN user ON user.id_user=req_barang.id_user
+                            JOIN karyawan ON karyawan.id_emp=user.id_emp
+                            JOIN barang ON barang.kode_brg=req_barang.kode_brg 
+                            JOIN satuan ON satuan.id_satuan=req_barang.id_satuan 
+                            JOIN lokasi_barang ON lokasi_barang.id_lokasi=req_barang.id_lokasi 
+                            JOIN lokasi_room ON lokasi_room.id_room=req_barang.id_room WHERE req_barang.status_req='Menunggu Persetujuan KC'";
+
                   $tampil2 = mysqli_query($koneksi, $query2);
                   $data2 = mysqli_fetch_assoc($tampil2);
               		$tampil = mysqli_query($koneksi, $query);
@@ -72,32 +84,35 @@ $id_user = $_SESSION["id_user"];
               	 ?>
                 <td class=" "><?= $no++;?></td>
                 <td class=" "><?= $data['kode_pengajuan'];?></td>
+                <td class=" "><?= $data['kode_brg'];?></td>
                 <td class=" "><?= $data['nama_barang'];?> </td>
                 <td class=" "><?= $data['spek'];?></td>
-                <td class=" "><?= $data['deskripsi'];?></td>
-                <td class=" "><?= $data['qty'];?></td>
-                <td class=" "><?= date('d-M-Y', strtotime($data['tgl_pengajuan']));?></td>
-                <td class=" "><strong><?= $data['username'];?></strong></td>
-                <!-- <td class=" "><strong><?= $data2['nama_emp'];?></strong></td> -->
+                <td class=" "><?= $data['qty_req'];?></td>
+                <td class=" "><?= $data['nama_satuan'];?></td>
+                <td class=" "><?= $data['nama_lokasi'];?></td>
+                <td class=" "><?= $data['room_name'];?></td>
+                <td class=" "><?= date('d-M-Y', strtotime($data['tgl_req_brg']));?></td>
+                <td class=" "><?= $data['alasan'];?></td>
+                <td class=" "><strong><?= $data['nama_emp'];?></strong></td>
                 <td class=" " style="color: <?php
-                    if ($data['status'] == 'Menunggu Persetujuan') {
+                    if ($data['status_req'] == 'Menunggu Persetujuan KC') {
                         echo '#b58709';
-                    } elseif ($data['status'] == 'Sedang diproses') {
+                    } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir.Ops') {
                         echo '#b58709';
-                    } elseif ($data['status'] == 'Sudah disetujui') {
+                    } elseif ($data['status_req'] == 'On Progress in Purchasing') {
                         echo '#14a664';
                     } else {
                         echo '#a62f26';
                     }
                 ?>;">
-                    <strong><?= $data['status'];?></strong>
+                    <strong><?= $data['status_req'];?></strong>
 
-                 <?php if ($data['status'] == 'Sudah disetujui' OR $data['status'] == 'Sedang diproses') { ?>
+                 <?php if ($data['status_req'] == 'Sudah disetujui' OR $data['status_req'] == 'Sedang diproses') { ?>
 		          <td class=" last">
 		            <span class="text-success fa fa-check"><strong> Selesai</strong></span>
 		          </td>
 		        <?php } else { ?>
-		          <td class=" last"><a href="?form=ubahApprove&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Approve </a> 
+		          <td class=" last"><a href="?form=ubahApprove&id_req_brg=<?= $data["id_req_brg"]; ?>" class="btn btn-info btn-sm">Approve </a> 
                 <input type="hidden" name="nama_pemohon" value="<?= $_SESSION['username']; ?>">
 		        </td>
 		        <?php } ?>

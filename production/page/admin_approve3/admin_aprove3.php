@@ -8,7 +8,7 @@ $id_user = $_SESSION["id_user"];
 ?>
     <div class="x_panel">
       <div class="x_title">
-        <h2>Rekap Data Pengajuan Barang <small></small></h2>
+        <h2>Rekap Data Permintaan Barang <small></small></h2>
         <!-- <a href="?form=tambahPengajuan" class="btn btn-primary">Form Pengajuan</a> -->
         <!-- <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -56,7 +56,7 @@ $id_user = $_SESSION["id_user"];
               		$no = 1;
                   // $query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='Sudah disetujui' GROUP BY barang.id_user";
               		// $query = "SELECT karyawan.nama_emp, karyawan.jabatan, karyawan.divisi, barang.tgl_pengajuan FROM karyawan JOIN user ON user.id_emp=karyawan.id_emp JOIN barang ON user.id_user=barang.id_user";
-                  $query = "SELECT * FROM karyawan JOIN user ON user.id_emp=karyawan.id_emp JOIN barang ON user.id_user=barang.id_user WHERE barang.status='On Progress in Purchasing' GROUP BY karyawan.nama_emp, barang.tgl_pengajuan ORDER BY barang.tgl_pengajuan DESC";
+                  $query = "SELECT * FROM karyawan JOIN user ON user.id_emp=karyawan.id_emp JOIN req_barang ON user.id_user=req_barang.id_user WHERE req_barang.status_req='On Progress in Purchasing' GROUP BY karyawan.nama_emp, req_barang.tgl_req_brg ORDER BY req_barang.tgl_req_brg DESC";
               		// $query = "SELECT * FROM barang WHERE barang.id_user=$id_user";
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
@@ -68,10 +68,10 @@ $id_user = $_SESSION["id_user"];
                 <td class=" "><strong><?= $data['nama_emp'];?></strong></td>
                 <td class=" "><?= $data['jabatan'];?></td>
                 <td class=" "><?= $data['divisi'];?></td>
-                <td class=" "><?= date('d-M-Y', strtotime($data['tgl_pengajuan']));?></td>
+                <td class=" "><?= date('d-M-Y', strtotime($data['tgl_req_brg']));?></td>
                 
 
-                <td><a href="?form=rincian&id_user=<?= $data["id_user"]; ?>&tgl_pengajuan=<?= $data['tgl_pengajuan']?>" class="btn btn-info btn-sm">Rincian</a></td>
+                <td><a href="?form=rincian&id_user=<?= $data["id_user"]; ?>&tgl_req_brg=<?= $data['tgl_req_brg']?>" class="btn btn-info btn-sm">Rincian</a></td>
 
                 <!-- <td class=" last"><a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Approve </a> 
                 </td> -->
@@ -102,6 +102,8 @@ $id_user = $_SESSION["id_user"];
           });
 
           </script>
+
+          
 
         </div>
 				

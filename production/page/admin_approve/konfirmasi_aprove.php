@@ -3,10 +3,15 @@
 // $id_mhs = $_SESSION["id_mhs"];
 
 // ambil data di URL
-$id_barang = $_GET["id_barang"];
+$id_req_brg = $_GET["id_req_brg"];
 // query data mahasiswa berdasarkan id
-$barang = query("SELECT * FROM barang WHERE id_barang = $id_barang")[0];
 
+$req_barang = query("SELECT * FROM req_barang WHERE id_req_brg = $id_req_brg")[0];
+$karyawan = query("SELECT * FROM user JOIN karyawan ON karyawan.id_emp=user.id_emp JOIN req_barang ON req_barang.id_user=user.id_user WHERE req_barang.id_req_brg=$id_req_brg")[0];
+$barang = query("SELECT * FROM barang");
+$lokasi = query("SELECT * FROM lokasi_barang");
+$room = query("SELECT * FROM lokasi_room");
+$satuan = query("SELECT * FROM satuan");
 
 
 // cek apakah tombol submit sudah ditekan atau belum
@@ -116,46 +121,100 @@ if (isset($_POST["submit"])) {
 								<div class="x_content">
 									<br />
 									<form action="" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-										<input type="hidden" name="id_barang" value="<?= $barang["id_barang"];?>">
+										<input type="hidden" name="id_req_brg" value="<?= $req_barang["id_req_brg"];?>">
+
+										<div class="item form-group">
+
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nama Pemohon <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" name="id_user" id="first-name" required="required" class="form-control" value="<?= $karyawan["nama_emp"];?>" disabled>
+											</div>
+										</div>
+
 										<div class="item form-group">
 											<!-- <input type="hidden" name="aksi" value="ubah"> -->
 
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Kode Pengajuan <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="kode_pengajuan" id="first-name" required="required" class="form-control" value="<?= $barang["kode_pengajuan"];?>" readonly>
+												<input type="text" name="kode_pengajuan" id="first-name" required="required" class="form-control" value="<?= $req_barang["kode_pengajuan"];?>" readonly>
 											</div>
 										</div>
+
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Nama Barang <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Kode Barang <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="nama_barang" id="last-name" required="required" class="form-control" value="<?= $barang["nama_barang"];?>" readonly>
+												<input type="hidden" name="kode_brg" value="<?= $req_barang['kode_brg']?>">
+												<select class="form-control" name="kode_brg" required disabled>
+													<option value="">--Pilih Barang--</option>
+													<?php foreach($barang as $row) : ?>
+														<option value="<?= $row['kode_brg']?>" <?= ($row['kode_brg'] == $req_barang['kode_brg'])?'selected': ''; ?>><?= $row['kode_brg']?> - <?= $row['nama_barang']?> - <?= $row['spek']?></option>
+													<?php endforeach;?>	
+												</select>
 											</div>
 										</div>
+
+										
 										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Spec</label>
+											<label for="id_lokasi" class="col-form-label col-md-3 col-sm-3 label-align">Lokasi Barang <span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="spek" class="form-control" type="text" value="<?= $barang["spek"];?>" readonly>
+												<input type="hidden" name="id_lokasi" value="<?= $req_barang['id_lokasi']?>">
+												<select class="form-control" name="id_lokasi" id="id_lokasi" required disabled>
+													<option value="">--Pilih Lokasi Barang--</option>
+													<?php foreach($lokasi as $row) : ?>
+														<option value="<?= $row['id_lokasi']?>" <?= ($row['id_lokasi'] == $req_barang['id_lokasi'])? 'selected' : '';?>><?= $row['nama_lokasi']?></option>
+													<?php endforeach;?>	
+												</select>
 											</div>
 										</div>
+										
 										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Desc</label>
+											<label for="id_room" class="col-form-label col-md-3 col-sm-3 label-align">Lokasi Ruangan <span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="deskripsi" class="form-control" type="text" value="<?= $barang["deskripsi"];?>" readonly>
+												<input type="hidden" name="id_room" value="<?= $req_barang['id_room']?>">
+												<select class="form-control" name="id_room" id="id_room" required disabled>
+													<option value="">--Pilih Lokasi Ruangan--</option>
+													<?php foreach($room as $row) : ?>
+														<option value="<?= $row['id_room']?>" <?= ($row['id_room'] == $req_barang['id_room'])?'selected' : '';?>><?= $row['room_name']?></option>
+													<?php endforeach;?>	
+												</select>
 											</div>
 										</div>
+
 										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Qty</label>
+										    <label for="qty_req" class="col-form-label col-md-3 col-sm-3 label-align">Qty <span class="required">*</span></label>
+										    <div class="col-md-6 col-sm-6">
+										        <input id="qty_req" name="qty_req" class="form-control" type="number" min="1" value="<?= $req_barang['qty_req']?>" required>
+										    </div>
+										</div>
+
+										<div class="item form-group">
+											<label for="id_room" class="col-form-label col-md-3 col-sm-3 label-align">Satuan Barang <span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="qty" class="form-control" type="number" value="<?= $barang["qty"];?>">
+												<select class="form-control" name="id_satuan" id="id_satuan" required disabled>
+													<option value="">--Pilih Satuan--</option>
+													<?php foreach($satuan as $row) : ?>
+														<option value="<?= $row['id_satuan']?>" <?= ($row['id_satuan'] == $req_barang['id_satuan'])?'selected': '';?>><?= $row['nama_satuan']?></option>
+													<?php endforeach;?>	
+												</select>
 											</div>
 										</div>
+
+
+										<div class="item form-group">
+											<label for="alasan" class="col-form-label col-md-3 col-sm-3 label-align">Alasan</label>
+											<div class="col-md-6 col-sm-6 ">
+												<textarea id="alasan" class="form-control" rows="4" name="alasan" id="alasan" style="resize:none;" readonly><?= $req_barang['alasan']?></textarea>
+											</div>
+										</div>
+
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Pengajuan</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="tgl_pengajuan" class="form-control" type="date" value="<?= $barang["tgl_pengajuan"];?>" readonly>
-												<input id="middle-name" name="status" class="form-control" type="hidden" value="Menunggu Persetujuan Dir.Ops">
+												<input id="middle-name" name="tgl_req_brg" class="form-control" type="date" value="<?= $req_barang["tgl_req_brg"];?>" readonly>
+												<input id="middle-name" name="status_req" class="form-control" type="hidden" value="Menunggu Persetujuan Dir.Ops">
 												<input id="middle-name" name="acc1" class="form-control" type="hidden" value="<?= $nama; ?>">
 
 											</div>

@@ -5,9 +5,9 @@ if (isset($_GET['cetakData'])) {
     // ambil data di URL
 	$id_user = $_GET["id_user"];
 	// query data mahasiswa berdasarkan id
-	$barang = query("SELECT * FROM barang WHERE id_user = $id_user")[0];
+	$req_barang = query("SELECT * FROM req_barang WHERE id_user = $id_user")[0];
 
-	$tgl_pengajuan = $_GET['tgl_pengajuan'];
+	$tgl_req_brg = $_GET['tgl_req_brg'];
 }
 ?>
 
@@ -249,7 +249,7 @@ if (isset($_GET['cetakData'])) {
 								<td height="25px"> <div align="center"><b>REKAP DATA</b></div> </td>
 							</tr>
 							<tr>
-								<td height="25px"> <div align="center"><b>PENGAJUAN BARANG</b></div> </td>
+								<td height="25px"> <div align="center"><b>PERMINTAAN BARANG</b></div> </td>
 							</tr>
 						</tbody></table>
 
@@ -260,7 +260,7 @@ if (isset($_GET['cetakData'])) {
 							</tr>
 							<?php 
 								$query = "SELECT * FROM user JOIN karyawan ON karyawan.id_emp=user.id_emp WHERE id_user='$id_user'";
-								$query2 = "SELECT * FROM barang WHERE id_user='$id_user'";
+								$query2 = "SELECT * FROM req_barang WHERE id_user='$id_user'";
 								$tampil = mysqli_query($koneksi, $query);
 								$tampil2 = mysqli_query($koneksi, $query2);
 								$data = mysqli_fetch_assoc($tampil);
@@ -270,7 +270,7 @@ if (isset($_GET['cetakData'])) {
 							 	$divisi = $data['divisi'];
 							 	$acc1 = $data2['acc1'];
 							 	$acc2 = $data2['acc2'];
-							 	$tgl = date('d-M-Y', strtotime($tgl_pengajuan));
+							 	$tgl = date('d-M-Y', strtotime($tgl_req_brg));
 							 ?>
 							<tr>
 								<td>Nama Pemohon</td>
@@ -302,10 +302,13 @@ if (isset($_GET['cetakData'])) {
 								
 								<td height="72" class="kotak"> <div align="center"><b>No</b></div> </td>
 								<td bordercolor="#333333" height="72" class="kananAtasBawah"> <div align="center"><b>Kode Pengajuan</b></div> </td>
+								<td height="72" class="kananAtasBawah"> <div align="center"> <b>Kode Barang</b></div> </td>
 								<td height="72" class="kananAtasBawah"> <div align="center"> <b>Nama Barang</b></div> </td>
-								<td height="72" class="kananAtasBawah"> <div align="center"><b>Spesifikasi</b></div> </td>
-								<td height="36" class="kananAtasBawah"> <div align="center"><b>Deskripsi</b></div> </td>
 								<td height="72" class="kananAtasBawah"> <div align="center"><b>Qty</b></div> </td>
+								<td height="72" class="kananAtasBawah"> <div align="center"><b>Satuan</b></div> </td>
+								<td height="72" class="kananAtasBawah"> <div align="center"><b>Spesifikasi</b></div> </td>
+								<!-- <td height="36" class="kananAtasBawah"> <div align="center"><b>Deskripsi</b></div> </td> -->
+								
 								<!-- <td height="72" class="kananAtasBawah"> <div align="center"><b>K x N</b></div> </td> -->
 							</tr>
 							
@@ -313,27 +316,42 @@ if (isset($_GET['cetakData'])) {
 							<tr>
 								<?php 
 				              		$no = 1;
-				              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='On Progress in Purchasing' AND barang.id_user=$id_user AND barang.tgl_pengajuan='$tgl_pengajuan'";
-				              		// $query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='Sudah disetujui' AND barang.id_user=$id_user";
-				              		// $query = "SELECT * FROM barang WHERE barang.id_user=$id_user";
+				              		$total = 0;
+				              		$query = "SELECT * FROM req_barang JOIN user ON user.id_user=req_barang.id_user JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan WHERE status_req='On Progress in Purchasing' AND req_barang.id_user=$id_user AND req_barang.tgl_req_brg='$tgl_req_brg'";
+				              		 // $query = "SELECT *, SUM(qty_req) AS total_qty FROM req_barang JOIN user ON user.id_user=req_barang.id_user JOIN barang ON barang.kode_brg=req_barang.kode_brg WHERE status_req='On Progress in Purchasing' AND req_barang.id_user=$id_user AND req_barang.tgl_req_brg='$tgl_req_brg'";
 				              		$tampil = mysqli_query($koneksi, $query);
 				              		while ($data = mysqli_fetch_assoc($tampil)) {
-				              		
+
+					              		$qty_req = $data['qty_req'];
+					              		$total += $qty_req;
+				              		// $qty_req_arr = explode(',', $qty_req);
+				              		// $total = array_sum($qty_req_arr);
 				              		
 
 				              	 ?>
 								<td height="20" valign="top" align="center" class="kotak" style="padding:4px">&nbsp;<?= $no++; ?></td>
 								<td valign="top" align="center" class="kananAtasBawah" style="padding:4px">&nbsp;<?= $data['kode_pengajuan'];?></td>
+								<td valign="top" align="center" class="kananAtasBawah" style="padding:4px"><?= $data['kode_brg'];?></td>
 								<td valign="top" align="left" class="kananAtasBawah" style="padding:4px"><?= $data['nama_barang'];?></td>
+								<td valign="top" align="center" class="kananAtasBawah" style="padding:4px"><?= $data['qty_req'];?></td>
+								<td valign="top" align="center" class="kananAtasBawah" style="padding:4px"><?= $data['nama_satuan'];?></td>
 								<td valign="top" align="left" class="kananAtasBawah" style="padding:4px"><?= $data['spek'];?></td>
-								<td valign="top" align="left" class="kananAtasBawah" style="padding:4px"><?= $data['deskripsi'];?></td>
-								<td valign="top" align="center" class="kananAtasBawah" style="padding:4px"><?= $data['qty'];?></td>
-								<!-- <td valign="top" align="center" class="kananAtasBawah" style="padding:4px">&nbsp;</td>   -->
-								<!-- <td valign="top" align="center" class="kananAtasBawah" style="padding:4px"></td> -->
+								<!-- <td valign="top" align="left" class="kananAtasBawah" style="padding:4px"><?= $data['deskripsi'];?></td> -->
+																
 							</tr>
 
 							
-						</tbody><?php } ?></table><br>
+						</tbody><?php } ?>
+						<tr>
+								<!-- <td height="20" valign="top" align="center" class="kotak" style="padding:4px">&nbsp;</td>
+								<td valign="top" align="center" class="kananAtasBawah" style="padding:4px">&nbsp;</td>
+								<td valign="top" align="center" class="kananAtasBawah" style="padding:4px">&nbsp;</td>
+								<td valign="top" align="center" class="kananAtasBawah" style="padding:4px">Jumlah</td> 
+								<td valign="top" align="center" class="kananAtasBawah" style="padding:4px"><?= $total;?></td>
+								<td valign="top" align="center" class="kananAtasBawah" style="padding:4px">&nbsp;</td> -->
+								<!-- <td valign="top" align="center" class="kananAtasBawah" style="padding:4px">&nbsp;</td>  -->
+							</tr>
+					</table><br>
 
 						<table width="90%" border="0" cellpadding="1" cellspacing="1" align="center" style="font-family:&#39;Times New Roman&#39;, Times, serif; font-size:12px">
 							<tbody><tr>

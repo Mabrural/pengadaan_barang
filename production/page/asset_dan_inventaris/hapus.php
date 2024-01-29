@@ -1,8 +1,8 @@
 <?php 
 
-$kode_brg = $_GET["kode_brg"];
+$id_storage = $_GET["id_storage"];
 
-if( hapusInventaris($kode_brg) > 0 ){
+if( hapusInventaris($id_storage) > 0 ){
 	echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
 	echo '<script src="./sweetalert2.min.js"></script>';
 	echo "<script>

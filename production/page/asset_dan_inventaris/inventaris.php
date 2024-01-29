@@ -3,31 +3,72 @@
 $id_user = $_SESSION["id_user"];
 
 // $pengajuan = query("SELECT * FROM barang WHERE barang.id_barang=$id_user");
+$lokasi = query("SELECT * FROM lokasi_barang");
+$room = query("SELECT * FROM lokasi_room");
+
+$id_lokasi = isset($_GET['id_lokasi']) ? $_GET['id_lokasi'] : '';
+$id_room = isset($_GET['id_room']) ? $_GET['id_room'] : '';
 
 ?>
     <div class="x_panel">
       <div class="x_title">
         <h2>Asset dan Inventaris <small></small></h2>
         <a href="?form=tambahInventaris" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah Asset</a>
-        <!-- <ul class="nav navbar-right panel_toolbox">
-          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Settings 1</a>
-                <a class="dropdown-item" href="#">Settings 2</a>
-              </div>
-          </li>
-          <li><a class="close-link"><i class="fa fa-close"></i></a>
-          </li>
-        </ul> -->
+        <a href="laporan/cetak_inventaris.php?id_lokasi=<?= $id_lokasi?>&id_room=<?= $id_room?>" class="btn btn-info btn-sm"><i class="fa fa-print"></i> Cetak Data</a><br>
+          <div class="row">
+            <div class="col-md-2 col-sm-6">
+                <form method="get">
+                  <input type="hidden" name="aksi">
+                      <input type="hidden" name="id_user" value="<?= $req_barang['id_user'];?>">
+                    <select class="form-control" name="id_lokasi" id="id_lokasi" required>
+                        <option value="">--Pilih Lokasi Barang--</option>
+                        <?php foreach($lokasi as $row) : ?>
+                            <option value="<?= $row['id_lokasi']?>" <?php echo ($id_lokasi == $row['id_lokasi']) ? 'selected' : ''; ?>>
+                                <?= $row['nama_lokasi']?>
+                            </option>
+                        <?php endforeach;?> 
+                    </select><br>
+                    <!-- <button type="submit" class="btn btn-primary btn-sm">Filter</button> -->
+                </form>
+            </div>
+            <div class="col-md-2 col-sm-6">
+                <form method="get">
+                    <select class="form-control" name="id_room" id="id_room" required>
+                        <option value="">--Pilih Lokasi Ruangan--</option>
+                        <?php foreach($room as $row) : ?>
+                            <option value="<?= $row['id_room']?>" <?php echo ($id_room == $row['id_room']) ? 'selected' : ''; ?>>
+                                <?= $row['room_name']?>
+                            </option>
+                        <?php endforeach;?> 
+                    </select>
+                    <br>
+                    <!-- <button type="submit" class="btn btn-primary btn-sm">Filter</button> -->
+                </form>
+            </div>
+          </div>
+
         <div class="clearfix"></div>
       </div>
 
       <div class="x_content">
 
         <!-- <p>Add class <code>bulk_action</code> to table for bulk actions options on row select</p> -->
+      <script type="text/javascript">
+        $(document).ready(function() {
+            // Add change event listeners to the dropdowns
+            $('#id_lokasi, #id_room').change(function() {
+                // Get selected values
+                var id_lokasi = $('#id_lokasi').val();
+                var id_room = $('#id_room').val();
+
+                // Redirect to the current page with filter parameters
+                window.location.href = '?page=dataInventaris&id_lokasi=' + id_lokasi + '&id_room=' + id_room;
+                // window.location.href = '?id_lokasi=' + id_lokasi + '&id_room=' + id_room;
+            });
+
+            // ... (rest of the JavaScript code)
+        });
+      </script>
 
         <div class="table-responsive">
           <table id="example" class="display" style="width:100%">
@@ -43,11 +84,10 @@ $id_user = $_SESSION["id_user"];
                 <th class="column-title">Deskripsi </th>
                 <th class="column-title">Qty </th>
                 <th class="column-title">Tanggal Masuk </th>
-                <th class="column-title">Renewal </th>
                 <th class="column-title">Kondisi Barang </th>
+                <th class="column-title">Keterangan </th>
                 <th class="column-title">Lokasi Barang </th>
                 <th class="column-title">Lokasi Ruangan </th>               
-                <th class="column-title">Vendor </th>               
                 <th class="column-title no-link last"><span class="nobr">Action</span>
                 </th>
                 <th class="bulk-actions" colspan="7">
@@ -60,55 +100,47 @@ $id_user = $_SESSION["id_user"];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-              		$query = "SELECT * FROM storage_barang JOIN vendor ON vendor.id_vendor=storage_barang.id_vendor JOIN lokasi_room ON lokasi_room.id_room=storage_barang.id_room JOIN lokasi_barang ON lokasi_barang.id_lokasi=storage_barang.id_lokasi";
-              		// $query = "SELECT * FROM barang WHERE barang.id_user=$id_user AND status='Menunggu Persetujuan KC' OR status='Menunggu Persetujuan Dir.Ops'";
+              		$query = "SELECT * FROM storage_barang JOIN lokasi_room ON lokasi_room.id_room=storage_barang.id_room JOIN lokasi_barang ON lokasi_barang.id_lokasi=storage_barang.id_lokasi JOIN barang ON barang.kode_brg=storage_barang.kode_brg";
+
+                  // Add filter conditions based on the selected values
+                  if (!empty($id_lokasi)) {
+                      $query .= " WHERE storage_barang.id_lokasi = $id_lokasi";
+                  }
+
+                  if (!empty($id_room)) {
+                      $query .= (!empty($id_lokasi)) ? " AND " : " WHERE ";
+                      $query .= "storage_barang.id_room = $id_room";
+                  }
+              		
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
-              		// $hari_indonesia = array(
-                  //     'Sunday' => 'Minggu',
-                  //     'Monday' => 'Senin',
-                  //     'Tuesday' => 'Selasa',
-                  //     'Wednesday' => 'Rabu',
-                  //     'Thursday' => 'Kamis',
-                  //     'Friday' => 'Jumat',
-                  //     'Saturday' => 'Sabtu',
-                  // );
-                  //     $hari = strftime('%A', strtotime($data['tgl_pengajuan']));          		
+                		
 
               	 ?>
                 <td class=" "><?= $no++;?></td>
                 <td class=" "><?= $data['kode_brg'];?></td>
-                <td class=" "><a href="img/asset_dan_inventaris/<?= $data['gambar_brg'];?>" style="text-decoration: underline; color:blue;"><?= $data['nama_barang'];?> </a></td>
+                <td class=" "><a href="img/barang/<?= $data['gambar_barang'];?>" style="text-decoration: underline; color:blue;"><?= $data['nama_barang'];?> </a></td>
                 <td class=" "><?= $data['spek'];?></td>
                 <td class=" "><?= $data['deskripsi'];?></td>
-                <td class=" "><?= $data['qty'];?></td>
+                <td class=" "><?= $data['qty_brg'];?></td>
                 <!-- <td class=" "><?= date('d-M-Y', strtotime($data['date_in']));?></td> -->
                 <td class=" ">
                 	<?php
-				        if ($data['date_in'] == NULL || $data['date_in'] == '' || $data['date_in'] == '0000-00-00') {
-				            echo '-';
-				        } else {
-				            echo date('d-M-Y', strtotime($data['date_in']));
-				        }
-				    ?>
+      				        if ($data['tgl_input'] == NULL || $data['tgl_input'] == '' || $data['tgl_input'] == '0000-00-00') {
+      				            echo '-';
+      				        } else {
+      				            echo date('d-M-Y', strtotime($data['tgl_input']));
+      				        }
+      				    ?>
                 </td>
-                <!-- <td class=" "><?= date('d-M-Y', strtotime($data['renewal']));?></td> -->
-                <td class=" ">
-                	<?php
-				        if ($data['renewal'] == NULL || $data['renewal'] == '' || $data['renewal'] == '0000-00-00') {
-				            echo '-';
-				        } else {
-				            echo date('d-M-Y', strtotime($data['renewal']));
-				        }
-				    ?>
-                </td>
+                
                 <td class=" "><?= $data['kondisi_brg'];?></td>
+                <td class=" "><?= $data['ket_kondisi'];?></td>
                 <td class=" "><?= $data['nama_lokasi'];?></td>
                 <td class=" "><?= $data['room_name'];?></td>
-                <td class=" "><?= $data['nama_vendor'];?></td>
 
  
-                <td class=" last"><a href="?form=ubahInventaris&kode_brg=<?= $data["kode_brg"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusInventaris&kode_brg=<?= $data["kode_brg"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
+                <td class=" last"><a href="?form=ubahInventaris&id_storage=<?= $data["id_storage"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusInventaris&id_storage=<?= $data["id_storage"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
                 </td>
               </tr>
               

@@ -1,8 +1,8 @@
 <?php 
 
-$id_barang = $_GET["id_barang"];
+$id_req_brg = $_GET["id_req_brg"];
 
-if( hapusPengajuan($id_barang) > 0 ){
+if( hapusPengajuan($id_req_brg) > 0 ){
 	echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
 	echo '<script src="./sweetalert2.min.js"></script>';
 	echo "<script>

@@ -82,6 +82,8 @@ if ($_SESSION["level"] == "Staff IT") {
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   </head>
 
   <body class="nav-md">
@@ -150,18 +152,43 @@ if ($_SESSION["level"] == "Staff IT") {
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
                   </li> -->
-                  <li><a><i class="fa fa-folder"></i> Asset dan Inventaris<span class="fa fa-chevron-down"></span></a>
+
+                  <li><a><i class="fa fa-folder"></i> Master Barang<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="index.php?page=dataInventaris">Storage Barang</a></li>
- <!--                      <li><a href="index.php?page=historyPengajuan">History Pengajuan</a></li>
-                      <li><a href="tables_dynamic.html">Table Dynamic</a></li> -->
+                      <li><a href="index.php?page=dataBarang">Data Barang</a></li>
+                      <li><a href="index.php?page=historyPengajuan">Barang Masuk</a></li>
+                      <li><a href="index.php?page=historyPengajuan">Barang Keluar</a></li>
+                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-list"></i> Pengajuan Barang<span class="fa fa-chevron-down"></span></a>
+                  <!-- <li><a><i class="fa fa-external-link"></i> Permintaan Barang<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="index.php?page=pengajuan">Data Pengajuan</a></li>
-                      <li><a href="index.php?page=historyPengajuan">History Pengajuan</a></li>
+                      <li><a href="index.php?page=pengajuan">Data Permintaan Barang</a></li>
+                      <li><a href="index.php?page=historyPengajuan">Barang Masuk</a></li>
+                      <li><a href="index.php?page=historyPengajuan">Barang Keluar</a></li>
+                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                    </ul>
+                  </li> -->
+
+                  <li><a><i class="fa fa-folder"></i> Asset dan Inventaris<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="index.php?page=dataInventaris">Storage Barang</a></li>
+                    </ul>
+                  </li>
+
+                  <li><a><i class="fa fa-exchange"></i>Transaksi Barang<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="index.php?page=transaksiBarangMasuk">Barang Masuk</a></li>
+                      <li><a href="index.php?page=historyTransaksi">History Transaksi</a></li>
+                      <!-- <li><a href="tables_dynamic.html">Table Dynamic</a></li> -->
+                    </ul>
+                  </li>
+
+                  <li><a><i class="fa fa-edit"></i> Pengajuan Barang<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="index.php?page=pengajuan">Data Pengajuan Barang</a></li>
+                      <li><a href="index.php?page=historyPengajuan">History Pengajuan Barang</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
                   </li>
@@ -388,6 +415,14 @@ if ($_SESSION["level"] == "Staff IT") {
                                 include 'page/asset_dan_inventaris/inventaris.php';
                                 break;
 
+                            case 'dataBarang':
+                                include 'page/data_barang/barang.php';
+                                break;
+
+                            case 'transaksiBarangMasuk':
+                                include 'page/asset_dan_inventaris/transaksi_barang/barang_masuk/barang_masuk.php';
+                                break;
+
                             case 'laporan':
                                 include "page/laporan/laporan.php";
                                 break;
@@ -447,6 +482,22 @@ if ($_SESSION["level"] == "Staff IT") {
                             case 'hapusInventaris':
                                 include 'page/asset_dan_inventaris/hapus.php';
                                 break;
+
+                            case 'tambahBarang':
+                                include "page/data_barang/tambah.php";
+                                break;
+
+                            case 'ubahBarang':
+                                include "page/data_barang/ubah.php";
+                                break;
+
+                            case 'hapusBarang':
+                                include "page/data_barang/hapus.php";
+                                break;
+
+                            case 'tambahBarangMasuk':
+                                include "page/asset_dan_inventaris/transaksi_barang/barang_masuk/tambah.php";
+                                break;
                 
                             case 'cariAnggaran':
                               include "page/anggaran/cari.php";
@@ -478,7 +529,6 @@ if ($_SESSION["level"] == "Staff IT") {
                             case 'ubahProfil':
                                 include "page/profil/ubah.php";
                                 break;
-                        
 
                             default:
                                 echo "<center><h3>Maaf. Halaman tidak di temukan!</h3></center>";

@@ -7,21 +7,8 @@ $id_user = $_SESSION["id_user"];
 ?>
     <div class="x_panel">
       <div class="x_title">
-        <h2>History Approval <small></small></h2>
-        <!-- <a href="?form=tambahPengajuan" class="btn btn-primary">Form Pengajuan</a> -->
-        <!-- <ul class="nav navbar-right panel_toolbox">
-          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Settings 1</a>
-                <a class="dropdown-item" href="#">Settings 2</a>
-              </div>
-          </li>
-          <li><a class="close-link"><i class="fa fa-close"></i></a>
-          </li>
-        </ul> -->
+        <h2>History Approval Barang<small></small></h2>
+       
         <div class="clearfix"></div>
       </div>
 
@@ -38,16 +25,21 @@ $id_user = $_SESSION["id_user"];
                 </th> -->
                 <th class="column-title">No. </th>
                 <th class="column-title">Kode Pengajuan </th>
+                <th class="column-title">Kode Barang </th>
                 <th class="column-title">Nama Barang </th>
                 <th class="column-title">Spesifikasi </th>
-                <th class="column-title">Deskripsi </th>
                 <th class="column-title">Qty </th>
+                <th class="column-title">Satuan </th>
+                <th class="column-title">Lokasi Barang </th>
+                <th class="column-title">Lokasi Ruangan </th>
                 <th class="column-title">Tanggal Pengajuan </th>
+                <th class="column-title">Alasan </th>
                 <th class="column-title">Nama Pemohon </th>
-                <th class="column-title">Approval 1 </th>
+                <th class="column-title">Approval 1</th>
                 <th class="column-title">Approval 2 </th>
                 <th class="column-title">Status </th>
-                <th class="column-title no-link last"><span class="nobr">Action</span>
+                
+                <!-- <th class="column-title no-link last"><span class="nobr">Action</span> -->
                 </th>
                 <th class="bulk-actions" colspan="7">
                   <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
@@ -57,57 +49,56 @@ $id_user = $_SESSION["id_user"];
 
             <tbody>
               <tr class="even pointer">
-              	<?php 
-              		$no = 1;
-              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user AND status='On Progress in Purchasing' OR status='Menunggu Persetujuan Dir.Ops' WHERE barang.id_user=user.id_user";
-                  $query2 = "SELECT * FROM user JOIN karyawan ON karyawan.id_emp=user.id_emp";
-                  $tampil2 = mysqli_query($koneksi, $query2);
-                  $data2 = mysqli_fetch_assoc($tampil2);
-              		$tampil = mysqli_query($koneksi, $query);
-              		while ($data = mysqli_fetch_assoc($tampil)) {
-              		
-              		
+                <?php 
+                  $no = 1;
+                  $query = "SELECT * FROM req_barang
+                            JOIN user ON user.id_user=req_barang.id_user
+                            JOIN karyawan ON karyawan.id_emp=user.id_emp
+                            JOIN barang ON barang.kode_brg=req_barang.kode_brg 
+                            JOIN satuan ON satuan.id_satuan=req_barang.id_satuan 
+                            JOIN lokasi_barang ON lokasi_barang.id_lokasi=req_barang.id_lokasi 
+                            JOIN lokasi_room ON lokasi_room.id_room=req_barang.id_room WHERE req_barang.status_req='Menunggu Persetujuan KC' OR req_barang.status_req='Menunggu Persetujuan Dir.Ops' OR req_barang.status_req='On Progress in Purchasing'";
+                  // $query2 = "SELECT * FROM user JOIN karyawan ON karyawan.id_emp=user.id_emp";
+                  // $tampil2 = mysqli_query($koneksi, $query2);
+                  // $data2 = mysqli_fetch_assoc($tampil2);
+                  $tampil = mysqli_query($koneksi, $query);
+                  while ($data = mysqli_fetch_assoc($tampil)) {
+                  
+                  
 
-              	 ?>
+                 ?>
                 <td class=" "><?= $no++;?></td>
                 <td class=" "><?= $data['kode_pengajuan'];?></td>
+                <td class=" "><?= $data['kode_brg'];?></td>
                 <td class=" "><?= $data['nama_barang'];?> </td>
                 <td class=" "><?= $data['spek'];?></td>
-                <td class=" "><?= $data['deskripsi'];?></td>
-                <td class=" "><?= $data['qty'];?></td>
-                <td class=" "><?= date('d-M-Y', strtotime($data['tgl_pengajuan']));?></td>
-                <td class=" "><strong><?= $data['username'];?></strong></td>
-                <!-- <td class=" "><strong><?= $data2['nama_emp'];?></strong></td> -->
+                <td class=" "><?= $data['qty_req'];?></td>
+                <td class=" "><?= $data['nama_satuan'];?></td>
+                <td class=" "><?= $data['nama_lokasi'];?></td>
+                <td class=" "><?= $data['room_name'];?></td>
+                <td class=" "><?= date('d-M-Y', strtotime($data['tgl_req_brg']));?></td>
+                <td class=" "><?= $data['alasan'];?></td>
+                <td class=" "><?= $data['nama_emp'];?></td>
                 <td class=" "><?= $data['acc1'];?></td>
                 <td class=" "><?= $data['acc2'];?></td>
                 <td class=" " style="color: <?php
-                    if ($data['status'] == 'Menunggu Persetujuan KC') {
+                    if ($data['status_req'] == 'Menunggu Persetujuan KC') {
                         echo '#b58709';
-                    } elseif ($data['status'] == 'Menunggu Persetujuan Dir.Ops') {
+                    } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir.Ops') {
                         echo '#b58709';
-                    } elseif ($data['status'] == 'On Progress in Purchasing') {
+                    } elseif ($data['status_req'] == 'On Progress in Purchasing') {
                         echo '#14a664';
                     } else {
                         echo '#a62f26';
                     }
                 ?>;">
-                    <strong><?= $data['status'];?></strong>
+                    <strong><?= $data['status_req'];?></strong>
                 </td>
 
-              <td class=" last">
-              <?php if ($data['status'] == 'On Progress in Purchasing') { ?>
-                <span class="text-success fa fa-check"><strong> Selesai</strong></span>
-              <?php } elseif ($data['status'] == 'Menunggu Persetujuan Dir.Ops') { ?>
-                <span class="text-info fa fa-spinner fa-spin"></span><strong> Waiting</strong>
-              <?php } else { ?>
-                <a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusPengajuan&id_barang=<?= $data["id_barang"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
-              <?php } ?>
-            </td>
-               <!--  <td class=" last"><a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusPengajuan&id_barang=<?= $data["id_barang"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
-                </td> -->
+          
               </tr>
-              
-           <?php } ?>
+              <?php } ?>
+           
             </tbody>
            
           </table>

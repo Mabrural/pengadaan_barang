@@ -100,7 +100,7 @@ if (isset($_POST['login'])) {
             window.location.href = 'admin3.php'; //will redirect to your blog page (an ex: blog.html)
         }, 2000); //will call the function after 2 secs
         </script>";
-      }elseif ($row["level"] === "admin4") {
+      }elseif ($row["level"] === "Finance") {
         echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
         echo '<script src="./sweetalert2.min.js"></script>';
         echo "<script>

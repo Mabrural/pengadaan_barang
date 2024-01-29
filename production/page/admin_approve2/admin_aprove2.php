@@ -8,7 +8,7 @@ $id_user = $_SESSION["id_user"];
 ?>
     <div class="x_panel">
       <div class="x_title">
-        <h2>Data Approval <small></small></h2>
+        <h2>Data Approval Barang<small></small></h2>
         <!-- <a href="?form=tambahPengajuan" class="btn btn-primary">Form Pengajuan</a> -->
         <!-- <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -41,8 +41,9 @@ $id_user = $_SESSION["id_user"];
                 <th class="column-title">Kode Pengajuan </th>
                 <th class="column-title">Nama Barang </th>
                 <th class="column-title">Spesifikasi </th>
-                <th class="column-title">Deskripsi </th>
+                <th class="column-title">Alasan </th>
                 <th class="column-title">Qty </th>
+                <th class="column-title">Satuan </th>
                 <th class="column-title">Tanggal Pengajuan </th>
                 <th class="column-title">Nama Pemohon </th>
                 <th class="column-title">Status </th>
@@ -58,8 +59,12 @@ $id_user = $_SESSION["id_user"];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='Menunggu Persetujuan Dir.Ops'";
-              		// $query = "SELECT * FROM barang WHERE barang.id_user=$id_user";
+              		// $query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user WHERE status='Menunggu Persetujuan Dir.Ops'";
+                  $query = "SELECT * FROM req_barang
+                            JOIN user ON user.id_user=req_barang.id_user
+                            JOIN karyawan ON karyawan.id_emp=user.id_emp
+                            JOIN barang ON barang.kode_brg=req_barang.kode_brg
+                            JOIN satuan ON satuan.id_satuan=req_barang.id_satuan WHERE req_barang.status_req='Menunggu Persetujuan Dir.Ops'";
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
               		
@@ -70,29 +75,30 @@ $id_user = $_SESSION["id_user"];
                 <td class=" "><?= $data['kode_pengajuan'];?></td>
                 <td class=" "><?= $data['nama_barang'];?> </td>
                 <td class=" "><?= $data['spek'];?></td>
-                <td class=" "><?= $data['deskripsi'];?></td>
-                <td class=" "><?= $data['qty'];?></td>
-                <td class=" "><?= date('d-M-Y', strtotime($data['tgl_pengajuan']));?></td>
-                <td class=" "><strong><?= $data['username'];?></strong></td>
+                <td class=" "><?= $data['alasan'];?></td>
+                <td class=" "><?= $data['qty_req'];?></td>
+                <td class=" "><?= $data['nama_satuan'];?></td>
+                <td class=" "><?= date('d-M-Y', strtotime($data['tgl_req_brg']));?></td>
+                <td class=" "><strong><?= $data['nama_emp'];?></strong></td>
                 <td class=" " style="color: <?php
-                    if ($data['status'] == 'Menunggu Persetujuan KC') {
+                    if ($data['status_req'] == 'Menunggu Persetujuan KC') {
                         echo '#b58709';
-                    } elseif ($data['status'] == 'Menunggu Persetujuan Dir.Ops') {
+                    } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir.Ops') {
                         echo '#b58709';
-                    } elseif ($data['status'] == 'Sudah disetujui') {
+                    } elseif ($data['status_req'] == 'On Progress in Purchasing') {
                         echo '#14a664';
                     } else {
                         echo '#a62f26';
                     }
                 ?>;">
-                    <span class="text-info fa fa-spinner fa-spin"></span> <strong><?= $data['status'];?></strong>
+                    <span class="text-info fa fa-spinner fa-spin"></span> <strong><?= $data['status_req'];?></strong>
 
-                 <?php if ($data['status'] == 'Sudah disetujui') { ?>
+                 <?php if ($data['status_req'] == 'On Progress in Purchasing') { ?>
 		          <td class=" last">
 		            <span class="text-success fa fa-check"><strong> Selesai</strong></span>
 		          </td>
 		        <?php } else { ?>
-		          <td class=" last"><a href="?form=ubahApprove2&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Approve </a> 
+		          <td class=" last"><a href="?form=ubahApprove2&id_req_brg=<?= $data["id_req_brg"]; ?>" class="btn btn-info btn-sm">Approve </a> 
                 <input type="hidden" name="nama_pemohon" value="<?= $_SESSION['username']; ?>">
 		        </td>
 		        <?php } ?>

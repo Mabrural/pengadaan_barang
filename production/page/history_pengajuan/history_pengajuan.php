@@ -38,11 +38,15 @@ $id_user = $_SESSION["id_user"];
                 </th> -->
                 <th class="column-title">No. </th>
                 <th class="column-title">Kode Pengajuan </th>
+                <th class="column-title">Kode Barang </th>
                 <th class="column-title">Nama Barang </th>
                 <th class="column-title">Spesifikasi </th>
-                <th class="column-title">Deskripsi </th>
                 <th class="column-title">Qty </th>
+                <th class="column-title">Satuan </th>
+                <th class="column-title">Lokasi Barang </th>
+                <th class="column-title">Lokasi Ruangan </th>
                 <th class="column-title">Tanggal Pengajuan </th>
+                <th class="column-title">Alasan </th>
                 <th class="column-title">Approval 1</th>
                 <th class="column-title">Approval 2 </th>
                 <th class="column-title">Status </th>
@@ -58,7 +62,7 @@ $id_user = $_SESSION["id_user"];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-                  $query = "SELECT * FROM barang WHERE id_user=$id_user";
+                  $query = "SELECT * FROM req_barang JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan JOIN lokasi_barang ON lokasi_barang.id_lokasi=req_barang.id_lokasi JOIN lokasi_room ON lokasi_room.id_room=req_barang.id_room WHERE id_user=$id_user";
               		// $query = "SELECT * FROM barang WHERE barang.id_user=$id_user AND status='On Progress in Purchasing' OR status='Menunggu Persetujuan KC' OR status = 'Menunggu Persetujuan Dir.Ops' ORDER BY kode_pengajuan DESC";
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
@@ -68,25 +72,29 @@ $id_user = $_SESSION["id_user"];
               	 ?>
                 <td class=" "><?= $no++;?></td>
                 <td class=" "><?= $data['kode_pengajuan'];?></td>
+                <td class=" "><?= $data['kode_brg'];?></td>
                 <td class=" "><?= $data['nama_barang'];?> </td>
                 <td class=" "><?= $data['spek'];?></td>
-                <td class=" "><?= $data['deskripsi'];?></td>
-                <td class=" "><?= $data['qty'];?></td>
-                <td class=" "><?= date('d-M-Y', strtotime($data['tgl_pengajuan']));?></td>
+                <td class=" "><?= $data['qty_req'];?></td>
+                <td class=" "><?= $data['nama_satuan'];?></td>
+                <td class=" "><?= $data['nama_lokasi'];?></td>
+                <td class=" "><?= $data['room_name'];?></td>
+                <td class=" "><?= date('d-M-Y', strtotime($data['tgl_req_brg']));?></td>
+                <td class=" "><?= $data['alasan'];?></td>
                 <td class=" "><?= $data['acc1'];?></td>
                 <td class=" "><?= $data['acc2'];?></td>
                 <td class=" " style="color: <?php
-                    if ($data['status'] == 'Menunggu Persetujuan KC') {
+                    if ($data['status_req'] == 'Menunggu Persetujuan KC') {
                         echo '#b58709';
-                    } elseif ($data['status'] == 'Menunggu Persetujuan Dir.Ops') {
+                    } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir.Ops') {
                         echo '#b58709';
-                    } elseif ($data['status'] == 'On Progress in Purchasing') {
+                    } elseif ($data['status_req'] == 'On Progress in Purchasing') {
                         echo '#14a664';
                     } else {
                         echo '#a62f26';
                     }
                 ?>;">
-                    <strong><?= $data['status'];?></strong>
+                    <strong><?= $data['status_req'];?></strong>
                 </td>
 
                 

@@ -4,9 +4,8 @@
 
 $lokasi = query("SELECT * FROM lokasi_barang");
 $room = query("SELECT * FROM lokasi_room");
-$vendor = query("SELECT * FROM vendor");
-$kode_brg = generate_kode_barang();
-
+$barang = query("SELECT * FROM barang");
+$satuan = query("SELECT * FROM satuan");
 // cek apakah tombol submit sudah ditekan atau belum
 if (isset($_POST["submit"])) {
 	
@@ -101,54 +100,46 @@ if (isset($_POST["submit"])) {
 									<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Kode Barang <span class="required">*</span>
 									</label>
 									<div class="col-md-6 col-sm-6 ">
-										<input type="text" name="kode_brg" id="last-name" required="required" class="form-control" value="<?= $kode_brg;?>" readonly>
+										<select class="form-control" name="kode_brg">
+											<option value="">--Pilih Barang--</option>
+											<?php foreach($barang as $row) : ?>
+												<option value="<?= $row['kode_brg']?>"><?= $row['kode_brg']?> - <?= $row['nama_barang']?> - <?= $row['spek']?></option>
+											<?php endforeach;?>	
+										</select>
 									</div>
 								</div>
 								
 								<div class="item form-group">
-									<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Nama Barang <span class="required">*</span>
+									<label for="qty_brg" class="col-form-label col-md-3 col-sm-3 label-align">Qty <span class="required">*</span></label>
+									<div class="col-md-6 col-sm-6 ">
+										<input id="qty_brg" name="qty_brg" class="form-control" type="number" placeholder="Ketikkan Qty" min="1" required>
+									</div>
+								</div>
+
+								<div class="item form-group">
+									<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Satuan <span class="required">*</span>
 									</label>
 									<div class="col-md-6 col-sm-6 ">
-										<input type="text" name="nama_barang" id="last-name" required="required" class="form-control" placeholder="Ketikkan Nama Barang">
-									</div>
-								</div>
-								<div class="item form-group">
-									<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Spesifikasi</label>
-									<div class="col-md-6 col-sm-6 ">
-										<input id="middle-name" name="spek" class="form-control" type="text" placeholder="Ketikkan Spesifikasi">
-									</div>
-								</div>
-								<div class="item form-group">
-									<label for="deskripsi" class="col-form-label col-md-3 col-sm-3 label-align">Deskripsi</label>
-									<div class="col-md-6 col-sm-6 ">
-										<textarea id="deskripsi" class="form-control" rows="4" name="deskripsi" id="deskripsi" placeholder="Ketikkan Deskripsi" style="resize:none;"></textarea>
-									</div>
-								</div>
-								<div class="item form-group">
-									<label for="qty" class="col-form-label col-md-3 col-sm-3 label-align">Qty <span class="required">*</span></label>
-									<div class="col-md-6 col-sm-6 ">
-										<input id="qty" name="qty" class="form-control" type="number" placeholder="Ketikkan Qty" min="1" required>
+										<select class="form-control" name="id_satuan">
+											<option value="">--Pilih Satuan--</option>
+											<?php foreach($satuan as $row) : ?>
+												<option value="<?= $row['id_satuan']?>"><?= $row['nama_satuan']?></option>
+											<?php endforeach;?>	
+										</select>
 									</div>
 								</div>
 
 								<div class="item form-group">
-									<label for="tanggal_masuk" class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Masuk </label>
+									<label for="tgl_input" class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Masuk </label>
 									<div class="col-md-6 col-sm-6 ">
-										<input id="tanggal_masuk" name="date_in" class="form-control" type="date">
+										<input id="tgl_input" name="tgl_input" class="form-control" type="date">
 									</div>
 								</div>
 
-								<div class="item form-group">
-									<label for="renewal" class="col-form-label col-md-3 col-sm-3 label-align">Renewal </label>
-									<div class="col-md-6 col-sm-6 ">
-										<input id="renewal" name="renewal" class="form-control" type="date">
-									</div>
-								</div>
 
 								<div class="item form-group">
 									<label for="kondisi_brg" class="col-form-label col-md-3 col-sm-3 label-align">Kondisi <span class="required">*</span></label>
 									<div class="col-md-6 col-sm-6 ">
-										<!-- <input id="kondisi_brg" name="kondisi_brg" class="form-control" type="text" placeholder="Ketikkan Kondisi Barang" required> -->
 										<select class="form-control" name="kondisi_brg" required>
 											<option value="NULL">--Pilih Kondisi--</option>
 											<option value="Baik">Baik</option>
@@ -159,6 +150,14 @@ if (isset($_POST["submit"])) {
 										</select>
 									</div>
 								</div>
+
+								<div class="item form-group">
+									<label for="ket_kondisi" class="col-form-label col-md-3 col-sm-3 label-align">Keterangan</label>
+									<div class="col-md-6 col-sm-6 ">
+										<textarea id="ket_kondisi" class="form-control" rows="4" name="ket_kondisi" id="ket_kondisi" placeholder="Ketikkan Deskripsi" style="resize:none;"></textarea>
+									</div>
+								</div>
+
 
 								<div class="item form-group">
 									<label for="id_lokasi" class="col-form-label col-md-3 col-sm-3 label-align">Lokasi Barang <span class="required">*</span></label>
@@ -185,24 +184,6 @@ if (isset($_POST["submit"])) {
 									</div>
 								</div>
 
-								<div class="item form-group">
-									<label for="id_vendor" class="col-form-label col-md-3 col-sm-3 label-align">Vendor</label>
-									<div class="col-md-6 col-sm-6 ">
-										<select class="form-control" name="id_vendor" id="id_vendor">
-											<option value="NULL">--Pilih Vendor--</option>
-											<?php foreach($vendor as $row) : ?>
-												<option value="<?= $row['id_vendor']?>"><?= $row['nama_vendor']?></option>
-											<?php endforeach;?>	
-										</select>
-									</div>
-								</div>
-
-								<div class="item form-group">
-									<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Gambar Barang</label>
-									<div class="col-md-6 col-sm-6 ">
-										<input type="file" name="gambar_brg">
-									</div>
-								</div>
 
 								<div class="ln_solid"></div>
 								<div class="item form-group">
