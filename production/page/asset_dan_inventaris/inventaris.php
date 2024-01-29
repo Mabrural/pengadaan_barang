@@ -2,7 +2,7 @@
 
 $id_user = $_SESSION["id_user"];
 
-// $pengajuan = query("SELECT * FROM barang WHERE barang.id_barang=$id_user");
+$storage_barang = query("SELECT * FROM storage_barang WHERE storage_barang.id_user=$id_user");
 $lokasi = query("SELECT * FROM lokasi_barang");
 $room = query("SELECT * FROM lokasi_room");
 
@@ -13,13 +13,22 @@ $id_room = isset($_GET['id_room']) ? $_GET['id_room'] : '';
     <div class="x_panel">
       <div class="x_title">
         <h2>Asset dan Inventaris <small></small></h2>
-        <a href="?form=tambahInventaris" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah Asset</a>
-        <a href="laporan/cetak_inventaris.php?id_lokasi=<?= $id_lokasi?>&id_room=<?= $id_room?>" class="btn btn-info btn-sm"><i class="fa fa-print"></i> Cetak Data</a><br>
+
+        
+        <!-- <a href="laporan/cetak_inventaris.php?id_lokasi=<?= $id_lokasi?>&id_room=<?= $id_room?>" class="btn btn-info btn-sm"><i class="fa fa-print"></i> Cetak Data</a><br> -->
+          <form action="laporan/cetak_inventaris.php" method="get">
+              <input type="hidden" name="aksi">
+              <input type="hidden" name="id_user" value="<?= $id_user;?>">
+              <input type="hidden" name="id_lokasi" value="<?= $id_lokasi;?>">
+              <input type="hidden" name="id_room" value="<?= $id_room;?>">
+              <button type="submit" class="btn btn-info btn-sm" name="cetakData"><i class="fa fa-print"></i> Cetak Data</button>
+              <a href="?form=tambahInventaris" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah Asset</a>
+          </form>
           <div class="row">
             <div class="col-md-2 col-sm-6">
                 <form method="get">
                   <input type="hidden" name="aksi">
-                      <input type="hidden" name="id_user" value="<?= $req_barang['id_user'];?>">
+                      <!-- <input type="hidden" name="id_user" value="<?= $storage_barang['id_user'];?>"> -->
                     <select class="form-control" name="id_lokasi" id="id_lokasi" required>
                         <option value="">--Pilih Lokasi Barang--</option>
                         <?php foreach($lokasi as $row) : ?>
@@ -32,7 +41,7 @@ $id_room = isset($_GET['id_room']) ? $_GET['id_room'] : '';
                 </form>
             </div>
             <div class="col-md-2 col-sm-6">
-                <form method="get">
+                <!-- <form method="get"> -->
                     <select class="form-control" name="id_room" id="id_room" required>
                         <option value="">--Pilih Lokasi Ruangan--</option>
                         <?php foreach($room as $row) : ?>
@@ -43,7 +52,7 @@ $id_room = isset($_GET['id_room']) ? $_GET['id_room'] : '';
                     </select>
                     <br>
                     <!-- <button type="submit" class="btn btn-primary btn-sm">Filter</button> -->
-                </form>
+                <!-- </form> -->
             </div>
           </div>
 

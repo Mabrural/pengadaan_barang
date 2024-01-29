@@ -1,14 +1,15 @@
 <?php
+   
 
 if (isset($_GET['cetakData'])) {
     include "../koneksi.php";
     // ambil data di URL
     $id_user = $_GET["id_user"];
-    // query data mahasiswa berdasarkan id
+    // query data berdasarkan id
     $storage_barang = query("SELECT * FROM storage_barang")[0];
 
-    $id_lokasi = isset($_GET['id_lokasi']) ? $_GET['id_lokasi'] : '';
-    $id_room = isset($_GET['id_room']) ? $_GET['id_room'] : '';
+    $id_lokasi = $_GET['id_lokasi'];
+    $id_room =$_GET['id_room'];
 }
 ?>
 
@@ -260,40 +261,64 @@ if (isset($_GET['cetakData'])) {
                                 <td>&nbsp;</td>
                             </tr>
                             <?php 
-                                $query = "SELECT * FROM user JOIN karyawan ON karyawan.id_emp=user.id_emp WHERE id_user='$id_user'";
-                                $query2 = "SELECT * FROM storage_barang";
+                                $query = "SELECT * FROM storage_barang JOIN lokasi_barang ON lokasi_barang.id_lokasi=storage_barang.id_lokasi JOIN lokasi_room ON lokasi_room.id_room=storage_barang.id_room JOIN user ON user.id_user=$id_user JOIN karyawan ON karyawan.id_emp=user.id_emp";
+
+                                // Add filter conditions based on the selected values
+                                  if (!empty($id_lokasi)) {
+                                      $query .= " WHERE storage_barang.id_lokasi = $id_lokasi";
+                                  }
+
+                                  if (!empty($id_room)) {
+                                      $query .= (!empty($id_lokasi)) ? " AND " : " WHERE ";
+                                      $query .= "storage_barang.id_room = $id_room";
+                                  }
+
+
                                 $tampil = mysqli_query($koneksi, $query);
-                                $tampil2 = mysqli_query($koneksi, $query2);
-                                $data = mysqli_fetch_assoc($tampil);
-                                $data2 = mysqli_fetch_assoc($tampil2);
-                                $nama_pemohon = $data['nama_emp'];
-                                $jabatan = $data['jabatan'];
-                                $divisi = $data['divisi'];
-                                $acc1 = $data2['acc1'];
-                                $acc2 = $data2['acc2'];
-                                $tgl = date('d-M-Y', strtotime($tgl_req_brg));
+                                
+                                if (mysqli_num_rows($tampil) > 0 ) {
+                                    
+                                
+                                    $data = mysqli_fetch_assoc($tampil);
+                                    
+                                    $nama_pemeriksa = $data['nama_emp'];                               
+                                    $nama_lokasi = $data['nama_lokasi'];
+                                    $room_name  = $data['room_name'];
+                                    $tgl = date('d-M-Y', strtotime(date('d-M-Y')));
                              ?>
                             <tr>
-                                <td>Nama Pemohon</td>
-                                <?= "<td>: $nama_pemohon</td>"  ?>
+                                <td>Lokasi Barang</td>
+                                <?php  
+                                if (!empty($id_lokasi)) {
+                                    echo "<td>: $nama_lokasi</td>";
+                                } else {
+                                    echo '<td>: Semua Lokasi</td>';
+                                } ?>
                             </tr>
                             <tr>
-                                <td>Jabatan</td>
-                                <?= "<td>: $jabatan</td>"  ?>
+                                <td>Lokasi Ruangan</td>
+                                <?php
+                                if (!empty($id_room)) {
+                                    echo "<td>: $room_name</td>";
+                                } else {
+                                    echo '<td>: Semua Ruangan</td>';
+                                } ?>
+                            </tr>
+                
+                            <tr>
+                                <td>Diperiksa Oleh  </td>
+                                <?= "<td>: $nama_pemeriksa</td>"  ?>
                             </tr>
                             <tr>
-                                <td>Divisi</td>
-                                <?= "<td>: $divisi</td>"  ?>
-                            </tr>
-                            <tr>
-                                <td>Disetujui Oleh  </td>
-                                <?= "<td>: $acc1 & $acc2</td>"  ?>
-                            </tr>
-                            <tr>
-                                <td>Tanggal Pengajuan</td>
+                                <td>Tanggal Pemeriksaan</td>
                                 <?= "<td>: $tgl</td>"  ?>
                             </tr>
-
+                        <?php
+                        } else {
+                                // No data found, display a message or handle accordingly
+                                echo '<td colspan="2">Tidak ada data yang ditemukan</td>';
+                            }
+                        ?>
 
                         </tbody></table><br>
 
@@ -308,6 +333,7 @@ if (isset($_GET['cetakData'])) {
                                 <td height="72" class="kananAtasBawah"> <div align="center"><b>Qty</b></div> </td>
                                 <td height="72" class="kananAtasBawah"> <div align="center"><b>Satuan</b></div> </td>
                                 <td height="72" class="kananAtasBawah"> <div align="center"><b>Kondisi</b></div> </td>
+                                <td height="72" class="kananAtasBawah"> <div align="center"><b>Aktual</b></div> </td>
                                 <!-- <td height="36" class="kananAtasBawah"> <div align="center"><b>Deskripsi</b></div> </td> -->
                                 
                                 <!-- <td height="72" class="kananAtasBawah"> <div align="center"><b>K x N</b></div> </td> -->
@@ -318,12 +344,22 @@ if (isset($_GET['cetakData'])) {
                                 <?php 
                                     $no = 1;
                                     $total = 0;
-                                    $query = "SELECT * FROM storage_barang JOIN user ON user.id_user=storage_barang.id_user JOIN barang ON barang.kode_brg=storage_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan WHERE status_req='On Progress in Purchasing' AND req_barang.id_user=$id_user AND req_barang.tgl_req_brg='$tgl_req_brg'";
-                                     // $query = "SELECT *, SUM(qty_req) AS total_qty FROM req_barang JOIN user ON user.id_user=req_barang.id_user JOIN barang ON barang.kode_brg=req_barang.kode_brg WHERE status_req='On Progress in Purchasing' AND req_barang.id_user=$id_user AND req_barang.tgl_req_brg='$tgl_req_brg'";
+                                    $query = "SELECT * FROM storage_barang JOIN lokasi_room ON lokasi_room.id_room=storage_barang.id_room JOIN lokasi_barang ON lokasi_barang.id_lokasi=storage_barang.id_lokasi JOIN barang ON barang.kode_brg=storage_barang.kode_brg JOIN satuan ON satuan.id_satuan=storage_barang.id_satuan";
+                                     
+                                    // Add filter conditions based on the selected values
+                                      if (!empty($id_lokasi)) {
+                                          $query .= " WHERE storage_barang.id_lokasi = $id_lokasi";
+                                      }
+
+                                      if (!empty($id_room)) {
+                                          $query .= (!empty($id_lokasi)) ? " AND " : " WHERE ";
+                                          $query .= "storage_barang.id_room = $id_room";
+                                      }
+
                                     $tampil = mysqli_query($koneksi, $query);
                                     while ($data = mysqli_fetch_assoc($tampil)) {
 
-                                        $qty_req = $data['qty_req'];
+                                        $qty_req = $data['qty_brg'];
                                         $total += $qty_req;
                                     // $qty_req_arr = explode(',', $qty_req);
                                     // $total = array_sum($qty_req_arr);
@@ -331,13 +367,13 @@ if (isset($_GET['cetakData'])) {
 
                                  ?>
                                 <td height="20" valign="top" align="center" class="kotak" style="padding:4px">&nbsp;<?= $no++; ?></td>
-                                <td valign="top" align="center" class="kananAtasBawah" style="padding:4px">&nbsp;<?= $data['kode_pengajuan'];?></td>
-                                <td valign="top" align="center" class="kananAtasBawah" style="padding:4px"><?= $data['kode_brg'];?></td>
-                                <td valign="top" align="left" class="kananAtasBawah" style="padding:4px"><?= $data['nama_barang'];?></td>
-                                <td valign="top" align="center" class="kananAtasBawah" style="padding:4px"><?= $data['qty_req'];?></td>
-                                <td valign="top" align="center" class="kananAtasBawah" style="padding:4px"><?= $data['nama_satuan'];?></td>
+                                <td valign="top" align="center" class="kananAtasBawah" style="padding:4px">&nbsp;<?= $data['kode_brg'];?></td>
+                                <td valign="top" align="center" class="kananAtasBawah" style="padding:4px"><?= $data['nama_barang'];?></td>
                                 <td valign="top" align="left" class="kananAtasBawah" style="padding:4px"><?= $data['spek'];?></td>
-                                <!-- <td valign="top" align="left" class="kananAtasBawah" style="padding:4px"><?= $data['deskripsi'];?></td> -->
+                                <td valign="top" align="center" class="kananAtasBawah" style="padding:4px"><?= $data['qty_brg'];?></td>
+                                <td valign="top" align="center" class="kananAtasBawah" style="padding:4px"><?= $data['nama_satuan'];?></td>
+                                <td valign="top" align="left" class="kananAtasBawah" style="padding:4px"><?= $data['kondisi_brg'];?></td>
+                                <td valign="top" align="left" class="kananAtasBawah" style="padding:4px">&nbsp;</td>
                                                                 
                             </tr>
 
@@ -365,7 +401,7 @@ if (isset($_GET['cetakData'])) {
                             </tr>
                             <tr>
                                 <td colspan="2">&nbsp;</td>
-                                <td align="center">Direktur Operasional</td>
+                                <td align="center">Staff Operasional</td>
                             </tr>   
                             <tr>
                                 <td width="37%"> <div align="left"></div> </td>
@@ -393,7 +429,7 @@ if (isset($_GET['cetakData'])) {
                             </tr>   
                             <tr>
                                 <td colspan="2"> <div align="left">&nbsp;</div><br><br> </td>
-                                <td> <div align="center">( <?= $acc2;?> ) </div> </td>
+                                <td> <div align="center"><?php if (isset($nama_pemeriksa)) echo "( $nama_pemeriksa )"; ?></div> </td>
                             </tr>
                         </tbody></table>
                     </td>
