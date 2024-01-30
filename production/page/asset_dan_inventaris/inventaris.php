@@ -21,8 +21,9 @@ $id_room = isset($_GET['id_room']) ? $_GET['id_room'] : '';
               <input type="hidden" name="id_user" value="<?= $id_user;?>">
               <input type="hidden" name="id_lokasi" value="<?= $id_lokasi;?>">
               <input type="hidden" name="id_room" value="<?= $id_room;?>">
-              <button type="submit" class="btn btn-info btn-sm" name="cetakData"><i class="fa fa-print"></i> Cetak Data</button>
               <a href="?form=tambahInventaris" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah Asset</a>
+              <button type="submit" class="btn btn-info btn-sm" name="cetakData"><i class="fa fa-print"></i> Cetak Data</button>
+              
           </form>
           <div class="row">
             <div class="col-md-2 col-sm-6">

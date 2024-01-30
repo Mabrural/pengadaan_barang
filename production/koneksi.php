@@ -988,26 +988,7 @@ function ubahBarang($data) {
 
 	return mysqli_affected_rows($koneksi);
 }
-function tambahInventaris($data) {
-	global $koneksi;
 
-	$tgl_input = htmlspecialchars($data['tgl_input']);
-	$qty_brg = htmlspecialchars($data['qty_brg']);
-	$kondisi_brg = htmlspecialchars($data["kondisi_brg"]);
-	$ket_kondisi = htmlspecialchars($data["ket_kondisi"]);
-	$kode_brg = htmlspecialchars($data["kode_brg"]);
-	$id_room = htmlspecialchars($data["id_room"]);
-	$id_lokasi = htmlspecialchars($data["id_lokasi"]);
-	$id_satuan = htmlspecialchars($data["id_satuan"]);
-	$id_user = htmlspecialchars($_SESSION['id_user']);
-
-
-	$query = "INSERT INTO storage_barang VALUES
-			('', '$tgl_input', '$qty_brg', '$kondisi_brg', '$ket_kondisi', '$kode_brg', '$id_lokasi', '$id_satuan', '$id_room', '$id_user')";
-	mysqli_query($koneksi, $query);
-
-	return mysqli_affected_rows($koneksi);
-}
 
 function uploadGambarBarang(){
 
@@ -1059,9 +1040,61 @@ function uploadGambarBarang(){
 	return $namaFileBaru;
  }
 
-function hapusInventaris($kode_brg) {
+
+function tambahInventaris($data) {
 	global $koneksi;
-	mysqli_query($koneksi, "DELETE FROM storage_barang WHERE kode_brg='$kode_brg'");
+
+	$tgl_input = htmlspecialchars($data['tgl_input']);
+	$qty_brg = htmlspecialchars($data['qty_brg']);
+	$kondisi_brg = htmlspecialchars($data["kondisi_brg"]);
+	$ket_kondisi = htmlspecialchars($data["ket_kondisi"]);
+	$kode_brg = htmlspecialchars($data["kode_brg"]);
+	$id_room = htmlspecialchars($data["id_room"]);
+	$id_lokasi = htmlspecialchars($data["id_lokasi"]);
+	$id_satuan = htmlspecialchars($data["id_satuan"]);
+	$id_user = htmlspecialchars($_SESSION['id_user']);
+
+
+	$query = "INSERT INTO storage_barang VALUES
+			('', '$tgl_input', '$qty_brg', '$kondisi_brg', '$ket_kondisi', '$kode_brg', '$id_lokasi', '$id_satuan', '$id_room', '$id_user')";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+
+function ubahInventaris($data) {
+	global $koneksi;
+	$id_storage = htmlspecialchars($data['id_storage']);
+	$tgl_input = htmlspecialchars($data['tgl_input']);
+	$qty_brg = htmlspecialchars($data['qty_brg']);
+	$kondisi_brg = htmlspecialchars($data["kondisi_brg"]);
+	$ket_kondisi = htmlspecialchars($data["ket_kondisi"]);
+	$kode_brg = htmlspecialchars($data["kode_brg"]);
+	$id_room = htmlspecialchars($data["id_room"]);
+	$id_lokasi = htmlspecialchars($data["id_lokasi"]);
+	$id_satuan = htmlspecialchars($data["id_satuan"]);
+
+
+	$query = "UPDATE storage_barang SET
+				tgl_input = '$tgl_input',
+				qty_brg = '$qty_brg',
+				kondisi_brg = '$kondisi_brg',
+				ket_kondisi = '$ket_kondisi',
+				kode_brg = '$kode_brg',
+				id_lokasi = '$id_lokasi',
+				id_satuan = '$id_satuan',
+				id_room = '$id_room'
+			  WHERE id_storage = $id_storage
+			";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function hapusInventaris($id_storage) {
+	global $koneksi;
+	mysqli_query($koneksi, "DELETE FROM storage_barang WHERE id_storage=$id_storage");
 
 	return mysqli_affected_rows($koneksi);
 

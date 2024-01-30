@@ -507,6 +507,14 @@ if ($_SESSION["level"] == "Staff IT") {
                                 include "page/asset_dan_inventaris/tambah.php";
                                 break;
 
+                            case 'ubahInventaris':
+                                include "page/asset_dan_inventaris/ubah.php";
+                                break;
+
+                            case 'hapusInventaris':
+                                include "page/asset_dan_inventaris/hapus.php";
+                                break;
+
                             case 'tambahBarang':
                                 include 'page/data_barang/tambah.php';
                                 break;

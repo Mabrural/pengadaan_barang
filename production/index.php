@@ -171,7 +171,7 @@ if ($_SESSION["level"] == "Staff IT") {
                     </ul>
                   </li> -->
 
-                  <li><a><i class="fa fa-folder"></i> Asset dan Inventaris<span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-database"></i> Asset dan Inventaris<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="index.php?page=dataInventaris">Storage Barang</a></li>
                     </ul>
