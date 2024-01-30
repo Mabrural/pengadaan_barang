@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 29, 2024 at 12:20 PM
+-- Generation Time: Jan 30, 2024 at 01:09 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -349,7 +349,7 @@ INSERT INTO `lokasi_barang` (`id_lokasi`, `nama_lokasi`) VALUES
 (2, 'OB Selaras 01'),
 (3, 'OB Garuda'),
 (4, 'TB Tiga Permata'),
-(5, 'Office');
+(8, 'Office');
 
 -- --------------------------------------------------------
 
@@ -403,6 +403,26 @@ INSERT INTO `manage_cuti` (`id_manage_cuti`, `id_kategori_cuti`, `kuota_cuti`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `po_barang`
+--
+
+CREATE TABLE `po_barang` (
+  `id_po` int(10) NOT NULL,
+  `id_req_brg` int(10) NOT NULL,
+  `tgl_po` date DEFAULT NULL,
+  `qty_po` int(5) DEFAULT NULL,
+  `harga_po` int(10) DEFAULT NULL,
+  `ket_po` text DEFAULT NULL,
+  `acc3` varchar(40) DEFAULT NULL,
+  `acc4` varchar(40) DEFAULT NULL,
+  `acc5` varchar(40) DEFAULT NULL,
+  `id_vendor` int(10) NOT NULL,
+  `id_user` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `req_barang`
 --
 
@@ -432,7 +452,7 @@ INSERT INTO `req_barang` (`id_req_brg`, `kode_pengajuan`, `kode_brg`, `qty_req`,
 (41, 'REQ-24012700003-60169', 'BRG00003', 1, '2024-01-27', '', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 2, 2, 29, 1),
 (42, 'REQ-24012700004-41123', 'BRG00008', 8, '2024-01-27', '', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 2, 1, 29, 1),
 (43, 'REQ-24012700005-26597', 'BRG00007', 2, '2024-01-27', '', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 1, 29, 1),
-(44, 'REQ-24012700006-15577', 'BRG00001', 1, '2024-01-27', '', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 1, 29, 1),
+(44, 'REQ-24012700006-15577', 'BRG00001', 1, '2024-01-27', '', 'On Progress in Purchasing	', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 1, 29, 1),
 (45, 'REQ-24012800007-52211', 'BRG00001', 1, '2024-01-28', 'untuk jig', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 1, 28, 1);
 
 -- --------------------------------------------------------
@@ -605,7 +625,7 @@ INSERT INTO `storage_barang` (`id_storage`, `tgl_input`, `qty_brg`, `kondisi_brg
 (88, '2024-01-29', 4, 'Baik', '-', 'BRG00085', 1, 2, 2, 27),
 (89, '2024-01-29', 9, 'Baik', '-', 'BRG00086', 1, 1, 2, 27),
 (90, '2024-01-29', 1, 'Baik', '-', 'BRG00087', 1, 1, 2, 27),
-(91, '2024-01-29', 1, 'Rusak', 'Not good', 'BRG00088', 1, 1, 2, 27);
+(92, '2024-01-29', 1, 'Rusak', 'Not Good', 'BRG00088', 1, 1, 2, 27);
 
 -- --------------------------------------------------------
 
@@ -657,7 +677,7 @@ CREATE TABLE `vendor` (
 INSERT INTO `vendor` (`id_vendor`, `nama_vendor`, `no_telp_vendor`) VALUES
 (1, 'PT Karimun Marine Suplarindo', NULL),
 (2, 'PT Evercode Internasional', NULL),
-(3, 'PT Securindo Jaya Pratama', NULL);
+(3, 'PT Securindo Jaya Pratama', '077812431570');
 
 --
 -- Indexes for dumped tables
@@ -748,6 +768,15 @@ ALTER TABLE `manage_cuti`
   ADD PRIMARY KEY (`id_manage_cuti`),
   ADD KEY `id_kategori_cuti` (`id_kategori_cuti`),
   ADD KEY `id_emp` (`id_emp`);
+
+--
+-- Indexes for table `po_barang`
+--
+ALTER TABLE `po_barang`
+  ADD PRIMARY KEY (`id_po`),
+  ADD KEY `id_req_brg` (`id_req_brg`),
+  ADD KEY `id_vendor` (`id_vendor`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indexes for table `req_barang`
@@ -848,19 +877,25 @@ ALTER TABLE `lantai`
 -- AUTO_INCREMENT for table `lokasi_barang`
 --
 ALTER TABLE `lokasi_barang`
-  MODIFY `id_lokasi` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_lokasi` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `lokasi_room`
 --
 ALTER TABLE `lokasi_room`
-  MODIFY `id_room` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_room` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `manage_cuti`
 --
 ALTER TABLE `manage_cuti`
   MODIFY `id_manage_cuti` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT for table `po_barang`
+--
+ALTER TABLE `po_barang`
+  MODIFY `id_po` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `req_barang`
@@ -872,19 +907,19 @@ ALTER TABLE `req_barang`
 -- AUTO_INCREMENT for table `req_cuti`
 --
 ALTER TABLE `req_cuti`
-  MODIFY `id_req_cuti` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_req_cuti` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `satuan`
 --
 ALTER TABLE `satuan`
-  MODIFY `id_satuan` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_satuan` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `storage_barang`
 --
 ALTER TABLE `storage_barang`
-  MODIFY `id_storage` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id_storage` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -896,7 +931,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `vendor`
 --
 ALTER TABLE `vendor`
-  MODIFY `id_vendor` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_vendor` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -943,6 +978,14 @@ ALTER TABLE `kontrak_kerja`
 ALTER TABLE `manage_cuti`
   ADD CONSTRAINT `manage_cuti_ibfk_1` FOREIGN KEY (`id_kategori_cuti`) REFERENCES `kategori_cuti` (`id_kategori_cuti`),
   ADD CONSTRAINT `manage_cuti_ibfk_2` FOREIGN KEY (`id_emp`) REFERENCES `karyawan` (`id_emp`);
+
+--
+-- Constraints for table `po_barang`
+--
+ALTER TABLE `po_barang`
+  ADD CONSTRAINT `po_barang_ibfk_1` FOREIGN KEY (`id_req_brg`) REFERENCES `req_barang` (`id_req_brg`),
+  ADD CONSTRAINT `po_barang_ibfk_2` FOREIGN KEY (`id_vendor`) REFERENCES `vendor` (`id_vendor`),
+  ADD CONSTRAINT `po_barang_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 
 --
 -- Constraints for table `req_barang`
