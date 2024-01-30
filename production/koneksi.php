@@ -1066,38 +1066,143 @@ function hapusInventaris($kode_brg) {
 	return mysqli_affected_rows($koneksi);
 
 }
-// function approveCuti($data) {
-// 	global $koneksi;
-// 	$id_req_cuti = $data["id_req_cuti"];
-// 	$tgl_mulai = htmlspecialchars($data["tgl_mulai"]);
-// 	$tgl_akhir = htmlspecialchars($data["tgl_akhir"]);
-// 	$jml_hari = htmlspecialchars($data["jml_hari"]);
-// 	$tipe_cuti = htmlspecialchars($data["tipe_cuti"]);
-// 	$alasan = htmlspecialchars($data["alasan"]);
-// 	$status_cuti = htmlspecialchars($data["status_cuti"]);
-// 	$created_at = htmlspecialchars($data["created_at"]);
-// 	$updated_at = htmlspecialchars($data["updated_at"]);
-// 	$id_kategori_cuti = htmlspecialchars($data["id_kategori_cuti"]);
-// 	$id_emp = htmlspecialchars($data["id_emp"]);
+
+function tambahVendor($data) {
+	global $koneksi;
+	$nama_vendor = htmlspecialchars($data["nama_vendor"]);
+	$no_telp_vendor = htmlspecialchars($data["no_telp_vendor"]);
 
 
-// 	$query = "UPDATE req_cuti SET
-// 				tgl_mulai = '$tgl_mulai',
-// 				tgl_akhir = '$tgl_akhir',
-// 				jml_hari = '$jml_hari',
-// 				tipe_cuti = '$tipe_cuti',
-// 				alasan = '$alasan',
-// 				status_cuti = '$status_cuti',
-// 				created_at = '$created_at',
-// 				updated_at = '$updated_at',
-// 				id_emp = '$id_emp',
-// 				id_kategori_cuti = '$id_kategori_cuti'
-// 			  WHERE id_req_cuti = $id_req_cuti
-// 			";
-// 	mysqli_query($koneksi, $query);
+	$query = "INSERT INTO vendor VALUES
+			('', '$nama_vendor', '$no_telp_vendor')";
+	mysqli_query($koneksi, $query);
 
-// 	return mysqli_affected_rows($koneksi);
-// }
+	return mysqli_affected_rows($koneksi);
+}
+
+function ubahVendor($data) {
+	global $koneksi;
+	$id_vendor = $data["id_vendor"];
+	$nama_vendor = htmlspecialchars($data["nama_vendor"]);
+	$no_telp_vendor = htmlspecialchars($data["no_telp_vendor"]);
+
+
+	$query = "UPDATE vendor SET
+				nama_vendor = '$nama_vendor',
+				no_telp_vendor = '$no_telp_vendor'
+			  WHERE id_vendor = $id_vendor
+			";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function hapusVendor($id_vendor) {
+	global $koneksi;
+	mysqli_query($koneksi, "DELETE FROM vendor WHERE id_vendor=$id_vendor");
+
+	return mysqli_affected_rows($koneksi);
+
+}
+
+function tambahLokasi($data) {
+	global $koneksi;
+	$nama_lokasi = htmlspecialchars($data["nama_lokasi"]);
+
+	$query = "INSERT INTO lokasi_barang VALUES
+			('', '$nama_lokasi')";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function ubahLokasi($data) {
+	global $koneksi;
+	$id_lokasi = $data["id_lokasi"];
+	$nama_lokasi = htmlspecialchars($data["nama_lokasi"]);
+
+	$query = "UPDATE lokasi_barang SET
+				nama_lokasi = '$nama_lokasi'
+			  WHERE id_lokasi = $id_lokasi
+			";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function hapusLokasi($id_lokasi) {
+	global $koneksi;
+	mysqli_query($koneksi, "DELETE FROM lokasi_barang WHERE id_lokasi=$id_lokasi");
+
+	return mysqli_affected_rows($koneksi);
+
+}
+
+function tambahRuangan($data) {
+	global $koneksi;
+	$room_name = htmlspecialchars($data["room_name"]);
+
+	$query = "INSERT INTO lokasi_room VALUES
+			('', '$room_name')";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function ubahRuangan($data) {
+	global $koneksi;
+	$id_room = $data["id_room"];
+	$room_name = htmlspecialchars($data["room_name"]);
+
+	$query = "UPDATE lokasi_room SET
+				room_name = '$room_name'
+			  WHERE id_room = $id_room
+			";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function hapusRuangan($id_room) {
+	global $koneksi;
+	mysqli_query($koneksi, "DELETE FROM lokasi_room WHERE id_room=$id_room");
+
+	return mysqli_affected_rows($koneksi);
+
+}
+
+function tambahSatuan($data) {
+	global $koneksi;
+	$nama_satuan = htmlspecialchars($data["nama_satuan"]);
+
+	$query = "INSERT INTO satuan VALUES
+			('', '$nama_satuan')";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function ubahSatuan($data) {
+	global $koneksi;
+	$id_satuan = $data["id_satuan"];
+	$nama_satuan = htmlspecialchars($data["nama_satuan"]);
+
+	$query = "UPDATE satuan SET
+				nama_satuan = '$nama_satuan'
+			  WHERE id_satuan = $id_satuan
+			";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function hapusSatuan($id_satuan) {
+	global $koneksi;
+	mysqli_query($koneksi, "DELETE FROM satuan WHERE id_satuan=$id_satuan");
+
+	return mysqli_affected_rows($koneksi);
+
+}
 
 function tambahAnggaran($data) {
 	global $koneksi;

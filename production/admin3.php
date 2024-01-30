@@ -152,9 +152,13 @@ if ($_SESSION["level"] == "Staff IT") {
                     </ul>
                   </li> -->
 
-                  <li><a><i class="fa fa-folder"></i> Master Barang<span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-folder"></i> Master Data<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="admin3.php?page=dataBarang">Daftar Barang</a></li>
+                      <li><a href="admin3.php?page=dataVendor">Daftar Vendor</a></li>
+                      <li><a href="admin3.php?page=dataLokasi">Daftar Lokasi</a></li>
+                      <li><a href="admin3.php?page=dataRuangan">Daftar Ruangan</a></li>
+                      <li><a href="admin3.php?page=dataSatuan">Daftar Satuan</a></li>
                     </ul>
                   </li>
 
@@ -417,6 +421,22 @@ if ($_SESSION["level"] == "Staff IT") {
                                 include "page/data_barang/barang.php";
                                 break;
 
+                            case 'dataVendor':
+                                include 'page/data_master/vendor/vendor.php';
+                                break;
+
+                            case 'dataLokasi':
+                                include 'page/data_master/lokasi/lokasi.php';
+                                break;
+
+                            case 'dataRuangan':
+                                include 'page/data_master/room/room.php';
+                                break;
+
+                            case 'dataSatuan':
+                                include 'page/data_master/satuan/satuan.php';
+                                break;
+
                             case 'transaksiBarangMasuk':
                                 include 'page/transaksi_barang/barang_masuk/barang_masuk.php';
                                 break;
@@ -497,6 +517,54 @@ if ($_SESSION["level"] == "Staff IT") {
 
                             case 'hapusBarang':
                                 include 'page/data_barang/hapus.php';
+                                break;
+
+                            case 'tambahVendor':
+                                include 'page/data_master/vendor/tambah.php';
+                                break;
+
+                            case 'hapusVendor':
+                                include 'page/data_master/vendor/hapus.php';
+                                break;
+
+                            case 'ubahVendor':
+                                include 'page/data_master/vendor/ubah.php';
+                                break;
+
+                            case 'tambahLokasi':
+                                include 'page/data_master/lokasi/tambah.php';
+                                break;
+
+                            case 'hapusLokasi':
+                                include 'page/data_master/lokasi/hapus.php';
+                                break;
+
+                            case 'ubahLokasi':
+                                include 'page/data_master/lokasi/ubah.php';
+                                break;
+
+                            case 'tambahRuangan':
+                                include 'page/data_master/room/tambah.php';
+                                break;
+
+                            case 'hapusRuangan':
+                                include 'page/data_master/room/hapus.php';
+                                break;
+
+                            case 'ubahRuangan':
+                                include 'page/data_master/room/ubah.php';
+                                break;
+
+                            case 'tambahSatuan':
+                                include 'page/data_master/satuan/tambah.php';
+                                break;
+
+                            case 'hapusSatuan':
+                                include 'page/data_master/satuan/hapus.php';
+                                break;
+
+                            case 'ubahSatuan':
+                                include 'page/data_master/satuan/ubah.php';
                                 break;
 
                             case 'tambahPembelian':
