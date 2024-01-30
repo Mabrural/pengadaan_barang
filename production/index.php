@@ -123,53 +123,15 @@ if ($_SESSION["level"] == "Staff IT") {
                       <li><a href="index3.html">Dashboard3</a></li> -->
                     </ul>
                   </li>
-                  <!-- <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="form.html">General Form</a></li>
-                      <li><a href="form_advanced.html">Advanced Components</a></li>
-                      <li><a href="form_validation.html">Form Validation</a></li>
-                      <li><a href="form_wizards.html">Form Wizard</a></li>
-                      <li><a href="form_upload.html">Form Upload</a></li>
-                      <li><a href="form_buttons.html">Form Buttons</a></li>
-                    </ul>
-                  </li> -->
-                  <!-- <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="general_elements.html">General Elements</a></li>
-                      <li><a href="media_gallery.html">Media Gallery</a></li>
-                      <li><a href="typography.html">Typography</a></li>
-                      <li><a href="icons.html">Icons</a></li>
-                      <li><a href="glyphicons.html">Glyphicons</a></li>
-                      <li><a href="widgets.html">Widgets</a></li>
-                      <li><a href="invoice.html">Invoice</a></li>
-                      <li><a href="inbox.html">Inbox</a></li>
-                      <li><a href="calendar.html">Calendar</a></li>
-                    </ul>
-                  </li> -->
-                 <!--  <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="tables.html">Tables</a></li>
-                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
-                    </ul>
-                  </li> -->
+
 
                   <li><a><i class="fa fa-folder"></i> Master Barang<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="index.php?page=dataBarang">Data Barang</a></li>
-                      <li><a href="index.php?page=historyPengajuan">Barang Masuk</a></li>
-                      <li><a href="index.php?page=historyPengajuan">Barang Keluar</a></li>
-                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                      <li><a href="index.php?page=dataBarang">Daftar Barang</a></li>
                     </ul>
                   </li>
 
-                  <!-- <li><a><i class="fa fa-external-link"></i> Permintaan Barang<span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="index.php?page=pengajuan">Data Permintaan Barang</a></li>
-                      <li><a href="index.php?page=historyPengajuan">Barang Masuk</a></li>
-                      <li><a href="index.php?page=historyPengajuan">Barang Keluar</a></li>
-                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
-                    </ul>
-                  </li> -->
+
 
                   <li><a><i class="fa fa-database"></i> Asset dan Inventaris<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -177,19 +139,17 @@ if ($_SESSION["level"] == "Staff IT") {
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-exchange"></i>Transaksi Barang<span class="fa fa-chevron-down"></span></a>
+                 <!--  <li><a><i class="fa fa-exchange"></i>Transaksi Barang<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="index.php?page=transaksiBarangMasuk">Barang Masuk</a></li>
                       <li><a href="index.php?page=historyTransaksi">History Transaksi</a></li>
-                      <!-- <li><a href="tables_dynamic.html">Table Dynamic</a></li> -->
                     </ul>
-                  </li>
+                  </li> -->
 
                   <li><a><i class="fa fa-edit"></i> Pengajuan Barang<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="index.php?page=pengajuan">Data Pengajuan Barang</a></li>
                       <li><a href="index.php?page=historyPengajuan">History Pengajuan Barang</a></li>
-                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
                   </li>
 
@@ -197,7 +157,7 @@ if ($_SESSION["level"] == "Staff IT") {
                     <ul class="nav child_menu">
                       <li><a href="index.php?page=reqCuti">Form Cuti</a></li>
                       <li><a href="index.php?page=historyCuti">History Cuti</a></li>
-                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                      <!-- <li><a href="tables_dynamic.html">Table Dynamic</a></li> -->
                     </ul>
                   </li>
 
@@ -412,11 +372,11 @@ if ($_SESSION["level"] == "Staff IT") {
                                 break;
 
                             case 'dataInventaris':
-                                include 'page/asset_dan_inventaris/inventaris.php';
+                                include 'page/asset_dan_inventaris/inventaris_read.php';
                                 break;
 
                             case 'dataBarang':
-                                include 'page/data_barang/barang.php';
+                                include 'page/data_barang/barang_read.php';
                                 break;
 
                             case 'transaksiBarangMasuk':

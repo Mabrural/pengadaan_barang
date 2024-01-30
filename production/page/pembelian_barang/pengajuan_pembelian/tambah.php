@@ -1,10 +1,10 @@
 <?php
 
 
-$kode_brg = generate_kode_barang();
+
 $satuan = query("SELECT * FROM satuan");
 $vendor = query("SELECT * FROM vendor");
-$barang = query("SELECT * FROM barang JOIN req_barang ON req_barang.kode_brg=barang.kode_brg");
+$req_barang = query("SELECT * FROM req_barang JOIN barang ON barang.kode_brg=req_barang.kode_brg WHERE req_barang.status_req='On Progress in Purchasing' GROUP BY barang.kode_brg");
 
 // cek apakah tombol submit sudah ditekan atau belum
 if (isset($_POST["submit"])) {
@@ -12,7 +12,7 @@ if (isset($_POST["submit"])) {
 
 
 	// cek apakah data berhasil ditambahkan atau tidak
-	if(tambahBarang($_POST) > 0 ) {
+	if(tambahPembelian($_POST) > 0 ) {
 		echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
 		echo '<script src="./sweetalert2.min.js"></script>';
 		echo "<script>
@@ -27,7 +27,7 @@ if (isset($_POST["submit"])) {
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=dataBarang'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=pengajuanPembelian'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>"; 
 		// echo "
@@ -51,7 +51,7 @@ if (isset($_POST["submit"])) {
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=dataBarang'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=pengajuanPembelian'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>";
 		// echo "
@@ -98,19 +98,19 @@ if (isset($_POST["submit"])) {
 							<form action="" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
 
 								<div class="item form-group">
-									<label class="col-form-label col-md-3 col-sm-3 label-align" for="tgl_mulai">Tanggal Pengajuan <span class="required">*</span>
+									<label class="col-form-label col-md-3 col-sm-3 label-align" for="tgl_po">Tanggal Pengajuan <span class="required">*</span>
 									</label>
 									<div class="col-md-6 col-sm-6 ">
-										<input type="date" name="tgl_mulai" id="tgl_mulai" required="required" class="form-control">
+										<input type="date" name="tgl_po" id="tgl_po" required="required" class="form-control">
 									</div>
 								</div>
 
 								<div class="item form-group">
 									<label for="id_room" class="col-form-label col-md-3 col-sm-3 label-align">Nama Barang <span class="required">*</span></label>
 									<div class="col-md-6 col-sm-6 ">
-										<select class="form-control" name="id_satuan" id="id_satuan" required>
+										<select class="form-control" name="id_req_brg" id="id_req_brg" required>
 											<option value="">--Pilih Barang--</option>
-											<?php foreach($barang as $row) : ?>
+											<?php foreach($req_barang as $row) : ?>
 												<option value="<?= $row['id_req_brg']?>"><?= $row['kode_brg']?> - <?= $row['nama_barang']?> - <?= $row['spek']?></option>
 											<?php endforeach;?>	
 										</select>
@@ -118,13 +118,13 @@ if (isset($_POST["submit"])) {
 								</div>
 
 								<div class="item form-group">
-									<label for="stok_barang" class="col-form-label col-md-3 col-sm-3 label-align">Qty</label>
+									<label for="qty_po" class="col-form-label col-md-3 col-sm-3 label-align">Qty</label>
 									<div class="col-md-6 col-sm-6 ">
-										<input id="stok_barang" name="stok_barang" class="form-control" type="number" min="0" placeholder="Ketikkan Qty Barang">
+										<input id="qty_po" name="qty_po" class="form-control" type="number" min="0" placeholder="Ketikkan Qty Barang">
 									</div>
 								</div>
 
-								<div class="item form-group">
+								<!-- <div class="item form-group">
 									<label for="id_room" class="col-form-label col-md-3 col-sm-3 label-align">Satuan Barang <span class="required">*</span></label>
 									<div class="col-md-6 col-sm-6 ">
 										<select class="form-control" name="id_satuan" id="id_satuan" required>
@@ -134,21 +134,25 @@ if (isset($_POST["submit"])) {
 											<?php endforeach;?>	
 										</select>
 									</div>
-								</div>
+								</div> -->
 
 								<div class="item form-group">
-									<label for="stok_barang" class="col-form-label col-md-3 col-sm-3 label-align">Harga Satuan</label>
+									<label for="harga_po" class="col-form-label col-md-3 col-sm-3 label-align">Harga Satuan</label>
 									<div class="col-md-6 col-sm-6 ">
-										<input id="stok_barang" name="stok_barang" class="form-control" type="number" min="0" placeholder="Ketikkan Harga Satuan">
+										<input id="harga_po" name="harga_po" class="form-control" type="number" min="0" placeholder="Ketikkan Harga Satuan">
 									</div>
 								</div>
 
 
 								<div class="item form-group">
-									<label for="deskripsi" class="col-form-label col-md-3 col-sm-3 label-align">Keterangan</label>
+									<label for="ket_po" class="col-form-label col-md-3 col-sm-3 label-align">Keterangan</label>
 									<div class="col-md-6 col-sm-6 ">
-										<textarea id="deskripsi" class="form-control" rows="4" name="deskripsi" id="deskripsi" placeholder="Ketikkan Keterangan" style="resize:none;"></textarea>
+										<textarea id="ket_po" class="form-control" rows="4" name="ket_po" id="ket_po" placeholder="Ketikkan Keterangan" style="resize:none;"></textarea>
 									</div>
+									<input name="acc3" class="form-control" type="hidden" value="">
+									<input name="acc4" class="form-control" type="hidden" value="">
+									<input name="acc5" class="form-control" type="hidden" value="">
+
 								</div>
 
 					
@@ -156,7 +160,7 @@ if (isset($_POST["submit"])) {
 								<div class="item form-group">
 									<label for="id_room" class="col-form-label col-md-3 col-sm-3 label-align">Vendor <span class="required">*</span></label>
 									<div class="col-md-6 col-sm-6 ">
-										<select class="form-control" name="id_satuan" id="id_satuan" required>
+										<select class="form-control" name="id_vendor" id="id_satuan" required>
 											<option value="">--Pilih Vendor--</option>
 											<?php foreach($vendor as $row) : ?>
 												<option value="<?= $row['id_vendor']?>"><?= $row['nama_vendor']?></option>

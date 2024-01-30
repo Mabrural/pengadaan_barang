@@ -1237,6 +1237,32 @@ function hapusSatuan($id_satuan) {
 
 }
 
+function tambahPembelian($data) {
+	global $koneksi;
+
+	$id_req_brg = htmlspecialchars($data['id_req_brg']);
+	$tgl_po = htmlspecialchars($data['tgl_po']);
+	$qty_po = htmlspecialchars($data["qty_po"]);
+	$harga_po = htmlspecialchars($data["harga_po"]);
+	$ket_po = htmlspecialchars($data["ket_po"]);
+	$acc3 = htmlspecialchars($data["acc3"]);
+	$acc4 = htmlspecialchars($data["acc4"]);
+	$acc5 = htmlspecialchars($data["acc5"]);
+	$id_vendor = htmlspecialchars($data["id_vendor"]);
+	$id_user = htmlspecialchars($_SESSION['id_user']);
+
+
+	$query = "INSERT INTO po_barang VALUES
+			('', '$id_req_brg', '$tgl_po', '$qty_po', '$harga_po', '$ket_po', '$acc3', '$acc4', '$acc5', '$id_vendor', '$id_user')";
+	mysqli_query($koneksi, $query);
+
+	// Mengupdate status_req di tabel req_barang
+	$query_update = "UPDATE req_barang SET status_req = 'Menunggu Persetujuan Dir. HRD' WHERE id_req_brg = $id_req_brg";
+	mysqli_query($koneksi, $query_update);
+
+	return mysqli_affected_rows($koneksi);
+}
+
 function tambahAnggaran($data) {
 	global $koneksi;
 	$nama_anggaran = htmlspecialchars($data["nama_anggaran"]);

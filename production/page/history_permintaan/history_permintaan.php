@@ -7,8 +7,8 @@ $id_user = $_SESSION["id_user"];
 ?>
     <div class="x_panel">
       <div class="x_title">
-        <h2>Data Pembelian Barang <small></small></h2>
-        <a href="?form=tambahPembelian" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Ajukan PO</a>
+        <h2>History Permintaan Barang <small></small></h2>
+        <!-- <a href="?form=tambahPengajuan" class="btn btn-primary">Form Pengajuan</a> -->
         <!-- <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>
@@ -37,18 +37,21 @@ $id_user = $_SESSION["id_user"];
                   <input type="checkbox" id="check-all" class="flat">
                 </th> -->
                 <th class="column-title">No. </th>
-                <th class="column-title">Tanggal PO</th>
+                <th class="column-title">Kode Pengajuan </th>
+                <th class="column-title">Kode Barang </th>
                 <th class="column-title">Nama Barang </th>
                 <th class="column-title">Spesifikasi </th>
-                <th class="column-title">Keterangan </th>
                 <th class="column-title">Qty </th>
                 <th class="column-title">Satuan </th>
-                <th class="column-title">Harga Satuan</th>
-                <th class="column-title">Total Harga</th>
-                <th class="column-title">Vendor </th>
+                <th class="column-title">Lokasi Barang </th>
+                <th class="column-title">Lokasi Ruangan </th>
+                <th class="column-title">Tanggal Pengajuan </th>
+                <th class="column-title">Alasan </th>
+                <th class="column-title">Nama Pemohon </th>
+                <th class="column-title">Approval 1</th>
+                <th class="column-title">Approval 2 </th>
                 <th class="column-title">Status </th>
-                           
-                <th class="column-title no-link last"><span class="nobr">Action</span>
+                <!-- <th class="column-title no-link last"><span class="nobr">Action</span> -->
                 </th>
                 <th class="bulk-actions" colspan="7">
                   <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
@@ -60,33 +63,55 @@ $id_user = $_SESSION["id_user"];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-              		$query = "SELECT * FROM po_barang JOIN vendor ON vendor.id_vendor=po_barang.id_vendor JOIN req_barang ON req_barang.id_req_brg=po_barang.id_req_brg JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan";
-                  // $query = "SELECT * FROM po_barang JOIN req_barang ON req_barang.id_req_brg JOIN vendor ON vendor.id_vendor=po_barang.id_vendor JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan";
-              		
+              		$query = "SELECT * FROM req_barang
+                            JOIN user ON user.id_user=req_barang.id_user
+                            JOIN karyawan ON karyawan.id_emp=user.id_emp
+                            JOIN barang ON barang.kode_brg=req_barang.kode_brg 
+                            JOIN satuan ON satuan.id_satuan=req_barang.id_satuan 
+                            JOIN lokasi_barang ON lokasi_barang.id_lokasi=req_barang.id_lokasi 
+                            JOIN lokasi_room ON lokasi_room.id_room=req_barang.id_room WHERE req_barang.status_req='Menunggu Persetujuan KC' OR req_barang.status_req='Menunggu Persetujuan Dir.Ops' OR req_barang.status_req='On Progress in Purchasing'";
+                  $query2 = "SELECT * FROM user JOIN karyawan ON karyawan.id_emp=user.id_emp";
+                  $tampil2 = mysqli_query($koneksi, $query2);
+                  $data2 = mysqli_fetch_assoc($tampil2);
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
-              	     	$qty
+              		
+              		
 
               	 ?>
                 <td class=" "><?= $no++;?></td>
-                <td class=" "><?= $data['tgl_po'];?></td>
-                <td class=" "><a href="img/barang/<?= $data['gambar_barang'];?>" style="text-decoration: underline; color:blue;"><?= $data['nama_barang'];?> </a></td>
+                <td class=" "><?= $data['kode_pengajuan'];?></td>
+                <td class=" "><?= $data['kode_brg'];?></td>
+                <td class=" "><?= $data['nama_barang'];?> </td>
                 <td class=" "><?= $data['spek'];?></td>
-                <td class=" "><?= $data['ket_po'];?></td>
-                <td class=" "><?= $data['qty_po'];?></td>
+                <td class=" "><?= $data['qty_req'];?></td>
                 <td class=" "><?= $data['nama_satuan'];?></td>
-                <td class=" "><?= $data['harga_po'];?></td>
-                <td class=" "><?= $data['harga_po']*$data['qty_po'];?></td>
-                <td class=" "><?= $data['nama_vendor'];?></td>
-                <td class=" "><?= $data['status_req'];?></td>
-                
-                <td class=" last"><a href="?form=ubahPembelian&id_po=<?= $data["id_po"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusPembelian&id_po=<?= $data["id_po"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
+                <td class=" "><?= $data['nama_lokasi'];?></td>
+                <td class=" "><?= $data['room_name'];?></td>
+                <td class=" "><?= date('d-M-Y', strtotime($data['tgl_req_brg']));?></td>
+                <td class=" "><?= $data['alasan'];?></td>
+                <td class=" "><?= $data['nama_emp'];?></td>
+                <td class=" "><?= $data['acc1'];?></td>
+                <td class=" "><?= $data['acc2'];?></td>
+                <td class=" " style="color: <?php
+                    if ($data['status_req'] == 'Menunggu Persetujuan KC') {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir.Ops') {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'On Progress in Purchasing') {
+                        echo '#14a664';
+                    } else {
+                        echo '#a62f26';
+                    }
+                ?>;">
+                    <strong><?= $data['status_req'];?></strong>
                 </td>
+
               </tr>
               
            <?php } ?>
-
             </tbody>
+           
           </table>
 
           <script type="text/javascript">
@@ -109,7 +134,6 @@ $id_user = $_SESSION["id_user"];
           });
 
           </script>
-
 
           <!-- <script type="text/javascript">
             new DataTable('#example', {

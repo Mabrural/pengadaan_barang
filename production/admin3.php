@@ -171,9 +171,8 @@ if ($_SESSION["level"] == "Staff IT") {
 
                   <li><a><i class="fa fa-external-link"></i> Permintaan Barang<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="admin3.php?page=approve3">Data Permintaan Barang</a></li>
-                      <!-- <li><a href="index.php?page=historyPengajuan">Barang Masuk</a></li>
-                      <li><a href="index.php?page=historyPengajuan">Barang Keluar</a></li> -->
+                      <li><a href="admin3.php?page=permintaanBarang">Data Permintaan Barang</a></li>
+                      <li><a href="admin3.php?page=historyPermintaan">History Permintaan Barang</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
                   </li>
@@ -397,8 +396,8 @@ if ($_SESSION["level"] == "Staff IT") {
                     if(isset($_GET['page'])){
                         $page = $_GET['page'];
                         switch ($page) {
-                            case 'approve3':
-                                include "page/admin_approve3/admin_aprove3.php";
+                            case 'permintaanBarang':
+                                include "page/permintaan_barang/permintaan_barang.php";
                                 break;
 
                             case 'historyApprove3':
@@ -453,6 +452,10 @@ if ($_SESSION["level"] == "Staff IT") {
                                 include "page/laporan/rekap_data.php";
                                 break;
 
+                            case 'historyPermintaan':
+                                include 'page/history_permintaan/history_permintaan.php';
+                                break;
+
                             case 'tagihan':
                                 include "page/tagihan/tagihan.php";
                                 break;
@@ -476,7 +479,7 @@ if ($_SESSION["level"] == "Staff IT") {
                                 break;
 
                             case 'rincian':
-                                include "page/admin_approve3/rincian.php";
+                                include "page/permintaan_barang/rincian.php";
                                 break;
 
                             case 'cetak':
@@ -581,6 +584,10 @@ if ($_SESSION["level"] == "Staff IT") {
 
                             case 'cetakInventaris':
                                 include 'page/laporan/cetak_inventaris.php';
+                                break;
+
+                            case 'historyPermintaan':
+                                include 'page/history_permintaan/history_permintaan.php';
                                 break;
 
                             case 'ubahCatatan':

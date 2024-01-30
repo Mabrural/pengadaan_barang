@@ -91,7 +91,7 @@ if ($_SESSION["level"] == "Staff IT") {
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="admin.php" class="site_title"><i class="fa fa-globe"></i> <span>PT Global Petro</span></a>
+              <a href="dirut.php" class="site_title"><i class="fa fa-globe"></i> <span>PT Global Petro</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -117,59 +117,138 @@ if ($_SESSION["level"] == "Staff IT") {
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="admin.php">Dashboard</a></li>
+                      <li><a href="dirut.php">Dashboard</a></li>
                       <!-- <li><a href="index2.html">Dashboard2</a></li>
                       <li><a href="index3.html">Dashboard3</a></li> -->
                     </ul>
                   </li>
-                  <!-- <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+
+                  <li><a><i class="fa fa-folder"></i> Master Data<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form.html">General Form</a></li>
-                      <li><a href="form_advanced.html">Advanced Components</a></li>
-                      <li><a href="form_validation.html">Form Validation</a></li>
-                      <li><a href="form_wizards.html">Form Wizard</a></li>
-                      <li><a href="form_upload.html">Form Upload</a></li>
-                      <li><a href="form_buttons.html">Form Buttons</a></li>
+                      <li><a href="dirut.php?page=dataBarang">Daftar Barang</a></li>
+                      <li><a href="dirut.php?page=dataVendor">Daftar Vendor</a></li>
+                      <li><a href="dirut.php?page=dataLokasi">Daftar Lokasi</a></li>
+                      <li><a href="dirut.php?page=dataRuangan">Daftar Ruangan</a></li>
+                      <li><a href="dirut.php?page=dataSatuan">Daftar Satuan</a></li>
                     </ul>
-                  </li> -->
-                  <!-- <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
+                  </li>
+
+                  <li><a><i class="fa fa-database"></i> Asset dan Inventaris<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="general_elements.html">General Elements</a></li>
-                      <li><a href="media_gallery.html">Media Gallery</a></li>
-                      <li><a href="typography.html">Typography</a></li>
-                      <li><a href="icons.html">Icons</a></li>
-                      <li><a href="glyphicons.html">Glyphicons</a></li>
-                      <li><a href="widgets.html">Widgets</a></li>
-                      <li><a href="invoice.html">Invoice</a></li>
-                      <li><a href="inbox.html">Inbox</a></li>
-                      <li><a href="calendar.html">Calendar</a></li>
+                      <li><a href="dirut.php?page=dataInventaris">Storage Barang</a></li>
                     </ul>
-                  </li> -->
-                  <!-- <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
+                  </li>
+
+
+                  <li><a><i class="fa fa-external-link"></i> Permintaan Barang<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="tables.html">Tables</a></li>
+                      <!-- <li><a href="dirut.php?page=permintaanBarang">Data Permintaan Barang</a></li> -->
+                      <li><a href="dirut.php?page=historyPermintaan">History Permintaan Barang</a></li>
+                      <!-- <li><a href="tables_dynamic.html">Table Dynamic</a></li> -->
+                    </ul>
+                  </li>
+
+                  <li><a><i class="fa fa-shopping-cart"></i> Pembelian Barang<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="dirut.php?page=pengajuanPembelian">Data Pembelian Barang</a></li>
+                      <li><a href="dirut.php?page=pengajuanPembelian">History Pembelian Barang</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
-                  </li> -->
+                  </li>
 
-                  <li><a><i class="fa fa-edit"></i> Approval <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-credit-card"></i> Accounting & Finance <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="dirut.php?page=pengajuanPembelian">Pengajuan Pembelian Barang</a></li>
+                      <li><a href="dirut.php?page=approve3">Data Keuangan</a></li>
+                      <li><a href="dirut.php?page=historyApprove3">History Keuangan</a></li>
+                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                    </ul>
+                  </li>
+
+                  <!-- li><a><i class="fa fa-edit"></i> Approval <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="admin.php?page=approve">Approval</a></li>
                       <li><a href="admin.php?page=historyApprove">History Approve</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
-                  </li>
+                  </li> -->
 
                   <li><a><i class="fa fa-users"></i> Human Resources<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="hrd.php?page=dataKaryawan">Data Karyawan</a></li>
-                      <li><a href="hrd.php?page=cuti">Form Cuti</a></li>
-                      <li><a href="hrd.php?page=absen">Data Absen</a></li>
-                      <li><a href="hrd.php?page=aksesPintu">Data Akses Pintu</a></li>
-                      <li><a href="hrd.php?page=userLogin">Data Login</a></li>
-                      <li><a href="hrd.php?page=attendance">Attendance</a></li>
-                      <li><a href="hrd.php?page=penilaian">Penilaian Karyawan</a></li>
-                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                      <li><a href="dirut.php?page=dataKaryawan">Data Karyawan</a></li>
+                      <li><a href="dirut.php?page=kontrakKerja">Kontrak Kerja</a></li>
+                      <li><a href="dirut.php?page=absen">Data Absen</a></li>
+                      <li><a href="dirut.php?page=aksesPintu">Data Akses Pintu</a></li>
+                      <li><a href="dirut.php?page=userLogin">Data Login</a></li>
+                      <li><a href="dirut.php?page=penitipanIjazah">Penitipan Ijazah</a></li>
+                      <li><a href="dirut.php?page=manageCuti">Manage Cuti</a></li>
+                      <li><a href="dirut.php?page=reqCuti">Form Cuti</a></li>
+                      <!-- <li><a href="hrd.php?page=approveCuti">Approve Cuti</a></li> -->
+
+                      <!-- notifikasi lengket jika tidak ada data yang ditampilkan maka spannya tetap ada tapi 0 -->
+                     <!--  <li class="nav-item">
+                          <a href="hrd.php?page=approveCuti" class="nav-link">
+                              Approve Cuti <span class="badge badge-primary">
+                                  <?php
+                                      // Query untuk menghitung jumlah cuti yang belum diapprove
+                                      $query = "SELECT COUNT(*) AS jml_cuti_belum_diapprove FROM req_cuti JOIN kategori_cuti ON kategori_cuti.id_kategori_cuti=req_cuti.id_kategori_cuti JOIN karyawan ON karyawan.id_emp=req_cuti.id_emp WHERE req_cuti.status_cuti='Belum diapprove'";
+                                      $result = mysqli_query($koneksi, $query);
+                                      $data = mysqli_fetch_assoc($result);
+                                      echo $data['jml_cuti_belum_diapprove'];
+                                  ?>
+                              </span>
+                          </a>
+                      </li> -->
+
+                      <!-- untuk menampilkan notifikasi permanent alias tidak hilang sebelum klik tombol approve -->
+                      <!-- <li class="nav-item">
+                          <a href="hrd.php?page=approveCuti" class="nav-link">
+                              Approve Cuti <?php
+                                  // Query untuk menghitung jumlah cuti yang belum diapprove
+                                  $query = "SELECT COUNT(*) AS jml_cuti_belum_diapprove FROM req_cuti JOIN kategori_cuti ON kategori_cuti.id_kategori_cuti=req_cuti.id_kategori_cuti JOIN karyawan ON karyawan.id_emp=req_cuti.id_emp WHERE req_cuti.status_cuti='Belum diapprove'";
+                                  $result = mysqli_query($koneksi, $query);
+                                  $data = mysqli_fetch_assoc($result);
+
+                                  // Cek apakah ada data
+                                  if ($data['jml_cuti_belum_diapprove'] > 0) {
+                                      echo "<span class='badge badge-primary'>{$data['jml_cuti_belum_diapprove']}</span>";
+                                  }
+                              ?>
+                          </a>
+                      </li> -->
+
+                      <!-- untuk menampilkan notif sekali lihat -->
+                        <li class="nav-item">
+                            <a href="hrd.php?page=approveCuti" class="nav-link">
+                                Approve Cuti 
+                                <?php
+                                    // Check if the notification should be displayed
+                                    if (!isset($_SESSION['cuti_notification_displayed'])) {
+                                        // Query untuk menghitung jumlah cuti yang belum diapprove
+                                        $query = "SELECT COUNT(*) AS jml_cuti_belum_diapprove FROM req_cuti JOIN kategori_cuti ON kategori_cuti.id_kategori_cuti=req_cuti.id_kategori_cuti JOIN karyawan ON karyawan.id_emp=req_cuti.id_emp WHERE req_cuti.status_cuti='Belum diapprove'";
+                                        $result = mysqli_query($koneksi, $query);
+                                        $data = mysqli_fetch_assoc($result);
+
+                                        // Cek apakah ada data
+                                        if ($data['jml_cuti_belum_diapprove'] > 0) {
+                                            echo "<span class='badge badge-primary'>{$data['jml_cuti_belum_diapprove']}</span>";
+                                        }
+
+                                        // Set session to indicate that the notification has been displayed
+                                        $_SESSION['cuti_notification_displayed'] = true;
+                                    }
+                                ?>
+                            </a>
+                        </li>
+
+                      
+
+
+
+
+                      <li><a href="hrd.php?page=historyApproveCuti">History Approve Cuti</a></li>
+                      <!-- <li><a href="hrd.php?page=attendance">Attendance</a></li>
+                      <li><a href="hrd.php?page=penilaian">Penilaian Karyawan</a></li> -->
                     </ul>
                   </li>
                   <!-- <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
@@ -327,6 +406,38 @@ if ($_SESSION["level"] == "Staff IT") {
                                 include "page/dashboard/dashboard.php";
                                 break;
 
+                            case 'dataBarang':
+                                include "page/data_barang/barang.php";
+                                break;
+
+                            case 'dataVendor':
+                                include 'page/data_master/vendor/vendor.php';
+                                break;
+
+                            case 'dataLokasi':
+                                include 'page/data_master/lokasi/lokasi.php';
+                                break;
+
+                            case 'dataRuangan':
+                                include 'page/data_master/room/room.php';
+                                break;
+
+                            case 'dataSatuan':
+                                include 'page/data_master/satuan/satuan.php';
+                                break;
+
+                            case 'dataInventaris':
+                                include "page/asset_dan_inventaris/inventaris.php";
+                                break;
+
+                            case 'historyPermintaan':
+                                include 'page/history_permintaan/history_permintaan.php';
+                                break;
+
+                            case 'pengajuanPembelian':
+                                include 'page/pembelian_barang/pengajuan_pembelian/pengajuan_pembelian.php';
+                                break;
+
                             case 'dataKaryawan':
                                 include "page/hrd/data_karyawan.php";
                                 break;
@@ -383,7 +494,89 @@ if ($_SESSION["level"] == "Staff IT") {
                         $form = $_GET['form'];
 
                         switch ($form) {
-                            
+                            case 'tambahInventaris':
+                                include "page/asset_dan_inventaris/tambah.php";
+                                break;
+
+                            case 'ubahInventaris':
+                                include "page/asset_dan_inventaris/ubah.php";
+                                break;
+
+                            case 'hapusInventaris':
+                                include "page/asset_dan_inventaris/hapus.php";
+                                break;
+
+                            case 'tambahBarang':
+                                include 'page/data_barang/tambah.php';
+                                break;
+
+                            case 'ubahBarang':
+                                include 'page/data_barang/ubah.php';
+                                break;
+
+                            case 'hapusBarang':
+                                include 'page/data_barang/hapus.php';
+                                break;
+
+                            case 'tambahVendor':
+                                include 'page/data_master/vendor/tambah.php';
+                                break;
+
+                            case 'hapusVendor':
+                                include 'page/data_master/vendor/hapus.php';
+                                break;
+
+                            case 'ubahVendor':
+                                include 'page/data_master/vendor/ubah.php';
+                                break;
+
+                            case 'tambahLokasi':
+                                include 'page/data_master/lokasi/tambah.php';
+                                break;
+
+                            case 'hapusLokasi':
+                                include 'page/data_master/lokasi/hapus.php';
+                                break;
+
+                            case 'ubahLokasi':
+                                include 'page/data_master/lokasi/ubah.php';
+                                break;
+
+                            case 'tambahRuangan':
+                                include 'page/data_master/room/tambah.php';
+                                break;
+
+                            case 'hapusRuangan':
+                                include 'page/data_master/room/hapus.php';
+                                break;
+
+                            case 'ubahRuangan':
+                                include 'page/data_master/room/ubah.php';
+                                break;
+
+                            case 'tambahSatuan':
+                                include 'page/data_master/satuan/tambah.php';
+                                break;
+
+                            case 'hapusSatuan':
+                                include 'page/data_master/satuan/hapus.php';
+                                break;
+
+                            case 'ubahSatuan':
+                                include 'page/data_master/satuan/ubah.php';
+                                break;
+
+                            case 'tambahPembelian':
+                                include 'page/pembelian_barang/pengajuan_pembelian/tambah.php';
+                                break;
+
+                            case 'cetakInventaris':
+                                include 'page/laporan/cetak_inventaris.php';
+                                break;
+
+                            case 'historyPermintaan':
+                                include 'page/history_permintaan/history_permintaan.php';
+                                break;
 
                             case 'tambahKaryawan':
                                 include "page/hrd/tambah.php";

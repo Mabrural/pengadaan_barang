@@ -7,8 +7,8 @@ $id_user = $_SESSION["id_user"];
 ?>
     <div class="x_panel">
       <div class="x_title">
-        <h2>History Approval <small></small></h2>
-        <!-- <a href="?form=tambahPengajuan" class="btn btn-primary">Form Pengajuan</a> -->
+        <h2>Data Barang <small></small></h2>
+        <!-- <a href="?form=tambahBarang" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah Barang</a> -->
         <!-- <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>
@@ -37,17 +37,13 @@ $id_user = $_SESSION["id_user"];
                   <input type="checkbox" id="check-all" class="flat">
                 </th> -->
                 <th class="column-title">No. </th>
-                <th class="column-title">Kode Pengajuan </th>
+                <th class="column-title">Kode Barang </th>
                 <th class="column-title">Nama Barang </th>
                 <th class="column-title">Spesifikasi </th>
                 <th class="column-title">Deskripsi </th>
-                <th class="column-title">Qty </th>
-                <th class="column-title">Tanggal Pengajuan </th>
-                <th class="column-title">Nama Pemohon </th>
-                <th class="column-title">Approval 1 </th>
-                <th class="column-title">Approval 2 </th>
-                <th class="column-title">Status </th>
-                <th class="column-title no-link last"><span class="nobr">Action</span>
+                <!-- <th class="column-title">Stok Barang </th> -->
+                           
+                <!-- <th class="column-title no-link last"><span class="nobr">Action</span> -->
                 </th>
                 <th class="bulk-actions" colspan="7">
                   <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
@@ -59,57 +55,27 @@ $id_user = $_SESSION["id_user"];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-              		$query = "SELECT * FROM barang JOIN user ON user.id_user=barang.id_user AND status='On Progress in Purchasing' OR status='Menunggu Persetujuan Dir.Ops' WHERE barang.id_user=user.id_user";
-                  $query2 = "SELECT * FROM user JOIN karyawan ON karyawan.id_emp=user.id_emp";
-                  $tampil2 = mysqli_query($koneksi, $query2);
-                  $data2 = mysqli_fetch_assoc($tampil2);
+              		$query = "SELECT * FROM barang";
+              		
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
-              		
-              		
+              	     		
 
               	 ?>
                 <td class=" "><?= $no++;?></td>
-                <td class=" "><?= $data['kode_pengajuan'];?></td>
-                <td class=" "><?= $data['nama_barang'];?> </td>
+                <td class=" "><?= $data['kode_brg'];?></td>
+                <td class=" "><a href="img/barang/<?= $data['gambar_barang'];?>" style="text-decoration: underline; color:blue;"><?= $data['nama_barang'];?> </a></td>
                 <td class=" "><?= $data['spek'];?></td>
                 <td class=" "><?= $data['deskripsi'];?></td>
-                <td class=" "><?= $data['qty'];?></td>
-                <td class=" "><?= date('d-M-Y', strtotime($data['tgl_pengajuan']));?></td>
-                <td class=" "><strong><?= $data['username'];?></strong></td>
-                <!-- <td class=" "><strong><?= $data2['nama_emp'];?></strong></td> -->
-                <td class=" "><?= $data['acc1'];?></td>
-                <td class=" "><?= $data['acc2'];?></td>
-                <td class=" " style="color: <?php
-                    if ($data['status'] == 'Menunggu Persetujuan KC') {
-                        echo '#b58709';
-                    } elseif ($data['status'] == 'Menunggu Persetujuan Dir.Ops') {
-                        echo '#b58709';
-                    } elseif ($data['status'] == 'On Progress in Purchasing') {
-                        echo '#14a664';
-                    } else {
-                        echo '#a62f26';
-                    }
-                ?>;">
-                    <strong><?= $data['status'];?></strong>
-                </td>
-
-              <td class=" last">
-              <?php if ($data['status'] == 'On Progress in Purchasing') { ?>
-                <span class="text-success fa fa-check"><strong> Selesai</strong></span>
-              <?php } elseif ($data['status'] == 'Menunggu Persetujuan Dir.Ops') { ?>
-                <span class="text-info fa fa-spinner fa-spin"></span><strong> Waiting</strong>
-              <?php } else { ?>
-                <a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusPengajuan&id_barang=<?= $data["id_barang"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
-              <?php } ?>
-            </td>
-               <!--  <td class=" last"><a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusPengajuan&id_barang=<?= $data["id_barang"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
+                <!-- <td class=" "><?= $data['stok_barang'];?></td> -->
+                
+                <!-- <td class=" last"><a href="?form=ubahBarang&kode_brg=<?= $data["kode_brg"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusBarang&kode_brg=<?= $data["kode_brg"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
                 </td> -->
               </tr>
               
            <?php } ?>
+
             </tbody>
-           
           </table>
 
           <script type="text/javascript">
@@ -132,6 +98,7 @@ $id_user = $_SESSION["id_user"];
           });
 
           </script>
+
 
           <!-- <script type="text/javascript">
             new DataTable('#example', {
