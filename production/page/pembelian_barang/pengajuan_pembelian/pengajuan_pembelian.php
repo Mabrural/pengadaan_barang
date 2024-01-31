@@ -69,7 +69,7 @@ $id_user = $_SESSION["id_user"];
 
               	 ?>
                 <td class=" "><?= $no++;?></td>
-                <td class=" "><?= $data['tgl_po'];?></td>
+                <td class=" "><?= date('d-M-Y', strtotime($data['tgl_po']));?></td>
                 <td class=" "><a href="img/barang/<?= $data['gambar_barang'];?>" style="text-decoration: underline; color:blue;"><?= $data['nama_barang'];?> </a></td>
                 <td class=" "><?= $data['spek'];?></td>
                 <td class=" "><?= $data['ket_po'];?></td>

@@ -1040,6 +1040,84 @@ function uploadGambarBarang(){
 	return $namaFileBaru;
  }
 
+// function uploadGambarBarang(){
+
+// 	$namaFile = $_FILES['gambar_barang']['name'];
+// 	$ukuranFile = $_FILES['gambar_barang']['size'];
+// 	$error = $_FILES['gambar_barang']['error'];
+// 	$tmpName = $_FILES['gambar_barang']['tmp_name'];
+
+// 	// cek apakah tidak ada gambar yang diupload
+// 	if ($error === 4) {
+// 		echo "
+// 			<script>
+// 				alert('pilih gambar terlebih dahulu!');
+// 			</script>
+// 		";
+// 		return false;
+// 	}
+
+// 	// cek apakah yang diupload adalah gambar
+// 	$ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
+// 	$ekstensiGambar = explode('.', $namaFile);
+// 	$ekstensiGambar = strtolower(end($ekstensiGambar));
+// 	if (!in_array($ekstensiGambar, $ekstensiGambarValid) ){
+// 		echo "
+// 			<script>
+// 				alert('yang anda upload bukan gambar!');
+// 			</script>
+// 		";
+// 		return false;
+// 	}
+
+// 	// cek jika ukurannya terlalu besar
+// 	if ($ukuranFile > 1000000){
+// 		echo "
+// 			<script>
+// 				alert('ukuran gambar terlalu besar!');
+// 			</script>
+// 		";
+// 		return false;
+// 	}
+
+// 	// Auto crop gambar menjadi 400 x 400 px
+// 	$maxWidth = 400;
+// 	$maxHeight = 400;
+
+// 	list($width, $height) = getimagesize($tmpName);
+
+// 	$ratio = min($maxWidth/$width, $maxHeight/$height);
+
+// 	$newWidth = $width * $ratio;
+// 	$newHeight = $height * $ratio;
+
+// 	$imageResized = imagecreatetruecolor($newWidth, $newHeight);
+
+// 	if ($ekstensiGambar == 'jpg' || $ekstensiGambar == 'jpeg') {
+// 		$image = imagecreatefromjpeg($tmpName);
+// 	} elseif ($ekstensiGambar == 'png') {
+// 		$image = imagecreatefrompng($tmpName);
+// 	}
+
+// 	imagecopyresampled($imageResized, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+
+// 	// Simpan gambar yang sudah di-crop
+// 	$namaFileBaru = 'img/barang/' . uniqid() . '.' . $ekstensiGambar;
+
+// 	if ($ekstensiGambar == 'jpg' || $ekstensiGambar == 'jpeg') {
+// 		imagejpeg($imageResized, $namaFileBaru);
+// 	} elseif ($ekstensiGambar == 'png') {
+// 		imagepng($imageResized, $namaFileBaru);
+// 	}
+
+// 	imagedestroy($imageResized);
+
+// 	// Hapus file sementara yang diupload
+// 	unlink($tmpName);
+
+// 	return $namaFileBaru;
+//  }
+
 
 function tambahInventaris($data) {
 	global $koneksi;
@@ -1257,11 +1335,91 @@ function tambahPembelian($data) {
 	mysqli_query($koneksi, $query);
 
 	// Mengupdate status_req di tabel req_barang
-	$query_update = "UPDATE req_barang SET status_req = 'Menunggu Persetujuan Dir. HRD' WHERE id_req_brg = $id_req_brg";
+	// $query_update = "UPDATE req_barang SET status_req = 'Menunggu Persetujuan Dir. HRD' WHERE id_req_brg = $id_req_brg AND req_barang.kode_brg=req_barang.kode_brg";
+	$query_update = "UPDATE req_barang 
+                 SET status_req = 'Menunggu Persetujuan Dir. HRD' 
+                 WHERE kode_brg = (SELECT kode_brg FROM req_barang WHERE id_req_brg = $id_req_brg)";
+
 	mysqli_query($koneksi, $query_update);
 
 	return mysqli_affected_rows($koneksi);
 }
+
+function ubahPembelian($data) {
+	global $koneksi;
+	$id_po = $data["id_po"];
+	$id_req_brg = htmlspecialchars($data['id_req_brg']);
+	$tgl_po = htmlspecialchars($data['tgl_po']);
+	$qty_po = htmlspecialchars($data["qty_po"]);
+	$harga_po = htmlspecialchars($data["harga_po"]);
+	$ket_po = htmlspecialchars($data["ket_po"]);
+	$acc3 = htmlspecialchars($data["acc3"]);
+	$acc4 = htmlspecialchars($data["acc4"]);
+	$acc5 = htmlspecialchars($data["acc5"]);
+	$id_vendor = htmlspecialchars($data["id_vendor"]);
+
+	$query = "UPDATE po_barang SET
+				id_req_brg = '$id_req_brg',
+				tgl_po = '$tgl_po',
+				qty_po = '$qty_po',
+				harga_po = '$harga_po',
+				ket_po = '$ket_po',
+				acc3 = '$acc3',
+				acc4 = '$acc4',
+				acc5 = '$acc5',
+				id_vendor = '$id_vendor'
+			  WHERE id_po = $id_po
+			";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+// function hapusPembelian($id_po) {
+// 	global $koneksi;
+// 	mysqli_query($koneksi, "DELETE FROM po_barang WHERE id_po=$id_po");
+
+// 	return mysqli_affected_rows($koneksi);
+
+// }
+
+
+function hapusPembelian($id_po) {
+    global $koneksi;
+
+    // Memulai transaksi
+    mysqli_begin_transaction($koneksi);
+
+    try {
+        // Ambil kode_brg dari tabel req_barang
+        $result = mysqli_query($koneksi, "SELECT kode_brg FROM req_barang WHERE id_req_brg = (SELECT id_req_brg FROM po_barang WHERE id_po = $id_po)");
+        $row = mysqli_fetch_assoc($result);
+        $kode_brg = $row['kode_brg'];
+
+        // Hapus data dari tabel po_barang
+        mysqli_query($koneksi, "DELETE FROM po_barang WHERE id_po=$id_po");
+
+        // Periksa apakah penghapusan berhasil
+        if (mysqli_affected_rows($koneksi) > 0) {
+            // Jika berhasil, update status_req di tabel req_barang
+            mysqli_query($koneksi, "UPDATE req_barang SET status_req = 'On Progress in Purchasing' WHERE kode_brg = '$kode_brg'");
+        } else {
+            // Jika gagal, rollback transaksi
+            mysqli_rollback($koneksi);
+            return false;
+        }
+
+        // Commit transaksi jika semuanya berhasil
+        mysqli_commit($koneksi);
+
+        return true;
+    } catch (Exception $e) {
+        // Jika terjadi kesalahan, rollback transaksi
+        mysqli_rollback($koneksi);
+        return false;
+    }
+}
+
 
 function tambahAnggaran($data) {
 	global $koneksi;

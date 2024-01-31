@@ -582,6 +582,14 @@ if ($_SESSION["level"] == "Staff IT") {
                                 include 'page/pembelian_barang/pengajuan_pembelian/tambah.php';
                                 break;
 
+                            case 'ubahPembelian':
+                                include 'page/pembelian_barang/pengajuan_pembelian/ubah.php';
+                                break;
+
+                            case 'hapusPembelian':
+                                include 'page/pembelian_barang/pengajuan_pembelian/hapus.php';
+                                break;
+
                             case 'cetakInventaris':
                                 include 'page/laporan/cetak_inventaris.php';
                                 break;
