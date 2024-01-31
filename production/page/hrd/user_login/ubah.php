@@ -160,6 +160,7 @@ if (isset($_POST["submit"])) {
 													<option value="Purchasing" <?php if ($user['level'] == 'Purchasing') { echo "selected"; } ?>>Purchasing</option>
 													<option value="HRD" <?php if ($user['level'] == 'HRD') { echo "selected"; } ?>>HRD</option>
 													<option value="Direktur Utama" <?php if ($user['level'] == 'Direktur Utama') { echo "selected"; } ?>>Direktur Utama</option>
+													<option value="Direktur Keuangan" <?php if ($user['level'] == 'Direktur Keuangan') { echo "selected"; } ?>>Direktur Keuangan</option>
 												</select>
 											</div>
 										</div>

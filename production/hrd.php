@@ -132,6 +132,16 @@ if ($_SESSION["level"] == "Staff IT") {
                     </ul>
                   </li>
 
+                  <li><a><i class="fa fa-shopping-cart"></i> Pembelian Barang<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="hrd.php?page=pengajuanPembelian">Data Pembelian Barang</a></li>
+                      <li><a href="hrd.php?page=approvePembelian">Approve Pembelian Barang</a></li>
+                      <!-- <li><a href="index.php?page=historyPengajuan">Barang Masuk</a></li>
+                      <li><a href="index.php?page=historyPengajuan">Barang Keluar</a></li> -->
+                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                    </ul>
+                  </li>
+
                   <li><a><i class="fa fa-users"></i> Human Resources<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="hrd.php?page=dataKaryawan">Data Karyawan</a></li>
@@ -362,6 +372,10 @@ if ($_SESSION["level"] == "Staff IT") {
                             case 'historyApprove':
                                 include "page/history_approve/history_approve.php";
                                 break;
+
+                            case 'approvePembelian':
+                                include 'page/pembelian_barang/approve_pembelian/approve1.php';
+                                break;
                          
                             case 'dashboard':
                                 include "page/dashboard/dashboard.php";
@@ -575,6 +589,10 @@ if ($_SESSION["level"] == "Staff IT") {
 
                             case 'approveCuti':
                                 include 'page/hrd/cuti/approve_cuti/konfirmasi_approve_cuti.php';
+                                break;
+
+                            case 'app1Pembelian':
+                                include 'page/pembelian_barang/approve_pembelian/konfirmasi_app1.php';
                                 break;
 
                             case 'ubahCatatan':

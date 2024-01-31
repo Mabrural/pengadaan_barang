@@ -3,7 +3,9 @@
 // $id_mhs = $_SESSION["id_mhs"];
 
 // $karyawan = query("SELECT * FROM karyawan");
-$karyawan = query("SELECT * FROM karyawan WHERE jabatan != 'Direktur Utama' AND jabatan != 'Direktur HRD' AND jabatan != 'Direktur Keuangan' AND jabatan != 'Direktur Operasional' AND id_emp NOT IN (SELECT id_emp FROM user)");
+$karyawan = query("SELECT * FROM karyawan WHERE id_emp NOT IN (SELECT id_emp FROM user)");
+
+// $karyawan = query("SELECT * FROM karyawan WHERE jabatan != 'Direktur Utama' AND jabatan != 'Direktur HRD' AND jabatan != 'Direktur Keuangan' AND jabatan != 'Direktur Operasional' AND id_emp NOT IN (SELECT id_emp FROM user)");
 $lantai = query("SELECT * FROM lantai");
 
 // cek apakah tombol submit sudah ditekan atau belum
@@ -162,6 +164,7 @@ if (isset($_POST["submit"])) {
 													<option value="Purchasing">Purchasing</option>
 													<option value="HRD">HRD</option>
 													<option value="Direktur Utama">Direktur Utama</option>
+													<option value="Direktur Keuangan">Direktur Keuangan</option>
 													
 													
 												</select>
