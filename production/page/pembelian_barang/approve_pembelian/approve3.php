@@ -1,8 +1,12 @@
 <?php
 
 $id_user = $_SESSION["id_user"];
+$nama = $_SESSION["nama_emp"];
+$jabatan = $_SESSION['jabatan'];
 
+$vendor = query("SELECT * FROM vendor");
 // $pengajuan = query("SELECT * FROM barang WHERE barang.id_barang=$id_user");
+$id_vendor = isset($_GET['id_vendor']) ? $_GET['id_vendor'] : '';
 
 ?>
     <div class="x_panel">
@@ -11,47 +15,62 @@ $id_user = $_SESSION["id_user"];
         	<form action="laporan/cetak_po.php" method="get">
 	          	<input type="hidden" name="aksi">
 	          	<input type="hidden" name="id_user" value="<?= $id_user;?>">
-	          	<!-- <input type="hidden" name="id_lokasi" value="<?= $id_lokasi;?>">
-	          	<input type="hidden" name="id_room" value="<?= $id_room;?>"> -->
+	          	<!-- <input type="hidden" name="nama_emp" value="<?= $nama;?>"> -->
+	          	<input type="hidden" name="id_vendor" value="<?= $id_vendor;?>">
+	          	<!-- <input type="hidden" name="id_room" value="<?= $id_room;?>"> -->
 	          	<button type="submit" class="btn btn-info btn-sm" name="cetakData"><i class="fa fa-print"></i> Cetak PO</button>
 	      	</form>
 
 	      	<div class="row">
-	            <div class="col-md-2 col-sm-6">
+	            <div class="col-md-3 col-sm-6">
 	                <form method="get">
 	                  <input type="hidden" name="aksi">
 	                      <!-- <input type="hidden" name="id_user" value="<?= $storage_barang['id_user'];?>"> -->
-	                    <select class="form-control" name="id_lokasi" id="id_lokasi" required>
-	                        <option value="">--Pilih Lokasi Barang--</option>
-	                        <?php foreach($lokasi as $row) : ?>
-	                            <option value="<?= $row['id_lokasi']?>" <?php echo ($id_lokasi == $row['id_lokasi']) ? 'selected' : ''; ?>>
-	                                <?= $row['nama_lokasi']?>
+	                    <select class="form-control" name="id_vendor" id="id_vendor" required>
+	                        <option value="">--Pilih Vendor--</option>
+	                        <?php foreach($vendor as $row) : ?>
+	                            <option value="<?= $row['id_vendor']?>" <?php echo ($id_vendor == $row['id_vendor']) ? 'selected' : ''; ?>>
+	                                <?= $row['nama_vendor']?>
 	                            </option>
 	                        <?php endforeach;?> 
 	                    </select><br>
 	                    <!-- <button type="submit" class="btn btn-primary btn-sm">Filter</button> -->
 	                </form>
 	            </div>
-	            <div class="col-md-2 col-sm-6">
-	                <!-- <form method="get"> -->
-	                    <select class="form-control" name="id_room" id="id_room" required>
-	                        <option value="">--Pilih Lokasi Ruangan--</option>
-	                        <?php foreach($room as $row) : ?>
-	                            <option value="<?= $row['id_room']?>" <?php echo ($id_room == $row['id_room']) ? 'selected' : ''; ?>>
-	                                <?= $row['room_name']?>
-	                            </option>
-	                        <?php endforeach;?> 
-	                    </select>
-	                    <br>
-	                    <!-- <button type="submit" class="btn btn-primary btn-sm">Filter</button> -->
-	                <!-- </form> -->
-	            </div>
+	            <!-- <div class="col-md-2 col-sm-6">
+                    <select class="form-control" name="id_room" id="id_room" required>
+                        <option value="">--Pilih Lokasi Ruangan--</option>
+                        <?php foreach($room as $row) : ?>
+                            <option value="<?= $row['id_room']?>" <?php echo ($id_room == $row['id_room']) ? 'selected' : ''; ?>>
+                                <?= $row['room_name']?>
+                            </option>
+                        <?php endforeach;?> 
+                    </select>
+                    <br>
+	            </div> -->
 	        </div>
 
         <div class="clearfix"></div>
       </div>
 
       <div class="x_content">
+
+      	<script type="text/javascript">
+        $(document).ready(function() {
+            // Add change event listeners to the dropdowns
+            $('#id_vendor, #id_room').change(function() {
+                // Get selected values
+                var id_vendor = $('#id_vendor').val();
+                var id_room = $('#id_room').val();
+
+                // Redirect to the current page with filter parameters
+                window.location.href = '?page=approvePembelian&id_vendor=' + id_vendor + '&id_room=' + id_room;
+                // window.location.href = '?id_lokasi=' + id_lokasi + '&id_room=' + id_room;
+            });
+
+            // ... (rest of the JavaScript code)
+        });
+      </script>
 
         <!-- <p>Add class <code>bulk_action</code> to table for bulk actions options on row select</p> -->
 
@@ -90,6 +109,16 @@ $id_user = $_SESSION["id_user"];
               		$query = "SELECT * FROM po_barang JOIN vendor ON vendor.id_vendor=po_barang.id_vendor JOIN req_barang ON req_barang.id_req_brg=po_barang.id_req_brg JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan JOIN user ON user.id_user=po_barang.id_user JOIN karyawan ON karyawan.id_emp=user.id_emp";
                   // $query = "SELECT * FROM po_barang JOIN req_barang ON req_barang.id_req_brg JOIN vendor ON vendor.id_vendor=po_barang.id_vendor JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan";
               		
+              		// Add filter conditions based on the selected values
+                  if (!empty($id_vendor)) {
+                      $query .= " WHERE po_barang.id_vendor = $id_vendor";
+                  }
+
+                  // if (!empty($id_room)) {
+                  //     $query .= (!empty($id_lokasi)) ? " AND " : " WHERE ";
+                  //     $query .= "storage_barang.id_room = $id_room";
+                  // }
+
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
               	     	$harga_po = $data['harga_po'];

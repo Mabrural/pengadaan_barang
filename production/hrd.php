@@ -132,6 +132,12 @@ if ($_SESSION["level"] == "Staff IT") {
                     </ul>
                   </li>
 
+                  <li><a><i class="fa fa-history"></i>History Permintaan<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="hrd.php?page=historyPermintaan">History Permintaan Barang</a></li>
+                    </ul>
+                  </li>
+
                   <li><a><i class="fa fa-shopping-cart"></i> Pembelian Barang<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="hrd.php?page=pengajuanPembelian">Data Pembelian Barang</a></li>
@@ -446,6 +452,10 @@ if ($_SESSION["level"] == "Staff IT") {
 
                             case 'historyApproveCuti':
                                 include "page/hrd/cuti/approve_cuti/history_approve_cuti.php";
+                                break;
+
+                            case 'historyPermintaan':
+                                include 'page/history_permintaan/history_permintaan.php';
                                 break;
 
                             case 'laporan':

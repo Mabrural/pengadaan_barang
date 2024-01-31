@@ -70,7 +70,7 @@ $id_user = $_SESSION["id_user"];
                             JOIN barang ON barang.kode_brg=req_barang.kode_brg 
                             JOIN satuan ON satuan.id_satuan=req_barang.id_satuan 
                             JOIN lokasi_barang ON lokasi_barang.id_lokasi=req_barang.id_lokasi 
-                            JOIN lokasi_room ON lokasi_room.id_room=req_barang.id_room WHERE req_barang.status_req='Menunggu Persetujuan KC' OR req_barang.status_req='Menunggu Persetujuan Dir.Ops' OR req_barang.status_req='On Progress in Purchasing'";
+                            JOIN lokasi_room ON lokasi_room.id_room=req_barang.id_room";
                   // $query2 = "SELECT * FROM user JOIN karyawan ON karyawan.id_emp=user.id_emp";
                   // $tampil2 = mysqli_query($koneksi, $query2);
                   // $data2 = mysqli_fetch_assoc($tampil2);

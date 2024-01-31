@@ -1,21 +1,22 @@
 <?php
-   
 
 if (isset($_GET['cetakData'])) {
     include "../koneksi.php";
     // ambil data di URL
     $id_user = $_GET["id_user"];
-    // query data berdasarkan id
-    $storage_barang = query("SELECT * FROM storage_barang")[0];
 
-    $id_lokasi = $_GET['id_lokasi'];
-    $id_room =$_GET['id_room'];
+	// $jabatan = $_GET['jabatan'];
+    // query data berdasarkan id
+    $po_barang = query("SELECT * FROM po_barang")[0];
+
+    $id_vendor = $_GET['id_vendor'];
+    // $id_room =$_GET['id_room'];
 }
 ?>
 
 <!-- saved from url=(0058)https://sim.polibatam.ac.id/layanan-akademik/cetak_khs.php -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>Rekap Data Inventaris</title>
+            <title>Purchase Order <?= date('d-M-Y')?></title>
             <link rel="icon" href="img/gpp.png" type="image/ico" />
             <script language="JavaScript">
                 function Cetakan(){
@@ -213,10 +214,10 @@ if (isset($_GET['cetakData'])) {
 
         <body>
             <div id="kop" style="display: none">
-                <div style="text-align: right; font-size: 18">
+                <div style="text-align: right; font-size: 16">
                     <!-- THE CENTRO TOWN HOUSE NO. 17 <br>
                     KEL. SUKAJADI, KEC. BATAM KOTA <br> -->
-                    <strong>PT GLOBAL PETRO PASIFIC</strong> <br>
+                    <strong>PT MITRA MARITIM MANDIRI</strong> <br>
                     The Centro Town House No. 17 <br>
                     Kel. Sukajadi, Kec. Batam Kota, Kota Batam <br>
                     <!-- Telepon +62 778 469856 - 469860 Faksimile +62 778 463620 <br> -->
@@ -224,7 +225,7 @@ if (isset($_GET['cetakData'])) {
                 </div>
 
                 <div style="margin-top: -70px; margin-left: 20px">
-                    <img src="img/Logo Global Petro.jpg" style="width:300px;">
+                    <img src="img/Untitled-1.png" style="width:300px;">
                     <!-- <img src="../img_sim/logo_polibatam.png" style="width:100px;"> -->
                 </div>
 
@@ -251,7 +252,7 @@ if (isset($_GET['cetakData'])) {
                                 <td height="25px"> <div align="center"><b>REKAP DATA</b></div> </td>
                             </tr>
                             <tr>
-                                <td height="25px"> <div align="center"><b>PURCHASE ORDER BARANG</b></div> </td>
+                                <td height="25px"> <div align="center"><b>PURCHASE ORDER</b></div> </td>
                             </tr>
                         </tbody></table>
 
@@ -264,8 +265,8 @@ if (isset($_GET['cetakData'])) {
                                 $query = "SELECT * FROM po_barang JOIN vendor ON vendor.id_vendor=po_barang.id_vendor JOIN req_barang ON req_barang.id_req_brg=po_barang.id_req_brg JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan JOIN user ON user.id_user=po_barang.id_user JOIN karyawan ON karyawan.id_emp=user.id_emp";
 
                                 // Add filter conditions based on the selected values
-                                  if (!empty($id_lokasi)) {
-                                      $query .= " WHERE storage_barang.id_lokasi = $id_lokasi";
+                                  if (!empty($id_vendor)) {
+                                      $query .= " WHERE po_barang.id_vendor = $id_vendor";
                                   }
 
                                   if (!empty($id_room)) {
@@ -282,35 +283,35 @@ if (isset($_GET['cetakData'])) {
                                     $data = mysqli_fetch_assoc($tampil);
                                     
                                     $nama_pemeriksa = $data['nama_emp'];                               
-                                    $nama_lokasi = $data['nama_lokasi'];
-                                    $room_name  = $data['room_name'];
+                                    $nama_vendor = $data['nama_vendor'];
+                                    $no_telp_vendor = $data['no_telp_vendor'];
                                     $tgl = date('d-M-Y', strtotime(date('d-M-Y')));
                              ?>
                             <tr>
                                 <td>Nama Vendor</td>
                                 <?php  
-                                if (!empty($id_lokasi)) {
-                                    echo "<td>: $nama_lokasi</td>";
+                                if (!empty($id_vendor)) {
+                                    echo "<td>: $nama_vendor</td>";
                                 } else {
-                                    echo '<td>: Semua Lokasi</td>';
+                                    echo '<td>: Semua Vendor</td>';
                                 } ?>
                             </tr>
                             <tr>
-                                <td>Lokasi Ruangan</td>
+                                <td>No. Telp Vendor</td>
                                 <?php
-                                if (!empty($id_room)) {
-                                    echo "<td>: $room_name</td>";
+                                if (!empty($id_vendor)) {
+                                    echo "<td>: $no_telp_vendor</td>";
                                 } else {
-                                    echo '<td>: Semua Ruangan</td>';
+                                    echo '<td>: - </td>';
                                 } ?>
                             </tr>
                 
                             <tr>
-                                <td>Diperiksa Oleh  </td>
+                                <td>Diorder Oleh  </td>
                                 <?= "<td>: $nama_pemeriksa</td>"  ?>
                             </tr>
                             <tr>
-                                <td>Tanggal Pemeriksaan</td>
+                                <td>Tanggal PO</td>
                                 <?= "<td>: $tgl</td>"  ?>
                             </tr>
                         <?php
@@ -332,8 +333,8 @@ if (isset($_GET['cetakData'])) {
                                 <td height="72" class="kananAtasBawah"> <div align="center"> <b>Spesifikasi</b></div> </td>
                                 <td height="72" class="kananAtasBawah"> <div align="center"><b>Qty</b></div> </td>
                                 <td height="72" class="kananAtasBawah"> <div align="center"><b>Satuan</b></div> </td>
-                                <td height="72" class="kananAtasBawah"> <div align="center"><b>Harga</b></div> </td>
-                                <td height="72" class="kananAtasBawah"> <div align="center"><b>Jumlah Harga</b></div> </td>
+                                <td height="72" class="kananAtasBawah"> <div align="center"><b>Harga Satuan</b></div> </td>
+                                <td height="72" class="kananAtasBawah"> <div align="center"><b>Total Harga</b></div> </td>
                                 <!-- <td height="36" class="kananAtasBawah"> <div align="center"><b>Deskripsi</b></div> </td> -->
                                 
                                 <!-- <td height="72" class="kananAtasBawah"> <div align="center"><b>K x N</b></div> </td> -->
@@ -344,14 +345,15 @@ if (isset($_GET['cetakData'])) {
                                 <?php 
                                     $no = 1;
                                     $total = 0;
+                                    $total_sum = 0;
                                     // $query = "SELECT * FROM storage_barang JOIN lokasi_room ON lokasi_room.id_room=storage_barang.id_room JOIN lokasi_barang ON lokasi_barang.id_lokasi=storage_barang.id_lokasi JOIN barang ON barang.kode_brg=storage_barang.kode_brg JOIN satuan ON satuan.id_satuan=storage_barang.id_satuan JOIN user ON user.id_user=$id_user JOIN karyawan ON karyawan.id_emp=user.id_emp";
 
                                     $query = "SELECT * FROM po_barang JOIN vendor ON vendor.id_vendor=po_barang.id_vendor JOIN req_barang ON req_barang.id_req_brg=po_barang.id_req_brg JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan JOIN user ON user.id_user=po_barang.id_user JOIN karyawan ON karyawan.id_emp=user.id_emp";
                                      
                                     // Add filter conditions based on the selected values
-                                      // if (!empty($id_lokasi)) {
-                                      //     $query .= " WHERE storage_barang.id_lokasi = $id_lokasi";
-                                      // }
+                                      if (!empty($id_vendor)) {
+                                          $query .= " WHERE po_barang.id_vendor = $id_vendor";
+                                      }
 
                                       // if (!empty($id_room)) {
                                       //     $query .= (!empty($id_lokasi)) ? " AND " : " WHERE ";
@@ -360,12 +362,14 @@ if (isset($_GET['cetakData'])) {
 
                                     $tampil = mysqli_query($koneksi, $query);
                                     while ($data = mysqli_fetch_assoc($tampil)) {
+                                    	
                                         $jabatan = $data['jabatan'];
-                                        $qty_req = $data['qty_po'];
-                                        $total += $qty_req;
-                                    // $qty_req_arr = explode(',', $qty_req);
-                                    // $total = array_sum($qty_req_arr);
-                                    
+                                        $qty_po = $data['qty_po'];
+                                        $total += $qty_po;
+				                        $harga_po = $data['harga_po'];
+				                     	$total_harga = $harga_po * $qty_po;
+                                    	$total_sum += $total_harga;
+                                    	$acc5 = $data['acc5'];
 
                                  ?>
                                 <td height="20" valign="top" align="center" class="kotak" style="padding:4px">&nbsp;<?= $no++; ?></td>
@@ -374,22 +378,23 @@ if (isset($_GET['cetakData'])) {
                                 <td valign="top" align="left" class="kananAtasBawah" style="padding:4px"><?= $data['spek'];?></td>
                                 <td valign="top" align="center" class="kananAtasBawah" style="padding:4px"><?= $data['qty_po'];?></td>
                                 <td valign="top" align="center" class="kananAtasBawah" style="padding:4px"><?= $data['nama_satuan'];?></td>
-                                <td valign="top" align="center" class="kananAtasBawah" style="padding:4px"><?= $data['harga_po'];?></td>
-                                <td valign="top" align="left" class="kananAtasBawah" style="padding:4px"><?= $total;?></td>
+                                <td valign="top" align="left" class="kananAtasBawah" style="padding:4px"><?= "Rp. ".number_format("$harga_po", 2, ",", "."); ?></td>
+                                <td valign="top" align="left" class="kananAtasBawah" style="padding:4px"><?= "Rp. ".number_format("$total_harga", 2, ",", "."); ?></td>
                                                                 
                             </tr>
 
                             
                         </tbody><?php } ?>
                         <tr>
-                                <td height="20" valign="top" align="center" class="kotak" style="padding:4px">&nbsp;</td>
-                                <td valign="top" align="center" class="kananAtasBawah" style="padding:4px">&nbsp;</td>
-                                <td valign="top" align="center" class="kananAtasBawah" style="padding:4px">&nbsp;</td>
-                                <td valign="top" align="center" class="kananAtasBawah" style="padding:4px"><strong>Total</strong></td> 
-                                <td valign="top" align="center" class="kananAtasBawah" style="padding:4px"><?= $total;?></td>
-                                <td valign="top" align="center" class="kananAtasBawah" style="padding:4px">&nbsp;</td>
-                                <td valign="top" align="center" class="kananAtasBawah" style="padding:4px">&nbsp;</td> 
-                            </tr>
+	                        <td height="20" valign="top" align="center" class="kotak" style="padding:4px">&nbsp;</td>
+	                        <td valign="top" align="center" class="kananAtasBawah" style="padding:4px">&nbsp;</td>
+	                        <td valign="top" align="center" class="kananAtasBawah" style="padding:4px">&nbsp;</td>
+	                        <td valign="top" align="center" class="kananAtasBawah" style="padding:4px"><strong>Jumlah</strong></td> 
+	                        <td valign="top" align="center" class="kananAtasBawah" style="padding:4px"><b><?= $total;?></b></td>
+	                        <td valign="top" align="center" class="kananAtasBawah" style="padding:4px">&nbsp;</td>
+	                        <td valign="top" align="right" class="kananAtasBawah" style="padding:4px">&nbsp;</td> 
+	                        <td valign="top" align="left" class="kananAtasBawah" style="padding:4px"><b><?= "Rp. ".number_format("$total_sum", 2, ",", "."); ?></b></td> 
+	                    </tr>
                     </table><br>
 
                         <table width="90%" border="0" cellpadding="1" cellspacing="1" align="center" style="font-family:&#39;Times New Roman&#39;, Times, serif; font-size:12px">
@@ -403,8 +408,8 @@ if (isset($_GET['cetakData'])) {
                             </tr>
                             <tr>
                                 <td colspan="2">&nbsp;</td>
-                                <td align="center"><?php if (isset($jabatan)) echo " $jabatan "; ?></td>
-                                <!-- <td align="center">Staff Operasional</td> -->
+                                <!-- <td align="center"><?php if (isset($jabatan)) echo " $jabatan "; ?></td> -->
+                                <td align="center">Direktur Utama</td>
                             </tr>   
                             <tr>
                                 <td width="37%"> <div align="left"></div> </td>
@@ -432,7 +437,7 @@ if (isset($_GET['cetakData'])) {
                             </tr>   
                             <tr>
                                 <td colspan="2"> <div align="left">&nbsp;</div><br><br> </td>
-                                <td> <div align="center"><?php if (isset($nama_pemeriksa)) echo "( $nama_pemeriksa )"; ?></div> </td>
+                                <td> <div align="center"><?php if (isset($acc5)) echo "( $acc5 )"; ?></div> </td>
                             </tr>
                         </tbody></table>
                     </td>
