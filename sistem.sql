@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 30, 2024 at 01:09 PM
+-- Generation Time: Jan 31, 2024 at 12:25 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -420,6 +420,17 @@ CREATE TABLE `po_barang` (
   `id_user` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `po_barang`
+--
+
+INSERT INTO `po_barang` (`id_po`, `id_req_brg`, `tgl_po`, `qty_po`, `harga_po`, `ket_po`, `acc3`, `acc4`, `acc5`, `id_vendor`, `id_user`) VALUES
+(33, 39, '2024-01-31', 2, 460800000, 'tes buy', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 2, 13),
+(34, 40, '2024-01-31', 1, 50000, '-', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 1, 27),
+(35, 41, '2024-01-31', 1, 7800000, '-', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 1, 27),
+(36, 43, '2024-01-31', 8, 230400000, 'buat kapal', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 1, 27),
+(37, 42, '2024-01-31', 2, 3200000, '-', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 3, 27);
+
 -- --------------------------------------------------------
 
 --
@@ -447,13 +458,13 @@ CREATE TABLE `req_barang` (
 --
 
 INSERT INTO `req_barang` (`id_req_brg`, `kode_pengajuan`, `kode_brg`, `qty_req`, `tgl_req_brg`, `alasan`, `status_req`, `acc1`, `acc2`, `id_lokasi`, `id_room`, `id_user`, `id_satuan`) VALUES
-(39, 'REQ-24012700001-53657', 'BRG00001', 1, '2024-01-27', '', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 1, 28, 1),
-(40, 'REQ-24012700002-90814', 'BRG00002', 1, '2024-01-27', '', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 2, 3, 28, 1),
-(41, 'REQ-24012700003-60169', 'BRG00003', 1, '2024-01-27', '', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 2, 2, 29, 1),
-(42, 'REQ-24012700004-41123', 'BRG00008', 8, '2024-01-27', '', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 2, 1, 29, 1),
-(43, 'REQ-24012700005-26597', 'BRG00007', 2, '2024-01-27', '', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 1, 29, 1),
-(44, 'REQ-24012700006-15577', 'BRG00001', 1, '2024-01-27', '', 'On Progress in Purchasing	', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 1, 29, 1),
-(45, 'REQ-24012800007-52211', 'BRG00001', 1, '2024-01-28', 'untuk jig', 'On Progress in Purchasing', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 1, 28, 1);
+(39, 'REQ-24012700001-53657', 'BRG00001', 1, '2024-01-27', '', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 1, 28, 1),
+(40, 'REQ-24012700002-90814', 'BRG00002', 1, '2024-01-27', '', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', 2, 3, 28, 1),
+(41, 'REQ-24012700003-60169', 'BRG00003', 1, '2024-01-27', '', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', 2, 2, 29, 1),
+(42, 'REQ-24012700004-41123', 'BRG00008', 8, '2024-01-27', '', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', 2, 1, 29, 1),
+(43, 'REQ-24012700005-26597', 'BRG00007', 2, '2024-01-27', '', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 1, 29, 1),
+(44, 'REQ-24012700006-15577', 'BRG00001', 1, '2024-01-27', '', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 1, 29, 1),
+(45, 'REQ-24012800007-52211', 'BRG00001', 1, '2024-01-28', 'untuk jig', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 1, 28, 1);
 
 -- --------------------------------------------------------
 
@@ -656,7 +667,8 @@ INSERT INTO `user` (`id_user`, `username`, `password`, `level`, `id_emp`) VALUES
 (28, 'robi', '$2y$10$pi39ljqjbeI7Xgu6up8uie2wOUT6Gv7dwqsQXgvI60DotWKCmSvQC', 'Crew', 18),
 (29, 'krisno', '$2y$10$wdmPEof2zbHxxFyJWXAZZOZOigLJucxD/Vy5oALS.0y5ZJkvzVNhC', 'Crew', 16),
 (30, 'niken', '$2y$10$Kzzb.fetZnuGPtKI03hX6.p.b.XP81bzSX92q0P3/HpRpWFSpdPZa', 'Staff Operasional', 17),
-(31, 'mabrur', '$2y$10$zxwFH.e4ooAM3CgI8Wzi8Ot0AIZhzcnKMHNPSIprWt.gbQiArYqki', 'Staff IT', 30);
+(31, 'mabrur', '$2y$10$zxwFH.e4ooAM3CgI8Wzi8Ot0AIZhzcnKMHNPSIprWt.gbQiArYqki', 'Staff IT', 30),
+(33, 'dirkeu', '$2y$10$ieRoa0fn5uVaLatoFYBeUuwI0H1l./YWLxnB.1WNvFbTZyPApFUl6', 'Direktur Keuangan', 9);
 
 -- --------------------------------------------------------
 
@@ -895,7 +907,7 @@ ALTER TABLE `manage_cuti`
 -- AUTO_INCREMENT for table `po_barang`
 --
 ALTER TABLE `po_barang`
-  MODIFY `id_po` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_po` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `req_barang`
@@ -925,7 +937,7 @@ ALTER TABLE `storage_barang`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `vendor`
