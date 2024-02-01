@@ -1527,6 +1527,41 @@ function hapusPembelian($id_po) {
     }
 }
 
+function reject1Pembelian($data) {
+	global $koneksi;
+	$id_po = $data["id_po"];
+	$id_req_brg = htmlspecialchars($data['id_req_brg']);
+	$tgl_po = htmlspecialchars($data['tgl_po']);
+	$qty_po = htmlspecialchars($data["qty_po"]);
+	$harga_po = htmlspecialchars($data["harga_po"]);
+	$ket_po = htmlspecialchars($data["ket_po"]);
+	$acc3 = htmlspecialchars($data["acc3"]);
+	$acc4 = htmlspecialchars($data["acc4"]);
+	$acc5 = htmlspecialchars($data["acc5"]);
+	$id_vendor = htmlspecialchars($data["id_vendor"]);
+
+	$query = "UPDATE po_barang SET
+				id_req_brg = '$id_req_brg',
+				tgl_po = '$tgl_po',
+				qty_po = '$qty_po',
+				harga_po = '$harga_po',
+				ket_po = '$ket_po',
+				acc3 = '$acc3',
+				acc4 = '$acc4',
+				acc5 = '$acc5',
+				id_vendor = '$id_vendor'
+			  WHERE id_po = $id_po
+			";
+	mysqli_query($koneksi, $query);
+
+
+	$query_update = "UPDATE req_barang 
+                 SET status_req = 'Ditolak' 
+                 WHERE kode_brg = (SELECT kode_brg FROM req_barang WHERE id_req_brg = $id_req_brg)";
+  mysqli_query($koneksi, $query_update);
+
+	return mysqli_affected_rows($koneksi);
+}
 
 function tambahAnggaran($data) {
 	global $koneksi;

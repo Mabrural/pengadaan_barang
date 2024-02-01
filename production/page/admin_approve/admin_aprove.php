@@ -94,25 +94,37 @@ $id_user = $_SESSION["id_user"];
                 <td class=" "><?= date('d-M-Y', strtotime($data['tgl_req_brg']));?></td>
                 <td class=" "><?= $data['alasan'];?></td>
                 <td class=" "><strong><?= $data['nama_emp'];?></strong></td>
-                <td class=" " style="color: <?php
+                <td class=" ">
+                    <strong style="background-color: <?php
                     if ($data['status_req'] == 'Menunggu Persetujuan KC') {
                         echo '#b58709';
                     } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir.Ops') {
                         echo '#b58709';
                     } elseif ($data['status_req'] == 'On Progress in Purchasing') {
-                        echo '#14a664';
-                    } else {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir. HRD') {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir. Keuangan') {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir. Utama') {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'Ditolak') {
                         echo '#a62f26';
+                    } else {
+                        echo '#14a664';
                     }
-                ?>;">
-                    <strong><?= $data['status_req'];?></strong>
+                ?>
+
+
+                    ; color: white; padding-left: 5px; padding-right: 5px; padding-bottom: 5px; padding-top: 5px; font-weight: normal;"><?= $data['status_req'];?></strong>
+                </td>
 
                  <?php if ($data['status_req'] == 'Sudah disetujui' OR $data['status_req'] == 'Sedang diproses') { ?>
 		          <td class=" last">
 		            <span class="text-success fa fa-check"><strong> Selesai</strong></span>
 		          </td>
 		        <?php } else { ?>
-		          <td class=" last"><a href="?form=ubahApprove&id_req_brg=<?= $data["id_req_brg"]; ?>" class="btn btn-info btn-sm">Approve </a> 
+		          <td class=" last"><a href="?form=ubahApprove&id_req_brg=<?= $data["id_req_brg"]; ?>" class="btn btn-info btn-sm">Approve </a> | <a href="?form=reject&id_req_brg=<?= $data["id_req_brg"]; ?>" class="btn btn-danger btn-sm">Reject </a> 
                 <input type="hidden" name="nama_pemohon" value="<?= $_SESSION['username']; ?>">
 		        </td>
 		        <?php } ?>

@@ -61,7 +61,7 @@ $id_user = $_SESSION["id_user"];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-              		$query = "SELECT * FROM po_barang JOIN vendor ON vendor.id_vendor=po_barang.id_vendor JOIN req_barang ON req_barang.id_req_brg=po_barang.id_req_brg JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan JOIN user ON user.id_user=po_barang.id_user JOIN karyawan ON karyawan.id_emp=user.id_emp";
+              		$query = "SELECT * FROM po_barang JOIN vendor ON vendor.id_vendor=po_barang.id_vendor JOIN req_barang ON req_barang.id_req_brg=po_barang.id_req_brg JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan JOIN user ON user.id_user=po_barang.id_user JOIN karyawan ON karyawan.id_emp=user.id_emp ORDER BY tgl_po DESC";
                   // $query = "SELECT * FROM po_barang JOIN req_barang ON req_barang.id_req_brg JOIN vendor ON vendor.id_vendor=po_barang.id_vendor JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan";
               		
               		$tampil = mysqli_query($koneksi, $query);
@@ -81,12 +81,37 @@ $id_user = $_SESSION["id_user"];
                 <td class=" "><?= "Rp. ".number_format("$total_harga", 2, ",", "."); ?></td>
                 <td class=" "><?= $data['nama_vendor'];?></td>
                 <td class=" "><?= $data['nama_emp'];?></td>
-                <td class=" "><?= $data['status_req'];?></td>
+                <td class=" ">
+                    <strong style="background-color: <?php
+                    if ($data['status_req'] == 'Menunggu Persetujuan KC') {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir.Ops') {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'On Progress in Purchasing') {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir. HRD') {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir. Keuangan') {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir. Utama') {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'Ditolak') {
+                        echo '#a62f26';
+                    } else {
+                        echo '#14a664';
+                    }
+                ?>
+
+
+                    ; color: white; padding-left: 5px; padding-right: 5px; padding-bottom: 5px; padding-top: 5px; font-weight: normal;"><?= $data['status_req'];?></strong>
+                </td>
 
                 <td class="last">
 				    <?php
 				    if ($data['status_req'] == 'Menunggu Persetujuan Dir. Keuangan') {
 				        echo '<a href="?form=app2Pembelian&id_po=' . $data["id_po"] . '" class="btn btn-info btn-sm">Approve</a>';
+                echo '<a href="?form=reject2&id_po=' . $data["id_po"] . '" class="btn btn-danger btn-sm">Reject</a>';
+
 				    } else {
 				        echo '<button class="btn btn-secondary btn-sm" disabled>Approve</button>';
 				    }

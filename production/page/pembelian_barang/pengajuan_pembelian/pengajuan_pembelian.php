@@ -5,6 +5,7 @@ $id_user = $_SESSION["id_user"];
 $vendor = query("SELECT * FROM vendor");
 // $pengajuan = query("SELECT * FROM barang WHERE barang.id_barang=$id_user");
 $id_vendor = isset($_GET['id_vendor']) ? $_GET['id_vendor'] : '';
+$selectedIds = isset($_GET['select_id']) ? $_GET['select_id'] : [];
 
 ?>
     <div class="x_panel">
@@ -15,9 +16,10 @@ $id_vendor = isset($_GET['id_vendor']) ? $_GET['id_vendor'] : '';
             <input type="hidden" name="aksi">
             <input type="hidden" name="id_user" value="<?= $id_user;?>">
             <input type="hidden" name="id_vendor" value="<?= $id_vendor;?>">
-            <!-- <input type="hidden" name="id_room" value="<?= $id_room;?>"> -->
+            <input type="hidden" id="select_id" name="select_id" value="<?=$selectedIds?>">
             <a href="?form=tambahPembelian" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Ajukan PO</a>
-            <button type="submit" class="btn btn-info btn-sm" name="cetakData"><i class="fa fa-print"></i> Cetak PO</button>
+            <button type="submit" class="btn btn-info btn-sm" name="cetakData" onclick="document.getElementById('select_id').value = getCheckedIds();"><i class="fa fa-print"></i> Cetak PO</button>
+            <!-- <button type="submit" class="btn btn-info btn-sm" name="cetakData"><i class="fa fa-print"></i> Cetak PO</button> -->
         </form>
 
         <div class="row">
@@ -71,15 +73,25 @@ $id_vendor = isset($_GET['id_vendor']) ? $_GET['id_vendor'] : '';
           });
         </script>
 
+        <script type="text/javascript">
+              function getCheckedIds() {
+              var selectedIds = [];
+              $('input[name="select_id[]"]:checked').each(function() {
+                  selectedIds.push($(this).val());
+              });
+              return selectedIds;
+          }
+        </script>
+
         <!-- <p>Add class <code>bulk_action</code> to table for bulk actions options on row select</p> -->
 
         <div class="table-responsive">
           <table id="example" class="display" style="width:100%">
             <thead style="background-color: #2a3f54; color: #dfe5f1;">
               <tr class="headings">
-                <!-- <th>
+                <th>
                   <input type="checkbox" id="check-all" class="flat">
-                </th> -->
+                </th>
                 <th class="column-title">No. </th>
                 <th class="column-title">Tanggal PO</th>
                 <th class="column-title">Nama Barang </th>
@@ -116,6 +128,7 @@ $id_vendor = isset($_GET['id_vendor']) ? $_GET['id_vendor'] : '';
               	     $harga_po = $data['harga_po'];
                      $total_harga = $harga_po * $data['qty_po'];
               	 ?>
+                 <td><input type="checkbox" class="flat" name="select_id[]" value="<?= $data['id_po']; ?>"></td>
                 <td class=" "><?= $no++;?></td>
                 <td class=" "><?= date('d-M-Y', strtotime($data['tgl_po']));?></td>
                 <td class=" "><a href="img/barang/<?= $data['gambar_barang'];?>" style="text-decoration: underline; color:blue;"><?= $data['nama_barang'];?> </a></td>
@@ -126,7 +139,30 @@ $id_vendor = isset($_GET['id_vendor']) ? $_GET['id_vendor'] : '';
                 <td class=" "><?= "Rp. ".number_format("$harga_po", 2, ",", "."); ?></td>
                 <td class=" "><?= "Rp. ".number_format("$total_harga", 2, ",", "."); ?></td>
                 <td class=" "><?= $data['nama_vendor'];?></td>
-                <td class=" "><?= $data['status_req'];?></td>
+                <td class=" ">
+                    <strong style="background-color: <?php
+                    if ($data['status_req'] == 'Menunggu Persetujuan KC') {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir.Ops') {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'On Progress in Purchasing') {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir. HRD') {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir. Keuangan') {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir. Utama') {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'Ditolak') {
+                        echo '#a62f26';
+                    } else {
+                        echo '#14a664';
+                    }
+                ?>
+
+
+                    ; color: white; padding-left: 5px; padding-right: 5px; padding-bottom: 5px; padding-top: 5px; font-weight: normal;"><?= $data['status_req'];?></strong>
+                </td>
                 
                 <td class="last">
                     <?php

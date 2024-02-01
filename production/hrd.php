@@ -605,6 +605,10 @@ if ($_SESSION["level"] == "Staff IT") {
                                 include 'page/pembelian_barang/approve_pembelian/konfirmasi_app1.php';
                                 break;
 
+                            case 'reject1':
+                                include 'page/pembelian_barang/approve_pembelian/reject1.php';
+                                break;
+
                             case 'ubahCatatan':
                                 include "page/catatan/ubah.php";
                                 break;

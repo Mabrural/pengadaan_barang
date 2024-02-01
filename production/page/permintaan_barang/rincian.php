@@ -113,23 +113,30 @@ $tgl_req_brg = $_GET['tgl_req_brg'];
                 <td class=" "><strong><?= $data['nama_emp'];?></strong></td>
                 <td class=" "><?= $data['acc1'];?></td>
                 <td class=" "><?= $data['acc2'];?></td>
-                <td class=" " style="color: <?php
+                <td class=" ">
+                    <strong style="background-color: <?php
                     if ($data['status_req'] == 'Menunggu Persetujuan KC') {
                         echo '#b58709';
                     } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir.Ops') {
                         echo '#b58709';
                     } elseif ($data['status_req'] == 'On Progress in Purchasing') {
-                        echo '#14a664';
-                    } else {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir. HRD') {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir. Keuangan') {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir. Utama') {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'Ditolak') {
                         echo '#a62f26';
+                    } else {
+                        echo '#14a664';
                     }
-                ?>;">
-                     <strong><?= $data['status_req'];?></strong>
+                ?>
 
-                <!-- <td><a href="?form=rincian&id_user=<?= $data["id_user"]; ?>" class="btn btn-info btn-sm">Rincian</a></td> -->
 
-                <!-- <td class=" last"><a href="?form=ubahPengajuan&id_barang=<?= $data["id_barang"]; ?>" class="btn btn-info btn-sm">Approve </a> 
-                </td> -->
+                    ; color: white; padding-left: 5px; padding-right: 5px; padding-bottom: 5px; padding-top: 5px; font-weight: normal;"><?= $data['status_req'];?></strong>
+                </td>
               </tr>
               
         					<?php } ?>

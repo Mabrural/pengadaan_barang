@@ -394,6 +394,10 @@ if ($_SESSION["level"] == "Staff IT") {
                                 include "page/admin_approve/konfirmasi_aprove.php";
                                 break;
 
+                            case 'reject':
+                                include "page/admin_approve/reject.php";
+                                break;
+
                             case 'tambahPengajuan':
                                 include "page/pengajuan/tambah.php";
                                 break;

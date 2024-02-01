@@ -10,7 +10,9 @@ if (isset($_GET['cetakData'])) {
     $po_barang = query("SELECT * FROM po_barang")[0];
 
     $id_vendor = $_GET['id_vendor'];
-    // $id_room =$_GET['id_room'];
+    // $selectedIds = isset($_GET['select_id']) ? $_GET['select_id'] : [];
+    // $selectedIds = isset($_GET['select_id']) ? $_GET['select_id'] : [];;
+    $selectedIds = explode(',', $_GET['select_id']);
 }
 ?>
 
@@ -269,11 +271,7 @@ if (isset($_GET['cetakData'])) {
                                       $query .= " WHERE po_barang.id_vendor = $id_vendor";
                                   }
 
-                                  if (!empty($id_room)) {
-                                      $query .= (!empty($id_lokasi)) ? " AND " : " WHERE ";
-                                      $query .= "storage_barang.id_room = $id_room";
-                                  }
-
+                        
 
                                 $tampil = mysqli_query($koneksi, $query);
                                 
@@ -346,23 +344,32 @@ if (isset($_GET['cetakData'])) {
                                     $no = 1;
                                     $total = 0;
                                     $total_sum = 0;
-                                    // $query = "SELECT * FROM storage_barang JOIN lokasi_room ON lokasi_room.id_room=storage_barang.id_room JOIN lokasi_barang ON lokasi_barang.id_lokasi=storage_barang.id_lokasi JOIN barang ON barang.kode_brg=storage_barang.kode_brg JOIN satuan ON satuan.id_satuan=storage_barang.id_satuan JOIN user ON user.id_user=$id_user JOIN karyawan ON karyawan.id_emp=user.id_emp";
-
+                                    $selectedIds = explode(',', $_GET['select_id']);
+                                    if (!is_array($selectedIds)) {
+                                        $selectedIds = array();
+                                    }
                                     $query = "SELECT * FROM po_barang JOIN vendor ON vendor.id_vendor=po_barang.id_vendor JOIN req_barang ON req_barang.id_req_brg=po_barang.id_req_brg JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan JOIN user ON user.id_user=po_barang.id_user JOIN karyawan ON karyawan.id_emp=user.id_emp";
                                      
                                     // Add filter conditions based on the selected values
-                                      if (!empty($id_vendor)) {
-                                          $query .= " WHERE po_barang.id_vendor = $id_vendor";
-                                      }
-
-                                      // if (!empty($id_room)) {
-                                      //     $query .= (!empty($id_lokasi)) ? " AND " : " WHERE ";
-                                      //     $query .= "storage_barang.id_room = $id_room";
+                                      // if (!empty($id_vendor)) {
+                                      //     $query .= " WHERE po_barang.id_vendor = $id_vendor";
                                       // }
+                                      // if (!empty($selectedIds)) {
+                                      //   $query .= " WHERE po_barang.id_po IN (" . implode(',', $selectedIds) . ")";
+                                      // }
+                                     
+                                      
+                                    if (!empty($selectedIds)) {
+                                        $query .= " WHERE po_barang.id_po IN (" . implode(',', $selectedIds) . ") AND po_barang.id_vendor = $id_vendor";
+                                    } else {
+                                        $query .= " WHERE po_barang.id_vendor = IFNULL($id_vendor, '0')";
+                                    }
+
+                                      
 
                                     $tampil = mysqli_query($koneksi, $query);
                                     while ($data = mysqli_fetch_assoc($tampil)) {
-                                    	
+                                        if (in_array($data['id_po'], $selectedIds)) {}
                                         $jabatan = $data['jabatan'];
                                         $qty_po = $data['qty_po'];
                                         $total += $qty_po;
@@ -370,7 +377,7 @@ if (isset($_GET['cetakData'])) {
 				                     	$total_harga = $harga_po * $qty_po;
                                     	$total_sum += $total_harga;
                                     	$acc5 = $data['acc5'];
-
+                                    
                                  ?>
                                 <td height="20" valign="top" align="center" class="kotak" style="padding:4px">&nbsp;<?= $no++; ?></td>
                                 <td valign="top" align="center" class="kananAtasBawah" style="padding:4px">&nbsp;<?= $data['kode_brg'];?></td>
@@ -383,9 +390,16 @@ if (isset($_GET['cetakData'])) {
                                                                 
                             </tr>
 
-                            
-                        </tbody><?php } ?>
+                          
+                        </tbody><?php }?>
                         <tr>
+	                        <td height="20" valign="top" align="center" class="kotak" style="padding:4px" colspan="4"><strong>Jumlah</strong></td>
+	                        
+	                        <td valign="top" align="center" class="kananAtasBawah" style="padding:4px"><b><?= $total;?></b></td>
+	                        <td valign="top" align="center" class="kananAtasBawah" style="padding:4px" colspan="2"><b>Total</b></td>
+	                        <td valign="top" align="left" class="kananAtasBawah" style="padding:4px"><b><?= "Rp. ".number_format("$total_sum", 2, ",", "."); ?></b></td> 
+	                    </tr>
+                        <!-- <tr>
 	                        <td height="20" valign="top" align="center" class="kotak" style="padding:4px">&nbsp;</td>
 	                        <td valign="top" align="center" class="kananAtasBawah" style="padding:4px">&nbsp;</td>
 	                        <td valign="top" align="center" class="kananAtasBawah" style="padding:4px">&nbsp;</td>
@@ -394,6 +408,10 @@ if (isset($_GET['cetakData'])) {
 	                        <td valign="top" align="center" class="kananAtasBawah" style="padding:4px">&nbsp;</td>
 	                        <td valign="top" align="right" class="kananAtasBawah" style="padding:4px">&nbsp;</td> 
 	                        <td valign="top" align="left" class="kananAtasBawah" style="padding:4px"><b><?= "Rp. ".number_format("$total_sum", 2, ",", "."); ?></b></td> 
+	                    </tr> -->
+	                    <tr>
+	                        <!-- <td height="20" valign="top" align="center" class="kotak" style="padding:4px" colspan="8">&nbsp;</td> -->
+	                         
 	                    </tr>
                     </table><br>
 

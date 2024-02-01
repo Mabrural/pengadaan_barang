@@ -62,7 +62,7 @@ $id_user = $_SESSION["id_user"];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-                  $query = "SELECT * FROM req_barang JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan JOIN lokasi_barang ON lokasi_barang.id_lokasi=req_barang.id_lokasi JOIN lokasi_room ON lokasi_room.id_room=req_barang.id_room WHERE id_user=$id_user";
+                  $query = "SELECT * FROM req_barang JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan JOIN lokasi_barang ON lokasi_barang.id_lokasi=req_barang.id_lokasi JOIN lokasi_room ON lokasi_room.id_room=req_barang.id_room WHERE id_user=$id_user ORDER BY tgl_req_brg DESC";
               		// $query = "SELECT * FROM barang WHERE barang.id_user=$id_user AND status='On Progress in Purchasing' OR status='Menunggu Persetujuan KC' OR status = 'Menunggu Persetujuan Dir.Ops' ORDER BY kode_pengajuan DESC";
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
@@ -83,18 +83,29 @@ $id_user = $_SESSION["id_user"];
                 <td class=" "><?= $data['alasan'];?></td>
                 <td class=" "><?= $data['acc1'];?></td>
                 <td class=" "><?= $data['acc2'];?></td>
-                <td class=" " style="color: <?php
+                <td class=" ">
+                    <strong style="background-color: <?php
                     if ($data['status_req'] == 'Menunggu Persetujuan KC') {
                         echo '#b58709';
                     } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir.Ops') {
                         echo '#b58709';
                     } elseif ($data['status_req'] == 'On Progress in Purchasing') {
-                        echo '#14a664';
-                    } else {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir. HRD') {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir. Keuangan') {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir. Utama') {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'Ditolak') {
                         echo '#a62f26';
+                    } else {
+                        echo '#14a664';
                     }
-                ?>;">
-                    <strong><?= $data['status_req'];?></strong>
+                ?>
+
+
+                    ; color: white; padding-left: 5px; padding-right: 5px; padding-bottom: 5px; padding-top: 5px; font-weight: normal;"><?= $data['status_req'];?></strong>
                 </td>
 
                 
