@@ -65,7 +65,7 @@ $selectedIds = isset($_GET['select_id']) ? $_GET['select_id'] : [];
                   var id_room = $('#id_room').val();
 
                   // Redirect to the current page with filter parameters
-                  window.location.href = '?page=pengajuanPembelian&id_vendor=' + id_vendor + '&id_room=' + id_room;
+                  window.location.href = '?page=pengajuanPembelian&id_vendor=' + id_vendor;
                   // window.location.href = '?id_lokasi=' + id_lokasi + '&id_room=' + id_room;
               });
 
@@ -120,7 +120,7 @@ $selectedIds = isset($_GET['select_id']) ? $_GET['select_id'] : [];
                   // $query = "SELECT * FROM po_barang JOIN req_barang ON req_barang.id_req_brg JOIN vendor ON vendor.id_vendor=po_barang.id_vendor JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan";
 
                   if (!empty($id_vendor)) {
-                      $query .= " WHERE po_barang.id_vendor = $id_vendor";
+                      $query .= " WHERE po_barang.id_vendor = $id_vendor ORDER BY id_po DESC";
                   }
               		
               		$tampil = mysqli_query($koneksi, $query);

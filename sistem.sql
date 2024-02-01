@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 31, 2024 at 12:25 PM
+-- Generation Time: Feb 01, 2024 at 12:02 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -256,7 +256,7 @@ INSERT INTO `karyawan` (`id_emp`, `nama_emp`, `jabatan`, `divisi`, `status`, `ga
 (10, 'James Taju', 'Direktur HRD', 'HRM', 'Aktif', '65a4f45ead15a.png', '1980-01-01', 'Laki-laki', '-', '1231231', 'btm@gmail.xom', 'Sudah Menikah', '123', '123'),
 (11, 'Bambang Wahyudi', 'Direktur Operasional', 'Manager', 'Aktif', '65a4f45ead15a.png', '0000-00-00', 'Laki-laki', '-', '0', 'btm@gmail.xom', 'Sudah Menikah', '132', '132'),
 (12, 'Michael Kawilarang', 'Kepala Cabang', 'Manager', 'Aktif', '65a8b1dbd087d.png', '0000-00-00', 'Laki-laki', '-', '0', 'batam@gmail.com', 'Sudah Menikah', '123', '123'),
-(13, 'Gahral', 'Kepala Shipping', 'Shipping', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
+(13, 'Gahral', 'Kepala Operasional', 'Shipping', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
 (14, 'Elis', 'Finance', 'Finance', 'Aktif', '65a4f45ead15a.png', '0000-00-00', 'Laki-laki', '-', '0', 'btm@gmail.xom', 'Belum Menikah', '123', '1321'),
 (15, 'Rika', 'Staff Shipping', 'Shipping', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
 (16, 'Krisno', 'Staff Shipping', 'Shipping', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
@@ -429,7 +429,12 @@ INSERT INTO `po_barang` (`id_po`, `id_req_brg`, `tgl_po`, `qty_po`, `harga_po`, 
 (34, 40, '2024-01-31', 1, 50000, '-', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 1, 27),
 (35, 41, '2024-01-31', 1, 7800000, '-', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 1, 27),
 (36, 43, '2024-01-31', 8, 230400000, 'buat kapal', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 1, 27),
-(37, 42, '2024-01-31', 2, 3200000, '-', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 3, 27);
+(37, 42, '2024-01-31', 2, 3200000, '-', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 3, 27),
+(38, 49, '2024-02-01', 1, 1600000, 'butuh cepat', 'James Taju', '', '', 1, 13),
+(39, 50, '2024-02-01', 1, 1500000, 'asdasd', 'James Taju', '', '', 1, 13),
+(40, 51, '2024-02-01', 1, 1600000, 'warna putih kain', 'James Taju', 'Regina', '', 3, 27),
+(41, 52, '2024-02-01', 1, 17000, '-', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 1, 27),
+(42, 54, '2024-02-01', 1, 1500000, '-', '', '', '', 1, 27);
 
 -- --------------------------------------------------------
 
@@ -447,6 +452,7 @@ CREATE TABLE `req_barang` (
   `status_req` varchar(50) NOT NULL,
   `acc1` varchar(50) DEFAULT NULL,
   `acc2` varchar(50) DEFAULT NULL,
+  `acc3` varchar(50) DEFAULT NULL,
   `id_lokasi` int(10) NOT NULL,
   `id_room` int(10) NOT NULL,
   `id_user` int(10) NOT NULL,
@@ -457,14 +463,26 @@ CREATE TABLE `req_barang` (
 -- Dumping data for table `req_barang`
 --
 
-INSERT INTO `req_barang` (`id_req_brg`, `kode_pengajuan`, `kode_brg`, `qty_req`, `tgl_req_brg`, `alasan`, `status_req`, `acc1`, `acc2`, `id_lokasi`, `id_room`, `id_user`, `id_satuan`) VALUES
-(39, 'REQ-24012700001-53657', 'BRG00001', 1, '2024-01-27', '', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 1, 28, 1),
-(40, 'REQ-24012700002-90814', 'BRG00002', 1, '2024-01-27', '', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', 2, 3, 28, 1),
-(41, 'REQ-24012700003-60169', 'BRG00003', 1, '2024-01-27', '', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', 2, 2, 29, 1),
-(42, 'REQ-24012700004-41123', 'BRG00008', 8, '2024-01-27', '', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', 2, 1, 29, 1),
-(43, 'REQ-24012700005-26597', 'BRG00007', 2, '2024-01-27', '', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 1, 29, 1),
-(44, 'REQ-24012700006-15577', 'BRG00001', 1, '2024-01-27', '', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 1, 29, 1),
-(45, 'REQ-24012800007-52211', 'BRG00001', 1, '2024-01-28', 'untuk jig', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 1, 28, 1);
+INSERT INTO `req_barang` (`id_req_brg`, `kode_pengajuan`, `kode_brg`, `qty_req`, `tgl_req_brg`, `alasan`, `status_req`, `acc1`, `acc2`, `acc3`, `id_lokasi`, `id_room`, `id_user`, `id_satuan`) VALUES
+(39, 'REQ-24012700001-53657', 'BRG00001', 1, '2024-01-27', '', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', NULL, 1, 1, 28, 1),
+(40, 'REQ-24012700002-90814', 'BRG00002', 1, '2024-01-27', '', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', NULL, 2, 3, 28, 1),
+(41, 'REQ-24012700003-60169', 'BRG00003', 1, '2024-01-27', '', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', NULL, 2, 2, 29, 1),
+(42, 'REQ-24012700004-41123', 'BRG00008', 8, '2024-01-27', '', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', NULL, 2, 1, 29, 1),
+(43, 'REQ-24012700005-26597', 'BRG00007', 2, '2024-01-27', '', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', NULL, 1, 1, 29, 1),
+(44, 'REQ-24012700006-15577', 'BRG00001', 1, '2024-01-27', '', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', NULL, 1, 1, 29, 1),
+(45, 'REQ-24012800007-52211', 'BRG00001', 1, '2024-01-28', 'untuk jig', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', NULL, 1, 1, 28, 1),
+(46, 'REQ-24020100008-29216', 'BRG00067', 1, '2024-02-01', 'yang lama sudah rusak\r\n', 'Ditolak', 'Michael Kawilarang', '', NULL, 2, 1, 28, 3),
+(47, 'REQ-24020100009-73440', 'BRG00004', 1, '2024-02-01', 'udah soak akinya', 'Ditolak', 'Michael Kawilarang', '', NULL, 1, 1, 28, 1),
+(48, 'REQ-24020100010-91082', 'BRG00009', 1, '2024-02-01', 'kunci inggris lama hilang', 'Menunggu Persetujuan Dir. HRD', 'Bambang Wahyudi', '', NULL, 3, 1, 28, 3),
+(49, 'REQ-24020100011-59449', 'BRG00088', 1, '2024-02-01', 'penambahan stok aja', 'Ditolak', 'Michael Kawilarang', 'Bambang Wahyudi', NULL, 3, 2, 28, 1),
+(50, 'REQ-24020100012-26182', 'BRG00086', 1, '2024-02-01', '', 'Ditolak', 'Michael Kawilarang', 'Bambang Wahyudi', NULL, 1, 2, 28, 1),
+(51, 'REQ-24020100013-15700', 'BRG00079', 1, '2024-02-01', 'untuk bongkar mesin\r\n', 'Ditolak', 'Michael Kawilarang', 'Bambang Wahyudi', NULL, 4, 1, 28, 2),
+(52, 'REQ-24020100014-89472', 'BRG00081', 1, '2024-02-01', 'untuk cat deck', 'Ditolak', 'Michael Kawilarang', 'Bambang Wahyudi', NULL, 1, 3, 28, 12),
+(54, 'REQ-24020100015-95164', 'BRG00009', 1, '2024-02-01', 'sdasdad', 'Menunggu Persetujuan Dir. HRD', 'Gahral', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 1, 28, 1),
+(55, 'REQ-24020100016-88468', 'BRG00085', 1, '2024-02-01', 'asds', 'On Progress in Purchasing', 'Gahral', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 1, 28, 2),
+(56, 'REQ-24020100017-25086', 'BRG00005', 1, '2024-02-01', 'sdfdf', 'Ditolak', 'Gahral', '', '', 2, 2, 28, 1),
+(63, 'REQ-24020100018-28054', 'BRG00006', 4, '2024-02-01', '', 'Ditolak', 'Gahral', 'Michael Kawilarang', '', 1, 2, 28, 1),
+(68, 'REQ-24020100019-85115', 'BRG00002', 1, '2024-02-01', '', 'Ditolak', 'Gahral', 'Michael Kawilarang', '', 1, 1, 28, 1);
 
 -- --------------------------------------------------------
 
@@ -668,7 +686,8 @@ INSERT INTO `user` (`id_user`, `username`, `password`, `level`, `id_emp`) VALUES
 (29, 'krisno', '$2y$10$wdmPEof2zbHxxFyJWXAZZOZOigLJucxD/Vy5oALS.0y5ZJkvzVNhC', 'Crew', 16),
 (30, 'niken', '$2y$10$Kzzb.fetZnuGPtKI03hX6.p.b.XP81bzSX92q0P3/HpRpWFSpdPZa', 'Staff Operasional', 17),
 (31, 'mabrur', '$2y$10$zxwFH.e4ooAM3CgI8Wzi8Ot0AIZhzcnKMHNPSIprWt.gbQiArYqki', 'Staff IT', 30),
-(33, 'dirkeu', '$2y$10$ieRoa0fn5uVaLatoFYBeUuwI0H1l./YWLxnB.1WNvFbTZyPApFUl6', 'Direktur Keuangan', 9);
+(33, 'dirkeu', '$2y$10$ieRoa0fn5uVaLatoFYBeUuwI0H1l./YWLxnB.1WNvFbTZyPApFUl6', 'Direktur Keuangan', 9),
+(34, 'gahral', '$2y$10$htRb4rT9Pd08BIcc9/JnpeMPtqmVxkXU2Agz4JkQX0xFMj29ZBCtG', 'Kepala Operasional', 13);
 
 -- --------------------------------------------------------
 
@@ -907,13 +926,13 @@ ALTER TABLE `manage_cuti`
 -- AUTO_INCREMENT for table `po_barang`
 --
 ALTER TABLE `po_barang`
-  MODIFY `id_po` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id_po` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `req_barang`
 --
 ALTER TABLE `req_barang`
-  MODIFY `id_req_brg` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id_req_brg` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `req_cuti`
@@ -937,7 +956,7 @@ ALTER TABLE `storage_barang`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `vendor`

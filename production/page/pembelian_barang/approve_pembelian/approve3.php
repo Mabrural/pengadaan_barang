@@ -65,13 +65,13 @@ $selectedIds = isset($_GET['select_id']) ? $_GET['select_id'] : [];
       </script>
 
       <script type="text/javascript">
-        function getCheckedIds() {
-        var selectedIds = [];
-        $('input[name="select_id[]"]:checked').each(function() {
-            selectedIds.push($(this).val());
-        });
-        return selectedIds;
-    }
+          function getCheckedIds() {
+          var selectedIds = [];
+          $('input[name="select_id[]"]:checked').each(function() {
+              selectedIds.push($(this).val());
+          });
+          return selectedIds;
+      }
       </script>
 
 

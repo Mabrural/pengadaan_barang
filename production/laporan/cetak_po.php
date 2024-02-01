@@ -223,7 +223,7 @@ if (isset($_GET['cetakData'])) {
                     The Centro Town House No. 17 <br>
                     Kel. Sukajadi, Kec. Batam Kota, Kota Batam <br>
                     <!-- Telepon +62 778 469856 - 469860 Faksimile +62 778 463620 <br> -->
-                    Laman: www.globalpetro.co.id, Surel: info@globalpetro.co.id
+                    Laman: www.mitramaritim.com, Surel: info@mitramaritim.com
                 </div>
 
                 <div style="margin-top: -70px; margin-left: 20px">
