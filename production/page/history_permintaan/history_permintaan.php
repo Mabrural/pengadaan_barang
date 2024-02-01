@@ -50,6 +50,7 @@ $id_user = $_SESSION["id_user"];
                 <th class="column-title">Nama Pemohon </th>
                 <th class="column-title">Approval 1</th>
                 <th class="column-title">Approval 2 </th>
+                <th class="column-title">Approval 3 </th>
                 <th class="column-title">Status </th>
                 <!-- <th class="column-title no-link last"><span class="nobr">Action</span> -->
                 </th>
@@ -93,11 +94,14 @@ $id_user = $_SESSION["id_user"];
                 <td class=" "><?= $data['nama_emp'];?></td>
                 <td class=" "><?= $data['acc1'];?></td>
                 <td class=" "><?= $data['acc2'];?></td>
+                <td class=" "><?= $data['acc3'];?></td>
                 <td class=" ">
                     <strong style="background-color: <?php
                     if ($data['status_req'] == 'Menunggu Persetujuan KC') {
                         echo '#b58709';
                     } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir.Ops') {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'Menunggu Persetujuan Ka. Ops') {
                         echo '#b58709';
                     } elseif ($data['status_req'] == 'On Progress in Purchasing') {
                         echo '#b58709';

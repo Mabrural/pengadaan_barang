@@ -49,6 +49,7 @@ $id_user = $_SESSION["id_user"];
                 <th class="column-title">Alasan </th>
                 <th class="column-title">Approval 1</th>
                 <th class="column-title">Approval 2 </th>
+                <th class="column-title">Approval 3 </th>
                 <th class="column-title">Status </th>
                 <!-- <th class="column-title no-link last"><span class="nobr">Action</span> -->
                 </th>
@@ -62,7 +63,7 @@ $id_user = $_SESSION["id_user"];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-                  $query = "SELECT * FROM req_barang JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan JOIN lokasi_barang ON lokasi_barang.id_lokasi=req_barang.id_lokasi JOIN lokasi_room ON lokasi_room.id_room=req_barang.id_room WHERE id_user=$id_user ORDER BY tgl_req_brg DESC";
+                  $query = "SELECT * FROM req_barang JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan JOIN lokasi_barang ON lokasi_barang.id_lokasi=req_barang.id_lokasi JOIN lokasi_room ON lokasi_room.id_room=req_barang.id_room WHERE id_user=$id_user ORDER BY id_req_brg DESC";
               		// $query = "SELECT * FROM barang WHERE barang.id_user=$id_user AND status='On Progress in Purchasing' OR status='Menunggu Persetujuan KC' OR status = 'Menunggu Persetujuan Dir.Ops' ORDER BY kode_pengajuan DESC";
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
@@ -83,11 +84,14 @@ $id_user = $_SESSION["id_user"];
                 <td class=" "><?= $data['alasan'];?></td>
                 <td class=" "><?= $data['acc1'];?></td>
                 <td class=" "><?= $data['acc2'];?></td>
+                <td class=" "><?= $data['acc3'];?></td>
                 <td class=" ">
                     <strong style="background-color: <?php
                     if ($data['status_req'] == 'Menunggu Persetujuan KC') {
                         echo '#b58709';
                     } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir.Ops') {
+                        echo '#b58709';
+                    } elseif ($data['status_req'] == 'Menunggu Persetujuan Ka. Ops') {
                         echo '#b58709';
                     } elseif ($data['status_req'] == 'On Progress in Purchasing') {
                         echo '#b58709';

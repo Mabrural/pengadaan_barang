@@ -126,13 +126,13 @@ if ($_SESSION["level"] == "Staff IT") {
 
                   <li><a><i class="fa fa-folder"></i> Master Barang<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="admin.php?page=dataBarang">Daftar Barang</a></li>
+                      <li><a href="admin-kops.php?page=dataBarang">Daftar Barang</a></li>
                     </ul>
                   </li>
 
                   <li><a><i class="fa fa-database"></i> Asset dan Inventaris<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="admin.php?page=dataInventaris">Storage Barang</a></li>
+                      <li><a href="admin-kops.php?page=dataInventaris">Storage Barang</a></li>
                     </ul>
                   </li>
 
@@ -140,13 +140,13 @@ if ($_SESSION["level"] == "Staff IT") {
                     <ul class="nav child_menu">
                       <!-- <li><a href="admin.php?page=approve">Approval</a></li> -->
                         <li class="nav-item">
-                            <a href="admin.php?page=approve" class="nav-link">
+                            <a href="admin-kops.php?page=approve" class="nav-link">
                                 Approve Permintaan Barang 
                                 <?php
                                     // Check if the notification should be displayed
                                     if (!isset($_SESSION['cuti_notification_displayed'])) {
                                         // Query untuk menghitung jumlah cuti yang belum diapprove
-                                        $query = "SELECT COUNT(*) AS jml_barang_belum_diapprove FROM req_barang JOIN user ON user.id_user=req_barang.id_user WHERE req_barang.status_req='Menunggu Persetujuan KC'";
+                                        $query = "SELECT COUNT(*) AS jml_barang_belum_diapprove FROM req_barang JOIN user ON user.id_user=req_barang.id_user WHERE req_barang.status_req='Menunggu Persetujuan Ka. Ops'";
                                         $result = mysqli_query($koneksi, $query);
                                         $data = mysqli_fetch_assoc($result);
 
@@ -161,15 +161,15 @@ if ($_SESSION["level"] == "Staff IT") {
                                 ?>
                             </a>
                         </li>
-                      <li><a href="admin.php?page=historyApprove">History Approve Barang</a></li>
+                      <li><a href="admin-kops.php?page=historyApprove">History Approve Barang</a></li>
                       <!-- <li><a href="tables_dynamic.html">Table Dynamic</a></li> -->
                     </ul>
                   </li>
 
                   <li><a><i class="fa fa-users"></i> Human Resources<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="admin.php?page=reqCuti">Form Cuti</a></li>
-                      <li><a href="admin.php?page=historyCuti">History Cuti</a></li>
+                      <li><a href="admin-kops.php?page=reqCuti">Form Cuti</a></li>
+                      <li><a href="admin-kops.php?page=historyCuti">History Cuti</a></li>
                     </ul>
                   </li>
 
@@ -322,7 +322,7 @@ if ($_SESSION["level"] == "Staff IT") {
                         $page = $_GET['page'];
                         switch ($page) {
                             case 'approve':
-                                include "page/admin_approve/admin_aprove.php";
+                                include "page/admin_approve/admin_aprove_kops.php";
                                 break;
 
                             case 'historyApprove':
@@ -391,11 +391,11 @@ if ($_SESSION["level"] == "Staff IT") {
                                 break;
 
                             case 'ubahApprove':
-                                include "page/admin_approve/konfirmasi_aprove.php";
+                                include "page/admin_approve/konfirmasi_aprove_kops.php";
                                 break;
 
                             case 'reject':
-                                include "page/admin_approve/reject_kc.php";
+                                include "page/admin_approve/reject_kops.php";
                                 break;
 
                             case 'tambahPengajuan':

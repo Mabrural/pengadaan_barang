@@ -83,6 +83,8 @@ $id_user = $_SESSION["id_user"];
                         echo '#b58709';
                     } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir.Ops') {
                         echo '#b58709';
+                    } elseif ($data['status_req'] == 'Menunggu Persetujuan Ka. Ops') {
+                        echo '#b58709';
                     } elseif ($data['status_req'] == 'On Progress in Purchasing') {
                         echo '#b58709';
                     } elseif ($data['status_req'] == 'Menunggu Persetujuan Dir. HRD') {

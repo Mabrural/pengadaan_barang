@@ -21,7 +21,7 @@ if (isset($_POST["submit"])) {
 	
 
 	// cek apakah data berhasil diubah atau tidak
-	if(ubahApprove($_POST) > 0 ) {
+	if(ubahApprove2($_POST) > 0 ) {
 		echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
 		echo '<script src="./sweetalert2.min.js"></script>';
 		echo "<script>
@@ -215,7 +215,7 @@ if (isset($_POST["submit"])) {
 											<div class="col-md-6 col-sm-6 ">
 												<input id="middle-name" name="tgl_req_brg" class="form-control" type="date" value="<?= $req_barang["tgl_req_brg"];?>" readonly>
 												<input id="middle-name" name="status_req" class="form-control" type="hidden" value="Ditolak">
-												<input id="middle-name" name="acc1" class="form-control" type="hidden" value="<?= $nama; ?>">
+												<input id="middle-name" name="acc2" class="form-control" type="hidden" value="">
 
 											</div>
 										</div>

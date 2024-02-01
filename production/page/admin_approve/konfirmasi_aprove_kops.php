@@ -4,8 +4,10 @@
 
 // ambil data di URL
 $id_req_brg = $_GET["id_req_brg"];
-// query data berdasarkan id
+// query data mahasiswa berdasarkan id
+
 $req_barang = query("SELECT * FROM req_barang WHERE id_req_brg = $id_req_brg")[0];
+$karyawan = query("SELECT * FROM user JOIN karyawan ON karyawan.id_emp=user.id_emp JOIN req_barang ON req_barang.id_user=user.id_user WHERE req_barang.id_req_brg=$id_req_brg")[0];
 $barang = query("SELECT * FROM barang");
 $lokasi = query("SELECT * FROM lokasi_barang");
 $room = query("SELECT * FROM lokasi_room");
@@ -19,7 +21,7 @@ if (isset($_POST["submit"])) {
 	
 
 	// cek apakah data berhasil diubah atau tidak
-	if(ubahPengajuan($_POST) > 0 ) {
+	if(ubahApprove($_POST) > 0 ) {
 		echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
 		echo '<script src="./sweetalert2.min.js"></script>';
 		echo "<script>
@@ -27,14 +29,14 @@ if (isset($_POST["submit"])) {
 			swal.fire({
 				
 				title               : 'Berhasil',
-				text                :  'Data berhasil diubah',
+				text                :  'Data berhasil diapprove',
 				//footer              :  '',
 				icon                : 'success',
 				timer               : 2000,
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=pengajuan'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=approve'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>";
 		// echo "
@@ -79,7 +81,7 @@ if (isset($_POST["submit"])) {
       <div class="">
 					<!-- <div class="page-title">
 						<div class="title_left">
-							<h3>Form Pengadaan Barang</h3>
+							<h3>Konfirmasi Approval</h3>
 						</div>
 
 						<div class="title_right">
@@ -98,7 +100,7 @@ if (isset($_POST["submit"])) {
 						<div class="col-md-12 col-sm-12 ">
 							<div class="x_panel">
 								<div class="x_title">
-									<h2>Ubah Data Pengajuan Barang<small></small></h2>
+									<h2>Konfirmasi Data <small></small></h2>
 									<!-- <ul class="nav navbar-right panel_toolbox">
 										<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
 										</li>
@@ -120,14 +122,32 @@ if (isset($_POST["submit"])) {
 									<br />
 									<form action="" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 										<input type="hidden" name="id_req_brg" value="<?= $req_barang["id_req_brg"];?>">
-										<input type="hidden" name="kode_pengajuan" id="last-name" required="required" class="form-control" value="<?= $req_barang["kode_pengajuan"];?>">
-										
+
+										<div class="item form-group">
+
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nama Pemohon <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" name="id_user" id="first-name" required="required" class="form-control" value="<?= $karyawan["nama_emp"];?>" disabled>
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<!-- <input type="hidden" name="aksi" value="ubah"> -->
+
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Kode Pengajuan <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" name="kode_pengajuan" id="first-name" required="required" class="form-control" value="<?= $req_barang["kode_pengajuan"];?>" readonly>
+											</div>
+										</div>
+
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Kode Barang <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-
-												<select class="form-control" name="kode_brg" required>
+												<input type="hidden" name="kode_brg" value="<?= $req_barang['kode_brg']?>">
+												<select class="form-control" name="kode_brg" required disabled>
 													<option value="">--Pilih Barang--</option>
 													<?php foreach($barang as $row) : ?>
 														<option value="<?= $row['kode_brg']?>" <?= ($row['kode_brg'] == $req_barang['kode_brg'])?'selected': ''; ?>><?= $row['kode_brg']?> - <?= $row['nama_barang']?> - <?= $row['spek']?></option>
@@ -136,11 +156,12 @@ if (isset($_POST["submit"])) {
 											</div>
 										</div>
 
+										
 										<div class="item form-group">
 											<label for="id_lokasi" class="col-form-label col-md-3 col-sm-3 label-align">Lokasi Barang <span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												
-												<select class="form-control" name="id_lokasi" id="id_lokasi" required>
+												<input type="hidden" name="id_lokasi" value="<?= $req_barang['id_lokasi']?>">
+												<select class="form-control" name="id_lokasi" id="id_lokasi" required disabled>
 													<option value="">--Pilih Lokasi Barang--</option>
 													<?php foreach($lokasi as $row) : ?>
 														<option value="<?= $row['id_lokasi']?>" <?= ($row['id_lokasi'] == $req_barang['id_lokasi'])? 'selected' : '';?>><?= $row['nama_lokasi']?></option>
@@ -152,7 +173,8 @@ if (isset($_POST["submit"])) {
 										<div class="item form-group">
 											<label for="id_room" class="col-form-label col-md-3 col-sm-3 label-align">Lokasi Ruangan <span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<select class="form-control" name="id_room" id="id_room" required>
+												<input type="hidden" name="id_room" value="<?= $req_barang['id_room']?>">
+												<select class="form-control" name="id_room" id="id_room" required disabled>
 													<option value="">--Pilih Lokasi Ruangan--</option>
 													<?php foreach($room as $row) : ?>
 														<option value="<?= $row['id_room']?>" <?= ($row['id_room'] == $req_barang['id_room'])?'selected' : '';?>><?= $row['room_name']?></option>
@@ -171,7 +193,7 @@ if (isset($_POST["submit"])) {
 										<div class="item form-group">
 											<label for="id_room" class="col-form-label col-md-3 col-sm-3 label-align">Satuan Barang <span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<select class="form-control" name="id_satuan" id="id_satuan" required>
+												<select class="form-control" name="id_satuan" id="id_satuan" required disabled>
 													<option value="">--Pilih Satuan--</option>
 													<?php foreach($satuan as $row) : ?>
 														<option value="<?= $row['id_satuan']?>" <?= ($row['id_satuan'] == $req_barang['id_satuan'])?'selected': '';?>><?= $row['nama_satuan']?></option>
@@ -180,33 +202,31 @@ if (isset($_POST["submit"])) {
 											</div>
 										</div>
 
+
 										<div class="item form-group">
 											<label for="alasan" class="col-form-label col-md-3 col-sm-3 label-align">Alasan</label>
 											<div class="col-md-6 col-sm-6 ">
-												<textarea id="alasan" class="form-control" rows="4" name="alasan" id="alasan" style="resize:none;"><?= $req_barang['alasan']?></textarea>
+												<textarea id="alasan" class="form-control" rows="4" name="alasan" id="alasan" style="resize:none;" readonly><?= $req_barang['alasan']?></textarea>
 											</div>
 										</div>
-
 
 										<div class="item form-group">
-											<!-- <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Date In</label> -->
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Pengajuan</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" name="tgl_req_brg" class="form-control" type="hidden" value="<?= $req_barang["tgl_req_brg"];?>" >
-												<input id="middle-name" name="status_req" class="form-control" type="hidden" value="<?= $req_barang["status_req"];?>">
-												<input id="middle-name" name="acc1" class="form-control" type="hidden" value="">
-												<input id="middle-name" name="acc2" class="form-control" type="hidden" value="">
-												<input id="middle-name" name="acc3" class="form-control" type="hidden" value="">
+												<input id="middle-name" name="tgl_req_brg" class="form-control" type="date" value="<?= $req_barang["tgl_req_brg"];?>" readonly>
+												<input id="middle-name" name="status_req" class="form-control" type="hidden" value="Menunggu Persetujuan KC">
+												<input id="middle-name" name="acc1" class="form-control" type="hidden" value="<?= $nama; ?>">
 
 											</div>
 										</div>
-										
+									
 									
 										<div class="ln_solid"></div>
 										<div class="item form-group">
 											<div class="col-md-6 col-sm-6 offset-md-3">
 												<!-- <button class="btn btn-primary" type="button">Cancel</button> -->
-												<button class="btn btn-primary" type="reset">Reset</button>
-												<button type="submit" class="btn btn-success" name="submit">Submit</button>
+												<!-- <button class="btn btn-primary" type="reset">Reset</button> -->
+												<button type="submit" class="btn btn-success" name="submit">Approve</button>
 											</div>
 										</div>
 

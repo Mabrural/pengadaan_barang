@@ -117,7 +117,7 @@ function tambahPengajuan($data) {
 	$id_user = mysqli_real_escape_string($koneksi, $_SESSION["id_user"]);
 
 	$query = "INSERT INTO req_barang VALUES
-			('', '$kode_pengajuan', '$kode_brg', '$qty_req', '$tgl_req_brg', '$alasan', '$status_req', '', '', '$id_lokasi', '$id_room', '$id_user', '$id_satuan')";
+			('', '$kode_pengajuan', '$kode_brg', '$qty_req', '$tgl_req_brg', '$alasan', '$status_req', '', '', '', '$id_lokasi', '$id_room', '$id_user', '$id_satuan')";
 	mysqli_query($koneksi, $query);
 
 	return mysqli_affected_rows($koneksi);
@@ -156,6 +156,7 @@ function ubahPengajuan($data) {
 
 	return mysqli_affected_rows($koneksi);
 }
+
 
 function ubahApprove($data) {
 	global $koneksi;
@@ -213,6 +214,38 @@ function ubahApprove2($data) {
 				id_lokasi = '$id_lokasi',
 				id_room = '$id_room',
 				acc2 = '$acc2'
+			  WHERE id_req_brg = $id_req_brg
+			";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function ubahApprove3($data) {
+	global $koneksi;
+	$id_req_brg = $data["id_req_brg"];
+	$kode_pengajuan = htmlspecialchars($data['kode_pengajuan']);
+	$kode_brg = htmlspecialchars($data["kode_brg"]);
+	$qty_req = htmlspecialchars($data["qty_req"]);
+	$tgl_req_brg = htmlspecialchars($data["tgl_req_brg"]);
+	$alasan = htmlspecialchars($data["alasan"]);
+	$status_req = htmlspecialchars($data["status_req"]);
+	$id_lokasi = htmlspecialchars($data["id_lokasi"]);
+	$id_room = htmlspecialchars($data["id_room"]);
+	$acc3 = htmlspecialchars($data["acc3"]);
+
+
+
+	$query = "UPDATE req_barang SET
+				kode_pengajuan = '$kode_pengajuan',
+				kode_brg = '$kode_brg',
+				qty_req = '$qty_req',
+				tgl_req_brg = '$tgl_req_brg',
+				alasan = '$alasan',
+				status_req = '$status_req',
+				id_lokasi = '$id_lokasi',
+				id_room = '$id_room',
+				acc3 = '$acc3'
 			  WHERE id_req_brg = $id_req_brg
 			";
 	mysqli_query($koneksi, $query);

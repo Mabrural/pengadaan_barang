@@ -155,9 +155,10 @@ if (isset($_POST["submit"])) {
 										<div class="item form-group">
 											<div class="col-md-6 col-sm-6 ">
 												<input id="middle-name" name="tgl_req_brg" class="form-control" placeholder="dd-mm-yyyy" type="hidden" value="<?php echo date('Y-m-d'); ?>" readonly>
-												<input id="middle-name" name="status_req" class="form-control" type="hidden" value="Menunggu Persetujuan KC">
+												<input id="middle-name" name="status_req" class="form-control" type="hidden" value="Menunggu Persetujuan Ka. Ops">
 												<input id="middle-name" name="acc1" class="form-control" type="hidden" value="">
 												<input id="middle-name" name="acc2" class="form-control" type="hidden" value="">
+												<input id="middle-name" name="acc3" class="form-control" type="hidden" value="">
 												
 											</div>
 										</div>
