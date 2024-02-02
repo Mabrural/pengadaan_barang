@@ -7,6 +7,8 @@ $vendor = query("SELECT * FROM vendor");
 $id_vendor = isset($_GET['id_vendor']) ? $_GET['id_vendor'] : '';
 $selectedIds = isset($_GET['select_id']) ? $_GET['select_id'] : [];
 
+$id_invoice = $_GET['id_invoice'];
+
 ?>
     <div class="x_panel">
       <div class="x_title">
@@ -17,7 +19,7 @@ $selectedIds = isset($_GET['select_id']) ? $_GET['select_id'] : [];
             <input type="hidden" name="id_user" value="<?= $id_user;?>">
             <input type="hidden" name="id_vendor" value="<?= $id_vendor;?>">
             <input type="hidden" id="select_id" name="select_id" value="<?=$selectedIds?>">
-            <a href="?form=tambahPembelian" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Ajukan PO</a>
+            <a href="?form=tambahPembelian&id_invoice=<?= $id_invoice?>" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Ajukan PO</a>
             <button type="submit" class="btn btn-info btn-sm" name="cetakData" onclick="document.getElementById('select_id').value = getCheckedIds();"><i class="fa fa-print"></i> Cetak PO</button>
             <!-- <button type="submit" class="btn btn-info btn-sm" name="cetakData"><i class="fa fa-print"></i> Cetak PO</button> -->
         </form>
@@ -27,28 +29,17 @@ $selectedIds = isset($_GET['select_id']) ? $_GET['select_id'] : [];
                   <form method="get">
                     <input type="hidden" name="aksi">
                         <!-- <input type="hidden" name="id_user" value="<?= $storage_barang['id_user'];?>"> -->
-                      <select class="form-control" name="id_vendor" id="id_vendor" required>
+                     <!--  <select class="form-control" name="id_vendor" id="id_vendor" required>
                           <option value="">--Pilih Vendor--</option>
                           <?php foreach($vendor as $row) : ?>
                               <option value="<?= $row['id_vendor']?>" <?php echo ($id_vendor == $row['id_vendor']) ? 'selected' : ''; ?>>
                                   <?= $row['nama_vendor']?>
                               </option>
                           <?php endforeach;?> 
-                      </select><br>
-                      <!-- <button type="submit" class="btn btn-primary btn-sm">Filter</button> -->
+                      </select><br> -->
                   </form>
               </div>
-              <!-- <div class="col-md-2 col-sm-6">
-                    <select class="form-control" name="id_room" id="id_room" required>
-                        <option value="">--Pilih Lokasi Ruangan--</option>
-                        <?php foreach($room as $row) : ?>
-                            <option value="<?= $row['id_room']?>" <?php echo ($id_room == $row['id_room']) ? 'selected' : ''; ?>>
-                                <?= $row['room_name']?>
-                            </option>
-                        <?php endforeach;?> 
-                    </select>
-                    <br>
-              </div> -->
+
           </div>
 
         <div class="clearfix"></div>
@@ -73,7 +64,7 @@ $selectedIds = isset($_GET['select_id']) ? $_GET['select_id'] : [];
           });
         </script>
 
-        <script type="text/javascript">
+        <!-- <script type="text/javascript">
               function getCheckedIds() {
               var selectedIds = [];
               $('input[name="select_id[]"]:checked').each(function() {
@@ -81,7 +72,7 @@ $selectedIds = isset($_GET['select_id']) ? $_GET['select_id'] : [];
               });
               return selectedIds;
           }
-        </script>
+        </script> -->
 
         <!-- <p>Add class <code>bulk_action</code> to table for bulk actions options on row select</p> -->
 
@@ -116,12 +107,12 @@ $selectedIds = isset($_GET['select_id']) ? $_GET['select_id'] : [];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-              		$query = "SELECT * FROM po_barang JOIN vendor ON vendor.id_vendor=po_barang.id_vendor JOIN req_barang ON req_barang.id_req_brg=po_barang.id_req_brg JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan";
+              		$query = "SELECT * FROM po_barang JOIN vendor ON vendor.id_vendor=po_barang.id_vendor JOIN req_barang ON req_barang.id_req_brg=po_barang.id_req_brg JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan WHERE po_barang.id_invoice=$id_invoice";
                   // $query = "SELECT * FROM po_barang JOIN req_barang ON req_barang.id_req_brg JOIN vendor ON vendor.id_vendor=po_barang.id_vendor JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan";
 
-                  if (!empty($id_vendor)) {
-                      $query .= " WHERE po_barang.id_vendor = $id_vendor ORDER BY id_po DESC";
-                  }
+                  // if (!empty($id_vendor)) {
+                  //     $query .= " WHERE po_barang.id_vendor = $id_vendor AND id_invoice=$id_invoice ORDER BY id_po DESC";
+                  // }
               		
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {

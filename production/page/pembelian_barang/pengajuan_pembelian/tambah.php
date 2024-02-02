@@ -1,6 +1,6 @@
 <?php
 
-
+$id_invoice = $_GET['id_invoice'];
 
 $satuan = query("SELECT * FROM satuan");
 $vendor = query("SELECT * FROM vendor");
@@ -27,7 +27,7 @@ if (isset($_POST["submit"])) {
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=pengajuanPembelian'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=pengajuanPembelian&id_invoice=$id_invoice'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>"; 
 		// echo "
@@ -51,7 +51,7 @@ if (isset($_POST["submit"])) {
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=pengajuanPembelian'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=pengajuanPembelian&id_invoice=$id_invoice'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>";
 		// echo "
@@ -152,6 +152,7 @@ if (isset($_POST["submit"])) {
 									<input name="acc3" class="form-control" type="hidden" value="">
 									<input name="acc4" class="form-control" type="hidden" value="">
 									<input name="acc5" class="form-control" type="hidden" value="">
+									<input name="id_invoice" class="form-control" type="hidden" value="<?= $id_invoice?>">
 
 								</div>
 

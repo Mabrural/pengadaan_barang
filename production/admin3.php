@@ -180,6 +180,7 @@ if ($_SESSION["level"] == "Staff IT") {
                   <li><a><i class="fa fa-shopping-cart"></i> Pembelian Barang<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="admin3.php?page=pengajuanPembelian">Data Pembelian Barang</a></li>
+                      <li><a href="admin3.php?page=invoicePembelian">Invoice</a></li>
                       <!-- <li><a href="index.php?page=historyPengajuan">Barang Masuk</a></li>
                       <li><a href="index.php?page=historyPengajuan">Barang Keluar</a></li> -->
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
@@ -448,6 +449,10 @@ if ($_SESSION["level"] == "Staff IT") {
                                 include 'page/pembelian_barang/pengajuan_pembelian/pengajuan_pembelian.php';
                                 break;
 
+                            case 'invoicePembelian':
+                                include 'page/pembelian_barang/invoice/invoice.php';
+                                break;
+
                             case 'laporan':
                                 include "page/laporan/rekap_data.php";
                                 break;
@@ -596,6 +601,18 @@ if ($_SESSION["level"] == "Staff IT") {
 
                             case 'historyPermintaan':
                                 include 'page/history_permintaan/history_permintaan.php';
+                                break;
+
+                            case 'tambahInvoice':
+                                include 'page/pembelian_barang/invoice/tambah.php';
+                                break;
+
+                            case 'ubahInvoice':
+                                include 'page/pembelian_barang/invoice/ubah.php';
+                                break;
+
+                            case 'hapusInvoice':
+                                include 'page/pembelian_barang/invoice/hapus.php';
                                 break;
 
                             case 'ubahCatatan':

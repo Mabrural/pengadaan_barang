@@ -1361,10 +1361,11 @@ function tambahPembelian($data) {
 	$acc5 = htmlspecialchars($data["acc5"]);
 	$id_vendor = htmlspecialchars($data["id_vendor"]);
 	$id_user = htmlspecialchars($_SESSION['id_user']);
+	$id_invoice = htmlspecialchars($data['id_invoice']);
 
 
 	$query = "INSERT INTO po_barang VALUES
-			('', '$id_req_brg', '$tgl_po', '$qty_po', '$harga_po', '$ket_po', '$acc3', '$acc4', '$acc5', '$id_vendor', '$id_user')";
+			('', '$id_req_brg', '$tgl_po', '$qty_po', '$harga_po', '$ket_po', '$acc3', '$acc4', '$acc5', '$id_vendor', '$id_user', '$id_invoice')";
 	mysqli_query($koneksi, $query);
 
 	// Mengupdate status_req di tabel req_barang
@@ -1594,6 +1595,108 @@ function reject1Pembelian($data) {
   mysqli_query($koneksi, $query_update);
 
 	return mysqli_affected_rows($koneksi);
+}
+
+// function generate_kode_invoice() {
+//   global $koneksi;
+  
+//   // Ambil nilai auto increment terakhir
+//   $query = "SELECT MAX(CAST(SUBSTRING(no_invoice, 4) AS SIGNED)) AS kode_terakhir FROM invoice";
+//   $result = mysqli_query($koneksi, $query);
+//   $row = mysqli_fetch_assoc($result);
+//   $kode_terakhir = $row['kode_terakhir'];
+
+//   // Generate kode barang baru
+//   $kode_baru = "NO. ";
+//   if ($kode_terakhir !== null) {
+//     $kode_baru .= sprintf("%05d", $kode_terakhir + 1);
+//   } else {
+//     $kode_baru .= "001/PO/MMM/I/date('y')";
+//   }
+
+//   return $kode_baru;
+// }
+
+
+
+
+function generate_kode_invoice() {
+  global $koneksi;
+
+  // Ambil tahun dan bulan sekarang
+  $tahun_sekarang = date("Y");
+
+  // Mencoba mengambil nilai auto increment terakhir (dengan penanganan error)
+  $query = "SELECT MAX(CAST(SUBSTRING(no_invoice, 4, 3) AS SIGNED)) AS kode_terakhir FROM invoice WHERE SUBSTRING(no_invoice, 6, 4) = '$tahun_sekarang'";
+  $result = mysqli_query($koneksi, $query);
+
+  if ($result) {
+    $row = mysqli_fetch_assoc($result);
+    $kode_terakhir = $row['kode_terakhir'];
+  } else {
+    // Jika terjadi error saat query, asumsikan kode terakhir belum ada
+    $kode_terakhir = 0;
+  }
+
+  // Generate kode invoice baru
+  $kode_baru = "NO. ";
+  $kode_baru .= sprintf("%03d", $kode_terakhir + 1);  // Tambahkan angka urut dengan 3 digit
+  $kode_baru .= "/PO/MMM/I/$tahun_sekarang";
+
+  return $kode_baru;
+}
+
+
+
+function tambahInvoice($data) {
+  global $koneksi;
+
+  // Ambil data no invoice dari input
+  $no_invoice = htmlspecialchars($data["no_invoice"]);
+
+  // Cek apakah no invoice sudah ada
+  $query_cek = "SELECT COUNT(*) AS total FROM invoice WHERE no_invoice = '$no_invoice'";
+  $result_cek = mysqli_query($koneksi, $query_cek);
+  $row_cek = mysqli_fetch_assoc($result_cek);
+
+  // Jika no invoice sudah ada, tampilkan pesan error
+  if ($row_cek['total'] > 0) {
+    echo "<script>alert('No invoice sudah ada!');</script>";
+    return false;
+  }
+
+  // Jika no invoice belum ada, insert data invoice
+  $query = "INSERT INTO invoice VALUES
+			('', '$no_invoice')";
+  mysqli_query($koneksi, $query);
+
+  // Return true jika insert berhasil
+  return mysqli_affected_rows($koneksi) > 0;
+}
+
+function ubahInvoice($data) {
+	global $koneksi;
+
+	$id_invoice = htmlspecialchars($data["id_invoice"]);
+	$no_invoice = htmlspecialchars($data["no_invoice"]);
+
+	$query = "UPDATE invoice SET
+				no_invoice= '$no_invoice'
+			  WHERE id_invoice='$id_invoice'
+			";
+			
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+
+}
+
+function hapusInvoice($id_invoice) {
+	global $koneksi;
+	mysqli_query($koneksi, "DELETE FROM invoice WHERE id_invoice=$id_invoice");
+
+	return mysqli_affected_rows($koneksi);
+
 }
 
 function tambahAnggaran($data) {
