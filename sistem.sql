@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 01, 2024 at 12:02 PM
+-- Generation Time: Feb 02, 2024 at 11:55 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -225,6 +225,27 @@ INSERT INTO `ijazah` (`id_ijazah`, `no_ijazah`, `tgl_penitipan`, `tgl_kembali`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `invoice`
+--
+
+CREATE TABLE `invoice` (
+  `id_invoice` int(10) NOT NULL,
+  `no_invoice` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `invoice`
+--
+
+INSERT INTO `invoice` (`id_invoice`, `no_invoice`) VALUES
+(23, 'NO. 002/PO/MMM/I/2024'),
+(24, 'NO. 003/PO/MMM/I/2024'),
+(26, 'NO. 004/PO/MMM/I/2024'),
+(31, 'NO. 005/PO/MMM/I/2024');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `karyawan`
 --
 
@@ -417,24 +438,21 @@ CREATE TABLE `po_barang` (
   `acc4` varchar(40) DEFAULT NULL,
   `acc5` varchar(40) DEFAULT NULL,
   `id_vendor` int(10) NOT NULL,
-  `id_user` int(10) NOT NULL
+  `id_user` int(10) NOT NULL,
+  `id_invoice` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `po_barang`
 --
 
-INSERT INTO `po_barang` (`id_po`, `id_req_brg`, `tgl_po`, `qty_po`, `harga_po`, `ket_po`, `acc3`, `acc4`, `acc5`, `id_vendor`, `id_user`) VALUES
-(33, 39, '2024-01-31', 2, 460800000, 'tes buy', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 2, 13),
-(34, 40, '2024-01-31', 1, 50000, '-', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 1, 27),
-(35, 41, '2024-01-31', 1, 7800000, '-', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 1, 27),
-(36, 43, '2024-01-31', 8, 230400000, 'buat kapal', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 1, 27),
-(37, 42, '2024-01-31', 2, 3200000, '-', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 3, 27),
-(38, 49, '2024-02-01', 1, 1600000, 'butuh cepat', 'James Taju', '', '', 1, 13),
-(39, 50, '2024-02-01', 1, 1500000, 'asdasd', 'James Taju', '', '', 1, 13),
-(40, 51, '2024-02-01', 1, 1600000, 'warna putih kain', 'James Taju', 'Regina', '', 3, 27),
-(41, 52, '2024-02-01', 1, 17000, '-', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 1, 27),
-(42, 54, '2024-02-01', 1, 1500000, '-', '', '', '', 1, 27);
+INSERT INTO `po_barang` (`id_po`, `id_req_brg`, `tgl_po`, `qty_po`, `harga_po`, `ket_po`, `acc3`, `acc4`, `acc5`, `id_vendor`, `id_user`, `id_invoice`) VALUES
+(48, 70, '2024-02-02', 1, 5000000, '4 cilinder', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 2, 27, 23),
+(49, 71, '2024-02-02', 1, 15000, '-', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 1, 27, 24),
+(50, 72, '2024-02-02', 1, 150000, '-', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 1, 27, 24),
+(51, 74, '2024-02-02', 1, 300000, 'untuk bersih bersih kapal', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 1, 27, 24),
+(52, 73, '2024-02-02', 1, 120000, '-', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 2, 27, 26),
+(53, 75, '2024-02-02', 1, 500000, '1', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 3, 27, 31);
 
 -- --------------------------------------------------------
 
@@ -464,25 +482,12 @@ CREATE TABLE `req_barang` (
 --
 
 INSERT INTO `req_barang` (`id_req_brg`, `kode_pengajuan`, `kode_brg`, `qty_req`, `tgl_req_brg`, `alasan`, `status_req`, `acc1`, `acc2`, `acc3`, `id_lokasi`, `id_room`, `id_user`, `id_satuan`) VALUES
-(39, 'REQ-24012700001-53657', 'BRG00001', 1, '2024-01-27', '', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', NULL, 1, 1, 28, 1),
-(40, 'REQ-24012700002-90814', 'BRG00002', 1, '2024-01-27', '', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', NULL, 2, 3, 28, 1),
-(41, 'REQ-24012700003-60169', 'BRG00003', 1, '2024-01-27', '', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', NULL, 2, 2, 29, 1),
-(42, 'REQ-24012700004-41123', 'BRG00008', 8, '2024-01-27', '', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', NULL, 2, 1, 29, 1),
-(43, 'REQ-24012700005-26597', 'BRG00007', 2, '2024-01-27', '', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', NULL, 1, 1, 29, 1),
-(44, 'REQ-24012700006-15577', 'BRG00001', 1, '2024-01-27', '', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', NULL, 1, 1, 29, 1),
-(45, 'REQ-24012800007-52211', 'BRG00001', 1, '2024-01-28', 'untuk jig', 'Selesai', 'Michael Kawilarang', 'Bambang Wahyudi', NULL, 1, 1, 28, 1),
-(46, 'REQ-24020100008-29216', 'BRG00067', 1, '2024-02-01', 'yang lama sudah rusak\r\n', 'Ditolak', 'Michael Kawilarang', '', NULL, 2, 1, 28, 3),
-(47, 'REQ-24020100009-73440', 'BRG00004', 1, '2024-02-01', 'udah soak akinya', 'Ditolak', 'Michael Kawilarang', '', NULL, 1, 1, 28, 1),
-(48, 'REQ-24020100010-91082', 'BRG00009', 1, '2024-02-01', 'kunci inggris lama hilang', 'Menunggu Persetujuan Dir. HRD', 'Bambang Wahyudi', '', NULL, 3, 1, 28, 3),
-(49, 'REQ-24020100011-59449', 'BRG00088', 1, '2024-02-01', 'penambahan stok aja', 'Ditolak', 'Michael Kawilarang', 'Bambang Wahyudi', NULL, 3, 2, 28, 1),
-(50, 'REQ-24020100012-26182', 'BRG00086', 1, '2024-02-01', '', 'Ditolak', 'Michael Kawilarang', 'Bambang Wahyudi', NULL, 1, 2, 28, 1),
-(51, 'REQ-24020100013-15700', 'BRG00079', 1, '2024-02-01', 'untuk bongkar mesin\r\n', 'Ditolak', 'Michael Kawilarang', 'Bambang Wahyudi', NULL, 4, 1, 28, 2),
-(52, 'REQ-24020100014-89472', 'BRG00081', 1, '2024-02-01', 'untuk cat deck', 'Ditolak', 'Michael Kawilarang', 'Bambang Wahyudi', NULL, 1, 3, 28, 12),
-(54, 'REQ-24020100015-95164', 'BRG00009', 1, '2024-02-01', 'sdasdad', 'Menunggu Persetujuan Dir. HRD', 'Gahral', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 1, 28, 1),
-(55, 'REQ-24020100016-88468', 'BRG00085', 1, '2024-02-01', 'asds', 'On Progress in Purchasing', 'Gahral', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 1, 28, 2),
-(56, 'REQ-24020100017-25086', 'BRG00005', 1, '2024-02-01', 'sdfdf', 'Ditolak', 'Gahral', '', '', 2, 2, 28, 1),
-(63, 'REQ-24020100018-28054', 'BRG00006', 4, '2024-02-01', '', 'Ditolak', 'Gahral', 'Michael Kawilarang', '', 1, 2, 28, 1),
-(68, 'REQ-24020100019-85115', 'BRG00002', 1, '2024-02-01', '', 'Ditolak', 'Gahral', 'Michael Kawilarang', '', 1, 1, 28, 1);
+(70, 'REQ-24020200021-18827', 'BRG00001', 1, '2024-02-02', 'urgent\r\n', 'Selesai', 'Gahral', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 1, 28, 1),
+(71, 'REQ-24020200022-74496', 'BRG00004', 1, '2024-02-02', 'aki lama sudah soak\r\n', 'Selesai', 'Gahral', 'Michael Kawilarang', 'Bambang Wahyudi', 4, 1, 28, 1),
+(72, 'REQ-24020200023-72480', 'BRG00009', 1, '2024-02-02', 'untuk tools', 'Selesai', 'Gahral', 'Michael Kawilarang', 'Bambang Wahyudi', 4, 1, 28, 3),
+(73, 'REQ-24020200024-47696', 'BRG00050', 1, '2024-02-02', 'untuk penerangan', 'Selesai', 'Gahral', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 3, 28, 1),
+(74, 'REQ-24020200025-97786', 'BRG00072', 1, '2024-02-02', '', 'Selesai', 'Gahral', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 2, 28, 1),
+(75, 'REQ-24020200026-97908', 'BRG00008', 1, '2024-02-02', '-', 'Selesai', 'Gahral', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 2, 29, 1);
 
 -- --------------------------------------------------------
 
@@ -756,6 +761,12 @@ ALTER TABLE `ijazah`
   ADD KEY `id_emp` (`id_emp`);
 
 --
+-- Indexes for table `invoice`
+--
+ALTER TABLE `invoice`
+  ADD PRIMARY KEY (`id_invoice`);
+
+--
 -- Indexes for table `karyawan`
 --
 ALTER TABLE `karyawan`
@@ -807,7 +818,8 @@ ALTER TABLE `po_barang`
   ADD PRIMARY KEY (`id_po`),
   ADD KEY `id_req_brg` (`id_req_brg`),
   ADD KEY `id_vendor` (`id_vendor`),
-  ADD KEY `id_user` (`id_user`);
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `id_invoice` (`id_invoice`);
 
 --
 -- Indexes for table `req_barang`
@@ -881,6 +893,12 @@ ALTER TABLE `ijazah`
   MODIFY `id_ijazah` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
+-- AUTO_INCREMENT for table `invoice`
+--
+ALTER TABLE `invoice`
+  MODIFY `id_invoice` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
@@ -926,13 +944,13 @@ ALTER TABLE `manage_cuti`
 -- AUTO_INCREMENT for table `po_barang`
 --
 ALTER TABLE `po_barang`
-  MODIFY `id_po` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id_po` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `req_barang`
 --
 ALTER TABLE `req_barang`
-  MODIFY `id_req_brg` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id_req_brg` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `req_cuti`
@@ -1016,7 +1034,8 @@ ALTER TABLE `manage_cuti`
 ALTER TABLE `po_barang`
   ADD CONSTRAINT `po_barang_ibfk_1` FOREIGN KEY (`id_req_brg`) REFERENCES `req_barang` (`id_req_brg`),
   ADD CONSTRAINT `po_barang_ibfk_2` FOREIGN KEY (`id_vendor`) REFERENCES `vendor` (`id_vendor`),
-  ADD CONSTRAINT `po_barang_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
+  ADD CONSTRAINT `po_barang_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
+  ADD CONSTRAINT `po_barang_ibfk_4` FOREIGN KEY (`id_invoice`) REFERENCES `invoice` (`id_invoice`);
 
 --
 -- Constraints for table `req_barang`
