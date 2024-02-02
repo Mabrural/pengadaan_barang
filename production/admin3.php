@@ -179,8 +179,8 @@ if ($_SESSION["level"] == "Staff IT") {
 
                   <li><a><i class="fa fa-shopping-cart"></i> Pembelian Barang<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="admin3.php?page=pengajuanPembelian">Data Pembelian Barang</a></li>
-                      <li><a href="admin3.php?page=invoicePembelian">Invoice</a></li>
+                      <!-- <li><a href="admin3.php?page=pengajuanPembelian">Data Pembelian Barang</a></li> -->
+                      <li><a href="admin3.php?page=invoicePembelian">Invoice Pembelian</a></li>
                       <!-- <li><a href="index.php?page=historyPengajuan">Barang Masuk</a></li>
                       <li><a href="index.php?page=historyPengajuan">Barang Keluar</a></li> -->
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>

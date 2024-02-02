@@ -71,13 +71,13 @@ $id_user = $_SESSION["id_user"];
      
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
-
+    
               	 ?>
                  <!-- <td><input type="checkbox" class="flat" name="select_id[]" value="<?= $data['id_invoice']; ?>"></td> -->
                 <td class=" "><?= $no++;?></td>
                 <td class=" "><?= $data['no_invoice'];?></td>
       
-                <td class=" last"><a href="?form=ubahInvoice&id_invoice=<?= $data["id_invoice"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusInvoice&id_invoice=<?= $data["id_invoice"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>  <a href="?page=pengajuanPembelian&id_invoice=<?= $data["id_invoice"]; ?>" class="btn btn-warning btn-sm">Lihat PO</a> 
+                <td class=" last"> <a href="?page=pengajuanPembelian&id_invoice=<?= $data["id_invoice"]; ?>" class="btn btn-dark btn-sm text-black"> <i class="fa fa-eye"></i> Lihat PO</a> | <a href="?form=ubahInvoice&id_invoice=<?= $data["id_invoice"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusInvoice&id_invoice=<?= $data["id_invoice"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a> 
                 </td>
               </tr>
               

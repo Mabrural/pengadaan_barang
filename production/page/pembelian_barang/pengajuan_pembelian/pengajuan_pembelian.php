@@ -4,8 +4,8 @@ $id_user = $_SESSION["id_user"];
 
 $vendor = query("SELECT * FROM vendor");
 // $pengajuan = query("SELECT * FROM barang WHERE barang.id_barang=$id_user");
-$id_vendor = isset($_GET['id_vendor']) ? $_GET['id_vendor'] : '';
-$selectedIds = isset($_GET['select_id']) ? $_GET['select_id'] : [];
+// $id_vendor = isset($_GET['id_vendor']) ? $_GET['id_vendor'] : '';
+// $selectedIds = isset($_GET['select_id']) ? $_GET['select_id'] : [];
 
 $id_invoice = $_GET['id_invoice'];
 
@@ -17,11 +17,12 @@ $id_invoice = $_GET['id_invoice'];
         <form action="laporan/cetak_po.php" method="get">
             <input type="hidden" name="aksi">
             <input type="hidden" name="id_user" value="<?= $id_user;?>">
-            <input type="hidden" name="id_vendor" value="<?= $id_vendor;?>">
-            <input type="hidden" id="select_id" name="select_id" value="<?=$selectedIds?>">
+            <input type="hidden" name="id_invoice" value="<?= $id_invoice;?>">
+            <!-- <input type="hidden" name="id_vendor" value="<?= $id_vendor;?>"> -->
+            <!-- <input type="hidden" id="select_id" name="select_id" value="<?=$selectedIds?>"> -->
             <a href="?form=tambahPembelian&id_invoice=<?= $id_invoice?>" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Ajukan PO</a>
-            <button type="submit" class="btn btn-info btn-sm" name="cetakData" onclick="document.getElementById('select_id').value = getCheckedIds();"><i class="fa fa-print"></i> Cetak PO</button>
-            <!-- <button type="submit" class="btn btn-info btn-sm" name="cetakData"><i class="fa fa-print"></i> Cetak PO</button> -->
+            <!-- button type="submit" class="btn btn-info btn-sm" name="cetakData" onclick="document.getElementById('select_id').value = getCheckedIds();"><i class="fa fa-print"></i> Cetak PO</button> -->
+            <button type="submit" class="btn btn-info btn-sm" name="cetakData"><i class="fa fa-print"></i> Cetak PO</button>
         </form>
 
         <div class="row">
@@ -80,9 +81,9 @@ $id_invoice = $_GET['id_invoice'];
           <table id="example" class="display" style="width:100%">
             <thead style="background-color: #2a3f54; color: #dfe5f1;">
               <tr class="headings">
-                <th>
+                <!-- <th>
                   <input type="checkbox" id="check-all" class="flat">
-                </th>
+                </th> -->
                 <th class="column-title">No. </th>
                 <th class="column-title">Tanggal PO</th>
                 <th class="column-title">Nama Barang </th>
@@ -119,7 +120,7 @@ $id_invoice = $_GET['id_invoice'];
               	     $harga_po = $data['harga_po'];
                      $total_harga = $harga_po * $data['qty_po'];
               	 ?>
-                 <td><input type="checkbox" class="flat" name="select_id[]" value="<?= $data['id_po']; ?>"></td>
+                 <!-- <td><input type="checkbox" class="flat" name="select_id[]" value="<?= $data['id_po']; ?>"></td> -->
                 <td class=" "><?= $no++;?></td>
                 <td class=" "><?= date('d-M-Y', strtotime($data['tgl_po']));?></td>
                 <td class=" "><a href="img/barang/<?= $data['gambar_barang'];?>" style="text-decoration: underline; color:blue;"><?= $data['nama_barang'];?> </a></td>

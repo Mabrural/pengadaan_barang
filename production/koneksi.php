@@ -1693,7 +1693,12 @@ function ubahInvoice($data) {
 
 function hapusInvoice($id_invoice) {
 	global $koneksi;
-	mysqli_query($koneksi, "DELETE FROM invoice WHERE id_invoice=$id_invoice");
+	// mysqli_query($koneksi, "DELETE FROM invoice WHERE id_invoice=$id_invoice");
+	try{
+		mysqli_query($koneksi, "DELETE FROM invoice WHERE id_invoice='$id_invoice'");
+	}catch(Exception $e){
+		return false;
+	}
 
 	return mysqli_affected_rows($koneksi);
 

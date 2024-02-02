@@ -7,13 +7,12 @@ if (isset($_GET['cetakData'])) {
 
 	// $jabatan = $_GET['jabatan'];
     // query data berdasarkan id
-    $po_barang = query("SELECT * FROM po_barang JOIN invoice ON invoice.id_invoice=po_barang.id_invoice")[0];
+    $po_barang = query("SELECT * FROM po_barang")[0];
 
-    // $id_vendor = $_GET['id_vendor'];
-    $id_invoice = $_GET['id_invoice'];
+    $id_vendor = $_GET['id_vendor'];
     // $selectedIds = isset($_GET['select_id']) ? $_GET['select_id'] : [];
     // $selectedIds = isset($_GET['select_id']) ? $_GET['select_id'] : [];;
-    // $selectedIds = explode(',', $_GET['select_id']);
+    $selectedIds = explode(',', $_GET['select_id']);
 }
 ?>
 
@@ -252,13 +251,10 @@ if (isset($_GET['cetakData'])) {
 
                         <table width="90%" border="0" cellpadding="0" cellspacing="0" align="center" style="font-family:&#39;Times New Roman&#39;, Times, serif; font-size:16px">
                             <tbody><tr>
-                                <!-- <td height="25px"> <div align="center"><b>REKAP DATA</b></div> </td> -->
+                                <td height="25px"> <div align="center"><b>REKAP DATA</b></div> </td>
                             </tr>
                             <tr>
                                 <td height="25px"> <div align="center"><b>PURCHASE ORDER</b></div> </td>
-                            </tr>
-                            <tr>
-                                <td height="25px"> <div align="center"><b>( <?= $po_barang['no_invoice']?> )</b></div> </td>
                             </tr>
                         </tbody></table>
 
@@ -268,12 +264,12 @@ if (isset($_GET['cetakData'])) {
                                 <td>&nbsp;</td>
                             </tr>
                             <?php 
-                                $query = "SELECT * FROM po_barang JOIN vendor ON vendor.id_vendor=po_barang.id_vendor JOIN req_barang ON req_barang.id_req_brg=po_barang.id_req_brg JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan JOIN user ON user.id_user=po_barang.id_user JOIN karyawan ON karyawan.id_emp=user.id_emp WHERE id_invoice=$id_invoice";
+                                $query = "SELECT * FROM po_barang JOIN vendor ON vendor.id_vendor=po_barang.id_vendor JOIN req_barang ON req_barang.id_req_brg=po_barang.id_req_brg JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan JOIN user ON user.id_user=po_barang.id_user JOIN karyawan ON karyawan.id_emp=user.id_emp";
 
                                 // Add filter conditions based on the selected values
-                                  // if (!empty($id_vendor)) {
-                                  //     $query .= " WHERE po_barang.id_vendor = $id_vendor";
-                                  // }
+                                  if (!empty($id_vendor)) {
+                                      $query .= " WHERE po_barang.id_vendor = $id_vendor";
+                                  }
 
                         
 
@@ -291,7 +287,12 @@ if (isset($_GET['cetakData'])) {
                              ?>
                             <tr>
                                 <td>Nama Vendor</td>
-                                <td><?= $nama_vendor?></td>
+                                <?php  
+                                if (!empty($id_vendor)) {
+                                    echo "<td>: $nama_vendor</td>";
+                                } else {
+                                    echo '<td>: Semua Vendor</td>';
+                                } ?>
                             </tr>
                             <tr>
                                 <td>No. Telp Vendor</td>
@@ -343,11 +344,11 @@ if (isset($_GET['cetakData'])) {
                                     $no = 1;
                                     $total = 0;
                                     $total_sum = 0;
-                                    // // $selectedIds = explode(',', $_GET['select_id']);
-                                    // if (!is_array($selectedIds)) {
-                                    //     $selectedIds = array();
-                                    // }
-                                    $query = "SELECT * FROM po_barang JOIN vendor ON vendor.id_vendor=po_barang.id_vendor JOIN req_barang ON req_barang.id_req_brg=po_barang.id_req_brg JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan JOIN user ON user.id_user=po_barang.id_user JOIN karyawan ON karyawan.id_emp=user.id_emp WHERE id_invoice=$id_invoice";
+                                    $selectedIds = explode(',', $_GET['select_id']);
+                                    if (!is_array($selectedIds)) {
+                                        $selectedIds = array();
+                                    }
+                                    $query = "SELECT * FROM po_barang JOIN vendor ON vendor.id_vendor=po_barang.id_vendor JOIN req_barang ON req_barang.id_req_brg=po_barang.id_req_brg JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan JOIN user ON user.id_user=po_barang.id_user JOIN karyawan ON karyawan.id_emp=user.id_emp";
                                      
                                     // Add filter conditions based on the selected values
                                       // if (!empty($id_vendor)) {
@@ -358,17 +359,17 @@ if (isset($_GET['cetakData'])) {
                                       // }
                                      
                                       
-                                    // if (!empty($selectedIds)) {
-                                    //     $query .= " WHERE po_barang.id_po IN (" . implode(',', $selectedIds) . ") AND po_barang.id_vendor = $id_vendor";
-                                    // } else {
-                                    //     $query .= " WHERE po_barang.id_vendor = IFNULL($id_vendor, '0')";
-                                    // }
+                                    if (!empty($selectedIds)) {
+                                        $query .= " WHERE po_barang.id_po IN (" . implode(',', $selectedIds) . ") AND po_barang.id_vendor = $id_vendor";
+                                    } else {
+                                        $query .= " WHERE po_barang.id_vendor = IFNULL($id_vendor, '0')";
+                                    }
 
                                       
 
                                     $tampil = mysqli_query($koneksi, $query);
                                     while ($data = mysqli_fetch_assoc($tampil)) {
-                                        // if (in_array($data['id_po'], $selectedIds)) {}
+                                        if (in_array($data['id_po'], $selectedIds)) {}
                                         $jabatan = $data['jabatan'];
                                         $qty_po = $data['qty_po'];
                                         $total += $qty_po;
@@ -376,10 +377,6 @@ if (isset($_GET['cetakData'])) {
 				                     	$total_harga = $harga_po * $qty_po;
                                     	$total_sum += $total_harga;
                                     	$acc5 = $data['acc5'];
-                                        if ($acc5==null) {
-                                            $no_acc = "Belum Disetujui";
-                                        }
-
                                     
                                  ?>
                                 <td height="20" valign="top" align="center" class="kotak" style="padding:4px">&nbsp;<?= $no++; ?></td>
@@ -417,7 +414,7 @@ if (isset($_GET['cetakData'])) {
 	                         
 	                    </tr>
                     </table><br>
-                    <div class="row">
+
                         <table width="90%" border="0" cellpadding="1" cellspacing="1" align="center" style="font-family:&#39;Times New Roman&#39;, Times, serif; font-size:12px">
                             <tbody><tr>
                                 <td colspan="2">&nbsp;</td>
@@ -452,35 +449,15 @@ if (isset($_GET['cetakData'])) {
                                 <td> <div align="left"> </div> </td>
                                 <td> <div align="left"></div> </td>
                             </tr>   
-                            
                             <tr>
                                 <td colspan="2"> <div align="left">&nbsp;</div> </td>
                                 <td> <div align="center"></div> </td>
                             </tr>   
                             <tr>
                                 <td colspan="2"> <div align="left">&nbsp;</div><br><br> </td>
-                                <!-- <td> <div align="center"><?php if (isset($acc5)) echo "( $acc5 )"; ?></div> </td> -->
-                                <td>
-                                  <div align="center">
-                                    <?php
-                                      if (isset($acc5) AND $acc5 != null) {
-                                        echo "( $acc5 )";
-                                      } else {
-                                        echo "( $no_acc )";
-                                      }
-                                    ?>
-                                  </div>
-                                </td>
-
+                                <td> <div align="center"><?php if (isset($acc5)) echo "( $acc5 )"; ?></div> </td>
                             </tr>
                         </tbody></table>
-
-                    </div>
-
-
-
-
-
                     </td>
                 </tr>
             </tbody></table>
