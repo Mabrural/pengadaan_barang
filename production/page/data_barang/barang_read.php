@@ -7,7 +7,7 @@ $id_user = $_SESSION["id_user"];
 ?>
     <div class="x_panel">
       <div class="x_title">
-        <h2>Data Barang <small></small></h2>
+        <h2>List Data Barang <small></small></h2>
         <!-- <a href="?form=tambahBarang" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah Barang</a> -->
         <!-- <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>

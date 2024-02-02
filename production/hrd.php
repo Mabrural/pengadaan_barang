@@ -140,11 +140,11 @@ if ($_SESSION["level"] == "Staff IT") {
 
                   <li><a><i class="fa fa-shopping-cart"></i> Pembelian Barang<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="hrd.php?page=pengajuanPembelian">Data Pembelian Barang</a></li>
+                      <!-- <li><a href="hrd.php?page=pengajuanPembelian">Data Pembelian Barang</a></li> -->
                       <li><a href="hrd.php?page=approvePembelian">Approve Pembelian Barang</a></li>
-                      <!-- <li><a href="index.php?page=historyPengajuan">Barang Masuk</a></li>
-                      <li><a href="index.php?page=historyPengajuan">Barang Keluar</a></li> -->
-                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                      <li><a href="hrd.php?page=invoicePembelian">Invoice Pembelian</a></li>
+                      <!-- <li><a href="index.php?page=historyPengajuan">Barang Keluar</a></li>  -->
+                      <!-- <li><a href="tables_dynamic.html">Table Dynamic</a></li> -->
                     </ul>
                   </li>
 
@@ -223,9 +223,9 @@ if ($_SESSION["level"] == "Staff IT") {
 
 
                       <li><a href="hrd.php?page=historyApproveCuti">History Approve Cuti</a></li>
-                      <li><a href="hrd.php?page=attendance">Attendance</a></li>
+                      <!-- <li><a href="hrd.php?page=attendance">Attendance</a></li>
                       <li><a href="hrd.php?page=penilaian">Penilaian Karyawan</a></li>
-                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                      <li><a href="tables_dynamic.html">Table Dynamic</a></li> -->
                     </ul>
                   </li>
                   <!-- <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
@@ -456,6 +456,14 @@ if ($_SESSION["level"] == "Staff IT") {
 
                             case 'historyPermintaan':
                                 include 'page/history_permintaan/history_permintaan.php';
+                                break;
+
+                            case 'invoicePembelian':
+                                include 'page/pembelian_barang/invoice/invoice_read.php';
+                                break;
+
+                            case 'pengajuanPembelian':
+                                include 'page/pembelian_barang/pengajuan_pembelian/pengajuan_pembelian_read.php';
                                 break;
 
                             case 'laporan':

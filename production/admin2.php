@@ -164,6 +164,16 @@ if ($_SESSION["level"] == "Staff IT") {
                     </ul>
                   </li>
 
+                  <li><a><i class="fa fa-shopping-cart"></i> Pembelian Barang<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <!-- <li><a href="admin3.php?page=pengajuanPembelian">Data Pembelian Barang</a></li> -->
+                      <li><a href="admin2.php?page=invoicePembelian">Invoice Pembelian</a></li>
+                      <!-- <li><a href="index.php?page=historyPengajuan">Barang Masuk</a></li>
+                      <li><a href="index.php?page=historyPengajuan">Barang Keluar</a></li> -->
+                      <!-- <li><a href="tables_dynamic.html">Table Dynamic</a></li> -->
+                    </ul>
+                  </li>
+
                   <li><a><i class="fa fa-users"></i> Human Resources<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="admin2.php?page=reqCuti">Form Cuti</a></li>
@@ -390,6 +400,14 @@ if ($_SESSION["level"] == "Staff IT") {
                                 break;
                             case 'historyCuti':
                                 include "page/hrd/cuti/req_cuti/history_request.php";
+                                break;
+
+                            case 'invoicePembelian':
+                                include 'page/pembelian_barang/invoice/invoice_read.php';
+                                break;
+
+                            case 'pengajuanPembelian':
+                                include 'page/pembelian_barang/pengajuan_pembelian/pengajuan_pembelian_read.php';
                                 break;
 
                             case 'tagihan':

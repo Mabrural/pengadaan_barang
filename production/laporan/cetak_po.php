@@ -223,8 +223,8 @@ if (isset($_GET['cetakData'])) {
                     <strong>PT MITRA MARITIM MANDIRI</strong> <br>
                     The Centro Town House No. 17 <br>
                     Kel. Sukajadi, Kec. Batam Kota, Kota Batam <br>
-                    <!-- Telepon +62 778 469856 - 469860 Faksimile +62 778 463620 <br> -->
-                    Laman: www.mitramaritim.com, Surel: info@mitramaritim.com
+                    Telepon +62 778 48844550 - Faksimile +62 778 48844550 <br>
+                    info@mitramaritim.com
                 </div>
 
                 <div style="margin-top: -70px; margin-left: 20px">
@@ -255,7 +255,7 @@ if (isset($_GET['cetakData'])) {
                                 <!-- <td height="25px"> <div align="center"><b>REKAP DATA</b></div> </td> -->
                             </tr>
                             <tr>
-                                <td height="25px"> <div align="center"><b>PURCHASE ORDER</b></div> </td>
+                                <td height="25px"> <div align="center" style="font-size:20px"><b>PURCHASE ORDER</b></div> </td>
                             </tr>
                             <tr>
                                 <td height="25px"> <div align="center"><b>( <?= $po_barang['no_invoice']?> )</b></div> </td>
@@ -452,7 +452,7 @@ if (isset($_GET['cetakData'])) {
                                 <td> <div align="left"> </div> </td>
                                 <td> <div align="left"></div> </td>
                             </tr>   
-                            
+
                             <tr>
                                 <td colspan="2"> <div align="left">&nbsp;</div> </td>
                                 <td> <div align="center"></div> </td>

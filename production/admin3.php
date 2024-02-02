@@ -173,7 +173,7 @@ if ($_SESSION["level"] == "Staff IT") {
                     <ul class="nav child_menu">
                       <li><a href="admin3.php?page=permintaanBarang">Data Permintaan Barang</a></li>
                       <li><a href="admin3.php?page=historyPermintaan">History Permintaan Barang</a></li>
-                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                      <!-- <li><a href="tables_dynamic.html">Table Dynamic</a></li> -->
                     </ul>
                   </li>
 
@@ -183,26 +183,25 @@ if ($_SESSION["level"] == "Staff IT") {
                       <li><a href="admin3.php?page=invoicePembelian">Invoice Pembelian</a></li>
                       <!-- <li><a href="index.php?page=historyPengajuan">Barang Masuk</a></li>
                       <li><a href="index.php?page=historyPengajuan">Barang Keluar</a></li> -->
-                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                      <!-- <li><a href="tables_dynamic.html">Table Dynamic</a></li> -->
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-credit-card"></i> Accounting & Finance <span class="fa fa-chevron-down"></span></a>
+                  <!-- <li><a><i class="fa fa-credit-card"></i> Accounting & Finance <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="admin3.php?page=pengajuanPembelian">Pengajuan Pembelian Barang</a></li>
                       <li><a href="admin3.php?page=approve3">Data Keuangan</a></li>
                       <li><a href="admin3.php?page=historyApprove3">History Keuangan</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
-                  </li>
+                  </li> -->
 
-                  <li><a><i class="fa fa-exchange"></i>Transaksi Barang<span class="fa fa-chevron-down"></span></a>
+                  <!-- <li><a><i class="fa fa-exchange"></i>Transaksi Barang<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="admin3.php?page=transaksiBarangMasuk">Barang Masuk</a></li>
                       <li><a href="index.php?page=historyTransaksi">History Transaksi</a></li>
-                      <!-- <li><a href="tables_dynamic.html">Table Dynamic</a></li> -->
                     </ul>
-                  </li>
+                  </li> -->
 
                   
                   <!-- <li><a><i class="fa fa-list-alt"></i> Laporan Pengajuan <span class="fa fa-chevron-down"></span></a>

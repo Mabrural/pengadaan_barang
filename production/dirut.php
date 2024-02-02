@@ -139,21 +139,27 @@ if ($_SESSION["level"] == "Staff IT") {
                     </ul>
                   </li>
 
-
-                  <li><a><i class="fa fa-external-link"></i> Permintaan Barang<span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-history"></i>History Permintaan<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <!-- <li><a href="dirut.php?page=permintaanBarang">Data Permintaan Barang</a></li> -->
                       <li><a href="dirut.php?page=historyPermintaan">History Permintaan Barang</a></li>
-                      <!-- <li><a href="tables_dynamic.html">Table Dynamic</a></li> -->
                     </ul>
                   </li>
 
+
+                  <!-- <li><a><i class="fa fa-external-link"></i> Permintaan Barang<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+
+                      <li><a href="dirut.php?page=historyPermintaan">History Permintaan Barang</a></li>
+    
+                    </ul>
+                  </li> -->
+
                   <li><a><i class="fa fa-shopping-cart"></i> Pembelian Barang<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="dirut.php?page=pengajuanPembelian">Data Pembelian Barang</a></li>
-                      <li><a href="dirut.php?page=approvePembelian">Approve Pembelian Barang</a></li>
-                      <li><a href="dirut.php?page=pengajuanPembelian">History Pembelian Barang</a></li>
-                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                       <li><a href="dirut.php?page=approvePembelian">Approve Pembelian Barang</a></li>
+                      <li><a href="dirut.php?page=invoicePembelian">Invoice Pembelian</a></li>
+                      <!-- <li><a href="dirut.php?page=pengajuanPembelian">History Pembelian Barang</a></li> -->
+                      <!-- <li><a href="tables_dynamic.html">Table Dynamic</a></li> -->
                     </ul>
                   </li>
 
@@ -441,6 +447,10 @@ if ($_SESSION["level"] == "Staff IT") {
 
                             case 'pengajuanPembelian':
                                 include 'page/pembelian_barang/pengajuan_pembelian/pengajuan_pembelian.php';
+                                break;
+
+                            case 'invoicePembelian':
+                                include 'page/pembelian_barang/invoice/invoice_read.php';
                                 break;
 
                             case 'dataKaryawan':
