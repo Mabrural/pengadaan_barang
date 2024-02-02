@@ -11,15 +11,13 @@ if (isset($_GET['cetakData'])) {
 
     // $id_vendor = $_GET['id_vendor'];
     $id_invoice = $_GET['id_invoice'];
-    // $selectedIds = isset($_GET['select_id']) ? $_GET['select_id'] : [];
-    // $selectedIds = isset($_GET['select_id']) ? $_GET['select_id'] : [];;
-    // $selectedIds = explode(',', $_GET['select_id']);
+    $invoice = query("SELECT * FROM invoice WHERE id_invoice='$id_invoice'")[0];
 }
 ?>
 
 <!-- saved from url=(0058)https://sim.polibatam.ac.id/layanan-akademik/cetak_khs.php -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>Purchase Order <?= date('d-M-Y')?></title>
+            <title>Purchase Order <?= $invoice['no_invoice']?> <?= date('d-M-Y')?></title>
             <link rel="icon" href="img/gpp.png" type="image/ico" />
             <script language="JavaScript">
                 function Cetakan(){
