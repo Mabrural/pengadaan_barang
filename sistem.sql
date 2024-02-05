@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2024 at 11:55 AM
+-- Generation Time: Feb 05, 2024 at 11:20 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -241,7 +241,8 @@ INSERT INTO `invoice` (`id_invoice`, `no_invoice`) VALUES
 (23, 'NO. 002/PO/MMM/I/2024'),
 (24, 'NO. 003/PO/MMM/I/2024'),
 (26, 'NO. 004/PO/MMM/I/2024'),
-(31, 'NO. 005/PO/MMM/I/2024');
+(31, 'NO. 005/PO/MMM/I/2024'),
+(32, 'NO. 006/PO/MMM/I/2024');
 
 -- --------------------------------------------------------
 
@@ -452,7 +453,26 @@ INSERT INTO `po_barang` (`id_po`, `id_req_brg`, `tgl_po`, `qty_po`, `harga_po`, 
 (50, 72, '2024-02-02', 1, 150000, '-', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 1, 27, 24),
 (51, 74, '2024-02-02', 1, 300000, 'untuk bersih bersih kapal', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 1, 27, 24),
 (52, 73, '2024-02-02', 1, 120000, '-', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 2, 27, 26),
-(53, 75, '2024-02-02', 1, 500000, '1', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 3, 27, 31);
+(53, 75, '2024-02-02', 1, 500000, '1', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 3, 27, 31),
+(83, 76, '2024-02-05', 1, 300000, 'aki kapal', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 1, 27, 32);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qrcode`
+--
+
+CREATE TABLE `qrcode` (
+  `id_qr` int(10) NOT NULL,
+  `id_emp` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `qrcode`
+--
+
+INSERT INTO `qrcode` (`id_qr`, `id_emp`) VALUES
+(10, 8);
 
 -- --------------------------------------------------------
 
@@ -487,7 +507,8 @@ INSERT INTO `req_barang` (`id_req_brg`, `kode_pengajuan`, `kode_brg`, `qty_req`,
 (72, 'REQ-24020200023-72480', 'BRG00009', 1, '2024-02-02', 'untuk tools', 'Selesai', 'Gahral', 'Michael Kawilarang', 'Bambang Wahyudi', 4, 1, 28, 3),
 (73, 'REQ-24020200024-47696', 'BRG00050', 1, '2024-02-02', 'untuk penerangan', 'Selesai', 'Gahral', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 3, 28, 1),
 (74, 'REQ-24020200025-97786', 'BRG00072', 1, '2024-02-02', '', 'Selesai', 'Gahral', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 2, 28, 1),
-(75, 'REQ-24020200026-97908', 'BRG00008', 1, '2024-02-02', '-', 'Selesai', 'Gahral', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 2, 29, 1);
+(75, 'REQ-24020200026-97908', 'BRG00008', 1, '2024-02-02', '-', 'Selesai', 'Gahral', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 2, 29, 1),
+(76, 'REQ-24020500027-93897', 'BRG00004', 1, '2024-02-05', 'sudah waktunya ganti aki', 'Selesai', 'Gahral', 'Michael Kawilarang', 'Bambang Wahyudi', 2, 1, 28, 1);
 
 -- --------------------------------------------------------
 
@@ -822,6 +843,13 @@ ALTER TABLE `po_barang`
   ADD KEY `id_invoice` (`id_invoice`);
 
 --
+-- Indexes for table `qrcode`
+--
+ALTER TABLE `qrcode`
+  ADD PRIMARY KEY (`id_qr`),
+  ADD KEY `id_emp` (`id_emp`);
+
+--
 -- Indexes for table `req_barang`
 --
 ALTER TABLE `req_barang`
@@ -896,7 +924,7 @@ ALTER TABLE `ijazah`
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `id_invoice` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_invoice` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `karyawan`
@@ -944,13 +972,19 @@ ALTER TABLE `manage_cuti`
 -- AUTO_INCREMENT for table `po_barang`
 --
 ALTER TABLE `po_barang`
-  MODIFY `id_po` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id_po` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+
+--
+-- AUTO_INCREMENT for table `qrcode`
+--
+ALTER TABLE `qrcode`
+  MODIFY `id_qr` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `req_barang`
 --
 ALTER TABLE `req_barang`
-  MODIFY `id_req_brg` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id_req_brg` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `req_cuti`
@@ -1036,6 +1070,12 @@ ALTER TABLE `po_barang`
   ADD CONSTRAINT `po_barang_ibfk_2` FOREIGN KEY (`id_vendor`) REFERENCES `vendor` (`id_vendor`),
   ADD CONSTRAINT `po_barang_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
   ADD CONSTRAINT `po_barang_ibfk_4` FOREIGN KEY (`id_invoice`) REFERENCES `invoice` (`id_invoice`);
+
+--
+-- Constraints for table `qrcode`
+--
+ALTER TABLE `qrcode`
+  ADD CONSTRAINT `qrcode_ibfk_1` FOREIGN KEY (`id_emp`) REFERENCES `karyawan` (`id_emp`);
 
 --
 -- Constraints for table `req_barang`
