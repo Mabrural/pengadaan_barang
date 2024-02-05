@@ -1704,6 +1704,26 @@ function hapusInvoice($id_invoice) {
 
 }
 
+
+function tambahQrcode($data) {
+	global $koneksi;
+	$id_emp = htmlspecialchars($data["id_emp"]);
+	
+	$query = "INSERT INTO qrcode VALUES
+			('', '$id_emp')";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function hapusQrcode($id_qr) {
+	global $koneksi;
+	mysqli_query($koneksi, "DELETE FROM qrcode WHERE id_qr=$id_qr");
+
+	return mysqli_affected_rows($koneksi);
+
+}
+
 function tambahAnggaran($data) {
 	global $koneksi;
 	$nama_anggaran = htmlspecialchars($data["nama_anggaran"]);

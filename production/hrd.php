@@ -223,6 +223,7 @@ if ($_SESSION["level"] == "Staff IT") {
 
 
                       <li><a href="hrd.php?page=historyApproveCuti">History Approve Cuti</a></li>
+                      <li><a href="hrd.php?page=qrCode">QRCode</a></li>
                       <!-- <li><a href="hrd.php?page=attendance">Attendance</a></li>
                       <li><a href="hrd.php?page=penilaian">Penilaian Karyawan</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li> -->
@@ -466,6 +467,10 @@ if ($_SESSION["level"] == "Staff IT") {
                                 include 'page/pembelian_barang/pengajuan_pembelian/pengajuan_pembelian_read.php';
                                 break;
 
+                            case 'qrCode':
+                                include 'page/hrd/qrcode/qrcode.php';
+                                break;
+
                             case 'laporan':
                                 include "page/laporan/laporan.php";
                                 break;
@@ -615,6 +620,14 @@ if ($_SESSION["level"] == "Staff IT") {
 
                             case 'reject1':
                                 include 'page/pembelian_barang/approve_pembelian/reject1.php';
+                                break;
+
+                            case 'tambahQrcode':
+                                include 'page/hrd/qrcode/tambah.php';
+                                break;
+
+                            case 'hapusQrcode':
+                                include 'page/hrd/qrcode/hapus.php';
                                 break;
 
                             case 'ubahCatatan':
