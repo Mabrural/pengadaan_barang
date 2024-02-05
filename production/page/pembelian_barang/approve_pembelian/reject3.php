@@ -6,8 +6,8 @@ $po_barang = query("SELECT * FROM po_barang WHERE id_po=$id_po")[0];
 
 $satuan = query("SELECT * FROM satuan");
 $vendor = query("SELECT * FROM vendor");
-$req_barang = query("SELECT * FROM req_barang JOIN barang ON barang.kode_brg=req_barang.kode_brg GROUP BY barang.kode_brg");
-// $req_barang = query("SELECT * FROM req_barang JOIN barang ON barang.kode_brg=req_barang.kode_brg WHERE req_barang.status_req='On Progress in Purchasing' GROUP BY barang.kode_brg");
+// $req_barang = query("SELECT * FROM req_barang JOIN barang ON barang.kode_brg=req_barang.kode_brg GROUP BY barang.kode_brg");
+$req_barang = query("SELECT * FROM req_barang JOIN barang ON barang.kode_brg=req_barang.kode_brg WHERE req_barang.status_req='Menunggu Persetujuan Dir. Utama' GROUP BY barang.kode_brg");
 
 // cek apakah tombol submit sudah ditekan atau belum
 if (isset($_POST["submit"])) {
@@ -161,7 +161,7 @@ if (isset($_POST["submit"])) {
 									</div>
 									<input name="acc3" class="form-control" type="hidden" value="<?= $po_barang['acc3']?>">
 									<input name="acc4" class="form-control" type="hidden" value="<?=$po_barang['acc4'] ?>">
-									<input name="acc5" class="form-control" type="hidden" value="<?= $nama ?>">
+									<input name="acc5" class="form-control" type="hidden" value="<?=$po_barang['acc5'] ?>">
 
 								</div>
 

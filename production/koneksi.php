@@ -1372,7 +1372,7 @@ function tambahPembelian($data) {
 	// $query_update = "UPDATE req_barang SET status_req = 'Menunggu Persetujuan Dir. HRD' WHERE id_req_brg = $id_req_brg AND req_barang.kode_brg=req_barang.kode_brg";
 	$query_update = "UPDATE req_barang 
                  SET status_req = 'Menunggu Persetujuan Dir. HRD' 
-                 WHERE kode_brg = (SELECT kode_brg FROM req_barang WHERE id_req_brg = $id_req_brg)";
+                 WHERE kode_brg = (SELECT kode_brg FROM req_barang WHERE id_req_brg = $id_req_brg) AND tgl_req_brg = (SELECT tgl_req_brg FROM req_barang WHERE id_req_brg = $id_req_brg)";
 
 	mysqli_query($koneksi, $query_update);
 
@@ -1439,7 +1439,7 @@ function app1Pembelian($data) {
 
 	$query_update = "UPDATE req_barang 
                  SET status_req = 'Menunggu Persetujuan Dir. Keuangan' 
-                 WHERE kode_brg = (SELECT kode_brg FROM req_barang WHERE id_req_brg = $id_req_brg)";
+                 WHERE kode_brg = (SELECT kode_brg FROM req_barang WHERE id_req_brg = $id_req_brg) AND tgl_req_brg = (SELECT tgl_req_brg FROM req_barang WHERE id_req_brg = $id_req_brg)";
   mysqli_query($koneksi, $query_update);
 
 	return mysqli_affected_rows($koneksi);
@@ -1475,7 +1475,7 @@ function app2Pembelian($data) {
 
 	$query_update = "UPDATE req_barang 
                  SET status_req = 'Menunggu Persetujuan Dir. Utama' 
-                 WHERE kode_brg = (SELECT kode_brg FROM req_barang WHERE id_req_brg = $id_req_brg)";
+                 WHERE kode_brg = (SELECT kode_brg FROM req_barang WHERE id_req_brg = $id_req_brg) AND tgl_req_brg = (SELECT tgl_req_brg FROM req_barang WHERE id_req_brg = $id_req_brg)";
   mysqli_query($koneksi, $query_update);
   
 	return mysqli_affected_rows($koneksi);
@@ -1511,7 +1511,7 @@ function app3Pembelian($data) {
 
 	$query_update = "UPDATE req_barang 
                  SET status_req = 'Selesai' 
-                 WHERE kode_brg = (SELECT kode_brg FROM req_barang WHERE id_req_brg = $id_req_brg)";
+                 WHERE kode_brg = (SELECT kode_brg FROM req_barang WHERE id_req_brg = $id_req_brg) AND tgl_req_brg = (SELECT tgl_req_brg FROM req_barang WHERE id_req_brg = $id_req_brg)";
   mysqli_query($koneksi, $query_update);
   
 	return mysqli_affected_rows($koneksi);
@@ -1533,9 +1533,11 @@ function hapusPembelian($id_po) {
 
     try {
         // Ambil kode_brg dari tabel req_barang
-        $result = mysqli_query($koneksi, "SELECT kode_brg FROM req_barang WHERE id_req_brg = (SELECT id_req_brg FROM po_barang WHERE id_po = $id_po)");
+        $result = mysqli_query($koneksi, "SELECT kode_brg,tgl_req_brg FROM req_barang WHERE id_req_brg = (SELECT id_req_brg FROM po_barang WHERE id_po = $id_po)");
         $row = mysqli_fetch_assoc($result);
         $kode_brg = $row['kode_brg'];
+        $tgl_req_brg = $row['tgl_req_brg'];
+        
 
         // Hapus data dari tabel po_barang
         mysqli_query($koneksi, "DELETE FROM po_barang WHERE id_po=$id_po");
@@ -1543,7 +1545,7 @@ function hapusPembelian($id_po) {
         // Periksa apakah penghapusan berhasil
         if (mysqli_affected_rows($koneksi) > 0) {
             // Jika berhasil, update status_req di tabel req_barang
-            mysqli_query($koneksi, "UPDATE req_barang SET status_req = 'On Progress in Purchasing' WHERE kode_brg = '$kode_brg'");
+            mysqli_query($koneksi, "UPDATE req_barang SET status_req = 'On Progress in Purchasing' WHERE kode_brg = '$kode_brg' AND tgl_req_brg = '$tgl_req_brg'");
         } else {
             // Jika gagal, rollback transaksi
             mysqli_rollback($koneksi);
@@ -1591,7 +1593,7 @@ function reject1Pembelian($data) {
 
 	$query_update = "UPDATE req_barang 
                  SET status_req = 'Ditolak' 
-                 WHERE kode_brg = (SELECT kode_brg FROM req_barang WHERE id_req_brg = $id_req_brg)";
+                 WHERE kode_brg = (SELECT kode_brg FROM req_barang WHERE id_req_brg = $id_req_brg) AND tgl_req_brg = (SELECT tgl_req_brg FROM req_barang WHERE id_req_brg = $id_req_brg)";
   mysqli_query($koneksi, $query_update);
 
 	return mysqli_affected_rows($koneksi);

@@ -2,6 +2,7 @@
 
 $id_po = $_GET["id_po"];
 
+
 if( hapusPembelian($id_po) > 0 ){
 	echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
 	echo '<script src="./sweetalert2.min.js"></script>';
@@ -17,7 +18,7 @@ if( hapusPembelian($id_po) > 0 ){
 			showConfirmButton   : true
 		});  
 	},10);   setTimeout(function () {
-		window.location.href = '?page=pengajuanPembelian'; //will redirect to your blog page (an ex: blog.html)
+		window.location.href = '?page=invoicePembelian'; //will redirect to your blog page (an ex: blog.html)
 	}, 2000); //will call the function after 2 secs
 	</script>";
 	// echo "
@@ -41,7 +42,7 @@ if( hapusPembelian($id_po) > 0 ){
 			showConfirmButton   : true
 		});  
 	},10);   setTimeout(function () {
-		window.location.href = '?page=pengajuanPembelian'; //will redirect to your blog page (an ex: blog.html)
+		window.location.href = '?page=invoicePembelian'; //will redirect to your blog page (an ex: blog.html)
 	}, 2000); //will call the function after 2 secs
 	</script>";
 	// echo "

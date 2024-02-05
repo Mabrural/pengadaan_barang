@@ -346,27 +346,12 @@ if (isset($_GET['cetakData'])) {
                                     //     $selectedIds = array();
                                     // }
                                     $query = "SELECT * FROM po_barang JOIN vendor ON vendor.id_vendor=po_barang.id_vendor JOIN req_barang ON req_barang.id_req_brg=po_barang.id_req_brg JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan JOIN user ON user.id_user=po_barang.id_user JOIN karyawan ON karyawan.id_emp=user.id_emp WHERE id_invoice=$id_invoice";
-                                     
-                                    // Add filter conditions based on the selected values
-                                      // if (!empty($id_vendor)) {
-                                      //     $query .= " WHERE po_barang.id_vendor = $id_vendor";
-                                      // }
-                                      // if (!empty($selectedIds)) {
-                                      //   $query .= " WHERE po_barang.id_po IN (" . implode(',', $selectedIds) . ")";
-                                      // }
-                                     
-                                      
-                                    // if (!empty($selectedIds)) {
-                                    //     $query .= " WHERE po_barang.id_po IN (" . implode(',', $selectedIds) . ") AND po_barang.id_vendor = $id_vendor";
-                                    // } else {
-                                    //     $query .= " WHERE po_barang.id_vendor = IFNULL($id_vendor, '0')";
-                                    // }
+                           
 
                                       
 
                                     $tampil = mysqli_query($koneksi, $query);
                                     while ($data = mysqli_fetch_assoc($tampil)) {
-                                        // if (in_array($data['id_po'], $selectedIds)) {}
                                         $jabatan = $data['jabatan'];
                                         $qty_po = $data['qty_po'];
                                         $total += $qty_po;
@@ -429,40 +414,88 @@ if (isset($_GET['cetakData'])) {
                                 <td colspan="2">&nbsp;</td>
                                 <!-- <td align="center"><?php if (isset($jabatan)) echo " $jabatan "; ?></td> -->
                                 <td align="center">Direktur Utama</td>
-                            </tr>   
-                            <tr>
-                                <td width="37%"> <div align="left"></div> </td>
-                                <td width="8%"> <div align="left"></div> </td>
-                                <td width="55%"> <div align="left"></div> </td>
-                            </tr>
-                            <tr>
-                                <td> <div align="left"> </div> </td>
-                                <td> <div align="left">  </div> </td>
-                                <td> <div align="left"></div> </td>
-                            </tr>
-                            <tr>
-                                <td> <div align="left"></div> </td>
-                                <td> <div align="left">  </div> </td>
-                                <td> <div align="left"></div> </td>
-                            </tr>
-                            <tr>
-                                <td> <div align="left"></div> </td>
-                                <td> <div align="left"> </div> </td>
-                                <td> <div align="left"></div> </td>
-                            </tr>   
+                            </tr>  
 
                             <tr>
+                                <td colspan="3">
+                                    <div align="right" style="position: relative; left:-75px;">
+                                        <?php
+                                        // Cek apakah $acc5 tidak null dan tidak kosong
+                                        if ($acc5 !== null && $acc5 !== "") {
+                                            // Tampilkan gambar QR code
+                                            echo '<img src="../pdfqrcodes/' . $acc5 . '.png">';
+                                        }else{
+                                            echo "
+                                                <tr>
+                                                    <td> <div align='left'> </div> </td>
+                                                    <td> <div align='left'>  </div> </td>
+                                                    <td> <div align='left'></div> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> <div align='left'></div> </td>
+                                                    <td> <div align='left'>  </div> </td>
+                                                    <td> <div align='left'></div> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> <div align='left'></div> </td>
+                                                    <td> <div align='left'> </div> </td>
+                                                    <td> <div align='left'></div> </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td colspan='2'> <div align='left'>&nbsp;</div> </td>
+                                                    <td> <div align='center'></div> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan='2'> <div align='left'>&nbsp;</div> </td>
+                                                    <td> <div align='center'></div> </td>
+                                                </tr>
+                                                ";
+                                        }
+                                        ?>
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                            <!-- <tr>
+                                <td colspan="3"><div align="right" style="position: relative; left:-75px;"><img src="../pdfqrcodes/<?= $acc5.'.png';?>"></div></td>
+                            </tr> -->
+
+                            <tr>
+                                <td width="37%"> <div align="left"></div> </td>
+                                <td width="28%"> <div align="left"></div> </td>
+                                <td width="55%"> <div align="left"></div> </td>
+                            </tr>
+                            <!-- <tr>
+                                <td> <div align="left"> </div> </td>
+                                <td> <div align="left">  </div> </td>
+                                <td> <div align="left"></div> </td>
+                            </tr> -->
+                            <!-- <tr>
+                                <td> <div align="left"></div> </td>
+                                <td> <div align="left">  </div> </td>
+                                <td> <div align="left"></div> </td>
+                            </tr> -->
+                            <!-- <tr>
+                                <td> <div align="left"></div> </td>
+                                <td> <div align="left"> </div> </td>
+                                <td> <div align="left"></div> </td>
+                            </tr>  -->  
+
+
+                            <!-- <tr>
                                 <td colspan="2"> <div align="left">&nbsp;</div> </td>
                                 <td> <div align="center"></div> </td>
-                            </tr>   
+                            </tr>   --> 
                             <tr>
                                 <td colspan="2"> <div align="left">&nbsp;</div><br><br> </td>
                                 <!-- <td> <div align="center"><?php if (isset($acc5)) echo "( $acc5 )"; ?></div> </td> -->
                                 <td>
-                                  <div align="center">
+                                  <div align="center" style="position:  relative;top: -20px;">
                                     <?php
                                       if (isset($acc5) AND $acc5 != null) {
-                                        echo "( $acc5 )";
+                                        echo "<b>( $acc5 )</b>";
                                       } else {
                                         echo "( $no_acc )";
                                       }

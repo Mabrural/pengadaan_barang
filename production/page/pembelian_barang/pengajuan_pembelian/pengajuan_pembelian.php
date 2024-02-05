@@ -3,9 +3,6 @@
 $id_user = $_SESSION["id_user"];
 
 $vendor = query("SELECT * FROM vendor");
-// $pengajuan = query("SELECT * FROM barang WHERE barang.id_barang=$id_user");
-// $id_vendor = isset($_GET['id_vendor']) ? $_GET['id_vendor'] : '';
-// $selectedIds = isset($_GET['select_id']) ? $_GET['select_id'] : [];
 
 $id_invoice = $_GET['id_invoice'];
 
@@ -22,7 +19,21 @@ $id_invoice = $_GET['id_invoice'];
             <!-- <input type="hidden" id="select_id" name="select_id" value="<?=$selectedIds?>"> -->
             <a href="?form=tambahPembelian&id_invoice=<?= $id_invoice?>" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Ajukan PO</a>
             <!-- button type="submit" class="btn btn-info btn-sm" name="cetakData" onclick="document.getElementById('select_id').value = getCheckedIds();"><i class="fa fa-print"></i> Cetak PO</button> -->
-            <button type="submit" class="btn btn-info btn-sm" name="cetakData"><i class="fa fa-print"></i> Cetak PO</button>
+
+            <?php 
+            $query = "SELECT * FROM po_barang JOIN vendor ON vendor.id_vendor=po_barang.id_vendor JOIN req_barang ON req_barang.id_req_brg=po_barang.id_req_brg JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan WHERE po_barang.id_invoice=$id_invoice";
+              // Eksekusi query
+                $result = mysqli_query($koneksi, $query);
+
+                // Hitung jumlah baris hasil query
+                $row_count = mysqli_num_rows($result);
+
+                // Buat kondisi untuk menentukan apakah tombol harus diaktifkan atau dinonaktifkan
+                $is_disabled = ($row_count > 0) ? "" : "disabled";
+
+
+             ?>
+            <button type="submit" class="btn btn-info btn-sm" name="cetakData" <?php echo $is_disabled; ?>><i class="fa fa-print"></i> Cetak PO</button>
         </form>
 
         <div class="row">
@@ -160,7 +171,7 @@ $id_invoice = $_GET['id_invoice'];
                     <?php
                     if ($data['status_req'] == 'Menunggu Persetujuan Dir. HRD') {
                         echo '<a href="?form=ubahPembelian&id_po=' . $data["id_po"] . '" class="btn btn-info btn-sm">Ubah</a> | ';
-                        echo '<a href="?form=hapusPembelian&id_po=' . $data["id_po"] . '" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\')" class="btn btn-danger btn-sm">Hapus</a>';
+                        echo '<a href="?form=hapusPembelian&id_po=' . $data["id_po"] . '&id_invoice='.$data["id_invoice"].'" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\')" class="btn btn-danger btn-sm">Hapus</a>';
                     } else {
                         echo '<button class="btn btn-secondary btn-sm" disabled>Selesai</button>';
                     }

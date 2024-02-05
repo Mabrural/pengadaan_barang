@@ -270,6 +270,7 @@ if (isset($_GET['cetakData'])) {
 							 	$divisi = $data['divisi'];
 							 	$acc1 = $data2['acc1'];
 							 	$acc2 = $data2['acc2'];
+							 	$acc3 = $data2['acc3'];
 							 	$tgl = date('d-M-Y', strtotime($tgl_req_brg));
 							 ?>
 							<tr>
@@ -368,7 +369,7 @@ if (isset($_GET['cetakData'])) {
 							</tr>	
 							<tr>
 								<td width="37%"> <div align="left"></div> </td>
-								<td width="8%"> <div align="left"></div> </td>
+								<td width="28%"> <div align="left"></div> </td>
 								<td width="55%"> <div align="left"></div> </td>
 							</tr>
 							<tr>
@@ -392,7 +393,7 @@ if (isset($_GET['cetakData'])) {
 							</tr>	
 							<tr>
 								<td colspan="2"> <div align="left">&nbsp;</div><br><br> </td>
-								<td> <div align="center">( <?= $acc2;?> ) </div> </td>
+								<td> <div align="center">( <?= $acc3;?> ) </div> </td>
 							</tr>
 						</tbody></table>
 					</td>
