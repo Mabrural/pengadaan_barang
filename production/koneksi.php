@@ -1726,6 +1726,49 @@ function hapusQrcode($id_qr) {
 
 }
 
+function tambahCoa($data) {
+	global $koneksi;
+	$kode_coa = htmlspecialchars($data["kode_coa"]);
+	$name_account = htmlspecialchars($data["name_account"]);
+	$account_type = htmlspecialchars($data["account_type"]);
+
+
+	$query = "INSERT INTO cart_of_account VALUES
+			('$kode_coa', '$name_account', '$account_type')";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function ubahCoa($data) {
+	global $koneksi;
+
+	$kode_coa = htmlspecialchars($data["kode_coa"]);
+	$kode_coa_lama = htmlspecialchars($data["kode_coa_lama"]);
+	$name_account = htmlspecialchars($data["name_account"]);
+	$account_type = htmlspecialchars($data["account_type"]);
+
+	$query = "UPDATE cart_of_account SET
+				kode_coa= '$kode_coa',
+				name_account = '$name_account',
+				account_type = '$account_type'
+			  WHERE kode_coa='$kode_coa_lama'
+			";
+			
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+
+}
+
+function hapusCoa($kode_coa) {
+	global $koneksi;
+	mysqli_query($koneksi, "DELETE FROM cart_of_account WHERE kode_coa=$kode_coa");
+
+	return mysqli_affected_rows($koneksi);
+
+}
+
 function tambahAnggaran($data) {
 	global $koneksi;
 	$nama_anggaran = htmlspecialchars($data["nama_anggaran"]);

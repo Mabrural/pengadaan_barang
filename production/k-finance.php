@@ -460,6 +460,10 @@ if ($_SESSION["level"] == "Staff IT") {
                                 include "page/laporan/rekap_data.php";
                                 break;
 
+                            case 'coa':
+                                include "page/accounting_dan_finance/cart_of_account/coa.php";
+                                break;
+
                             case 'historyPermintaan':
                                 include 'page/history_permintaan/history_permintaan.php';
                                 break;
@@ -616,6 +620,18 @@ if ($_SESSION["level"] == "Staff IT") {
 
                             case 'hapusInvoice':
                                 include 'page/pembelian_barang/invoice/hapus.php';
+                                break;
+
+                            case 'tambahCoa':
+                                include "page/accounting_dan_finance/cart_of_account/tambah.php";
+                                break;
+
+                            case 'ubahCoa':
+                                include "page/accounting_dan_finance/cart_of_account/ubah.php";
+                                break;
+
+                            case 'hapusCoa':
+                                include "page/accounting_dan_finance/cart_of_account/hapus.php";
                                 break;
 
                             case 'ubahCatatan':
