@@ -464,6 +464,12 @@ if ($_SESSION["level"] == "Staff IT") {
                                 include "page/accounting_dan_finance/cart_of_account/coa.php";
                                 break;
 
+                            case 'journal':
+                                include "page/accounting_dan_finance/journal/journal.php";
+                                break;
+
+                            
+
                             case 'historyPermintaan':
                                 include 'page/history_permintaan/history_permintaan.php';
                                 break;
@@ -632,6 +638,34 @@ if ($_SESSION["level"] == "Staff IT") {
 
                             case 'hapusCoa':
                                 include "page/accounting_dan_finance/cart_of_account/hapus.php";
+                                break;
+
+                            case 'tambahJournal':
+                                include "page/accounting_dan_finance/journal/tambah.php";
+                                break;
+
+                            case 'hapusNoJurnal':
+                                include "page/accounting_dan_finance/journal/hapus.php";
+                                break;
+
+                            case 'ubahNoJurnal':
+                                include "page/accounting_dan_finance/journal/ubah.php";
+                                break;
+
+                            case 'rincianJurnal':
+                                include "page/accounting_dan_finance/journal/rincian_journal/rincian_journal.php";
+                                break;
+
+                            case 'tambahDataJournal':
+                                include "page/accounting_dan_finance/journal/rincian_journal/tambah.php";
+                                break;
+
+                            case 'ubahDataJournal':
+                                include "page/accounting_dan_finance/journal/rincian_journal/ubah.php";
+                                break;
+
+                            case 'hapusDataJournal':
+                                include "page/accounting_dan_finance/journal/rincian_journal/hapus.php";
                                 break;
 
                             case 'ubahCatatan':

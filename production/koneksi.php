@@ -1769,6 +1769,92 @@ function hapusCoa($kode_coa) {
 
 }
 
+function tambahNoJournal($data) {
+	global $koneksi;
+	$no_journal = htmlspecialchars($data["no_journal"]);
+
+	$query = "INSERT INTO no_jurnal VALUES
+			('$no_journal')";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function hapusNoJournal($no_jurnal) {
+	global $koneksi;
+	mysqli_query($koneksi, "DELETE FROM no_jurnal WHERE no_jurnal='$no_jurnal'");
+
+	return mysqli_affected_rows($koneksi);
+
+}
+
+function ubahNoJournal($data) {
+	global $koneksi;
+
+	$no_jurnal = htmlspecialchars($data["no_jurnal"]);
+	$no_jurnal_lama = htmlspecialchars($data["no_jurnal_lama"]);
+
+	$query = "UPDATE no_jurnal SET
+				no_jurnal= '$no_jurnal'
+			  WHERE no_jurnal='$no_jurnal_lama'
+			";
+			
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+
+}
+
+function tambahDataJournal($data) {
+	global $koneksi;
+	$tgl_jurnal = htmlspecialchars($data["tgl_jurnal"]);
+	$ket_jurnal = htmlspecialchars($data["ket_jurnal"]);
+	$debit = htmlspecialchars($data["debit"]);
+	$kredit = htmlspecialchars($data["kredit"]);
+	$no_jurnal = htmlspecialchars($data["no_jurnal"]);
+	$kode_coa = htmlspecialchars($data["kode_coa"]);
+
+	$query = "INSERT INTO jurnal VALUES
+			('', '$tgl_jurnal', '$ket_jurnal', '$debit', '$kredit','$no_jurnal', '$kode_coa')";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function ubahDataJournal($data) {
+	global $koneksi;
+	$id_jurnal = htmlspecialchars($data["id_jurnal"]);
+	$tgl_jurnal = htmlspecialchars($data["tgl_jurnal"]);
+	$ket_jurnal = htmlspecialchars($data["ket_jurnal"]);
+	$debit = htmlspecialchars($data["debit"]);
+	$kredit = htmlspecialchars($data["kredit"]);
+	$no_jurnal = htmlspecialchars($data["no_jurnal"]);
+	$kode_coa = htmlspecialchars($data["kode_coa"]);
+
+	$query = "UPDATE jurnal SET
+				tgl_jurnal= '$tgl_jurnal',
+				ket_jurnal= '$ket_jurnal',
+				debit= '$debit',
+				kredit= '$kredit',
+				no_jurnal= '$no_jurnal',
+				kode_coa= '$kode_coa'
+			  WHERE id_jurnal='$id_jurnal'
+			";
+			
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+
+}
+
+function hapusDataJournal($no_jurnal) {
+	global $koneksi;
+	mysqli_query($koneksi, "DELETE FROM jurnal WHERE no_jurnal='$no_jurnal'");
+
+	return mysqli_affected_rows($koneksi);
+
+}
+
 function tambahAnggaran($data) {
 	global $koneksi;
 	$nama_anggaran = htmlspecialchars($data["nama_anggaran"]);
