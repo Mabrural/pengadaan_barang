@@ -6,8 +6,13 @@ if (!isset($_SESSION["login"])) {
   exit;
 }
 
-if ($_SESSION["level"] == "Staff Operasional") {
+if ($_SESSION["level"] == "Staff Operasional" || $_SESSION["level"] == "Crew Armada") {
     header("Location: index.php");
+    exit;
+}
+
+if ($_SESSION["level"] == "Direktur Keuangan") {
+    header("Location: dirkeu.php");
     exit;
 }
 
@@ -25,7 +30,7 @@ if ($_SESSION["level"] == "Direktur Utama") {
     exit;
 }
 
-if ($_SESSION["level"] == "HRD") {
+if ($_SESSION["level"] == "Direktur HRD") {
     header("Location: hrd.php");
     exit;
 }

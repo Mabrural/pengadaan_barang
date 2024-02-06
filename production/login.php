@@ -9,6 +9,14 @@ if (isset($_SESSION["login"])) {
     header("Location: admin2.php");
   }elseif ($_SESSION["level"] === "Purchasing") {
     header("Location: admin3.php");
+  }elseif ($_SESSION["level"] === "Direktur HRD") {
+    header("Location: hrd.php");
+  }elseif ($_SESSION["level"] === "Direktur Keuangan") {
+    header("Location: dirkeu.php");
+  }elseif ($_SESSION["level"] === "Direktur Utama") {
+    header("Location: dirut.php");
+  }elseif ($_SESSION["level"] === "Kepala Operasional") {
+    header("Location: admin-kops.php");
   }else{
     header("Location: index.php");
   }
@@ -100,7 +108,7 @@ if (isset($_POST['login'])) {
             window.location.href = 'admin3.php'; //will redirect to your blog page (an ex: blog.html)
         }, 2000); //will call the function after 2 secs
         </script>";
-      }elseif ($row["level"] === "Finance") {
+      }elseif ($row["level"] === "Kepala Finance") {
         echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
         echo '<script src="./sweetalert2.min.js"></script>';
         echo "<script>
@@ -115,10 +123,10 @@ if (isset($_POST['login'])) {
                 showConfirmButton   : true
             });  
         },10);   setTimeout(function () {
-            window.location.href = 'admin4.php'; //will redirect to your blog page (an ex: blog.html)
+            window.location.href = 'k-finance.php'; //will redirect to your blog page (an ex: blog.html)
         }, 2000); //will call the function after 2 secs
         </script>";
-      }elseif ($row["level"] === "HRD") {
+      }elseif ($row["level"] === "Direktur HRD") {
         echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
         echo '<script src="./sweetalert2.min.js"></script>';
         echo "<script>

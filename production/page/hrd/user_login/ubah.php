@@ -153,14 +153,19 @@ if (isset($_POST["submit"])) {
 											<div class="col-md-6 col-sm-6 ">
 												<select class="form-control" name="level" required>
 													<option value="">--Pilih Level--</option>
+													<option value="Crew Armada" <?php if ($user['level'] == 'Crew Armada') { echo "selected"; } ?>>Crew Armada</option>
 													<option value="Staff Operasional" <?php if ($user['level'] == 'Staff Operasional') { echo "selected"; } ?>>Staff Operasional</option>
-													<option value="Staff IT" <?php if ($user['level'] == 'Staff IT') { echo "selected"; } ?>>Staff IT</option>
+													<option value="Kepala Operasional" <?php if ($user['level'] == 'Kepala Operasional') { echo "selected"; } ?>>Kepala Operasional</option>
 													<option value="Kepala Cabang" <?php if ($user['level'] == 'Kepala Cabang') { echo "selected"; } ?>>Kepala Cabang</option>
-													<option value="Direktur Operasional" <?php if ($user['level'] == 'Direktur Operasional') { echo "selected"; } ?>>Direktur Operasional</option>
 													<option value="Purchasing" <?php if ($user['level'] == 'Purchasing') { echo "selected"; } ?>>Purchasing</option>
-													<option value="HRD" <?php if ($user['level'] == 'HRD') { echo "selected"; } ?>>HRD</option>
-													<option value="Direktur Utama" <?php if ($user['level'] == 'Direktur Utama') { echo "selected"; } ?>>Direktur Utama</option>
+													<option value="Staff IT" <?php if ($user['level'] == 'Staff IT') { echo "selected"; } ?>>Staff IT</option>
+													<option value="Staff Finance" <?php if ($user['level'] == 'Staff Finance') { echo "selected"; } ?>>Staff Finance</option>
+													<option value="Kepala Finance" <?php if ($user['level'] == 'Kepala Finance') { echo "selected"; } ?>>Kepala Finance</option>
+													<option value="Direktur Operasional" <?php if ($user['level'] == 'Direktur Operasional') { echo "selected"; } ?>>Direktur Operasional</option>
+													<option value="Direktur HRD" <?php if ($user['level'] == 'Direktur HRD') { echo "selected"; } ?>>Direktur HRD</option>
 													<option value="Direktur Keuangan" <?php if ($user['level'] == 'Direktur Keuangan') { echo "selected"; } ?>>Direktur Keuangan</option>
+													<option value="Direktur Utama" <?php if ($user['level'] == 'Direktur Utama') { echo "selected"; } ?>>Direktur Utama</option>
+													
 												</select>
 											</div>
 										</div>

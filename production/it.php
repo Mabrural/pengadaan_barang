@@ -21,13 +21,18 @@ if ($_SESSION["level"] == "Direktur Operasional") {
     exit;
 }
 
+if ($_SESSION["level"] == "Direktur Keuangan") {
+    header("Location: dirkeu.php");
+    exit;
+}
+
 if ($_SESSION["level"] == "Direktur Utama") {
     header("Location: dirut.php");
     exit;
 }
 
 
-if ($_SESSION["level"] == "HRD") {
+if ($_SESSION["level"] == "Direktur HRD") {
     header("Location: hrd.php");
     exit;
 }
