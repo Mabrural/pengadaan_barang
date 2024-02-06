@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 05, 2024 at 11:20 AM
+-- Generation Time: Feb 06, 2024 at 11:57 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -202,6 +202,26 @@ CREATE TABLE `barang_masuk` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cart_of_account`
+--
+
+CREATE TABLE `cart_of_account` (
+  `kode_coa` int(10) NOT NULL,
+  `name_account` varchar(60) NOT NULL,
+  `account_type` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart_of_account`
+--
+
+INSERT INTO `cart_of_account` (`kode_coa`, `name_account`, `account_type`) VALUES
+(4114, 'Mandiri xxxxx', 'xxxxxx'),
+(5115, 'Biaya Sewa', '-');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ijazah`
 --
 
@@ -242,7 +262,35 @@ INSERT INTO `invoice` (`id_invoice`, `no_invoice`) VALUES
 (24, 'NO. 003/PO/MMM/I/2024'),
 (26, 'NO. 004/PO/MMM/I/2024'),
 (31, 'NO. 005/PO/MMM/I/2024'),
-(32, 'NO. 006/PO/MMM/I/2024');
+(32, 'NO. 006/PO/MMM/I/2024'),
+(33, 'NO. 007/PO/MMM/I/2024');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jurnal`
+--
+
+CREATE TABLE `jurnal` (
+  `id_jurnal` int(10) NOT NULL,
+  `tgl_jurnal` date DEFAULT NULL,
+  `ket_jurnal` text NOT NULL,
+  `debit` decimal(10,0) DEFAULT NULL,
+  `kredit` decimal(10,0) DEFAULT NULL,
+  `no_jurnal` varchar(50) NOT NULL,
+  `kode_coa` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `jurnal`
+--
+
+INSERT INTO `jurnal` (`id_jurnal`, `tgl_jurnal`, `ket_jurnal`, `debit`, `kredit`, `no_jurnal`, `kode_coa`) VALUES
+(3, '2024-02-06', '-', 1000000, 0, '003/GPP/2024', 4114),
+(4, '2024-02-06', '-', 500000, 0, '003/GPP/2024', 5115),
+(13, '2024-02-06', '-', 0, 1500000, '003/GPP/2024', 5115),
+(16, '2024-02-06', '-', 0, 1000000, '001/GPP/2024', 5115),
+(17, '2024-02-06', '-', 0, 1300000, '003/GPP/2024', 4114);
 
 -- --------------------------------------------------------
 
@@ -279,7 +327,7 @@ INSERT INTO `karyawan` (`id_emp`, `nama_emp`, `jabatan`, `divisi`, `status`, `ga
 (11, 'Bambang Wahyudi', 'Direktur Operasional', 'Manager', 'Aktif', '65a4f45ead15a.png', '0000-00-00', 'Laki-laki', '-', '0', 'btm@gmail.xom', 'Sudah Menikah', '132', '132'),
 (12, 'Michael Kawilarang', 'Kepala Cabang', 'Manager', 'Aktif', '65a8b1dbd087d.png', '0000-00-00', 'Laki-laki', '-', '0', 'batam@gmail.com', 'Sudah Menikah', '123', '123'),
 (13, 'Gahral', 'Kepala Operasional', 'Shipping', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
-(14, 'Elis', 'Finance', 'Finance', 'Aktif', '65a4f45ead15a.png', '0000-00-00', 'Laki-laki', '-', '0', 'btm@gmail.xom', 'Belum Menikah', '123', '1321'),
+(14, 'Elis', 'Kepala Finance', 'Finance', 'Aktif', '65a4f45ead15a.png', '0000-00-00', 'Laki-laki', '-', '0', 'btm@gmail.xom', 'Belum Menikah', '123', '1321'),
 (15, 'Rika', 'Staff Shipping', 'Shipping', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
 (16, 'Krisno', 'Staff Shipping', 'Shipping', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
 (17, 'Niken', 'Staff Finance', 'Finance', 'Aktif', '65a4f45ead15a.png', NULL, NULL, NULL, '', '', '', NULL, ''),
@@ -425,6 +473,24 @@ INSERT INTO `manage_cuti` (`id_manage_cuti`, `id_kategori_cuti`, `kuota_cuti`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `no_jurnal`
+--
+
+CREATE TABLE `no_jurnal` (
+  `no_jurnal` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `no_jurnal`
+--
+
+INSERT INTO `no_jurnal` (`no_jurnal`) VALUES
+('001/GPP/2024'),
+('003/GPP/2024');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `po_barang`
 --
 
@@ -454,7 +520,8 @@ INSERT INTO `po_barang` (`id_po`, `id_req_brg`, `tgl_po`, `qty_po`, `harga_po`, 
 (51, 74, '2024-02-02', 1, 300000, 'untuk bersih bersih kapal', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 1, 27, 24),
 (52, 73, '2024-02-02', 1, 120000, '-', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 2, 27, 26),
 (53, 75, '2024-02-02', 1, 500000, '1', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 3, 27, 31),
-(83, 76, '2024-02-05', 1, 300000, 'aki kapal', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 1, 27, 32);
+(83, 76, '2024-02-05', 1, 300000, 'aki kapal', 'James Taju', 'Regina', 'Raden Sulaiman Sanjeev', 1, 27, 32),
+(84, 77, '2024-02-06', 1, 1500000, '-', '', '', '', 1, 27, 33);
 
 -- --------------------------------------------------------
 
@@ -508,7 +575,8 @@ INSERT INTO `req_barang` (`id_req_brg`, `kode_pengajuan`, `kode_brg`, `qty_req`,
 (73, 'REQ-24020200024-47696', 'BRG00050', 1, '2024-02-02', 'untuk penerangan', 'Selesai', 'Gahral', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 3, 28, 1),
 (74, 'REQ-24020200025-97786', 'BRG00072', 1, '2024-02-02', '', 'Selesai', 'Gahral', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 2, 28, 1),
 (75, 'REQ-24020200026-97908', 'BRG00008', 1, '2024-02-02', '-', 'Selesai', 'Gahral', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 2, 29, 1),
-(76, 'REQ-24020500027-93897', 'BRG00004', 1, '2024-02-05', 'sudah waktunya ganti aki', 'Selesai', 'Gahral', 'Michael Kawilarang', 'Bambang Wahyudi', 2, 1, 28, 1);
+(76, 'REQ-24020500027-93897', 'BRG00004', 1, '2024-02-05', 'sudah waktunya ganti aki', 'Selesai', 'Gahral', 'Michael Kawilarang', 'Bambang Wahyudi', 2, 1, 28, 1),
+(77, 'REQ-24020600028-82431', 'BRG00082', 1, '2024-02-06', '-', 'Menunggu Persetujuan Dir. HRD', 'Gahral', 'Michael Kawilarang', 'Bambang Wahyudi', 1, 1, 28, 1);
 
 -- --------------------------------------------------------
 
@@ -704,13 +772,13 @@ INSERT INTO `user` (`id_user`, `username`, `password`, `level`, `id_emp`) VALUES
 (11, 'admin', '$2y$10$IgW4FLMwe9euVk0Ne9.ks.8ZhYCvheo7j1at4NiMIW38uOXYUM8pi', 'Kepala Cabang', 12),
 (12, 'admin2', '$2y$10$HGD9twPbqY2jRuhsR6NMA.qUNiqShFNa8AFS8hy2LjDvFqdvGGM3e', 'Direktur Operasional', 11),
 (13, 'admin3', '$2y$10$Q3IQI9/N96Pkm12hhwZrRe152Y937dQmRcqeZZSshp0mpz2Mh7IjO', 'Purchasing', 19),
-(14, 'admin4', '$2y$10$3SspMiCSr.VJIpZy9thj2O1tNUeKc/EGPCLLRLaj4SznMsEmQliN.', 'Finance', 14),
-(15, 'hrd', '$2y$10$rfSEEc5RaRZ/YjmxEF9G8uDTXi8w04f8PnuI/3Br7pXPWD9PKOhN2', 'HRD', 10),
+(14, 'elis', '$2y$10$D4rpUxPZMdYYV5EBPAbWleveaycPXW5m/bsLGyhUWTF34uSzL1BJ2', 'Kepala Finance', 14),
+(15, 'hrd', '$2y$10$rfSEEc5RaRZ/YjmxEF9G8uDTXi8w04f8PnuI/3Br7pXPWD9PKOhN2', 'Direktur HRD', 10),
 (21, 'sanjeev', '$2y$10$dqD5eyXMYFl5dmq.1s103OeZOPTBNN4gHGqbu/D5neofhrjWRKxBO', 'Direktur Utama', 8),
 (27, 'alex', '$2y$10$AIPkK9rwsTtwIpWxWxQyl.B4q1KZkeHJuzk9htMLmXM3k7hgRuyzW', 'Purchasing', 19),
-(28, 'robi', '$2y$10$pi39ljqjbeI7Xgu6up8uie2wOUT6Gv7dwqsQXgvI60DotWKCmSvQC', 'Crew', 18),
-(29, 'krisno', '$2y$10$wdmPEof2zbHxxFyJWXAZZOZOigLJucxD/Vy5oALS.0y5ZJkvzVNhC', 'Crew', 16),
-(30, 'niken', '$2y$10$Kzzb.fetZnuGPtKI03hX6.p.b.XP81bzSX92q0P3/HpRpWFSpdPZa', 'Staff Operasional', 17),
+(28, 'robi', '$2y$10$pi39ljqjbeI7Xgu6up8uie2wOUT6Gv7dwqsQXgvI60DotWKCmSvQC', 'Crew Armada', 18),
+(29, 'krisno', '$2y$10$wdmPEof2zbHxxFyJWXAZZOZOigLJucxD/Vy5oALS.0y5ZJkvzVNhC', 'Crew Armada', 16),
+(30, 'niken', '$2y$10$97K4MbdoDy98yZbu5BbtIOkSn4iT.PuudgLeGDIGb/USt79lGL6K2', 'Staff Finance', 17),
 (31, 'mabrur', '$2y$10$zxwFH.e4ooAM3CgI8Wzi8Ot0AIZhzcnKMHNPSIprWt.gbQiArYqki', 'Staff IT', 30),
 (33, 'dirkeu', '$2y$10$ieRoa0fn5uVaLatoFYBeUuwI0H1l./YWLxnB.1WNvFbTZyPApFUl6', 'Direktur Keuangan', 9),
 (34, 'gahral', '$2y$10$htRb4rT9Pd08BIcc9/JnpeMPtqmVxkXU2Agz4JkQX0xFMj29ZBCtG', 'Kepala Operasional', 13);
@@ -775,6 +843,12 @@ ALTER TABLE `barang_masuk`
   ADD KEY `id_req_brg` (`id_req_brg`);
 
 --
+-- Indexes for table `cart_of_account`
+--
+ALTER TABLE `cart_of_account`
+  ADD PRIMARY KEY (`kode_coa`);
+
+--
 -- Indexes for table `ijazah`
 --
 ALTER TABLE `ijazah`
@@ -786,6 +860,14 @@ ALTER TABLE `ijazah`
 --
 ALTER TABLE `invoice`
   ADD PRIMARY KEY (`id_invoice`);
+
+--
+-- Indexes for table `jurnal`
+--
+ALTER TABLE `jurnal`
+  ADD PRIMARY KEY (`id_jurnal`),
+  ADD KEY `no_jurnal` (`no_jurnal`),
+  ADD KEY `kode_coa` (`kode_coa`);
 
 --
 -- Indexes for table `karyawan`
@@ -831,6 +913,12 @@ ALTER TABLE `manage_cuti`
   ADD PRIMARY KEY (`id_manage_cuti`),
   ADD KEY `id_kategori_cuti` (`id_kategori_cuti`),
   ADD KEY `id_emp` (`id_emp`);
+
+--
+-- Indexes for table `no_jurnal`
+--
+ALTER TABLE `no_jurnal`
+  ADD PRIMARY KEY (`no_jurnal`);
 
 --
 -- Indexes for table `po_barang`
@@ -924,7 +1012,13 @@ ALTER TABLE `ijazah`
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `id_invoice` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_invoice` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+--
+-- AUTO_INCREMENT for table `jurnal`
+--
+ALTER TABLE `jurnal`
+  MODIFY `id_jurnal` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `karyawan`
@@ -972,7 +1066,7 @@ ALTER TABLE `manage_cuti`
 -- AUTO_INCREMENT for table `po_barang`
 --
 ALTER TABLE `po_barang`
-  MODIFY `id_po` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `id_po` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `qrcode`
@@ -984,7 +1078,7 @@ ALTER TABLE `qrcode`
 -- AUTO_INCREMENT for table `req_barang`
 --
 ALTER TABLE `req_barang`
-  MODIFY `id_req_brg` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id_req_brg` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT for table `req_cuti`
@@ -1048,6 +1142,13 @@ ALTER TABLE `barang_masuk`
 --
 ALTER TABLE `ijazah`
   ADD CONSTRAINT `ijazah_ibfk_1` FOREIGN KEY (`id_emp`) REFERENCES `karyawan` (`id_emp`);
+
+--
+-- Constraints for table `jurnal`
+--
+ALTER TABLE `jurnal`
+  ADD CONSTRAINT `jurnal_ibfk_1` FOREIGN KEY (`no_jurnal`) REFERENCES `no_jurnal` (`no_jurnal`),
+  ADD CONSTRAINT `jurnal_ibfk_2` FOREIGN KEY (`kode_coa`) REFERENCES `cart_of_account` (`kode_coa`);
 
 --
 -- Constraints for table `kontrak_kerja`
