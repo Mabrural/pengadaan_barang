@@ -4,8 +4,9 @@
 
 // ambil data di URL
 $no_jurnal = $_GET["no_jurnal"];
+$id_jurnal = $_GET["id_jurnal"];
 // query data mahasiswa berdasarkan id
-$jurnal = query("SELECT * FROM jurnal WHERE no_jurnal = '$no_jurnal'")[0];
+$jurnal = query("SELECT * FROM jurnal WHERE id_jurnal = '$id_jurnal'")[0];
 $coa = query("SELECT * FROM cart_of_account");
 
 // cek apakah tombol submit sudah ditekan atau belum

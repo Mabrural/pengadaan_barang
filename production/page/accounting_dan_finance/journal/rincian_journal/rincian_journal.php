@@ -44,13 +44,16 @@ $no_jurnal = $_GET['no_jurnal'];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
+                  $totalDebit = 0;
+                  $totalKredit = 0;
               		$query = "SELECT * FROM jurnal JOIN no_jurnal ON no_jurnal.no_jurnal=jurnal.no_jurnal JOIN cart_of_account ON cart_of_account.kode_coa=jurnal.kode_coa WHERE jurnal.no_jurnal='$no_jurnal'";
               		
               		$tampil = mysqli_query($koneksi, $query);
               		while ($data = mysqli_fetch_assoc($tampil)) {
                       $debit = $data['debit'];
               	     	$kredit = $data['kredit'];
-
+                      $totalDebit += $debit;
+                      $totalKredit += $kredit;
               	 ?>
                 <td class=" "><?= $no++;?></td>
                 <td class=" "><?= $data['no_jurnal'];?></td>
@@ -68,7 +71,17 @@ $no_jurnal = $_GET['no_jurnal'];
            <?php } ?>
 
             </tbody>
+
+            <tfoot>
+                <tr>
+                    <th colspan="6" style="text-align:right">Total:</th>
+                    <th><?= "Rp. " . number_format($totalDebit, 2, ",", "."); ?></th>
+                    <th><?= "Rp. " . number_format($totalKredit, 2, ",", "."); ?></th>
+                    <th colspan="1"></th> <!-- Kolom aksi tidak perlu dihitung total -->
+                </tr>
+            </tfoot>
           </table>
+    
 
           <script type="text/javascript">
           $(document).ready(function() {
