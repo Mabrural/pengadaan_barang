@@ -1,8 +1,9 @@
 <?php 
 
+$id_jurnal = $_GET["id_jurnal"];
 $no_jurnal = $_GET["no_jurnal"];
 
-if( hapusDataJournal($no_jurnal) > 0 ){
+if( hapusDataJournal($id_jurnal) > 0 ){
 	echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
 	echo '<script src="./sweetalert2.min.js"></script>';
 	echo "<script>

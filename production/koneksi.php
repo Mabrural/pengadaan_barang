@@ -1524,7 +1524,7 @@ function app3Pembelian($data) {
 
 // }
 
-
+ 
 function hapusPembelian($id_po) {
     global $koneksi;
 
@@ -1730,7 +1730,8 @@ function tambahCoa($data) {
 	global $koneksi;
 	$kode_coa = htmlspecialchars($data["kode_coa"]);
 	$name_account = htmlspecialchars($data["name_account"]);
-	$account_type = htmlspecialchars($data["account_type"]);
+	$account_type = mysqli_real_escape_string($koneksi, $data["account_type"]);
+	// $account_type = htmlspecialchars($data["account_type"]);
 
 
 	$query = "INSERT INTO cart_of_account VALUES
@@ -1746,7 +1747,8 @@ function ubahCoa($data) {
 	$kode_coa = htmlspecialchars($data["kode_coa"]);
 	$kode_coa_lama = htmlspecialchars($data["kode_coa_lama"]);
 	$name_account = htmlspecialchars($data["name_account"]);
-	$account_type = htmlspecialchars($data["account_type"]);
+	$account_type = mysqli_real_escape_string($koneksi, $data["account_type"]);
+	// $account_type = htmlspecialchars($data["account_type"]);
 
 	$query = "UPDATE cart_of_account SET
 				kode_coa= '$kode_coa',
@@ -1847,9 +1849,9 @@ function ubahDataJournal($data) {
 
 }
 
-function hapusDataJournal($no_jurnal) {
+function hapusDataJournal($id_jurnal) {
 	global $koneksi;
-	mysqli_query($koneksi, "DELETE FROM jurnal WHERE no_jurnal='$no_jurnal'");
+	mysqli_query($koneksi, "DELETE FROM jurnal WHERE id_jurnal='$id_jurnal'");
 
 	return mysqli_affected_rows($koneksi);
 

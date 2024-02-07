@@ -468,6 +468,9 @@ if ($_SESSION["level"] == "Staff IT") {
                                 include "page/accounting_dan_finance/journal/journal.php";
                                 break;
 
+                            case 'gl':
+                                include "page/accounting_dan_finance/general_ledger/gl.php";
+                                break;
                             
 
                             case 'historyPermintaan':

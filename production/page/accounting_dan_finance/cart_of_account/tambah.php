@@ -96,9 +96,50 @@ if (isset($_POST["submit"])) {
 								<div class="item form-group">
 									<label for="account_type" class="col-form-label col-md-3 col-sm-3 label-align">Account Type<span class="required">*</span></label>
 									<div class="col-md-6 col-sm-6 ">
-										<input id="account_type" name="account_type" class="form-control" type="text" placeholder="Ketikkan Account Type" required>
+										<select class="form-control" name="account_type" required>
+											<option value="">--Pilih Account Type--</option>
+											<option value="ASET">ASET</option>
+											<option value="Aset Lancar">Aset Lancar</option>
+											<option value="Kas & Bank">Kas & Bank</option>
+											<option value="Kas">Kas</option>
+											<option value="Bank">Bank</option>
+											<option value="Piutang Usaha">Piutang Usaha</option>
+											<option value="Piutang Non Usaha">Piutang Non Usaha</option>
+											<option value="Piutang Pemegang Saham">Piutang Pemegang Saham</option>
+											<option value="Piutang Related Party">Piutang Related Party</option>
+											<option value="Pajak Dibayar Dimuka">Pajak Dibayar Dimuka</option>
+											<option value="Aktiva Lancar Lainnya">Aktiva Lancar Lainnya</option>
+											<option value="Aset Tidak Lancar">Aset Tidak Lancar</option>
+											<option value="Aset Tetap">Aset Tetap</option>
+											<option value="Aset Tetap-Akumulasi Penyusutan">Aset Tetap-Akumulasi Penyusutan</option>
+											<option value="Akumulasi Penyusutan">Akumulasi Penyusutan</option>
+											<option value="KEWAJIBAN">KEWAJIBAN</option>
+											<option value="Hutang Lancar">Hutang Lancar</option>
+											<option value="Hutang Usaha">Hutang Usaha</option>
+											<option value="Hutang Non Usaha">Hutang Non Usaha</option>
+											<option value="Hutang Bank">Hutang Bank</option>
+											<option value="Hutang Pajak">Hutang Pajak</option>
+											<option value="Hutang Lancar Lainnya">Hutang Lancar Lainnya</option>
+											<option value="Biaya Yang Masih Harus Dibayar">Biaya Yang Masih Harus Dibayar</option>
+											<option value="Hutang Jangka Panjang">Hutang Jangka Panjang</option>
+											<option value="EKUITAS">EKUITAS</option>
+											<option value="Laba Ditahan">Laba Ditahan</option>
+											<option value="Pendapatan">Pendapatan</option>
+											<option value="Pendapatan Lainnya">Pendapatan Lainnya</option>
+											<option value="Harga Pokok Penjualan">Harga Pokok Penjualan</option>
+											<option value="Beban">Beban</option>
+											<option value="Beban Lainnya">Beban Lainnya</option>
+											
+										</select>
 									</div>
 								</div>
+
+								<!-- <div class="item form-group">
+									<label for="account_type" class="col-form-label col-md-3 col-sm-3 label-align">Account Type<span class="required">*</span></label>
+									<div class="col-md-6 col-sm-6 ">
+										<input id="account_type" name="account_type" class="form-control" type="text" placeholder="Ketikkan Account Type" required>
+									</div>
+								</div> -->
 
 
 								<div class="ln_solid"></div>

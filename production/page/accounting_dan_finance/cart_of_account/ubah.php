@@ -123,7 +123,41 @@ if (isset($_POST["submit"])) {
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="account_type">Account Type<span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="account_type" id="account_type" required="required" class="form-control" value="<?= $coa['account_type']?>">
+													<select class="form-control" name="account_type" required>
+														<option value="">--Pilih Account Type--</option>
+														<option value="ASET" <?php if ($coa['account_type'] == 'ASET') { echo "selected"; } ?>>ASET</option>
+														<option value="Aset Lancar" <?php if ($coa['account_type'] == 'Aset Lancar') { echo "selected"; } ?>>Aset Lancar</option>
+														<option value="Kas & Bank" <?php if ($coa['account_type'] == 'Kas & Bank') { echo "selected"; } ?>>Kas & Bank</option>
+														<option value="Kas" <?php if ($coa['account_type'] == 'Kas') { echo "selected"; } ?>>Kas</option>
+														<option value="Bank" <?php if ($coa['account_type'] == 'Bank') { echo "selected"; } ?>>Bank</option>
+														<option value="Piutang Usaha" <?php if ($coa['account_type'] == 'Piutang Usaha') { echo "selected"; } ?>>Piutang Usaha</option>
+														<option value="Piutang Non Usaha" <?php if ($coa['account_type'] == 'Piutang Non Usaha') { echo "selected"; } ?>>Piutang Non Usaha</option>
+														<option value="Piutang Pemegang Saham" <?php if ($coa['account_type'] == 'Piutang Pemegang Saham') { echo "selected"; } ?>>Piutang Pemegang Saham</option>
+														<option value="Piutang Related Party" <?php if ($coa['account_type'] == 'Piutang Related Party') { echo "selected"; } ?>>Piutang Related Party</option>
+														<option value="Pajak Dibayar Dimuka" <?php if ($coa['account_type'] == 'Pajak Dibayar Dimuka') { echo "selected"; } ?>>Pajak Dibayar Dimuka</option>
+														<option value="Aktiva Lancar Lainnya" <?php if ($coa['account_type'] == 'Aktiva Lancar Lainnya') { echo "selected"; } ?>>Aktiva Lancar Lainnya</option>
+														<option value="Aset Tidak Lancar" <?php if ($coa['account_type'] == 'Aset Tidak Lancar') { echo "selected"; } ?>>Aset Tidak Lancar</option>
+														<option value="Aset Tetap" <?php if ($coa['account_type'] == 'Aset Tetap') { echo "selected"; } ?>>Aset Tetap</option>
+														<option value="Aset Tetap-Akumulasi Penyusutan" <?php if ($coa['account_type'] == 'Aset Tetap-Akumulasi Penyusutan') { echo "selected"; } ?>>Aset Tetap-Akumulasi Penyusutan</option>
+														<option value="Akumulasi Penyusutan" <?php if ($coa['account_type'] == 'Akumulasi Penyusutan') { echo "selected"; } ?>>Akumulasi Penyusutan</option>
+														<option value="KEWAJIBAN" <?php if ($coa['account_type'] == 'KEWAJIBAN') { echo "selected"; } ?>>KEWAJIBAN</option>
+														<option value="Hutang Lancar" <?php if ($coa['account_type'] == 'Hutang Lancar') { echo "selected"; } ?>>Hutang Lancar</option>
+														<option value="Hutang Usaha" <?php if ($coa['account_type'] == 'Hutang Usaha') { echo "selected"; } ?>>Hutang Usaha</option>
+														<option value="Hutang Non Usaha" <?php if ($coa['account_type'] == 'Hutang Non Usaha') { echo "selected"; } ?>>Hutang Non Usaha</option>
+														<option value="Hutang Bank" <?php if ($coa['account_type'] == 'Hutang Bank') { echo "selected"; } ?>>Hutang Bank</option>
+														<option value="Hutang Pajak" <?php if ($coa['account_type'] == 'Hutang Pajak') { echo "selected"; } ?>>Hutang Pajak</option>
+														<option value="Hutang Lancar Lainnya" <?php if ($coa['account_type'] == 'Hutang Lancar Lainnya') { echo "selected"; } ?>>Hutang Lancar Lainnya</option>
+														<option value="Biaya Yang Masih Harus Dibayar" <?php if ($coa['account_type'] == 'Biaya Yang Masih Harus Dibayar') { echo "selected"; } ?>>Biaya Yang Masih Harus Dibayar</option>
+														<option value="Hutang Jangka Panjang" <?php if ($coa['account_type'] == 'Hutang Jangka Panjang') { echo "selected"; } ?>>Hutang Jangka Panjang</option>
+														<option value="EKUITAS" <?php if ($coa['account_type'] == 'EKUITAS') { echo "selected"; } ?>>EKUITAS</option>
+														<option value="Laba Ditahan" <?php if ($coa['account_type'] == 'Laba Ditahan') { echo "selected"; } ?>>Laba Ditahan</option>
+														<option value="Pendapatan" <?php if ($coa['account_type'] == 'Pendapatan') { echo "selected"; } ?>>Pendapatan</option>
+														<option value="Pendapatan Lainnya" <?php if ($coa['account_type'] == 'Pendapatan Lainnya') { echo "selected"; } ?>>Pendapatan Lainnya</option>
+														<option value="Harga Pokok Penjualan" <?php if ($coa['account_type'] == 'Harga Pokok Penjualan') { echo "selected"; } ?>>Harga Pokok Penjualan</option>
+														<option value="Beban" <?php if ($coa['account_type'] == 'Beban') { echo "selected"; } ?>>Beban</option>
+														<option value="Beban Lainnya" <?php if ($coa['account_type'] == 'Beban Lainnya') { echo "selected"; } ?>>Beban Lainnya</option>
+														
+													</select>
 											</div>
 										</div>
 
