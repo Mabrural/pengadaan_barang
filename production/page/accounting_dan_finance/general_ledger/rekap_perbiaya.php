@@ -2,12 +2,12 @@
 
 $id_user = $_SESSION["id_user"];
 
-// $pengajuan = query("SELECT * FROM barang WHERE barang.id_barang=$id_user");
-
+$kode_coa = $_GET['kode_coa'];
+$rekap = query("SELECT * FROM jurnal JOIN cart_of_account ON cart_of_account.kode_coa=$kode_coa")[0];
 ?>
     <div class="x_panel">
       <div class="x_title">
-        <h2>General Ledger <small></small></h2>
+        <h2>Biaya - [ <?= $kode_coa ;?> ]<?= $rekap['name_account'] ;?> <small></small></h2>
         <!-- <a href="?form=tambahJournal" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> New Journal</a> -->
        
         <div class="clearfix"></div>
@@ -25,9 +25,13 @@ $id_user = $_SESSION["id_user"];
                   <input type="checkbox" id="check-all" class="flat">
                 </th> -->
                 <th class="column-title">No. </th>
-                <th class="column-title">No. Account</th>
-                <th class="column-title">Account</th>
-                <th class="column-title">Total Biaya</th>
+                <th class="column-title">No. Journal</th>
+                <th class="column-title">Tanggal</th>
+                <th class="column-title">Keterangan</th>
+                <th class="column-title">Debit</th>
+                <th class="column-title">Kredit</th>
+                <th class="column-title">Saldo</th>
+
                 <!-- <th class="column-title no-link last"><span class="nobr">Action</span> -->
                 </th>
                 <th class="bulk-actions" colspan="7">
@@ -40,10 +44,9 @@ $id_user = $_SESSION["id_user"];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-              		$query = "SELECT * FROM no_jurnal JOIN jurnal ON jurnal.no_jurnal=no_jurnal.no_jurnal JOIN cart_of_account ON cart_of_account.kode_coa=jurnal.kode_coa GROUP BY jurnal.kode_coa";
+              		$query = "SELECT * FROM no_jurnal JOIN jurnal ON jurnal.no_jurnal=no_jurnal.no_jurnal JOIN cart_of_account ON cart_of_account.kode_coa=jurnal.kode_coa WHERE jurnal.kode_coa=$kode_coa";
               		
               		$tampil = mysqli_query($koneksi, $query);
-
 
               		// Inisialisasi saldo awal
         			$saldo = 0;
@@ -51,17 +54,21 @@ $id_user = $_SESSION["id_user"];
               		while ($data = mysqli_fetch_assoc($tampil)) {
               	     	$debit = $data['debit'];
               	     	$kredit = $data['kredit'];
-              			// Update saldo berdasarkan jenis transaksi
+
+              	     	// Update saldo berdasarkan jenis transaksi
 			            if ($data['account_type'] == 'ASET') {
-			                $saldo += $debit + $kredit;
+			                $saldo += $kredit + $saldo;
 			            } else {
-			                $saldo += $kredit - $debit;
+			                $saldo += $kredit + $debit;
 			            }
               	 ?>
                 <td class=" "><?= $no++;?></td>
-                <td class=" "><a href="?page=rekapPerbiaya&kode_coa=<?= $data['kode_coa']?>" style="text-decoration: underline; color: blue"><?= $data['kode_coa'];?></a></td>
-                <td class=" "><?= $data['name_account'];?></td>
-                <td class=" "><?= "Rp. ".number_format("$saldo", 2, ",", "."); ?>0</td>
+                <td class=" "><?= $data['no_jurnal']?></td>
+                <td class=" "><?= $data['tgl_jurnal'];?></td>
+                <td class=" "><?= $data['ket_jurnal'];?></td>
+                <td class=" "><?= "Rp. ".number_format("$debit", 2, ",", "."); ?></td>
+                <td class=" "><?= "Rp. ".number_format("$kredit", 2, ",", "."); ?></td>
+                <td class=" "><?= "Rp. ".number_format("$saldo", 2, ",", "."); ?></td>
                 
                <!--  <td class=" last"><a href="?form=rincianJurnal&no_jurnal=<?= $data["no_jurnal"]; ?>" class="btn btn-secondary btn-sm"><i class="fa fa-eye fa-sm"></i> Lihat Journal </a> | <a href="?form=ubahNoJurnal&no_jurnal=<?= $data["no_jurnal"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusNoJurnal&no_jurnal=<?= $data["no_jurnal"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
                 </td> -->

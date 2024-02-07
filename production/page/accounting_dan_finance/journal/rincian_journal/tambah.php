@@ -74,7 +74,7 @@ if (isset($_POST["submit"])) {
 									<label class="col-form-label col-md-3 col-sm-3 label-align">Tanggal <span class="required">*</span></label>
 									<div class="col-md-6 col-sm-6 ">
 										<input id="no_jurnal" name="no_jurnal" class="form-control" type="hidden" value="<?= $no_jurnal?>">
-										<input id="tgl_jurnal" name="tgl_jurnal" class="form-control" type="date" required>
+										<input id="tgl_jurnal" name="tgl_jurnal" class="form-control" type="date" value="<?= date('Y-m-d') ?>" required>
 									</div>
 								</div>
 
