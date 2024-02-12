@@ -40,23 +40,32 @@ $id_user = $_SESSION["id_user"];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-              		$query = "SELECT * FROM no_jurnal JOIN jurnal ON jurnal.no_jurnal=no_jurnal.no_jurnal JOIN cart_of_account ON cart_of_account.kode_coa=jurnal.kode_coa GROUP BY jurnal.kode_coa";
+                  $query = "SELECT *,
+                    SUM(debit) as total_debit,
+                    SUM(kredit) as total_kredit
+                  FROM no_jurnal
+                  JOIN jurnal ON jurnal.no_jurnal = no_jurnal.no_jurnal
+                  JOIN cart_of_account ON cart_of_account.kode_coa = jurnal.kode_coa
+                  GROUP BY jurnal.kode_coa";
+              		// $query = "SELECT * FROM no_jurnal JOIN jurnal ON jurnal.no_jurnal=no_jurnal.no_jurnal JOIN cart_of_account ON cart_of_account.kode_coa=jurnal.kode_coa WHERE jurnal.kode_coa GROUP BY jurnal.kode_coa";
               		
               		$tampil = mysqli_query($koneksi, $query);
 
 
               		// Inisialisasi saldo awal
-        			$saldo = 0;
+        			   $saldo = 0;
 
               		while ($data = mysqli_fetch_assoc($tampil)) {
-              	     	$debit = $data['debit'];
-              	     	$kredit = $data['kredit'];
-              			// Update saldo berdasarkan jenis transaksi
-			            if ($data['account_type'] == 'ASET') {
-			                $saldo += $debit + $kredit;
-			            } else {
-			                $saldo += $kredit - $debit;
-			            }
+              	    $debit = $data['total_debit'];
+                    $kredit = $data['total_kredit'];
+
+                    // Update saldo berdasarkan jenis transaksi
+                    // You may need to adjust this logic based on your requirements
+                    if ($data['account_type'] == 'ASET') {
+                        $saldo = $kredit + $saldo;
+                    } else {
+                        $saldo = $kredit + $debit;
+                    }
               	 ?>
                 <td class=" "><?= $no++;?></td>
                 <td class=" "><a href="?page=rekapPerbiaya&kode_coa=<?= $data['kode_coa']?>" style="text-decoration: underline; color: blue"><?= $data['kode_coa'];?></a></td>

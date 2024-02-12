@@ -49,17 +49,20 @@ $rekap = query("SELECT * FROM jurnal JOIN cart_of_account ON cart_of_account.kod
               		$tampil = mysqli_query($koneksi, $query);
 
               		// Inisialisasi saldo awal
-        			$saldo = 0;
+        			   $saldo = 0;
 
               		while ($data = mysqli_fetch_assoc($tampil)) {
               	     	$debit = $data['debit'];
               	     	$kredit = $data['kredit'];
 
               	     	// Update saldo berdasarkan jenis transaksi
-			            if ($data['account_type'] == 'ASET') {
-			                $saldo += $kredit + $saldo;
+			            if ($data['account_type'] == 'ASET' OR $data['account_type'] == 'Aset Lancar' OR $data['account_type'] == 'Kas & Bank' OR $data['account_type'] == 'Bank' OR $data['account_type'] == 'Piutang Usaha' OR $data['account_type'] == 'Piutang Non Usaha' OR $data['account_type'] == 'Piutang Pemegang Saham' OR $data['account_type'] == 'Piutang Related Party' OR $data['account_type'] == 'Pajak Dibayar Dimuka' OR $data['account_type'] == 'Aktiva Lancar Lainnya' OR $data['account_type'] == 'Aset Tidak Lancar' OR $data['account_type'] == 'Aset Tetap' OR $data['account_type'] == 'Aset Tetap-Akumulasi Penyusutan' OR $data['account_type'] == 'Akumulasi Penyusutan' OR $data['account_type'] == 'Harga Pokok Penjualan' OR $data['account_type'] == 'Beban' OR $data['account_type'] == 'Beban Lainnya') {
+
+			                $saldo += $debit - $kredit ;
+
 			            } else {
-			                $saldo += $kredit + $debit;
+                      $saldo += $kredit - $debit;
+                      // $saldo += $debit - $kredit;
 			            }
               	 ?>
                 <td class=" "><?= $no++;?></td>
@@ -68,7 +71,7 @@ $rekap = query("SELECT * FROM jurnal JOIN cart_of_account ON cart_of_account.kod
                 <td class=" "><?= $data['ket_jurnal'];?></td>
                 <td class=" "><?= "Rp. ".number_format("$debit", 2, ",", "."); ?></td>
                 <td class=" "><?= "Rp. ".number_format("$kredit", 2, ",", "."); ?></td>
-                <td class=" "><?= "Rp. ".number_format("$saldo", 2, ",", "."); ?></td>
+                <td class=" "><strong style="color: red"><?= "Rp. ".number_format("$saldo", 2, ",", "."); ?></strong></td>
                 
                <!--  <td class=" last"><a href="?form=rincianJurnal&no_jurnal=<?= $data["no_jurnal"]; ?>" class="btn btn-secondary btn-sm"><i class="fa fa-eye fa-sm"></i> Lihat Journal </a> | <a href="?form=ubahNoJurnal&no_jurnal=<?= $data["no_jurnal"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusNoJurnal&no_jurnal=<?= $data["no_jurnal"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>
                 </td> -->
