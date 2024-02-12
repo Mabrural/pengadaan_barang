@@ -140,7 +140,7 @@ if ($_SESSION["level"] == "Staff IT") {
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-edit"></i> Approval Barang<span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-edit"></i> Permintaan Barang<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <!-- <li><a href="admin.php?page=approve">Approval</a></li> -->
                         <li class="nav-item">
@@ -165,7 +165,7 @@ if ($_SESSION["level"] == "Staff IT") {
                                 ?>
                             </a>
                         </li>
-                      <li><a href="admin-kops.php?page=historyApprove">History Approve Barang</a></li>
+                      <li><a href="admin-kops.php?page=historyApprove">History Permintaan Barang</a></li>
                       <!-- <li><a href="tables_dynamic.html">Table Dynamic</a></li> -->
                     </ul>
                   </li>

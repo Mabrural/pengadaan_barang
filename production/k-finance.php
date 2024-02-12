@@ -178,24 +178,36 @@ if ($_SESSION["level"] == "Staff IT") {
                     <ul class="nav child_menu">
                       <li><a href="k-finance.php?page=permintaanBarang">Data Permintaan Barang</a></li>
                       <li><a href="k-finance.php?page=historyPermintaan">History Permintaan Barang</a></li>
-                      <!-- <li><a href="tables_dynamic.html">Table Dynamic</a></li> -->
+                      <li><a href="k-finance.php?page=purchaseOrder">Purchase Order</a></li>
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-shopping-cart"></i> Pembelian Barang<span class="fa fa-chevron-down"></span></a>
+                  <!-- <li><a><i class="fa fa-shopping-cart"></i> Pembelian Barang<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <!-- <li><a href="k-finance.php?page=pengajuanPembelian">Data Pembelian Barang</a></li> -->
                       <li><a href="k-finance.php?page=invoicePembelian">Invoice Pembelian</a></li>
-                      <!-- <li><a href="index.php?page=historyPengajuan">Barang Masuk</a></li>
-                      <li><a href="index.php?page=historyPengajuan">Barang Keluar</a></li> -->
-                      <!-- <li><a href="tables_dynamic.html">Table Dynamic</a></li> -->
+                      <li><a href="k-finance.php?page=invoicePembelian">Stock</a></li>
                     </ul>
-                  </li>
+                  </li> -->
+
+                 <!--  <li><a><i class="fa fa-shopping-cart"></i> Penjualan Barang<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="k-finance.php?page=invoicePembelian">PO dari Customer</a></li>
+                      <li><a href="k-finance.php?page=invoicePembelian">Invoice Penjualan</a></li>
+                    </ul>
+                  </li> -->
 
                   <li><a><i class="fa fa-credit-card"></i> Accounting & Finance <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="k-finance.php?page=coa">Cart of Account</a></li>
                       <li><a href="k-finance.php?page=journal">Journal</a></li>
+                      <li><a href="k-finance.php?page=gl">General Ledger</a></li>
+                    </ul>
+                  </li>
+
+                  <li><a><i class="fa fa-users"></i> Crewing <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="k-finance.php?page=crew">Data Crew</a></li>
+                      <li><a href="k-finance.php?page=journal">Sertifikat Kapal</a></li>
                       <li><a href="k-finance.php?page=gl">General Ledger</a></li>
                     </ul>
                   </li>
@@ -324,70 +336,7 @@ if ($_SESSION["level"] == "Staff IT") {
                   </div>
                 </li>
 
-               <!--  <li role="presentation" class="nav-item dropdown open">
-                  <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-envelope-o"></i>
-                    <span class="badge bg-green">6</span>
-                  </a>
-                  <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
-                    <li class="nav-item">
-                      <a class="dropdown-item">
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="dropdown-item">
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="dropdown-item">
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="dropdown-item">
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <div class="text-center">
-                        <a class="dropdown-item">
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
-                  </ul>
-                </li> -->
+        
               </ul>
             </nav>
           </div>
@@ -478,6 +427,14 @@ if ($_SESSION["level"] == "Staff IT") {
 
                             case 'historyPermintaan':
                                 include 'page/history_permintaan/history_permintaan.php';
+                                break;
+
+                            case 'purchaseOrder':
+                                include 'page/permintaan_barang/purchase_order/po.php';
+                                break;
+
+                            case 'pengajuanPO':
+                                include 'page/permintaan_barang/purchase_order/pengajuan_po/pengajuan_po.php';
                                 break;
 
                             case 'tagihan':
@@ -672,6 +629,30 @@ if ($_SESSION["level"] == "Staff IT") {
 
                             case 'hapusDataJournal':
                                 include "page/accounting_dan_finance/journal/rincian_journal/hapus.php";
+                                break;
+
+                            case 'newPO':
+                                include 'page/permintaan_barang/purchase_order/tambah.php';
+                                break;
+
+                            case 'ubahPO':
+                                include 'page/permintaan_barang/purchase_order/ubah.php';
+                                break;
+
+                            case 'hapusPO':
+                                include 'page/permintaan_barang/purchase_order/hapus.php';
+                                break;
+
+                            case 'tambahPO':
+                                include 'page/permintaan_barang/purchase_order/pengajuan_po/tambah.php';
+                                break;
+
+                            case 'ubahPengajuanPO':
+                                include 'page/permintaan_barang/purchase_order/pengajuan_po/ubah.php';
+                                break;
+
+                            case 'hapusPengajuanPO':
+                                include 'page/permintaan_barang/purchase_order/pengajuan_po/hapus.php';
                                 break;
 
                             case 'ubahCatatan':

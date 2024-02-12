@@ -77,7 +77,7 @@ $id_user = $_SESSION["id_user"];
                 <td class=" "><?= $no++;?></td>
                 <td class=" "><?= $data['no_invoice'];?></td>
       
-                <td class=" last"> <a href="?page=pengajuanPembelian&id_invoice=<?= $data["id_invoice"]; ?>" class="btn btn-dark btn-sm text-black"> <i class="fa fa-eye"></i> Lihat PO</a> <!-- | <a href="?form=ubahInvoice&id_invoice=<?= $data["id_invoice"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusInvoice&id_invoice=<?= $data["id_invoice"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>  -->
+                <td class=" last"> <a href="?page=Pembelian&id_invoice=<?= $data["id_invoice"]; ?>" class="btn btn-dark btn-sm text-black"> <i class="fa fa-eye"></i> Lihat Invoice</a> <!-- | <a href="?form=ubahInvoice&id_invoice=<?= $data["id_invoice"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusInvoice&id_invoice=<?= $data["id_invoice"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a>  -->
                 </td>
               </tr>
               

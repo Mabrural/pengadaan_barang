@@ -6,9 +6,9 @@ $id_user = $_SESSION["id_user"];
 ?>
     <div class="x_panel">
       <div class="x_title">
-        <h2>Invoice Pembelian Barang <small></small></h2>
+        <h2>Purchase Order <small></small></h2>
         
-        <a href="?form=tambahInvoice" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Buat Invoice</a>
+        <a href="?form=newPO" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> New PO</a>
 
         <div class="clearfix"></div>
       </div>
@@ -52,7 +52,7 @@ $id_user = $_SESSION["id_user"];
                   <input type="checkbox" id="check-all" class="flat">
                 </th> -->
                 <th class="column-title">No. </th>
-                <th class="column-title">No. Invoice</th>
+                <th class="column-title">No. Purchase Order</th>
                            
                 <th class="column-title no-link last"><span class="nobr">Action</span>
                 </th>
@@ -66,7 +66,7 @@ $id_user = $_SESSION["id_user"];
               <tr class="even pointer">
               	<?php 
               		$no = 1;
-              		$query = "SELECT * FROM invoice ORDER BY id_invoice DESC";
+              		$query = "SELECT * FROM no_po ORDER BY id_no_po DESC";
               		// $query = "SELECT * FROM po_barang JOIN vendor ON vendor.id_vendor=po_barang.id_vendor JOIN req_barang ON req_barang.id_req_brg=po_barang.id_req_brg JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan";
      
               		$tampil = mysqli_query($koneksi, $query);
@@ -75,9 +75,9 @@ $id_user = $_SESSION["id_user"];
               	 ?>
                  <!-- <td><input type="checkbox" class="flat" name="select_id[]" value="<?= $data['id_invoice']; ?>"></td> -->
                 <td class=" "><?= $no++;?></td>
-                <td class=" "><?= $data['no_invoice'];?></td>
+                <td class=" "><?= $data['no_po'];?></td>
       
-                <td class=" last"> <a href="?page=pengajuanPembelian&id_invoice=<?= $data["id_invoice"]; ?>" class="btn btn-dark btn-sm text-black"> <i class="fa fa-eye"></i> Lihat Invoice</a> | <a href="?form=ubahInvoice&id_invoice=<?= $data["id_invoice"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusInvoice&id_invoice=<?= $data["id_invoice"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a> 
+                <td class=" last"> <a href="?page=pengajuanPO&id_no_po=<?= $data["id_no_po"]; ?>" class="btn btn-dark btn-sm text-black"> <i class="fa fa-eye"></i> Lihat PO</a> | <a href="?form=ubahPO&id_no_po=<?= $data["id_no_po"]; ?>" class="btn btn-info btn-sm">Ubah </a> | <a href="?form=hapusPO&id_no_po=<?= $data["id_no_po"]; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">Hapus </a> 
                 </td>
               </tr>
               

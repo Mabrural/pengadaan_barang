@@ -62,7 +62,7 @@ $rekap = query("SELECT * FROM jurnal JOIN cart_of_account ON cart_of_account.kod
 
 			            } else {
                       $saldo += $kredit - $debit;
-                      // $saldo += $debit - $kredit;
+
 			            }
               	 ?>
                 <td class=" "><?= $no++;?></td>

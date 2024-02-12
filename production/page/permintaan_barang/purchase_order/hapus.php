@@ -1,8 +1,7 @@
 <?php 
 
-$no_jurnal = $_GET["no_jurnal"];
-
-if($no_jurnal === null) {
+$id_no_po = $_GET["id_no_po"];
+if($id_no_po === null) {
     echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
 	echo '<script src="./sweetalert2.min.js"></script>';
 	echo "<script>
@@ -17,12 +16,12 @@ if($no_jurnal === null) {
 			showConfirmButton   : true
 		});  
 	},10);   setTimeout(function () {
-		window.location.href = '?page=journal'; //will redirect to your blog page (an ex: blog.html)
+		window.location.href = '?page=purchaseOrder'; //will redirect to your blog page (an ex: blog.html)
 	}, 2000); //will call the function after 2 secs
 	</script>";
  }
 
-if( $no_jurnal!==null && hapusNoJournal($no_jurnal) > 0 ){
+if( $id_no_po!==null && hapusPO($id_no_po) > 0 ){
 	echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
 	echo '<script src="./sweetalert2.min.js"></script>';
 	echo "<script>
@@ -37,7 +36,7 @@ if( $no_jurnal!==null && hapusNoJournal($no_jurnal) > 0 ){
 			showConfirmButton   : true
 		});  
 	},10);   setTimeout(function () {
-		window.location.href = '?page=journal'; //will redirect to your blog page (an ex: blog.html)
+		window.location.href = '?page=purchaseOrder'; //will redirect to your blog page (an ex: blog.html)
 	}, 2000); //will call the function after 2 secs
 	</script>";
 
@@ -49,16 +48,16 @@ if( $no_jurnal!==null && hapusNoJournal($no_jurnal) > 0 ){
 			swal.fire({
 				
 				title               : 'Peringatan!',
-				text                :  'Data Journal Sudah Ada, Journal Tidak Boleh Dihapus',
+				text                :  'Data PO Barang Sudah Ada, No. Purchase Order Tidak Boleh Dihapus',
 				//footer              :  '',
 				icon                : 'warning',
 				timer               : 2000,
 				showConfirmButton   : true
 			});  
 		},10);   setTimeout(function () {
-			window.location.href = '?page=journal'; //will redirect to your blog page (an ex: blog.html)
+			window.location.href = '?page=purchaseOrder'; //will redirect to your blog page (an ex: blog.html)
 		}, 2000); //will call the function after 2 secs
 		</script>";
 }
 
-?>
+ ?>

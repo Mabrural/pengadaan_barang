@@ -7,17 +7,17 @@ if (isset($_GET['cetakData'])) {
 
 	// $jabatan = $_GET['jabatan'];
     // query data berdasarkan id
-    $po_barang = query("SELECT * FROM po_barang JOIN invoice ON invoice.id_invoice=po_barang.id_invoice")[0];
+    $po_barang = query("SELECT * FROM po_barang JOIN no_po ON no_po.id_no_po=po_barang.id_no_po")[0];
 
     // $id_vendor = $_GET['id_vendor'];
-    $id_invoice = $_GET['id_invoice'];
-    $invoice = query("SELECT * FROM invoice WHERE id_invoice='$id_invoice'")[0];
+    $id_no_po = $_GET['id_no_po'];
+    $no_po = query("SELECT * FROM no_po WHERE id_no_po='$id_no_po'")[0];
 }
 ?>
 
 <!-- saved from url=(0058)https://sim.polibatam.ac.id/layanan-akademik/cetak_khs.php -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>Purchase Order <?= $invoice['no_invoice']?> <?= date('d-M-Y')?></title>
+            <title>Purchase Order <?= $no_po['no_po']?> <?= date('d-M-Y')?></title>
             <link rel="icon" href="img/gpp.png" type="image/ico" />
             <script language="JavaScript">
                 function Cetakan(){
@@ -256,7 +256,7 @@ if (isset($_GET['cetakData'])) {
                                 <td height="25px"> <div align="center" style="font-size:20px"><b>PURCHASE ORDER</b></div> </td>
                             </tr>
                             <tr>
-                                <td height="25px"> <div align="center"><b>( <?= $po_barang['no_invoice']?> )</b></div> </td>
+                                <td height="25px"> <div align="center"><b>( <?= $po_barang['no_po']?> )</b></div> </td>
                             </tr>
                         </tbody></table>
 
@@ -266,7 +266,7 @@ if (isset($_GET['cetakData'])) {
                                 <td>&nbsp;</td>
                             </tr>
                             <?php 
-                                $query = "SELECT * FROM po_barang JOIN vendor ON vendor.id_vendor=po_barang.id_vendor JOIN req_barang ON req_barang.id_req_brg=po_barang.id_req_brg JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan JOIN user ON user.id_user=po_barang.id_user JOIN karyawan ON karyawan.id_emp=user.id_emp WHERE id_invoice=$id_invoice";
+                                $query = "SELECT * FROM po_barang JOIN vendor ON vendor.id_vendor=po_barang.id_vendor JOIN req_barang ON req_barang.id_req_brg=po_barang.id_req_brg JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan JOIN user ON user.id_user=po_barang.id_user JOIN karyawan ON karyawan.id_emp=user.id_emp WHERE id_no_po=$id_no_po";
 
                                 // Add filter conditions based on the selected values
                                   // if (!empty($id_vendor)) {
@@ -345,7 +345,7 @@ if (isset($_GET['cetakData'])) {
                                     // if (!is_array($selectedIds)) {
                                     //     $selectedIds = array();
                                     // }
-                                    $query = "SELECT * FROM po_barang JOIN vendor ON vendor.id_vendor=po_barang.id_vendor JOIN req_barang ON req_barang.id_req_brg=po_barang.id_req_brg JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan JOIN user ON user.id_user=po_barang.id_user JOIN karyawan ON karyawan.id_emp=user.id_emp WHERE id_invoice=$id_invoice";
+                                    $query = "SELECT * FROM po_barang JOIN vendor ON vendor.id_vendor=po_barang.id_vendor JOIN req_barang ON req_barang.id_req_brg=po_barang.id_req_brg JOIN barang ON barang.kode_brg=req_barang.kode_brg JOIN satuan ON satuan.id_satuan=req_barang.id_satuan JOIN user ON user.id_user=po_barang.id_user JOIN karyawan ON karyawan.id_emp=user.id_emp WHERE id_no_po=$id_no_po";
                            
 
                                       

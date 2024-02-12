@@ -1348,6 +1348,105 @@ function hapusSatuan($id_satuan) {
 
 }
 
+function ajukanPO($data) {
+	global $koneksi;
+
+	$id_req_brg = htmlspecialchars($data['id_req_brg']);
+	$tgl_po = htmlspecialchars($data['tgl_po']);
+	$qty_po = htmlspecialchars($data["qty_po"]);
+	$harga_po = htmlspecialchars($data["harga_po"]);
+	$ket_po = htmlspecialchars($data["ket_po"]);
+	$acc3 = htmlspecialchars($data["acc3"]);
+	$acc4 = htmlspecialchars($data["acc4"]);
+	$acc5 = htmlspecialchars($data["acc5"]);
+	$id_vendor = htmlspecialchars($data["id_vendor"]);
+	$id_user = htmlspecialchars($_SESSION['id_user']);
+	$id_no_po = htmlspecialchars($data['id_no_po']);
+
+
+	$query = "INSERT INTO po_barang VALUES
+			('', '$id_req_brg', '$tgl_po', '$qty_po', '$harga_po', '$ket_po', '$acc3', '$acc4', '$acc5', '$id_vendor', '$id_user', '$id_no_po')";
+	mysqli_query($koneksi, $query);
+
+	// Mengupdate status_req di tabel req_barang
+	// $query_update = "UPDATE req_barang SET status_req = 'Menunggu Persetujuan Dir. HRD' WHERE id_req_brg = $id_req_brg AND req_barang.kode_brg=req_barang.kode_brg";
+	$query_update = "UPDATE req_barang 
+                 SET status_req = 'Menunggu Persetujuan Dir. HRD' 
+                 WHERE kode_brg = (SELECT kode_brg FROM req_barang WHERE id_req_brg = $id_req_brg) AND tgl_req_brg = (SELECT tgl_req_brg FROM req_barang WHERE id_req_brg = $id_req_brg)";
+
+	mysqli_query($koneksi, $query_update);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function ubahPengajuanPO($data) {
+	global $koneksi;
+	$id_po = $data["id_po"];
+	$id_req_brg = htmlspecialchars($data['id_req_brg']);
+	$tgl_po = htmlspecialchars($data['tgl_po']);
+	$qty_po = htmlspecialchars($data["qty_po"]);
+	$harga_po = htmlspecialchars($data["harga_po"]);
+	$ket_po = htmlspecialchars($data["ket_po"]);
+	$acc3 = htmlspecialchars($data["acc3"]);
+	$acc4 = htmlspecialchars($data["acc4"]);
+	$acc5 = htmlspecialchars($data["acc5"]);
+	$id_vendor = htmlspecialchars($data["id_vendor"]);
+
+	$query = "UPDATE po_barang SET
+				id_req_brg = '$id_req_brg',
+				tgl_po = '$tgl_po',
+				qty_po = '$qty_po',
+				harga_po = '$harga_po',
+				ket_po = '$ket_po',
+				acc3 = '$acc3',
+				acc4 = '$acc4',
+				acc5 = '$acc5',
+				id_vendor = '$id_vendor'
+			  WHERE id_po = $id_po
+			";
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
+function hapusPengajuanPO($id_po) {
+    global $koneksi;
+
+    // Memulai transaksi
+    mysqli_begin_transaction($koneksi);
+
+    try {
+        // Ambil kode_brg dari tabel req_barang
+        $result = mysqli_query($koneksi, "SELECT kode_brg,tgl_req_brg FROM req_barang WHERE id_req_brg = (SELECT id_req_brg FROM po_barang WHERE id_po = $id_po)");
+        $row = mysqli_fetch_assoc($result);
+        $kode_brg = $row['kode_brg'];
+        $tgl_req_brg = $row['tgl_req_brg'];
+        
+
+        // Hapus data dari tabel po_barang
+        mysqli_query($koneksi, "DELETE FROM po_barang WHERE id_po=$id_po");
+
+        // Periksa apakah penghapusan berhasil
+        if (mysqli_affected_rows($koneksi) > 0) {
+            // Jika berhasil, update status_req di tabel req_barang
+            mysqli_query($koneksi, "UPDATE req_barang SET status_req = 'On Progress in Purchasing' WHERE kode_brg = '$kode_brg' AND tgl_req_brg = '$tgl_req_brg'");
+        } else {
+            // Jika gagal, rollback transaksi
+            mysqli_rollback($koneksi);
+            return false;
+        }
+
+        // Commit transaksi jika semuanya berhasil
+        mysqli_commit($koneksi);
+
+        return true;
+    } catch (Exception $e) {
+        // Jika terjadi kesalahan, rollback transaksi
+        mysqli_rollback($koneksi);
+        return false;
+    }
+}
+
 function tambahPembelian($data) {
 	global $koneksi;
 
@@ -1648,7 +1747,61 @@ function generate_kode_invoice() {
   return $kode_baru;
 }
 
+function tambahPO($data) {
+  global $koneksi;
 
+  // Ambil data no invoice dari input
+  $no_po = htmlspecialchars($data["no_po"]);
+
+  // Cek apakah no invoice sudah ada
+  $query_cek = "SELECT COUNT(*) AS total FROM no_po WHERE no_po = '$no_po'";
+  $result_cek = mysqli_query($koneksi, $query_cek);
+  $row_cek = mysqli_fetch_assoc($result_cek);
+
+  // Jika no invoice sudah ada, tampilkan pesan error
+  if ($row_cek['total'] > 0) {
+    echo "<script>alert('No. Purchase Order sudah ada!');</script>";
+    return false;
+  }
+
+  // Jika no invoice belum ada, insert data invoice
+  $query = "INSERT INTO no_po VALUES
+			('', '$no_po')";
+  mysqli_query($koneksi, $query);
+
+  // Return true jika insert berhasil
+  return mysqli_affected_rows($koneksi) > 0;
+}
+
+function ubahNoPO($data) {
+	global $koneksi;
+
+	$id_no_po = htmlspecialchars($data["id_no_po"]);
+	$no_po = htmlspecialchars($data["no_po"]);
+
+	$query = "UPDATE no_po SET
+				no_po= '$no_po'
+			  WHERE id_no_po='$id_no_po'
+			";
+			
+	mysqli_query($koneksi, $query);
+
+	return mysqli_affected_rows($koneksi);
+
+}
+
+function hapusPO($id_no_po) {
+	global $koneksi;
+	// mysqli_query($koneksi, "DELETE FROM invoice WHERE id_invoice=$id_invoice");
+	try{
+		mysqli_query($koneksi, "DELETE FROM no_po WHERE id_no_po='$id_no_po'");
+	}catch(Exception $e){
+		return false;
+	}
+
+	return mysqli_affected_rows($koneksi);
+
+}
 
 function tambahInvoice($data) {
   global $koneksi;
@@ -1782,9 +1935,21 @@ function tambahNoJournal($data) {
 	return mysqli_affected_rows($koneksi);
 }
 
+// function hapusNoJournal($no_jurnal) {
+// 	global $koneksi;
+// 	mysqli_query($koneksi, "DELETE FROM no_jurnal WHERE no_jurnal='$no_jurnal'");
+
+// 	return mysqli_affected_rows($koneksi);
+
+// }
+
 function hapusNoJournal($no_jurnal) {
 	global $koneksi;
-	mysqli_query($koneksi, "DELETE FROM no_jurnal WHERE no_jurnal='$no_jurnal'");
+	try{
+		mysqli_query($koneksi, "DELETE FROM no_jurnal WHERE no_jurnal='$no_jurnal'");
+	}catch(Exception $e){
+		return false;
+	}
 
 	return mysqli_affected_rows($koneksi);
 
@@ -1856,6 +2021,8 @@ function hapusDataJournal($id_jurnal) {
 	return mysqli_affected_rows($koneksi);
 
 }
+
+
 
 function tambahAnggaran($data) {
 	global $koneksi;
